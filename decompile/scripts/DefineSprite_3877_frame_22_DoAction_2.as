@@ -1,0 +1,12 @@
+//! status=pending
+_root.fightStat = "Mystic Path";
+_root.areaSafe = false;
+_root.areaUnderwater = true;
+_root.areaSpawn = 2.5;
+_root.areaSpawnReduce = 0;
+_root.areaRareChance = 25;
+_root.areaAllyChance = 2.5;
+_root.areaDamagePct = 0.1;
+_root.areaEpicChance = 2.5;
+_root.areaEpicChance2 = 10;
+_root.challengeCompatible = false;

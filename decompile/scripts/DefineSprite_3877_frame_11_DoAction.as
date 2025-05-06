@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Binary Battlefield";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 2.2;
+_root.areaSpawnReduce = 75;
+_root.areaRareChance = 1.8;
+_root.areaAllyChance = 7.5;
+_root.areaDamagePct = 100;
+_root.areaEpicChance = 0.1;
+_root.areaEpicChance2 = 0.8;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.25;

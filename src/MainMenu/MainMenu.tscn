@@ -1,0 +1,167 @@
+[gd_scene load_steps=16 format=3 uid="uid://cfu6dd1gm07jp"]
+
+[ext_resource type="Script" uid="uid://bqq4lt8no6mjx" path="res://src/MainMenu/MainMenu.cs" id="1_vuisw"]
+[ext_resource type="Texture2D" uid="uid://g87ba8owylpk" path="res://src/MenuBg.png" id="2_tcb8k"]
+[ext_resource type="PackedScene" uid="uid://gkvema20morg" path="res://src/BottomBar.tscn" id="3_22hij"]
+[ext_resource type="FontFile" uid="uid://b13u4mtuc78o2" path="res://fonts/McLaren.ttf" id="4_aeosc"]
+[ext_resource type="Script" uid="uid://c2hndoj8llbob" path="res://src/AwesomeButton.cs" id="5_olvkn"]
+[ext_resource type="Texture2D" uid="uid://cgf2hbfs8dm8s" path="res://src/Logo.png" id="6_h61mk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qsnd5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4yxw"]
+bg_color = Color(0.796078, 0.796078, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3i8k"]
+bg_color = Color(0.294118, 0.294118, 0.0980392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nvlv"]
+bg_color = Color(0.588235, 0.588235, 0.196078, 1)
+
+[sub_resource type="Animation" id="Animation_fvj16"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Button/AlphaAnimation/AlphaRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.2)]
+}
+
+[sub_resource type="Animation" id="Animation_8bkfx"]
+resource_name = "color_shift"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Button/AlphaAnimation/AlphaRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.00833333, 0.0166667, 0.025, 0.0333333, 0.0416667, 0.05, 0.0583333, 0.0666667, 0.075, 0.0833333, 0.0916667, 0.1, 0.108333, 0.116667, 0.125, 0.133333, 0.141667, 0.15, 0.158333, 0.166667, 0.175, 0.183333, 0.191667, 0.2, 0.208333, 0.216667, 0.225, 0.233333, 0.241667, 0.25, 0.258333, 0.266667, 0.275, 0.283333, 0.291667, 0.3, 0.308333, 0.316667, 0.325, 0.333333, 0.341667, 0.35, 0.358333, 0.366667, 0.375, 0.383333, 0.391667, 0.4, 0.408333, 0.416667, 0.425, 0.433333, 0.441667, 0.45, 0.458333, 0.466667, 0.475, 0.483333, 0.491667, 0.5, 0.508333, 0.516667, 0.525, 0.533333, 0.541667, 0.55, 0.558333, 0.566667, 0.575, 0.583333, 0.591667, 0.6, 0.608333, 0.616667, 0.625, 0.633333, 0.641667, 0.65, 0.658333, 0.666667, 0.675, 0.683333, 0.691667, 0.7, 0.708333, 0.716667, 0.725, 0.733333, 0.741667, 0.75, 0.758333, 0.766667, 0.775, 0.783333, 0.791667, 0.8, 0.808333, 0.816667, 0.825, 0.833333, 0.841667, 0.85, 0.858333, 0.866667, 0.875, 0.883333, 0.891667, 0.9, 0.908333, 0.916667, 0.925, 0.933333, 0.941667, 0.95, 0.958333, 0.966667, 0.975, 0.983333, 0.991667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.00333333), Color(1, 1, 1, 0.00666667), Color(1, 1, 1, 0.01), Color(1, 1, 1, 0.0133333), Color(1, 1, 1, 0.0166667), Color(1, 1, 1, 0.02), Color(1, 1, 1, 0.0233333), Color(1, 1, 1, 0.0266667), Color(1, 1, 1, 0.03), Color(1, 1, 1, 0.0333333), Color(1, 1, 1, 0.0366667), Color(1, 1, 1, 0.04), Color(1, 1, 1, 0.0433333), Color(1, 1, 1, 0.0466667), Color(1, 1, 1, 0.05), Color(1, 1, 1, 0.0533333), Color(1, 1, 1, 0.0566667), Color(1, 1, 1, 0.06), Color(1, 1, 1, 0.0633333), Color(1, 1, 1, 0.0666667), Color(1, 1, 1, 0.07), Color(1, 1, 1, 0.0733333), Color(1, 1, 1, 0.0766667), Color(1, 1, 1, 0.08), Color(1, 1, 1, 0.0833333), Color(1, 1, 1, 0.0866667), Color(1, 1, 1, 0.09), Color(1, 1, 1, 0.0933333), Color(1, 1, 1, 0.0966667), Color(1, 1, 1, 0.1), Color(1, 1, 1, 0.103333), Color(1, 1, 1, 0.106667), Color(1, 1, 1, 0.11), Color(1, 1, 1, 0.113333), Color(1, 1, 1, 0.116667), Color(1, 1, 1, 0.12), Color(1, 1, 1, 0.123333), Color(1, 1, 1, 0.126667), Color(1, 1, 1, 0.13), Color(1, 1, 1, 0.133333), Color(1, 1, 1, 0.136667), Color(1, 1, 1, 0.14), Color(1, 1, 1, 0.143333), Color(1, 1, 1, 0.146667), Color(1, 1, 1, 0.15), Color(1, 1, 1, 0.153333), Color(1, 1, 1, 0.156667), Color(1, 1, 1, 0.16), Color(1, 1, 1, 0.163333), Color(1, 1, 1, 0.166667), Color(1, 1, 1, 0.17), Color(1, 1, 1, 0.173333), Color(1, 1, 1, 0.176667), Color(1, 1, 1, 0.18), Color(1, 1, 1, 0.183333), Color(1, 1, 1, 0.186667), Color(1, 1, 1, 0.19), Color(1, 1, 1, 0.193333), Color(1, 1, 1, 0.196667), Color(1, 1, 1, 0.2), Color(1, 1, 1, 0.196667), Color(1, 1, 1, 0.193333), Color(1, 1, 1, 0.19), Color(1, 1, 1, 0.186667), Color(1, 1, 1, 0.183333), Color(1, 1, 1, 0.18), Color(1, 1, 1, 0.176667), Color(1, 1, 1, 0.173333), Color(1, 1, 1, 0.17), Color(1, 1, 1, 0.166667), Color(1, 1, 1, 0.163333), Color(1, 1, 1, 0.16), Color(1, 1, 1, 0.156667), Color(1, 1, 1, 0.153333), Color(1, 1, 1, 0.15), Color(1, 1, 1, 0.146667), Color(1, 1, 1, 0.143333), Color(1, 1, 1, 0.14), Color(1, 1, 1, 0.136667), Color(1, 1, 1, 0.133333), Color(1, 1, 1, 0.13), Color(1, 1, 1, 0.126667), Color(1, 1, 1, 0.123333), Color(1, 1, 1, 0.12), Color(1, 1, 1, 0.116667), Color(1, 1, 1, 0.113333), Color(1, 1, 1, 0.11), Color(1, 1, 1, 0.106667), Color(1, 1, 1, 0.103333), Color(1, 1, 1, 0.1), Color(1, 1, 1, 0.0966667), Color(1, 1, 1, 0.0933333), Color(1, 1, 1, 0.09), Color(1, 1, 1, 0.0866667), Color(1, 1, 1, 0.0833333), Color(1, 1, 1, 0.08), Color(1, 1, 1, 0.0766667), Color(1, 1, 1, 0.0733333), Color(1, 1, 1, 0.07), Color(1, 1, 1, 0.0666667), Color(1, 1, 1, 0.0633333), Color(1, 1, 1, 0.06), Color(1, 1, 1, 0.0566667), Color(1, 1, 1, 0.0533333), Color(1, 1, 1, 0.05), Color(1, 1, 1, 0.0466667), Color(1, 1, 1, 0.0433333), Color(1, 1, 1, 0.04), Color(1, 1, 1, 0.0366667), Color(1, 1, 1, 0.0333333), Color(1, 1, 1, 0.03), Color(1, 1, 1, 0.0266667), Color(1, 1, 1, 0.0233333), Color(1, 1, 1, 0.02), Color(1, 1, 1, 0.0166667), Color(1, 1, 1, 0.0133333), Color(1, 1, 1, 0.01), Color(1, 1, 1, 0.00666668), Color(1, 1, 1, 0.00333333), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vwy8w"]
+_data = {
+&"RESET": SubResource("Animation_fvj16"),
+&"color_shift": SubResource("Animation_8bkfx")
+}
+
+[sub_resource type="Gradient" id="Gradient_vuisw"]
+colors = PackedColorArray(0, 0.498, 1, 0.7, 0, 0.498, 1, 0.3)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tcb8k"]
+gradient = SubResource("Gradient_vuisw")
+fill_to = Vector2(0, 1)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_vuisw")
+
+[node name="MenuBg" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.003, 1.003)
+texture = ExtResource("2_tcb8k")
+centered = false
+
+[node name="BottomBar" parent="." instance=ExtResource("3_22hij")]
+visible = false
+
+[node name="WelcomeToAntiIdle" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 25.0
+offset_top = 145.0
+offset_right = 625.0
+offset_bottom = 389.0
+theme_override_colors/default_color = Color(0.392157, 0.588235, 0.784314, 1)
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("4_aeosc")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center][color=#C8E1FA][font_size=21]Welcome to Anti-Idle: The Game![/font_size][/color]
+Anti-Idle: The Game is a unique idle-type game created in 2009 (and still updated after 11 years!) by Tukkun.
+
+Gain some EXP, level up and unlock tons of features and minigames! Anti-Idle: The Game can be played even when you are busy or not sitting near your computer, but there are also plenty of things that you can do when you are actively playing - and all of that is completely FREE!
+
+What are you still waiting for? Press the big \"Awesome!\" button below there and join the awesomeness right away, with millions of other players![/center]"
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 15.0
+offset_top = 380.0
+offset_right = 635.0
+offset_bottom = 440.0
+theme_override_colors/font_hover_color = Color(0.992157, 0.992157, 0.796078, 1)
+theme_override_colors/font_color = Color(0.980392, 0.980392, 0.588235, 1)
+theme_override_colors/font_focus_color = Color(0.980392, 0.980392, 0.588235, 1)
+theme_override_colors/font_pressed_color = Color(0.490196, 0.490196, 0.294118, 1)
+theme_override_fonts/font = ExtResource("4_aeosc")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qsnd5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x4yxw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w3i8k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3nvlv")
+text = "Awesome!"
+script = ExtResource("5_olvkn")
+
+[node name="AlphaAnimation" type="AnimationPlayer" parent="Button"]
+root_node = NodePath("../../MenuBg")
+libraries = {
+&"": SubResource("AnimationLibrary_vwy8w")
+}
+autoplay = "color_shift"
+
+[node name="AlphaRect" type="ColorRect" parent="Button/AlphaAnimation"]
+visible = false
+offset_left = 14.0
+offset_top = 350.0
+offset_right = 634.0
+offset_bottom = 410.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0.2)
+
+[node name="Logo" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(330, 82)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("6_h61mk")
+
+[node name="popUp" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 650.0
+offset_bottom = 650.0
+
+[node name="TitleBg" type="TextureRect" parent="popUp"]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 265.0
+offset_right = 485.0
+offset_bottom = 285.0
+texture = SubResource("GradientTexture2D_tcb8k")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="popUp/TitleBg"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 21.0
+
+[node name="TextBg" type="ColorRect" parent="popUp"]
+offset_right = 650.0
+offset_bottom = 650.0
+color = Color(0, 0, 0, 0.33)
+
+[node name="Bg" type="ColorRect" parent="popUp"]
+offset_left = 165.0
+offset_top = 285.0
+offset_right = 485.1
+offset_bottom = 385.0
+color = Color(0, 0, 0, 0.33)

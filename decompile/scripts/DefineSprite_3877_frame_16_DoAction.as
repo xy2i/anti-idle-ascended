@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Polluted Sky";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 2;
+_root.areaSpawnReduce = 25;
+_root.areaRareChance = 1.5;
+_root.areaAllyChance = 20;
+_root.areaDamagePct = 25;
+_root.areaEpicChance = 0.1;
+_root.areaEpicChance2 = 0.5;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.15;

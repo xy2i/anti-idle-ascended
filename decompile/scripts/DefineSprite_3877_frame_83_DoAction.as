@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Technical Battleground < " + _root.save.arenaEvent + " >";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 3;
+_root.areaSpawnReduce = 0;
+_root.areaRareChance = 0;
+_root.areaAllyChance = 0;
+_root.areaDamagePct = 0.1;
+_root.areaEpicChance = 0;
+_root.areaEpicChance2 = 0;
+_root.eventConsecKill = 0;
+_root.challengeCompatible = false;

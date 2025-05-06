@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Pokayman City";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 3.5;
+_root.areaSpawnReduce = 50;
+_root.areaRareChance = 1;
+_root.areaAllyChance = 5;
+_root.areaDamagePct = 100;
+_root.areaEpicChance = 0.3;
+_root.areaEpicChance2 = 1;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.75;

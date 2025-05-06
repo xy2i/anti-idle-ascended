@@ -1,0 +1,14 @@
+//! status=pending
+_root.fightStat = "Dark Pyramid";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 0;
+_root.areaSpawnReduce = 0;
+_root.areaRareChance = 2;
+_root.areaAllyChance = 0.2;
+_root.areaDamagePct = 0.0001;
+_root.areaFirstPyr = false;
+_root.areaEpicChance = 0;
+_root.areaEpicChance2 = 0.2;
+_root.challengeCompatible = false;
+_root.fightStat2 = "Deal as much damage as possible within the time limit!";

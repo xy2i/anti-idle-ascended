@@ -1,0 +1,15 @@
+//! status=pending
+_root.fightStat = "Fortress Foothills?";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 3.2;
+_root.areaSpawnReduce = 75;
+_root.areaRareChance = 8;
+_root.areaAllyChance = 2;
+_root.areaDamagePct = 0.7;
+_root.areaEpicChance = 1.7;
+_root.areaEpicChance2 = 8;
+_root.areaFairyPerformance = 0;
+_root.areaFairyPower = false;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 3;

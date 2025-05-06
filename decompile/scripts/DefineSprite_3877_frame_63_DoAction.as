@@ -1,0 +1,15 @@
+//! status=pending
+_root.fightStat = "Lullaby Lake";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 3.8;
+_root.areaSpawnReduce = 25;
+_root.areaRareChance = 3;
+_root.areaAllyChance = 1;
+_root.areaDamagePct = 20;
+_root.areaEpicChance = 0.3;
+_root.areaEpicChance2 = 1.5;
+_root.areaFairyPerformance = 0;
+_root.areaFairyPower = false;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.5;

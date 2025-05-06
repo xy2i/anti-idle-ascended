@@ -1,0 +1,15 @@
+//! status=pending
+_root.fightStat = "Throne Room?";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 3;
+_root.areaSpawnReduce = 75;
+_root.areaRareChance = 10;
+_root.areaAllyChance = 2;
+_root.areaDamagePct = 0.5;
+_root.areaEpicChance = 2.5;
+_root.areaEpicChance2 = 15;
+_root.areaFairyPerformance = 0;
+_root.areaFairyPower = false;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 4;

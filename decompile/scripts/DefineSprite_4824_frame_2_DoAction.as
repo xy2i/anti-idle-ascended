@@ -1,0 +1,10 @@
+//! status=pending
+onEnterFrame = null;
+_root.specInfinity = 0;
+_root.specPierce = 0;
+_root.specPolearm = 0;
+_root.specTrueshot = 0;
+_root.specSphere = 0;
+_root.specDispel = 0;
+_root.specGlory = 0;
+_root.spiritBreak = 0;

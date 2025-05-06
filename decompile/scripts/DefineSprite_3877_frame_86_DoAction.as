@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Triangle Land!!!";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 1.3;
+_root.areaSpawnReduce = 30;
+_root.areaRareChance = 15;
+_root.areaAllyChance = 3;
+_root.areaDamagePct = 30;
+_root.areaEpicChance = 3;
+_root.areaEpicChance2 = 15;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 5;

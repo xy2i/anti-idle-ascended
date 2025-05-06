@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Triangle Hideout";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 2;
+_root.areaSpawnReduce = 30;
+_root.areaRareChance = 100;
+_root.areaAllyChance = 1;
+_root.areaTriangleKill = 0;
+_root.areaDamagePct = 0.3;
+_root.areaEpicChance = 9;
+_root.areaEpicChance2 = 100;
+_root.challengeCompatible = false;

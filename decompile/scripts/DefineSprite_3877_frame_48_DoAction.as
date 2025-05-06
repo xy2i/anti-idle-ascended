@@ -1,0 +1,16 @@
+//! status=pending
+_root.fightStat = "Tower of DOOOOOOM";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 6;
+_root.areaSpawnReduce = 0;
+_root.areaRareChance = 100;
+_root.areaAllyChance = 1;
+_root.areaDamagePct = 50;
+_root.doomTowerSpawn = 0;
+_root.doomTowerTaunt = 0;
+_root.doomTowerDel = 4;
+_root.fightStat2 = "Attack before the monster spawns to TAUNT it!";
+_root.areaEpicChance = 4;
+_root.areaEpicChance2 = 20;
+_root.challengeCompatible = false;

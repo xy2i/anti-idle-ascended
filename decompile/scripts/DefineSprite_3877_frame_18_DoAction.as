@@ -1,0 +1,12 @@
+//! status=pending
+_root.fightStat = "Scary Graveyard";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 1;
+_root.areaSpawnReduce = 90;
+_root.areaRareChance = 3;
+_root.areaAllyChance = 0;
+_root.areaDamagePct = 100;
+_root.areaEpicChance = 0.4;
+_root.areaEpicChance2 = 2;
+_root.challengeCompatible = false;

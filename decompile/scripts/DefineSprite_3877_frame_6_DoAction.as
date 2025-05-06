@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "The Sky";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 2.5;
+_root.areaSpawnReduce = 75;
+_root.areaRareChance = 1.4;
+_root.areaAllyChance = 15;
+_root.areaDamagePct = 100;
+_root.areaEpicChance = 0;
+_root.areaEpicChance2 = 0.4;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.14;

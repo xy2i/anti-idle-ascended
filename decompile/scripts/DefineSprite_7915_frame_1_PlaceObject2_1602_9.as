@@ -1,0 +1,127 @@
+//! status=pending
+on(release){
+   rand1 = random(9000000) + 1000000;
+   _root.actiondescription = "";
+   if(_root.failGrammar > 0 && _root.failGrammar < 120 && _root.save.bestWpm > 0)
+   {
+      _parent.typeArray = new Array();
+      _parent.typeArray[-2] = "";
+      _parent.typeArray[-1] = "";
+      _parent.typeArray.push("TERM OF SERVISE");
+      _parent.typeArray.push("(well not rly but i dunno wat else 2 call it)");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("1. ur save is UR reponsibly");
+      _parent.typeArray.push("if u lose ur save its NOT teh devlopers flaut.");
+      _parent.typeArray.push("teh devloper cnat eat, delite or steel ur save.");
+      _parent.typeArray.push("talk 2 devloper or maek 4rum thred 2 complin");
+      _parent.typeArray.push("wont chance anythin so dont boter.");
+      _parent.typeArray.push("u can lose save bcuz many resons incluid:");
+      _parent.typeArray.push("- run certin 3th pty progams");
+      _parent.typeArray.push("- claring internet cukees");
+      _parent.typeArray.push("- broser crash, pow out age, etc");
+      _parent.typeArray.push("sinse savefiel loss hapens friquenly, its hily");
+      _parent.typeArray.push("recomd u BAKUP UR SAVE OTFEN. yes its so");
+      _parent.typeArray.push("importent u had 2 type it all cap.");
+      _parent.typeArray.push("how 2 bakup can find in teh main menu.");
+      _parent.typeArray.push("oh, and dont 4get dis gaem save data on ur comp.");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("2. plz dont hax, PLZ");
+      _parent.typeArray.push("of cause, i cant find evry haxor and punnish em");
+      _parent.typeArray.push("but haxing r fowned up on, so u shudent hax.");
+      _parent.typeArray.push("it taeks fun out from gaem.");
+      _parent.typeArray.push("and it rins ladders, witch is VARY bad.");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("3. behaevior in chat n 4rum good");
+      _parent.typeArray.push("u can get baned if u violate kong behaevior");
+      _parent.typeArray.push("guidline so b careful");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("4. lats but not least, HAEV FUN!");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("2 sum up:");
+      _parent.typeArray.push("1. bakup ur saev often");
+      _parent.typeArray.push("2. refain frm hax");
+      _parent.typeArray.push("3. behaevior in chat n 4rum good");
+      _parent.typeArray.push("4. haev fun");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("dats probly it 4 now.");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("[END]");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.gotoAndStop(2);
+   }
+   else
+   {
+      _parent.typeArray = new Array();
+      _parent.typeArray[-2] = "";
+      _parent.typeArray[-1] = "";
+      _parent.typeArray.push("TERMS OF SERVICE");
+      _parent.typeArray.push("(Well, not really, but I am not sure what else");
+      _parent.typeArray.push("to call it)");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("1. Your savefile is YOUR responsibility.");
+      _parent.typeArray.push("If you happen to lose your savefile, that is");
+      _parent.typeArray.push("YOUR fault. The developer cannot eat, delete or");
+      _parent.typeArray.push("steal your savefile.");
+      _parent.typeArray.push("You can lose your savefile due to many different");
+      _parent.typeArray.push("reasons, such as:");
+      _parent.typeArray.push("- Running certain third-party tools");
+      _parent.typeArray.push("- Clearing cookies");
+      _parent.typeArray.push("- Browser crash, power outage, etc.");
+      _parent.typeArray.push("Since savefile loss can happen at any time, it");
+      _parent.typeArray.push("is highly recommended that you BACKUP YOUR");
+      _parent.typeArray.push("SAVEFILE OFTEN. And yes, it is so important that");
+      _parent.typeArray.push("you had to type it in all caps.");
+      _parent.typeArray.push("Instructions on how to backup your savefile can");
+      _parent.typeArray.push("be found in the main menu.");
+      _parent.typeArray.push("Oh, and remember that this game stores data in");
+      _parent.typeArray.push("your computer, not your Kongregate account.");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("2. Please do not hack. PLEASE.");
+      _parent.typeArray.push("In case you REALLY want to hack, please turn");
+      _parent.typeArray.push("Safe Hacking Mode on (by following the");
+      _parent.typeArray.push("instructions provided in the savefile), or use");
+      _parent.typeArray.push("the Secret Savefile, which can be accessed by");
+      _parent.typeArray.push("holding Ctrl while clicking File 2.");
+      _parent.typeArray.push("Or, press Ctrl + Z in the Dragon of Wisdom");
+      _parent.typeArray.push("screen, then disable highscore submission.");
+      _parent.typeArray.push("If you destroy the leaderboards by hacking,");
+      _parent.typeArray.push("you may be banned from the game.");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("3. Do not violate the behavior guidelines");
+      _parent.typeArray.push("Bad chat behavior affects the fun of other");
+      _parent.typeArray.push("players. Also, if you violate the behavior");
+      _parent.typeArray.push("guidelines of Kongregate, you may be banned");
+      _parent.typeArray.push("from the website, so be careful!");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("4. Last but not least, HAVE FUN!");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("Before you continue, type this completely");
+      _parent.typeArray.push("random number. This happened because some");
+      _parent.typeArray.push("people tried to cheat. Blame them.");
+      _parent.typeArray.push(rand1.toString());
+      _parent.typeArray.push("");
+      _parent.typeArray.push("To sum up:");
+      _parent.typeArray.push("1. Backup your savefile often.");
+      _parent.typeArray.push("2. Refrain from hacking.");
+      _parent.typeArray.push("3. Behave in chat and in the forum.");
+      _parent.typeArray.push("4. Have fun!");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("Enjoy playing Anti-Idle!");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("[END]");
+      _parent.typeArray.push("");
+      _parent.typeArray.push("");
+      _parent.gotoAndStop(2);
+   }
+}
+
+

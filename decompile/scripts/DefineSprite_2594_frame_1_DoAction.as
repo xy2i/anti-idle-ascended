@@ -1,0 +1,20 @@
+//! status=pending
+stop();
+challengeName = "Untitled Challenge";
+challengeDesc = "This is a challenge!";
+challengeObjective = "Reach level 5,000";
+challengeRule1 = "";
+challengeRule2 = "";
+challengeRule3 = "";
+challengeRule4 = "";
+challengeRule5 = "";
+challengeRule6 = "";
+challengeRule7 = "";
+challengeRule8 = "";
+challengeRule9 = "";
+challengeRule10 = "";
+challengeRule11 = "";
+challengeMedalName = "";
+challengeSkinName = "";
+challengeSkinColor = "";
+challengeEyeColor = "";

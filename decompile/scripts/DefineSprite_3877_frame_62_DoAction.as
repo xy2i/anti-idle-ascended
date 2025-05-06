@@ -1,0 +1,14 @@
+//! status=pending
+_root.fightStat = "Abandoned Lab";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 9999999;
+_root.areaSpawnReduce = 0;
+_root.areaRareChance = 100;
+_root.areaAllyChance = 100;
+_root.areaDamagePct = 0.3;
+_root.areaEpicChance = 0;
+_root.areaEpicChance2 = 100;
+_root.labEnemy = 0;
+_root.labCooldown = 3;
+_root.challengeCompatible = false;

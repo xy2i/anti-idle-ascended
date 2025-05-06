@@ -1,0 +1,15 @@
+//! status=pending
+_root.fightStat = "Fabled Forest";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 3.6;
+_root.areaSpawnReduce = 25;
+_root.areaRareChance = 3.6;
+_root.areaAllyChance = 1;
+_root.areaDamagePct = 16;
+_root.areaEpicChance = 0.4;
+_root.areaEpicChance2 = 2;
+_root.areaFairyPerformance = 0;
+_root.areaFairyPower = false;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.75;

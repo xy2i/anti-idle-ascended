@@ -1,0 +1,35 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://ckuimkddjmlyv"
+path="res://.godot/imported/1507_Maiandra GD.ttf-8026a7baf18b261c85c25976c2a8a463.fontdata"
+
+[deps]
+
+source_file="res://fonts/1507_Maiandra GD.ttf"
+dest_files=["res://.godot/imported/1507_Maiandra GD.ttf-8026a7baf18b261c85c25976c2a8a463.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

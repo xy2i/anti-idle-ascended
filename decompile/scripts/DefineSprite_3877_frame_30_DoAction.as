@@ -1,0 +1,12 @@
+//! status=pending
+_root.fightStat = "The Special Arena";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 9999;
+_root.areaSpawnReduce = 0;
+_root.areaRareChance = 10;
+_root.areaAllyChance = 0.5;
+_root.areaDamagePct = 100;
+_root.areaEpicChance = 0.5;
+_root.areaEpicChance2 = 5;
+_root.challengeCompatible = false;

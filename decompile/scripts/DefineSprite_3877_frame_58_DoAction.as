@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Censor Ship";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 4;
+_root.areaSpawnReduce = 50;
+_root.areaRareChance = 5;
+_root.areaAllyChance = 0.5;
+_root.areaDamagePct = 50;
+_root.areaEpicChance = 0.5;
+_root.areaEpicChance2 = 2.5;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 2;

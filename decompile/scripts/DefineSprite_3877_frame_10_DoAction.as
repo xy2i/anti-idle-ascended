@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "The Beach";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 2.3;
+_root.areaSpawnReduce = 75;
+_root.areaRareChance = 1.7;
+_root.areaAllyChance = 10;
+_root.areaDamagePct = 100;
+_root.areaEpicChance = 0;
+_root.areaEpicChance2 = 0.7;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.2;

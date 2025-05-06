@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Not Copyright Infringement";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 3.2;
+_root.areaSpawnReduce = 25;
+_root.areaRareChance = 3;
+_root.areaAllyChance = 5;
+_root.areaDamagePct = 100;
+_root.areaEpicChance = 0.5;
+_root.areaEpicChance2 = 2.5;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.8;

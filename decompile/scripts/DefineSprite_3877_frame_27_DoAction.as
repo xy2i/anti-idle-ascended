@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Volcano Peak";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 1.8;
+_root.areaSpawnReduce = 25;
+_root.areaRareChance = 2.5;
+_root.areaAllyChance = 5;
+_root.areaDamagePct = 25;
+_root.areaEpicChance = 0.2;
+_root.areaEpicChance2 = 1;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.25;

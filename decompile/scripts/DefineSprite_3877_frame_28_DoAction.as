@@ -1,0 +1,13 @@
+//! status=pending
+_root.fightStat = "Frosty Zone";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 1.7;
+_root.areaSpawnReduce = 25;
+_root.areaRareChance = 3;
+_root.areaAllyChance = 5;
+_root.areaDamagePct = 25;
+_root.areaEpicChance = 0.2;
+_root.areaEpicChance2 = 1;
+_root.challengeCompatible = true;
+_root.challengeRewardMul = 1.4;

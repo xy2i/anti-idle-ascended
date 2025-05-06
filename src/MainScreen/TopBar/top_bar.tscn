@@ -1,0 +1,170 @@
+[gd_scene load_steps=16 format=3 uid="uid://bcqt2fkj8x6ht"]
+
+[ext_resource type="Script" uid="uid://c68spg6og0mjk" path="res://src/MainScreen/TopBar/TopBar.cs" id="1_30qjn"]
+[ext_resource type="Texture2D" uid="uid://c453uid0vbav5" path="res://src/MainScreen/TopBar/YellowCoinOutline.svg" id="1_p84q1"]
+[ext_resource type="FontFile" uid="uid://dd718xgaqyv8t" path="res://fonts/PF Tempesta Seven Bold.ttf" id="2_30qjn"]
+[ext_resource type="Theme" uid="uid://dlsuofn53re4x" path="res://src/MainScreen/Tempesta10.tres" id="3_din3h"]
+[ext_resource type="FontFile" uid="uid://djnxgb24tkeu6" path="res://fonts/PF Tempesta Seven Extended.ttf" id="4_07yc4"]
+[ext_resource type="Script" uid="uid://dvv0dpsucmv2l" path="res://src/MainScreen/TopBar/YellowOvercap.cs" id="4_8dodk"]
+[ext_resource type="Texture2D" uid="uid://bm3jbahncmd5f" path="res://src/MainScreen/TopBar/OvercapOrange.svg" id="4_din3h"]
+[ext_resource type="Texture2D" uid="uid://bwainvbhcjb40" path="res://src/MainScreen/TopBar/OvercapRed.svg" id="5_07yc4"]
+[ext_resource type="Texture2D" uid="uid://b4sqqstjyv0wc" path="res://src/MainScreen/TopBar/GreenCoinOutline.svg" id="6_htfb4"]
+[ext_resource type="FontFile" uid="uid://b13u4mtuc78o2" path="res://fonts/McLaren.ttf" id="7_7alns"]
+[ext_resource type="Script" uid="uid://doqajsioty5b0" path="res://src/NameText.cs" id="8_7dgig"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8dodk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_din3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_07yc4")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8voa1"]
+light_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_q37uv"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1ri50"]
+gradient = SubResource("Gradient_q37uv")
+
+[node name="TopBar" type="ColorRect"]
+offset_right = 650.0
+offset_bottom = 70.0
+color = Color(0, 0, 0, 0.5)
+script = ExtResource("1_30qjn")
+
+[node name="Overcap" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 9.0
+offset_right = 70.0
+offset_bottom = 49.0
+
+[node name="OvercapTriangle" type="AnimatedSprite2D" parent="Overcap"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_8dodk")
+frame = 1
+centered = false
+script = ExtResource("4_8dodk")
+
+[node name="timText" type="Label" parent="Overcap/OvercapTriangle"]
+offset_right = 40.0
+offset_bottom = 22.3333
+text = "1:11"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="YellowCoin" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 7.5
+offset_right = 30.0
+offset_bottom = 32.5
+
+[node name="YellowCoinOutline" type="Sprite2D" parent="YellowCoin"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_p84q1")
+centered = false
+
+[node name="Label" type="Label" parent="YellowCoin"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 18.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(1, 0.6, 0, 1)
+theme_override_fonts/font = ExtResource("2_30qjn")
+theme_override_font_sizes/font_size = 10
+text = "Y"
+
+[node name="coinText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 12.0
+offset_right = 149.0
+offset_bottom = 28.0
+theme = ExtResource("3_din3h")
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_07yc4")
+theme_override_font_sizes/font_size = 10
+text = "    1,000,000,000,000"
+
+[node name="GreenCoin" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 37.5
+offset_right = 30.0
+offset_bottom = 62.5
+
+[node name="YellowCoinOutline" type="Sprite2D" parent="GreenCoin"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_htfb4")
+centered = false
+
+[node name="Label" type="Label" parent="GreenCoin"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 18.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.6, 0, 1)
+theme_override_fonts/font = ExtResource("2_30qjn")
+theme_override_font_sizes/font_size = 10
+text = "G"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 10.0
+offset_right = 425.0
+offset_bottom = 38.4
+theme_override_constants/margin_top = 2
+
+[node name="nameText" type="Label" parent="MarginContainer"]
+material = SubResource("CanvasItemMaterial_8voa1")
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("7_7alns")
+theme_override_font_sizes/font_size = 17
+text = "Name"
+horizontal_alignment = 1
+script = ExtResource("8_7dgig")
+
+[node name="PointLight2D" type="PointLight2D" parent="MarginContainer/nameText"]
+position = Vector2(36, 5)
+scale = Vector2(0.853943, 22)
+texture = SubResource("GradientTexture1D_1ri50")
+offset = Vector2(100, 0.25)
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_left = 185.0
+offset_top = 40.0
+offset_right = 425.0
+offset_bottom = 66.0
+theme_override_constants/margin_top = 2
+
+[node name="titleText" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("7_7alns")
+theme_override_font_sizes/font_size = 12
+text = "Name"
+horizontal_alignment = 1

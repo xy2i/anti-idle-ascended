@@ -1,0 +1,14 @@
+//! status=pending
+_root.fightStat = "Special Training Zone";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 10;
+_root.areaSpawnReduce = 0;
+_root.areaRareChance = 0;
+_root.areaAllyChance = 0;
+_root.areaDamagePct = 100;
+_root.areaEpicChance = 0;
+_root.areaEpicChance2 = 0;
+_root.areaDamage = 0;
+_root.areaDamageRemainder = 0;
+_root.challengeCompatible = false;

@@ -1,0 +1,12 @@
+//! status=pending
+_root.fightStat = "Patience Room";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 6000;
+_root.areaSpawnReduce = 0;
+_root.areaRareChance = 0;
+_root.areaAllyChance = 0;
+_root.areaDamagePct = 10;
+_root.areaEpicChance = 0;
+_root.areaEpicChance2 = 0;
+_root.challengeCompatible = false;

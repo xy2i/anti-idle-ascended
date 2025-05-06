@@ -1,0 +1,12 @@
+//! status=pending
+_root.fightStat = "2012: Ye Olde Pub";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 3.5;
+_root.areaSpawnReduce = 25;
+_root.areaRareChance = 1;
+_root.areaAllyChance = 100;
+_root.areaDamagePct = 15;
+_root.areaEpicChance = 0.2;
+_root.areaEpicChance2 = 1;
+_root.challengeCompatible = false;

@@ -1,0 +1,12 @@
+//! status=pending
+_root.fightStat = "9001: Mystic Forest";
+_root.areaSafe = false;
+_root.areaUnderwater = false;
+_root.areaSpawn = 2;
+_root.areaSpawnReduce = 25;
+_root.areaRareChance = 5;
+_root.areaAllyChance = 10;
+_root.areaDamagePct = 0;
+_root.areaEpicChance = 0.4;
+_root.areaEpicChance2 = 2;
+_root.challengeCompatible = false;
