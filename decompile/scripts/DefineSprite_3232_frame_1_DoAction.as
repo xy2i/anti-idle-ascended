@@ -1,2 +1,0 @@
-//! status=pending
-breedScreen = false;

@@ -67,16 +67,13 @@ fill_to = Vector2(0, 1)
 script = ExtResource("1_vuisw")
 
 [node name="MenuBg" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(1.003, 1.003)
 texture = ExtResource("2_tcb8k")
 centered = false
 
 [node name="BottomBar" parent="." instance=ExtResource("3_22hij")]
-visible = false
 
 [node name="WelcomeToAntiIdle" type="RichTextLabel" parent="."]
-visible = false
 offset_left = 25.0
 offset_top = 145.0
 offset_right = 625.0
@@ -94,7 +91,6 @@ Gain some EXP, level up and unlock tons of features and minigames! Anti-Idle: Th
 What are you still waiting for? Press the big \"Awesome!\" button below there and join the awesomeness right away, with millions of other players![/center]"
 
 [node name="Button" type="Button" parent="."]
-visible = false
 offset_left = 15.0
 offset_top = 380.0
 offset_right = 635.0
@@ -129,12 +125,12 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0.2)
 
 [node name="Logo" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(330, 82)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("6_h61mk")
 
 [node name="popUp" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 650.0
@@ -155,11 +151,13 @@ offset_right = 320.0
 offset_bottom = 21.0
 
 [node name="TextBg" type="ColorRect" parent="popUp"]
+layout_mode = 0
 offset_right = 650.0
 offset_bottom = 650.0
 color = Color(0, 0, 0, 0.33)
 
 [node name="Bg" type="ColorRect" parent="popUp"]
+layout_mode = 0
 offset_left = 165.0
 offset_top = 285.0
 offset_right = 485.1

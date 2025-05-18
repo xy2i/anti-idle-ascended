@@ -1,3 +1,9 @@
 # Godot files
 .godot/
 *.translation
+
+aitg.exe
+aitg.pck
+decmp/script
+decomp_db.json
+decmp/v1861.swf

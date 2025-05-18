@@ -1,2 +1,0 @@
-//! status=pending
-helpText.text = "";

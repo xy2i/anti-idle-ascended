@@ -1,9 +1,0 @@
-//! status=pending
-choice1Text = "";
-choice2Text = "";
-choice3Text = "";
-choice4Text = "";
-choice1 = null;
-choice2 = null;
-choice3 = null;
-choice4 = null;
