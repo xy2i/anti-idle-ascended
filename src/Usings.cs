@@ -1,0 +1,5 @@
+global using static AntiIdle.Common.Global;
+global using static AntiIdle.Common.Flash.FlashRandom;
+global using static AntiIdle.Common.Flash.DeadStubs;
+global using static AntiIdle.Common.Flash.Version;
+global using AntiIdle.Common.Flash;

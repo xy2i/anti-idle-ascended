@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dlsuofn53re4x"]
-
-[ext_resource type="FontFile" uid="uid://d0gvmdvhfaoig" path="res://fonts/PF Tempesta Seven.ttf" id="1_2ycxo"]
-
-[resource]
-default_font = ExtResource("1_2ycxo")
-default_font_size = 10

@@ -11,14 +11,10 @@ config_version=5
 [application]
 
 config/name="aitg"
-run/main_scene="res://src/MainMenu/MainMenu.tscn"
+run/main_scene="uid://cin6024e2i0aa"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/max_fps=40
 config/icon="res://icon.svg"
-
-[autoload]
-
-DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [display]
 
@@ -30,11 +26,11 @@ window/vsync/vsync_mode=0
 
 [dotnet]
 
-project/assembly_name="aitg"
+project/assembly_name="AntiIdle"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
+enabled=PackedStringArray()
 
 [gui]
 

@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://cin6024e2i0aa"]
+
+[ext_resource type="Script" uid="uid://qtwetfx4ayvo" path="res://src/Loader/Loader.cs" id="1_2blfs"]
+[ext_resource type="FontFile" uid="uid://qs8fgfyxuiho" path="res://common_assets/fonts/PF Tempesta Seven Bold_131.ttf" id="2_2voco"]
+[ext_resource type="Script" uid="uid://cu4gsekhlarar" path="res://src/Loader/LoadingBox.cs" id="2_jksyv"]
+[ext_resource type="FontFile" uid="uid://undd4htvlr06" path="res://common_assets/fonts/PF Tempesta Seven_893.ttf" id="3_0yiv2"]
+
+[node name="Loader" type="Node2D"]
+script = ExtResource("1_2blfs")
+
+[node name="Bg" type="ColorRect" parent="."]
+offset_right = 650.0
+offset_bottom = 650.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 52.0
+offset_top = 294.0
+offset_right = 148.0
+offset_bottom = 342.0
+text = "frame1"
+
+[node name="LoadingBox" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 175.0
+offset_top = 200.0
+offset_right = 475.0
+offset_bottom = 500.0
+script = ExtResource("2_jksyv")
+
+[node name="BgRects" type="Control" parent="LoadingBox"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BgRect1" type="ColorRect" parent="LoadingBox/BgRects"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 50.0
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="BgRect2" type="ColorRect" parent="LoadingBox/BgRects"]
+layout_mode = 0
+offset_top = 70.0
+offset_right = 300.0
+offset_bottom = 120.0
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="randomMessage" type="RichTextLabel" parent="LoadingBox"]
+layout_mode = 0
+offset_top = 73.0
+offset_right = 300.0
+offset_bottom = 123.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_0yiv2")
+theme_override_font_sizes/normal_font_size = 10
+
+[node name="AntiIdleIsLoading" type="RichTextLabel" parent="LoadingBox"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 303.0
+offset_bottom = 54.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_2voco")
+theme_override_font_sizes/normal_font_size = 10
+text = "Anti-Idle: The Game is loading..."
