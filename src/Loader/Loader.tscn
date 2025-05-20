@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cin6024e2i0aa"]
+[gd_scene load_steps=6 format=3 uid="uid://cin6024e2i0aa"]
 
 [ext_resource type="Script" uid="uid://qtwetfx4ayvo" path="res://src/Loader/Loader.cs" id="1_2blfs"]
 [ext_resource type="FontFile" uid="uid://qs8fgfyxuiho" path="res://common_assets/fonts/PF Tempesta Seven Bold_131.ttf" id="2_2voco"]
 [ext_resource type="Script" uid="uid://cu4gsekhlarar" path="res://src/Loader/LoadingBox.cs" id="2_jksyv"]
 [ext_resource type="FontFile" uid="uid://undd4htvlr06" path="res://common_assets/fonts/PF Tempesta Seven_893.ttf" id="3_0yiv2"]
+[ext_resource type="Script" uid="uid://b0gvds1ywc1xr" path="res://src/Battle Arena/LootMechanics/LootMaterials.cs" id="5_7r27f"]
 
 [node name="Loader" type="Node2D"]
 script = ExtResource("1_2blfs")
@@ -66,3 +67,10 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_2voco")
 theme_override_font_sizes/normal_font_size = 10
 text = "Anti-Idle: The Game is loading..."
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_7r27f")
