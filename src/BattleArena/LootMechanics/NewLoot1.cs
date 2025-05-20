@@ -1,9 +1,9 @@
 using Godot;
-namespace AntiIdle.BattleArena.LootMaterials;
+namespace AntiIdle.BattleArena.LootMechanics;
 
 //TO DO attach to asset
 // MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as
-public partial class LootMaterials : Control
+public partial class NewLoot1 : Control
 {
     private int i;
     private int yy;

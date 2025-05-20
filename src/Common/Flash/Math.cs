@@ -6,4 +6,14 @@ public static class Math
     {
         return 1;
     }
+
+    public static double ceil(double number)
+    {
+        return System.Math.Ceiling(number);
+    }
+
+    public static double floor(double number)
+    {
+        return System.Math.Floor(number);
+    }
 }

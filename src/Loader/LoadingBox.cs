@@ -1,11 +1,13 @@
 
+
 using Godot;
 using System;
 
+// MATCH: DefineSprite_2322/frame_1/DoAction.as
 public partial class LoadingBox : Control
 {
     private RichTextLabel randomMessage;
-    
+
     // MATCH: DefineSprite_2322/frame_1/DoAction.as:genRandom()
     public void genRandom()
     {
@@ -64,7 +66,7 @@ public partial class LoadingBox : Control
     }
 
     private double preloadCount;
-    
+
     public override void _Ready()
     {
         randomMessage = GetNode<RichTextLabel>("randomMessage");
@@ -72,7 +74,6 @@ public partial class LoadingBox : Control
         preloadCount = 0;
     }
 
-    // MATCH: DefineSprite_2322/frame_1/DoAction.as
     public override void _Process(double delta)
     {
         preloadCount += 1;
@@ -83,7 +84,7 @@ public partial class LoadingBox : Control
         }
         if(_root.getBytesLoaded() == _root.getBytesTotal())
         {
-            _root.gotoAndPlay(2);
+            GetTree().ChangeSceneToFile("src/Loader/Loading1OutOf8.tscn");
         }
     }
 }
