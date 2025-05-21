@@ -2,8 +2,8 @@ using Godot;
 namespace AntiIdle.BattleArena.LootMechanics;
 
 //TO DO attach to asset
-// MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as
-public partial class NewLoot1 : Control
+// MATCH: DefineSprite_1325_newLoot17/frame_1/DoAction.as
+public partial class NewLoot17Frame1 : Control
 {
     private int i;
     private int yy;
@@ -26,39 +26,41 @@ public partial class NewLoot1 : Control
     private double _ymouse;
     private double _alpha;
 
-    // MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as:getLoot()
+    // MATCH: DefineSprite_1325_newLoot17/frame_1/DoAction.as:getLoot()
     public void getLoot()
     {
         if (_root.save.questType == "Loot")
         {
-            if (_root.save.questSubtype == "Any" || _root.save.questSubtype == "Coin")
+            if (_root.save.questSubtype == "Any" || _root.save.questSubtype == "Bacon")
             {
                 _root.save.questCount += 1;
             }
         }
-        i = 1;
-        while (i <= _root.todayEvent)
-        {
-            yy = _root.clock_year % 10;
-            mm = _root.clock_month;
-            dd = _root.clock_date;
-            if (_root.eventList[yy][mm][dd][i] == "2x Coin from loot drops in Battle Arena")
-            {
-                lootValue *= 2;
-            }
-            i++;
-        }
         amntToGain = lootValue;
-        _root.gainCoin(amntToGain);
-        _root.house.arena.showDamage("Coin +" + _root.withComma(amntToGain), 16776960, _X, _Y - 20);
+        if (isNaN(lootValue))
+        {
+            amntToGain = 1;
+        }
+        _root.save.arenaBacon += amntToGain;
+        _root.dispNews(41, "Found " + amntToGain + " [Bacon]!");
+        _root.house.arena.showDamage("Bacon +" + _root.withComma(amntToGain), 14524531, _X, _Y - 20);
     }
 
     public override void _Ready()
     {
+        if (_root.save.vegetarianMode == true)
+        {
+            gotoAndStop(2);
+        }
+        else
+        {
+            gotoAndStop(1);
+        }
         leftChance = 0.3;
         magneticChance = 1;
-        var _X = x;
-        var _Y = y - 50;
+        _X = x;
+        _Y = y - 50;
+        xVel = Math.random() * 2;
         if (Math.random() < leftChance)
         {
             xVel = (-Math.random()) * 2;
@@ -88,6 +90,9 @@ public partial class NewLoot1 : Control
             }
             _Y = y;
         }
+        yVel = -5;
+        xalpha = 250;
+        del = 0;
     }
 
     public override void _Process(double delta)
@@ -96,20 +101,17 @@ public partial class NewLoot1 : Control
         if (del >= 2)
         {
             del = 0;
-            if (_Y > 0)
+            xVel *= 0.98;
+            if (_root.save.activityLoot == true && (_root.cursoridle < 5 || _root.arenaBot > 0 && _root.arenaBot < 2400))
             {
-                xVel *= 0.98;
-                if (_root.save.activityLoot == true && (_root.cursoridle < 5 || _root.arenaBot > 0 && _root.arenaBot < 2400))
+                xVel -= 1;
+                if (_root.save.bouncyLoot == false)
                 {
-                    xVel -= 1;
-                    if (_root.save.bouncyLoot == false)
-                    {
-                        _X = 80;
-                    }
+                    _X = 80;
                 }
             }
             yVel += 1;
-            if (_Y > 150 && yVel > 0)
+            if (_Y > y)
             {
                 yVel *= -0.6;
             }
@@ -119,10 +121,7 @@ public partial class NewLoot1 : Control
                 {
                     xVel -= 1;
                 }
-                if (_Y > 0)
-                {
-                    _X = _X + xVel;
-                }
+                _X = _X + xVel;
                 _Y = _Y + yVel;
             }
             if (_X > 500)

@@ -11,6 +11,8 @@ public static class DeadStubs
 {
     public static void stop() {}
 
+    public static void gotoAndStop(double index) {}
+
     public static void fscommand(string command, bool arg) {}
 }
 

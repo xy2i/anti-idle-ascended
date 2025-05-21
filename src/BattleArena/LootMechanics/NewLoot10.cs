@@ -2,8 +2,8 @@ using Godot;
 namespace AntiIdle.BattleArena.LootMechanics;
 
 //TO DO attach to asset
-// MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as
-public partial class NewLoot1 : Control
+// MATCH: DefineSprite_174_newLoot10/frame_1/DoAction.as
+public partial class NewLoot10 : Control
 {
     private int i;
     private int yy;
@@ -26,12 +26,12 @@ public partial class NewLoot1 : Control
     private double _ymouse;
     private double _alpha;
 
-    // MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as:getLoot()
+    // MATCH: DefineSprite_174_newLoot10/frame_1/DoAction.as:getLoot()
     public void getLoot()
     {
         if (_root.save.questType == "Loot")
         {
-            if (_root.save.questSubtype == "Any" || _root.save.questSubtype == "Coin")
+            if (_root.save.questSubtype == "Any" || _root.save.questSubtype == "Superior Crafting Material")
             {
                 _root.save.questCount += 1;
             }
@@ -42,23 +42,37 @@ public partial class NewLoot1 : Control
             yy = _root.clock_year % 10;
             mm = _root.clock_month;
             dd = _root.clock_date;
-            if (_root.eventList[yy][mm][dd][i] == "2x Coin from loot drops in Battle Arena")
+            if (_root.eventList[yy][mm][dd][i] == "4x Superior Crafting Material from loot drops in Battle Arena")
             {
-                lootValue *= 2;
+                lootValue *= 4;
             }
             i++;
         }
         amntToGain = lootValue;
-        _root.gainCoin(amntToGain);
-        _root.house.arena.showDamage("Coin +" + _root.withComma(amntToGain), 16776960, _X, _Y - 20);
+        if (_root.clock_year == 2013 && _root.clock_month == 12 && _root.saveid < 10)
+        {
+            if (_root.clock_date == 6 || _root.clock_date == 20)
+            {
+                amntToGain = Math.floor(amntToGain * 4);
+            }
+        }
+        if (isNaN(amntToGain))
+        {
+            amntToGain = 1;
+        }
+        _root.gainCareerEXP(4, 5 * amntToGain, true);
+        _root.save.arenaSuperiorCraft += amntToGain;
+        _root.dispNews(36, "Found " + amntToGain + " [Superior Crafting Material]!");
+        _root.house.arena.showDamage("Superior Crafting Material +" + _root.withComma(amntToGain), 10630050, _X, _Y - 20);
     }
 
     public override void _Ready()
     {
         leftChance = 0.3;
         magneticChance = 1;
-        var _X = x;
-        var _Y = y - 50;
+        _X = x;
+        _Y = y - 50;
+        xVel = Math.random() * 2;
         if (Math.random() < leftChance)
         {
             xVel = (-Math.random()) * 2;
@@ -88,6 +102,9 @@ public partial class NewLoot1 : Control
             }
             _Y = y;
         }
+        yVel = -5;
+        xalpha = 250;
+        del = 0;
     }
 
     public override void _Process(double delta)

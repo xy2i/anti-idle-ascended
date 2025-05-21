@@ -1,3 +1,5 @@
+using System;
+
 namespace AntiIdle.Common.Globals;
 
 public class GlobalSettingWrapper

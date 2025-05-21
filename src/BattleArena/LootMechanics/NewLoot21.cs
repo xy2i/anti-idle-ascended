@@ -2,8 +2,8 @@ using Godot;
 namespace AntiIdle.BattleArena.LootMechanics;
 
 //TO DO attach to asset
-// MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as
-public partial class NewLoot1 : Control
+// MATCH: DefineSprite_1331_newLoot21/frame_1/DoAction.as
+public partial class NewLoot21 : Control
 {
     private int i;
     private int yy;
@@ -26,39 +26,34 @@ public partial class NewLoot1 : Control
     private double _ymouse;
     private double _alpha;
 
-    // MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as:getLoot()
+    // MATCH: DefineSprite_1331_newLoot21/frame_1/DoAction.as:getLoot()
     public void getLoot()
     {
         if (_root.save.questType == "Loot")
         {
-            if (_root.save.questSubtype == "Any" || _root.save.questSubtype == "Coin")
+            if (_root.save.questSubtype == "Any" || _root.save.questSubtype == "Tukkonium")
             {
                 _root.save.questCount += 1;
             }
         }
-        i = 1;
-        while (i <= _root.todayEvent)
-        {
-            yy = _root.clock_year % 10;
-            mm = _root.clock_month;
-            dd = _root.clock_date;
-            if (_root.eventList[yy][mm][dd][i] == "2x Coin from loot drops in Battle Arena")
-            {
-                lootValue *= 2;
-            }
-            i++;
-        }
         amntToGain = lootValue;
-        _root.gainCoin(amntToGain);
-        _root.house.arena.showDamage("Coin +" + _root.withComma(amntToGain), 16776960, _X, _Y - 20);
+        if (isNaN(amntToGain))
+        {
+            amntToGain = 1;
+        }
+        _root.gainCareerEXP(4, 5000 * amntToGain, true);
+        _root.save.arenaTukkonium += amntToGain;
+        _root.dispNews(185, "Found " + amntToGain + " [Tukkonium]!");
+        _root.house.arena.showDamage("Tukkonium +" + _root.withComma(amntToGain), 16777215, _X, _Y - 20);
     }
 
     public override void _Ready()
     {
-        leftChance = 0.3;
+        leftChance = 0;
         magneticChance = 1;
-        var _X = x;
-        var _Y = y - 50;
+        _X = x;
+        _Y = y - 50;
+        xVel = Math.random() * 2;
         if (Math.random() < leftChance)
         {
             xVel = (-Math.random()) * 2;
@@ -88,6 +83,9 @@ public partial class NewLoot1 : Control
             }
             _Y = y;
         }
+        yVel = -5;
+        xalpha = 250;
+        del = 0;
     }
 
     public override void _Process(double delta)
