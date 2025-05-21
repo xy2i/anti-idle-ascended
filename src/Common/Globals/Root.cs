@@ -612,7 +612,7 @@ public class Root
     }
 
     // MATCH: frame_3/DoAction.as:submitKong()
-    public void submitKong(string scoreName, double amount, double hardCap, bool submitZero)
+    public void submitKong(string scoreName, double amount, double hardCap = 0, bool submitZero = false)
     {
     }
 
@@ -716,8 +716,8 @@ public class Root
         _root.submitScore("[Battle Arena] Rune of Experience", _root.save.arenaRuneLevel[5], 100);
         _root.submitScore("[Battle Arena] Rune of Greed", _root.save.arenaRuneLevel[6], 100);
         _root.submitScore("[Battle Arena] Total Rune Level",
-            _root.save.arenaRuneLevel[1] + _root.save.arenaRuneLevel[2] + _root.save.arenaRuneLevel[3] +
-            _root.save.arenaRuneLevel[4] + _root.save.arenaRuneLevel[5] + _root.save.arenaRuneLevel[6], 600);
+        _root.save.arenaRuneLevel[1] + _root.save.arenaRuneLevel[2] + _root.save.arenaRuneLevel[3] +
+        _root.save.arenaRuneLevel[4] + _root.save.arenaRuneLevel[5] + _root.save.arenaRuneLevel[6], 600);
         _root.submitScore("[Button Machine] Button Presses", _root.save.buttonPress);
         _root.submitScore("[Button Machine] Perfect Clicks", _root.save.buttonPerfect);
         _root.submitScore("[Button Machine] Max Hit Combo", _root.save.buttonMaxCombo);
@@ -988,4 +988,42 @@ public class Root
     {
         return 0;
     }
+
+    public double gainGreenCoin(double index)
+    {
+        return 0;
+    }
+
+    public double gainBlueCoin(double index)
+    {
+        return 0;
+    }
+
+    public double gainBoost(double index, double x)
+    {
+        return 0;
+    }
+
+    public double gainCareerEXP(double index, double x, bool y)
+    {
+        return 0;
+    }
+
+    public void checkBestiary()
+    {
+    }
+
+    public double obtainAlly(double lootValue)
+    {
+        return 0;
+    }
+
+    internal double gainWhiteCoin(double lootValue)
+    {
+        return 0;
+    }
+
+    public FlashList<double> arenaSkillMaxF;
+
+    public FlashList<double> arenaSkillNameF;
 }

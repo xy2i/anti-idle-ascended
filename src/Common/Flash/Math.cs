@@ -16,4 +16,9 @@ public static class Math
     {
         return System.Math.Floor(number);
     }
+
+    public static double pow(double number, double x)
+    {
+        return System.Math.Pow(number, x);
+    }
 }
