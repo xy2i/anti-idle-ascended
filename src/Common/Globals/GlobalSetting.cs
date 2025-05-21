@@ -20,6 +20,8 @@ public class GlobalSetting
     public FlashList<bool> breakTab3;
     public FlashList<bool> breakTab4;
     public FlashList<double> challengeTime;
+    public double defTab;
+
 
     public object this[string key]
     {

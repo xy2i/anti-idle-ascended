@@ -148,7 +148,7 @@ def match(args):
 
     matching_line_count = 0
     for file_path in file_paths:
-        with open(Path(args.source_path) / file_path, 'r') as file:
+        with open(Path(args.source_path) / file_path, "r", encoding="utf-8") as file:
             for line in file:
                 # Look for the MATCH: pattern
                 if "MATCH:" in line:
@@ -164,7 +164,6 @@ def match(args):
                             "line_count": line_count
                         })
                         matching_line_count += line_count
-
 
     matches = sorted(matches, key=lambda x: x["name"])
     total_line_count = db["total_line_count"]

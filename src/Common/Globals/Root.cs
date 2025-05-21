@@ -11,6 +11,8 @@ namespace AntiIdle.Common.Globals;
 /// </summary>
 public class Root
 {
+    public double boostMax;
+    public double moostMin;
     public string _quality;
     public double achRedCoin;
     public double actualKpaCount;
@@ -49,7 +51,7 @@ public class Root
     public double maxredcoin;
     public double nameValue;
     public Dictionary<string, object> news;
-    public FlashList<string> newsFeature;
+    public FlashList<double> newsFeature;
     public bool offlineVersion;
     public bool preloadedFile0;
     public bool preloadedFile1;
@@ -82,9 +84,11 @@ public class Root
     public double uniqueUlt1;
     public double uniqueUlt2;
     public double uniqueUlt3;
+    public double maxNum;
     public double updateBreakNews;
     public double upnumber;
     public double upnumberHidden;
+    public Popup popUp; // TODO: code which calls popUp needs to init this, or put it in all frames?
 
     public int getBytesLoaded()
     {
@@ -896,92 +900,690 @@ public class Root
         }
         else if (_root.save.breakNewsMode == 2)
         {
-            // if (_root.saveGlobal.defTab == 5)
-            // {
-            //     if (_root.saveGlobal.breakAll[type] || (_root.saveGlobal.breakFeature[type] &&
-            //                                             _root.house._currentframe == _root.newsFeature[type]))
-            //     {
-            //         b = 30;
-            //         while (b >= 2)
-            //         {
-            //             if (_root.saveGlobal.breakAll[type])
-            //             {
-            //                 c = 1;
-            //                 while (c <= 30)
-            //                 {
-            //                     _root["F" + c + "breakNews" + b] = _root["F" + c + "breakNews" + (b - 1)];
-            //                     _root["F" + c + "breakStamp" + b] = _root["F" + c + "breakStamp" + (b - 1)];
-            //                     _root["F" + c + "breakColor" + b] = _root["F" + c + "breakColor" + (b - 1)];
-            //                     c++;
-            //                 }
-            //             }
-            //             else if (_root.saveGlobal.breakFeature[type])
-            //             {
-            //                 ft = _root.newsFeature[type];
-            //                 _root["F" + ft + "breakNews" + b] = _root["F" + ft + "breakNews" + (b - 1)];
-            //                 _root["F" + ft + "breakStamp" + b] = _root["F" + ft + "breakStamp" + (b - 1)];
-            //                 _root["F" + ft + "breakColor" + b] = _root["F" + ft + "breakColor" + (b - 1)];
-            //             }
-            //
-            //             b -= 1;
-            //         }
-            //
-            //         if (_root.saveGlobal.breakAll[type])
-            //         {
-            //             c = 1;
-            //             while (c <= 30)
-            //             {
-            //                 _root["F" + c + "breakNews1"] = news;
-            //                 _root["F" + c + "breakStamp1"] = "[" + _root.clock_display + "]";
-            //                 _root["F" + c + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
-            //                                                  _root.saveGlobal.breakG[type] * 256 +
-            //                                                  _root.saveGlobal.breakB[type];
-            //                 c++;
-            //             }
-            //         }
-            //         else if (_root.saveGlobal.breakFeature[type])
-            //         {
-            //             ft = _root.newsFeature[type];
-            //             _root["F" + ft + "breakNews1"] = news;
-            //             _root["F" + ft + "breakStamp1"] = "[" + _root.clock_display + "]";
-            //             _root["F" + ft + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
-            //                                               _root.saveGlobal.breakG[type] * 256 +
-            //                                               _root.saveGlobal.breakB[type];
-            //         }
-            //
-            //         _root.updateBreakNews = 1;
-            //     }
-            // }
-            // else if (_root.saveGlobal.defTab == 0 ||
-            //          _root.saveGlobal["breakTab" + _root.saveGlobal.defTab][type] == true)
-            // {
-            //     imp = _root.saveGlobal.defTab;
-            //     b = 30;
-            //     while (b >= 2)
-            //     {
-            //         _root["X" + imp + "breakNews" + b] = _root["X" + imp + "breakNews" + (b - 1)];
-            //         _root["X" + imp + "breakStamp" + b] = _root["X" + imp + "breakStamp" + (b - 1)];
-            //         _root["X" + imp + "breakColor" + b] = _root["X" + imp + "breakColor" + (b - 1)];
-            //         b -= 1;
-            //     }
-            //
-            //     _root["X" + imp + "breakNews1"] = news;
-            //     _root["X" + imp + "breakStamp1"] = "[" + _root.clock_display + "]";
-            //     _root["X" + imp + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
-            //                                        _root.saveGlobal.breakG[type] * 256 + _root.saveGlobal.breakB[type];
-            //     _root.updateBreakNews = 1;
-            // }
+            if (_root.saveGlobal.defTab == 5)
+            {
+                if (_root.saveGlobal.breakAll[type] || (_root.saveGlobal.breakFeature[type] &&
+                                                        _root.house._currentframe == _root.newsFeature[type]))
+                {
+                    var b = 30;
+                    while (b >= 2)
+                    {
+                        if (_root.saveGlobal.breakAll[type])
+                        {
+                            var c = 1;
+                            while (c <= 30)
+                            {
+                                _root.news["F" + c + "breakNews" + b] = _root.news["F" + c + "breakNews" + (b - 1)];
+                                _root.news["F" + c + "breakStamp" + b] = _root.news["F" + c + "breakStamp" + (b - 1)];
+                                _root.news["F" + c + "breakColor" + b] = _root.news["F" + c + "breakColor" + (b - 1)];
+                                c++;
+                            }
+                        }
+                        else if (_root.saveGlobal.breakFeature[type])
+                        {
+                            var ft = _root.newsFeature[type];
+                            _root.news["F" + ft + "breakNews" + b] = _root.news["F" + ft + "breakNews" + (b - 1)];
+                            _root.news["F" + ft + "breakStamp" + b] = _root.news["F" + ft + "breakStamp" + (b - 1)];
+                            _root.news["F" + ft + "breakColor" + b] = _root.news["F" + ft + "breakColor" + (b - 1)];
+                        }
+
+                        b -= 1;
+                    }
+
+                    if (_root.saveGlobal.breakAll[type])
+                    {
+                        var c = 1;
+                        while (c <= 30)
+                        {
+                            _root.news["F" + c + "breakNews1"] = news;
+                            _root.news["F" + c + "breakStamp1"] = "[" + _root.clock_display + "]";
+                            _root.news["F" + c + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+                                                             _root.saveGlobal.breakG[type] * 256 +
+                                                             _root.saveGlobal.breakB[type];
+                            c++;
+                        }
+                    }
+                    else if (_root.saveGlobal.breakFeature[type])
+                    {
+                        var ft = _root.newsFeature[type];
+                        _root.news["F" + ft + "breakNews1"] = news;
+                        _root.news["F" + ft + "breakStamp1"] = "[" + _root.clock_display + "]";
+                        _root.news["F" + ft + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+                                                          _root.saveGlobal.breakG[type] * 256 +
+                                                          _root.saveGlobal.breakB[type];
+                    }
+
+                    _root.updateBreakNews = 1;
+                }
+            }
+            else if (_root.saveGlobal.defTab == 0 ||
+                     ((FlashList<bool>)_root.saveGlobal["breakTab" + _root.saveGlobal.defTab])[type] == true)
+            {
+                var imp = _root.saveGlobal.defTab;
+                var b = 30;
+                while (b >= 2)
+                {
+                    _root.news["X" + imp + "breakNews" + b] = _root.news["X" + imp + "breakNews" + (b - 1)];
+                    _root.news["X" + imp + "breakStamp" + b] = _root.news["X" + imp + "breakStamp" + (b - 1)];
+                    _root.news["X" + imp + "breakColor" + b] = _root.news["X" + imp + "breakColor" + (b - 1)];
+                    b -= 1;
+                }
+
+                _root.news["X" + imp + "breakNews1"] = news;
+                _root.news["X" + imp + "breakStamp1"] = "[" + _root.clock_display + "]";
+                _root.news["X" + imp + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+                                                   _root.saveGlobal.breakG[type] * 256 + _root.saveGlobal.breakB[type];
+                _root.updateBreakNews = 1;
+            }
+        }
+    }
+
+    // MATCH: frame_3/DoAction.as:showPopup()
+    public void showPopup(string popT, string popD)
+    {
+        _root.popUp.Frame = 2;
+        _root.popUp.popTitle.Text = popT;
+        _root.popUp.popDesc.Text = popD;
+    }
+
+    // MATCH: frame_3/DoAction.as:convertMin()
+    public string convertMin(double thatNumber)
+    {
+        if (thatNumber < 0)
+        {
+            thatNumber = 0;
+        }
+        var hr = Math.floor(thatNumber / 3600);
+        var min = Math.floor(thatNumber / 60) - hr * 60;
+        var minString = "" + min;
+        if (min < 10)
+        {
+            minString = "0" + min;
+        }
+        return hr + ":" + minString;
+    }
+
+    // MATCH: frame_3/DoAction.as:convertSecFull()
+    public string convertSecFull(double thatNumber)
+    {
+        if (thatNumber < 0)
+        {
+            thatNumber = 0;
+        }
+        var hr = Math.floor(thatNumber / 3600);
+        var min = Math.floor(thatNumber / 60) - hr * 60;
+        var sec = Math.floor(thatNumber) - hr * 3600 - min * 60;
+        var minS = "" + min;
+        var secS = "" + sec;
+        if (min < 10)
+        {
+            minS = "0" + min;
+        }
+        if (sec < 10)
+        {
+            secS = "0" + sec;
+        }
+        return hr + ":" + minS + ":" + secS;
+    }
+
+    // MATCH: frame_3/DoAction.as:convertSec()
+    public string convertSec(double thatNumber)
+    {
+        if (thatNumber < 0)
+        {
+            thatNumber = 0;
+        }
+        var min = Math.floor(thatNumber / 60);
+        var sec = Math.floor(thatNumber) - min * 60;
+        var minS = $"{min}";
+        var secS = $"{sec}";
+        if (min < 10)
+        {
+            minS = "0" + min;
+        }
+        if (sec < 10)
+        {
+            secS = "0" + sec;
+        }
+        return minS + ":" + secS;
+    }
+
+    // MATCH: frame_3/DoAction.as:convertSecCD()
+    public string convertSecCD(double thatNumber)
+    {
+        if (thatNumber < 0)
+        {
+            thatNumber = 0;
+        }
+        var min = Math.floor(thatNumber / 60);
+        var sec = Math.floor(thatNumber) - min * 60;
+        var secS = $"{sec}";
+        if (sec < 10)
+        {
+            secS = "0" + sec;
+        }
+        return min + ":" + secS;
+    }
+
+    // MATCH: frame_3/DoAction.as:tukkunRandom()
+    public double tukkunRandom(double noZero, double maxChance, double maxVal)
+    {
+        maxVal = Math.ceil(maxVal);
+        var val = .0;
+        if (Math.random() < noZero)
+        {
+            val = Math.ceil(Math.random() * maxVal);
+            if (Math.random() < maxChance)
+            {
+                val = maxVal;
+            }
+        }
+        else
+        {
+            val = 0;
+        }
+        return val;
+    }
+
+    // MATCH: frame_3/DoAction.as:withComma()
+    public string withComma(double thatNumber)
+    {
+        var finalNumber = "";
+        if (thatNumber == Infinity || isNaN(thatNumber))
+        {
+            finalNumber = "-----";
+        }
+        else
+        {
+            if (thatNumber > 999999999999999)
+            {
+                thatNumber = 999999999999999;
+            }
+            var cNegative = false;
+            var groupval = thatNumber;
+            if (thatNumber < 0)
+            {
+                groupval = Math.abs(thatNumber);
+                cNegative = true;
+            }
+            var group1 = Math.floor(groupval / 1000000000000);
+            var group2 = Math.floor(groupval / 1000000000) - group1 * 1000;
+            var group3 = Math.floor(groupval / 1000000) - group1 * 1000000 - group2 * 1000;
+            var group4 = Math.floor(groupval / 1000) - group1 * 1000000000 - group2 * 1000000 - group3 * 1000;
+            var group5 = Math.floor(groupval) - group1 * 1000000000000 - group2 * 1000000000 - group3 * 1000000 - group4 * 1000;
+            var groupCount = 1;
+            if (group4 > 0)
+            {
+                groupCount = 2;
+            }
+            if (group3 > 0)
+            {
+                groupCount = 3;
+            }
+            if (group2 > 0)
+            {
+                groupCount = 4;
+            }
+            if (group1 > 0)
+            {
+                groupCount = 5;
+            }
+            var group1s = $"{group1}";
+            var group2s = $"{group2}";
+            var group3s = $"{group3}";
+            var group4s = $"{group4}";
+            var group5s = $"{group5}";
+            if (groupCount >= 2 && group5 < 10)
+            {
+                group5s = "0" + group5;
+            }
+            if (groupCount >= 2 && group5 < 100)
+            {
+                group5s = "0" + group5;
+            }
+            if (groupCount >= 3 && group4 < 10)
+            {
+                group4s = "0" + group4;
+            }
+            if (groupCount >= 3 && group4 < 100)
+            {
+                group4s = "0" + group4;
+            }
+            if (groupCount >= 4 && group3 < 10)
+            {
+                group3s = "0" + group3;
+            }
+            if (groupCount >= 4 && group3 < 100)
+            {
+                group3s = "0" + group3;
+            }
+            if (groupCount >= 5 && group2 < 10)
+            {
+                group2s = "0" + group2;
+            }
+            if (groupCount >= 5 && group2 < 100)
+            {
+                group2s = "0" + group2;
+            }
+            if (groupCount == 5)
+            {
+                finalNumber = group1 + "," + group2 + "," + group3 + "," + group4 + "," + group5;
+            }
+            if (groupCount == 4)
+            {
+                finalNumber = group2 + "," + group3 + "," + group4 + "," + group5;
+            }
+            if (groupCount == 3)
+            {
+                finalNumber = group3 + "," + group4 + "," + group5;
+            }
+            if (groupCount == 2)
+            {
+                finalNumber = group4 + "," + group5;
+            }
+            if (groupCount == 1)
+            {
+                finalNumber = "" + group5;
+            }
+            if (cNegative == true)
+            {
+                finalNumber = "-" + finalNumber;
+            }
+        }
+        return finalNumber;
+    }
+
+
+    // MATCH: frame_3/DoAction.as:bCreate()
+    public double bCreate(double regB, double regE)
+    {
+        while (regE > 0 && regB < 100000000000)
+        {
+            regE -= 1;
+            regB *= 10;
+        }
+        if (regE > 990)
+        {
+            return 990999999999999;
+        }
+        return Math.floor(regE * 1000000000000 + regB);
+    }
+
+
+    // MATCH: frame_3/DoAction.as:toB()
+    public double toB(double reg)
+    {
+        if (reg == Infinity || isNaN(reg))
+        {
+            return 0;
+        }
+        var tmpB = reg;
+        var tmpE = 0;
+        while (tmpB > 999999999999)
+        {
+            tmpB = Math.floor(tmpB / 10);
+            tmpE += 1;
+        }
+        tmpB = Math.floor(tmpB);
+        return _root.bCreate(tmpB, tmpE);
+    }
+
+
+    // MATCH: frame_3/DoAction.as:toR()
+    public double toR(double bn)
+    {
+        if (isNaN(bn) || bn == Infinity)
+        {
+            return 0;
+        }
+        return Math.round(_root.bGetB(bn) * Math.pow(10, _root.bGetE(bn)));
+    }
+
+    // MATCH: frame_3/DoAction.as:bReduc()
+    public double bReduc(double bn)
+    {
+        while (_root.bGetE(bn) > 0 && _root.bGetB(bn) < 100000000000)
+        {
+            var tmpE = _root.bGetE(bn) - 1;
+            var tmpB = _root.bGetB(bn) * 10;
+            bn = Math.floor(tmpE * 1000000000000 + tmpB);
+        }
+        return bn;
+    }
+
+    // MATCH: frame_3/DoAction.as:bGetB()
+    public double bGetB(double bn)
+    {
+        return bn % 1000000000000;
+    }
+
+    // MATCH: frame_3/DoAction.as:bGetE()
+    public double bGetE(double bn)
+    {
+        return Math.floor(bn / 1000000000000);
+    }
+
+    // MATCH: frame_3/DoAction.as:bAdd()
+    public double bAdd(double bnA, double bnB)
+    {
+        if (bnB > bnA)
+        {
+            var tmp = bnB;
+            bnB = bnA;
+            bnA = tmp;
+        }
+        var tmpEDiff = _root.bGetE(bnA) - _root.bGetE(bnB);
+        if (tmpEDiff > 12)
+        {
+            return bnA;
+        }
+        var tmpBA = _root.bGetB(bnA);
+        var tmpBB = Math.floor(_root.bGetB(bnB) / Math.pow(10, tmpEDiff));
+        var tmpB = tmpBA + tmpBB;
+        var tmpE = _root.bGetE(bnA);
+        if (tmpB > 999999999999)
+        {
+            tmpB = Math.floor(tmpB / 10);
+            tmpE += 1;
+        }
+        return _root.bCreate(tmpB, tmpE);
+    }
+
+    // MATCH: frame_3/DoAction.as:bSub()
+    public double bSub(double bnA, double bnB)
+    {
+        if (bnB >= bnA)
+        {
+            return 0;
+        }
+        var tmpEDiff = _root.bGetE(bnA) - _root.bGetE(bnB);
+        if (tmpEDiff > 12)
+        {
+            return bnA;
+        }
+        var tmpBA = _root.bGetB(bnA);
+        var tmpBB = Math.floor(_root.bGetB(bnB) / Math.pow(10, tmpEDiff));
+        var tmpB = tmpBA - tmpBB;
+        var tmpE = _root.bGetE(bnA);
+        if (tmpB > 999999999999)
+        {
+            tmpB = Math.floor(tmpB / 10);
+            tmpE += 1;
+        }
+        return _root.bCreate(tmpB, tmpE);
+    }
+
+    // MATCH: frame_3/DoAction.as:bMul2()
+    public double bMul2(double bnA, double regB)
+    {
+        var tmpB = _root.bGetB(bnA);
+        var tmpE = _root.bGetE(bnA);
+        while (regB >= 10)
+        {
+            tmpB *= 10;
+            if (tmpB > 999999999999)
+            {
+                tmpB = Math.floor(tmpB / 10);
+                tmpE += 1;
+            }
+            regB /= 10;
+        }
+        tmpB *= regB;
+        if (tmpB > 999999999999)
+        {
+            tmpB = Math.floor(tmpB / 10);
+            tmpE += 1;
+        }
+        return _root.bCreate(tmpB, tmpE);
+    }
+
+    // MATCH: frame_3/DoAction.as:bMul()
+    public double bMul(double bnA, double bnB)
+    {
+        return _root.bMul2(_root.bCreate(_root.bGetB(bnA), _root.bGetE(bnA) + _root.bGetE(bnB)), _root.bGetB(bnB));
+    }
+
+    // MATCH: frame_3/DoAction.as:bDiv2()
+    public double bDiv2(double nA, double regB)
+    {
+        return _root.bMul2(bnA, 1 / regB);
+    }
+
+    // MATCH: frame_3/DoAction.as:bDiv()
+    public double bDiv(double bnA, double bnB)
+    {
+        if (bnA < bnB)
+        {
+            return 0;
+        }
+        return _root.bDiv2(_root.bCreate(_root.bGetB(bnA), _root.bGetE(bnA) - _root.bGetE(bnB)), _root.bGetB(bnB));
+    }
+
+    // MATCH: frame_3/DoAction.as:bPct()
+    public double bPct(double bnA, double bnB)
+    {
+        if (bnA >= bnB)
+        {
+            return 100;
+        }
+        var tmpBA = _root.bGetB(bnA);
+        var tmpEA = _root.bGetE(bnA);
+        var tmpBB = _root.bGetB(bnB);
+        var tmpEB = _root.bGetE(bnB);
+        if (tmpEB - tmpEA > 4)
+        {
+            return 0;
+        }
+        while (tmpEA < tmpEB)
+        {
+            tmpEA += 1;
+            tmpBA /= 10;
+        }
+        return tmpBA * 100 / tmpBB;
+    }
+
+    // MATCH: frame_3/DoAction.as:bPctD()
+    public string bPctD(double bnA, double bnB)
+    {
+        var tmp = Math.floor(bPct(bnA, bnB) * 100);
+        var tmpPA = Math.floor(tmp / 100);
+        var tmpPB = tmp % 100;
+        var tmpPAs = $"{tmpPA}";
+        var tmpPBs = $"{tmpPB}";
+        if (tmpPA < 10)
+        {
+            tmpPAs = "0" + tmpPA;
+        }
+        if (tmpPB < 10)
+        {
+            tmpPBs = "0" + tmpPB;
+        }
+        return tmpPAs + "." + tmpPBs + "%";
+    }
+
+    // MATCH: frame_3/DoAction.as:pctD()
+    public string pctD(double pct)
+    {
+        var tmp = Math.floor(pct * 100);
+        var tmpPA = Math.floor(pct / 100);
+        var tmpPB = tmp % 100;
+        var tmpPBs = $"{tmpPB}";
+        if (tmpPB < 10)
+        {
+            tmpPBs = "0" + tmpPB;
+        }
+        return tmpPA + "." + tmpPBs + "%";
+    }
+
+    // MATCH: frame_3/DoAction.as:bPow()
+    public double bPow(double regA, double regB)
+    {
+        var maxB = Math.floor(Math.log(_root.maxNum) / Math.log(regA) - 1);
+        if (regB < maxB)
+        {
+            var res = Math.pow(regA, regB);
+            return _root.toB(res);
+        }
+        return _root.bMul(_root.toB(Math.pow(regA, maxB)), _root.bPow(regA, regB - maxB));
+    }
+
+    // MATCH: frame_3/DoAction.as:bSqrt()
+    public double bSqrt(double bn)
+    {
+        var tmpB = _root.bGetB(bn);
+        var tmpE = _root.bGetE(bn);
+        if (tmpE % 2 != 0)
+        {
+            tmpE -= 1;
+            tmpB *= 10;
+        }
+        var tmpI = 1;
+        while (tmpI <= 4)
+        {
+            if (tmpE >= 2)
+            {
+                tmpE -= 2;
+                tmpB *= 100;
+            }
+            else
+            {
+                tmpI = 5;
+            }
+            tmpI++;
+        }
+        tmpE /= 2;
+        tmpB = Math.floor(Math.sqrt(tmpB));
+        return _root.bCreate(tmpB, tmpE);
+    }
+
+    // MATCH: frame_3/DoAction.as:bDisp()
+    public string bDisp(double bn)
+    {
+        var tmpB = _root.bGetB(bn);
+        var tmpB2 = 0;
+        var tmpE = _root.bGetE(bn);
+        if (tmpE == 0)
+        {
+            return _root.withComma(tmpB);
+        }
+        while (tmpB > 99999 || tmpE % 3 != 1)
+        {
+            tmpE += 1;
+            tmpB = Math.floor(tmpB / 10);
+        }
+        tmpB2 = (int)tmpB % 100;
+        var tmpB2s = $"{tmpB2}";
+        if (tmpB2 < 10)
+        {
+            tmpB2s = "0" + tmpB2;
+        }
+        tmpB = Math.floor(tmpB / 100);
+        tmpE += 2;
+        return tmpB + "." + tmpB2s + " x 10^" + tmpE;
+    }
+
+    // MATCH: frame_3/DoAction.as:toFW()
+    public string toFW(string str)
+    {
+        str += "";
+        str = str.Replace("0", "０");
+        str = str.Replace("1", "１");
+        str = str.Replace("2", "２");
+        str = str.Replace("3", "３");
+        str = str.Replace("4", "４");
+        str = str.Replace("5", "５");
+        str = str.Replace("6", "６");
+        str = str.Replace("7", "７");
+        str = str.Replace("8", "８");
+        str = str.Replace("9", "９");
+        return str;
+    }
+
+    // MATCH: frame_3/DoAction.as:bDispX()
+    public string bDispX(double bn)
+    {
+        var tmpB = _root.bGetB(bn);
+        var tmpB2 = 0;
+        var tmpE = _root.bGetE(bn);
+        if (tmpE == 0)
+        {
+            return _root.withComma(tmpB);
+        }
+        while (tmpB > 99999 || tmpE % 3 != 1)
+        {
+            tmpE += 1;
+            tmpB = Math.floor(tmpB / 10);
+        }
+        tmpB2 = (int)tmpB % 100;
+        var tmpB2s = $"{tmpB2}";
+        if (tmpB2 < 10)
+        {
+            tmpB2s = "0" + tmpB2;
+        }
+        tmpB = Math.floor(tmpB / 100);
+        tmpE += 2;
+        return $"{tmpB}" + "." + tmpB2s + " x 10" + _root.toFW("" + tmpE);
+    }
+
+    // MATCH: frame_3/DoAction.as:withCommaB()
+    public string withCommaB(double num)
+    {
+        if (num < 0)
+        {
+            return "-" + _root.bDisp(_root.toB(-num));
+        }
+        return _root.bDisp(_root.toB(num));
+    }
+
+    // MATCH: frame_3/DoAction.as:withCommaC()
+    public string withCommaC(double num)
+    {
+        if (num < 0)
+        {
+            return "-" + _root.bDispX(_root.toB(-num));
+        }
+        return _root.bDispX(_root.toB(num));
+    }
+
+    // MATCH: frame_3/DoAction.as:gainBoost()
+    public void gainBoost(double amount, double limit)
+    {
+        if (!isNaN(amount))
+        {
+            var realLimit = .0;
+            if (limit == 1)
+            {
+                realLimit = _root.boostMax;
+            }
+            else if (limit == 2 || limit == 3)
+            {
+                realLimit = _root.boostMax * 1.5;
+            }
+            else
+            {
+                realLimit = _root.boostMax * 2.5;
+            }
+            if (_root.save.bestLevel <= 5 && _root.save.featureBoostGen != true)
+            {
+                realLimit = 100;
+            }
+            var actualGain = amount;
+            if (actualGain > realLimit - _root.save.boost)
+            {
+                actualGain = realLimit - _root.save.boost;
+            }
+            if (actualGain < 0)
+            {
+                actualGain = 0;
+            }
+            _root.save.boost += actualGain;
+            _root.save.boostPurchased += actualGain;
         }
     }
 
     public void gotoAndPlay(int index)
     {
         GD.Print($"WARNING: unconverted gotoAndPlay({index})");
-    }
-
-    public string withComma(double index)
-    {
-        return "";
     }
 
     public double gainCoin(double index)

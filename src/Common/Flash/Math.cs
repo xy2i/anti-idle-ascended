@@ -21,4 +21,18 @@ public static class Math
     {
         return System.Math.Pow(number, x);
     }
+
+    public static double abs(double number)
+    {
+        return System.Math.Abs(number);
+    }
+
+    public static double log(double number)
+    {
+        return System.Math.Log(number);
+    }
+    public static double sqrt(double number)
+    {
+        return System.Math.Sqrt(number);
+    }
 }

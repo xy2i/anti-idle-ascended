@@ -12,6 +12,7 @@ public class Global
     public static Root _root = new();
 
     public static string undefined = null;
+    public static double Infinity = double.PositiveInfinity;
 
     public static UnderscoreGlobal _global = new();
 }
@@ -1610,6 +1611,7 @@ public class Save
 public class House
 {
     public Arena arena = new();
+    public double _currentframe;
 }
 
 public class Arena

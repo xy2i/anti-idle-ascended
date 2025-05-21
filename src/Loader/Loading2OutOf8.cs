@@ -341,5 +341,7 @@ public partial class Loading2OutOf8 : Control
             [300, 420, 175, 80, 165, 675, 500, 360, 17, 19, 600, 360, 120, 150, 170, 190, 200, 300, 350, 450, 27];
         _root.cyborgActCost = [0, 84, 35, 16, 33, 135, 100, 72, 4, 5, 1000, 72, 30, 35, 40, 45, 60, 90, 120, 180, 11];
         _root.cyborgWorking = false;
+        Trans
+        return false;
     }
 }
