@@ -12,10 +12,16 @@ namespace AntiIdle.Common.Globals;
 public class Root
 {
     public string _quality;
+    public double achRedCoin;
+    public double actualKpaCount;
+    public double actualShinyKpaCount;
     public double arenaBot;
     public bool autoStart;
+    public double awards;
+    public double bestiaryLevel;
     public List<string> careerName;
     public int clock_date;
+    public double clock_display;
     public int clock_month;
     public int clock_year;
     public double correctTier;
@@ -30,6 +36,7 @@ public class Root
     public List<double> cyborgActTime;
     public bool cyborgWorking;
     public List<List<List<List<string>>>> eventList;
+    public double fishRodCount;
     public string flashVer;
     public int fps = 40;
     public GlobalSettingWrapper globalSetting;
@@ -39,8 +46,10 @@ public class Root
     public bool kpaChip;
     public bool lootMagnet;
     public double luckyNumber;
+    public double maxredcoin;
     public double nameValue;
     public Dictionary<string, object> news;
+    public FlashList<string> newsFeature;
     public bool offlineVersion;
     public bool preloadedFile0;
     public bool preloadedFile1;
@@ -52,20 +61,30 @@ public class Root
     public double refresh_month;
     public double refresh_year;
     public Save save = new();
-    public GlobalSetting saveGlobal;
+    public GlobalSetting saveGlobal = new();
     public double saveid;
+    public double sawards;
     public bool scoreBanned;
     public double sessionTimeLeft;
+    public double stadiumHatUnlocked;
+    public double systemTimeNow;
     public double thisSession;
     public double todayEvent;
+    public double totalachievements;
+    public double totalAllyMastered;
+    public double totalAllyMaxed;
+    public double totalAllyTamed;
+    public double totalCareerLevel;
+    public double totalRestEfficiency;
+    public double totalsachievements;
+    public double totalUltra;
+    public double totalUnrankedPower;
+    public double uniqueUlt1;
+    public double uniqueUlt2;
+    public double uniqueUlt3;
+    public double updateBreakNews;
     public double upnumber;
     public double upnumberHidden;
-    public double totalRestEfficiency;
-    public double awards;
-    public double sawards;
-    public double achRedCoin;
-    public double actualKpaCount;
-    public double actualShinyKpaCount;
 
     public int getBytesLoaded()
     {
@@ -132,7 +151,7 @@ public class Root
             i = 0;
             while (i <= myDeckArray.Count - 1)
             {
-                planDeck[myDeckArray[i]] += 1;
+                planDeck[(int)myDeckArray[i]] += 1;
                 i++;
             }
         }
@@ -654,7 +673,307 @@ public class Root
             z++;
         }
     }
-    
+
+    // MATCH: frame_3/DoAction.as:submitAll()
+    public void submitAll()
+    {
+        _root.submitGeneral();
+        _root.submitScore("[Speedrun] Speedrun Time", _root.saveGlobal.challengeTime[0], 999999999);
+        var z = 1;
+        while (z <= 20)
+        {
+            _root.submitScore("[Challenge] Challenge #" + z + " Time", _root.saveGlobal.challengeTime[z], 999999999);
+            z++;
+        }
+
+        _root.submitScore("Ants Sprayed", _root.save.antsSprayed);
+        _root.submitScore("[Garden] Tree Harvests", _root.save.harvestCount);
+        _root.submitScore("[Garden] Tree Income", _root.save.harvestCoin);
+        _root.submitScore("[Garden] Garden EXP", _root.save.gardenEXP);
+        _root.submitScore("[Battle Arena] Bestiary Level", _root.bestiaryLevel);
+        _root.submitScore("[Battle Arena] Arena Rank", _root.save.arenaLevel);
+        _root.submitScore("[Battle Arena] Robacon Rank", _root.save.robaconLevel);
+        _root.submitScore("[Battle Arena] Missions", _root.save.arenaMission);
+        _root.submitScore("[Battle Arena] Mission Kommander", _root.save.arenaKommanderComplete);
+        _root.submitScore("[Battle Arena] Defend Mission", _root.save.arenaDefendComplete);
+        _root.submitScore("[Battle Arena] Prehistoric Mission", _root.save.arenaPrehistoricComplete);
+        _root.submitScore("[Battle Arena] Kills", _root.save.arenaKill);
+        _root.submitScore("[Battle Arena] Kills (Non-Weak)", _root.save.arenaKillWhite);
+        _root.submitScore("[Battle Arena] Kills (Strong)", _root.save.arenaKillRed);
+        _root.submitScore("[Battle Arena] Kills (Boss)", _root.save.arenaKillPurple);
+        _root.submitScore("[Battle Arena] Combo", _root.save.arenaMaxCombo);
+        _root.submitScore("[Battle Arena] Loot Drops", _root.save.arenaLoot);
+        _root.submitScore("[Battle Arena] Unspent Pixels", _root.save.arenaPixelMax);
+        _root.submitScore("[Battle Arena] Crafting Material Used", _root.save.arenaCraftUsed);
+        _root.submitScore("[Battle Arena] Max Damage Dealt", _root.save.arenaMaxDamage);
+        _root.submitScore("[Battle Arena] Invisible Allies Tamed", _root.totalAllyTamed);
+        _root.submitScore("[Battle Arena] Invisible Allies Mastered", _root.totalAllyMastered);
+        _root.submitScore("[Battle Arena] Skill Books", _root.save.arenaSkillBook);
+        _root.submitScore("[Battle Arena] Rune of Health", _root.save.arenaRuneLevel[1], 100);
+        _root.submitScore("[Battle Arena] Rune of Mana", _root.save.arenaRuneLevel[2], 100);
+        _root.submitScore("[Battle Arena] Rune of Rage", _root.save.arenaRuneLevel[3], 100);
+        _root.submitScore("[Battle Arena] Rune of Encounter", _root.save.arenaRuneLevel[4], 100);
+        _root.submitScore("[Battle Arena] Rune of Experience", _root.save.arenaRuneLevel[5], 100);
+        _root.submitScore("[Battle Arena] Rune of Greed", _root.save.arenaRuneLevel[6], 100);
+        _root.submitScore("[Battle Arena] Total Rune Level",
+            _root.save.arenaRuneLevel[1] + _root.save.arenaRuneLevel[2] + _root.save.arenaRuneLevel[3] +
+            _root.save.arenaRuneLevel[4] + _root.save.arenaRuneLevel[5] + _root.save.arenaRuneLevel[6], 600);
+        _root.submitScore("[Button Machine] Button Presses", _root.save.buttonPress);
+        _root.submitScore("[Button Machine] Perfect Clicks", _root.save.buttonPerfect);
+        _root.submitScore("[Button Machine] Max Hit Combo", _root.save.buttonMaxCombo);
+        _root.submitScore("[Money Printer] Illegal Coins", _root.save.totalPrinterMoney);
+        _root.submitScore("[Money Printer] Battery Charges", _root.save.totalPrinterCharge);
+        _root.submitScore("[Arcade] Pong", _root.save.rankedPong);
+        _root.submitScore("[Arcade] Ultimate Avoidance", _root.save.rankedAvoidance);
+        _root.submitScore("[Arcade] Math Master", _root.save.rankedMath);
+        _root.submitScore("[Arcade] Whack-a-greg", _root.save.rankedWhack);
+        _root.submitScore("[Arcade] MindSweeper", _root.save.rankedMind);
+        _root.submitScore("[Arcade] Balance 3", _root.save.rankedBalance);
+        _root.submitScore("[Arcade] Triangle Count", _root.save.rankedCount);
+        _root.submitScore("[Stadium] Simple Race (Impossible)", _root.save.stadiumImpossibleRace);
+        _root.submitScore("[Stadium] Item Fight (Impossible)", _root.save.stadiumImpossibleItem);
+        _root.submitScore("[Stadium] Death Match Wins", _root.save.stadiumDeathMatch);
+        _root.submitScore("[Stadium] Death Match PWNts", _root.save.stadiumBestDeathMatch);
+        _root.submitScore("[Stadium] Fastest Race", _root.save.stadiumBestTime, 99999);
+        _root.submitScore("[Stadium] Unspent Stadium Tokens", _root.save.stadiumTokenMax);
+        _root.submitScore("[TukkunFCG] FCG Level", _root.save.fcgLevel);
+        _root.submitScore("[TukkunFCG] FCG EXP", _root.save.fcgExp + _root.save.fcgExpTotal);
+        _root.submitScore("[TukkunFCG] FCG Cash", _root.save.fcgMaxCash);
+        _root.submitScore("[TukkunFCG] FCG Wins", _root.save.fcgWin);
+        _root.submitScore("[TukkunFCG] FCG Win Streak (Lv6)", _root.save.fcgMaxStreak6);
+        _root.submitScore("[TukkunFCG] FCG Win Streak (Lv7)", _root.save.fcgMaxStreak7);
+        _root.submitScore("[TukkunFCG] FCG Win Streak (Lv8 New)", _root.save.fcgMaxStreak8);
+        _root.submitScore("[TukkunFCG] FCG Win Streak (Lv10)", _root.save.fcgMaxStreak10);
+        _root.submitScore("[TukkunFCG] FCG Wins (Lv8)", _root.save.fcgLevel8);
+        _root.submitScore("[TukkunFCG] FCG Wins (Lv10)", _root.save.fcgLevel10);
+        _root.submitScore("[TukkunFCG] Legendary Monsters Killed", _root.save.fcgLegendCount);
+        _root.submitScore("[LolMarket] LolMarket Profit", _root.save.lolMaxProfit);
+        _root.submitScore("[Awesome Adventures] Reputation", _root.save.awesomeMaxReputation);
+        _root.submitScore("[Awesome Adventures] Town", _root.save.awesomeTotalAdv1);
+        _root.submitScore("[Awesome Adventures] Untitled Zone", _root.save.awesomeTotalAdv2);
+        _root.submitScore("[Awesome Adventures] Titled Zone", _root.save.awesomeTotalAdv3);
+        _root.submitScore("[Fishing] Skill", _root.save.fishBestLevel, 60);
+        _root.submitScore("[Fishing] Mastery", _root.save.fishExp + _root.save.fishTotalExp);
+        _root.submitScore("[Fishing] Score", _root.save.fishScore);
+        _root.submitScore("[Fishing] Score (1 day)", _root.save.fishScoreRecord);
+        _root.submitScore("[Fishing] Catches", _root.save.fishTotal);
+        _root.submitScore("[Fishing] Perfect Catches", _root.save.fishPerfect);
+        _root.submitScore("[Fishing] Perfect Streak", _root.save.fishBestStreak);
+        _root.submitScore("[Career] Career: Idler", _root.save.careerLevel[1], 200);
+        _root.submitScore("[Career] Career: Gardener", _root.save.careerLevel[2], 200);
+        _root.submitScore("[Career] Career: Fighter", _root.save.careerLevel[3], 200);
+        _root.submitScore("[Career] Career: Item Maker", _root.save.careerLevel[4], 200);
+        _root.submitScore("[Career] Career: Button Basher", _root.save.careerLevel[5], 200);
+        _root.submitScore("[Career] Career: Arcade Player", _root.save.careerLevel[6], 200);
+        _root.submitScore("[Career] Career: Racer", _root.save.careerLevel[7], 200);
+        _root.submitScore("[Career] Career: Card Player", _root.save.careerLevel[8], 200);
+        _root.submitScore("[Career] Career: Gem Trader", _root.save.careerLevel[9], 200);
+        _root.submitScore("[Career] Career: Adventurer", _root.save.careerLevel[10], 200);
+        _root.submitScore("[Career] Career: Pet Trainer", _root.save.careerLevel[11], 200);
+        _root.submitScore("[Career] Career: Fisherman", _root.save.careerLevel[12], 200);
+        _root.submitScore("[Career] Total Career Level", _root.totalCareerLevel, 2400);
+        _root.submitScore("[Cyborg] Cyborg Level", _root.save.botLevel, 200);
+        _root.submitScore("[Battle Arena] +10 Upgraded Allies", _root.totalAllyMaxed);
+        _root.submitScore("[Battle Arena] ULTRA ALLIES", _root.totalUltra);
+        _root.submitScore("[Battle Arena] Unique ULTRA-1 Kills [New]", _root.uniqueUlt1);
+        _root.submitScore("[Battle Arena] Unique ULTRA-2 Kills [New]", _root.uniqueUlt2);
+        _root.submitScore("[Battle Arena] Unique ULTRA-3 Kills [New]", _root.uniqueUlt3);
+        _root.submitScore("[Button Machine] Additional Multiplier", _root.save.buttonMultiplier, 1200);
+        _root.submitScore("[Button Machine] Grandpas", _root.save.buttonGrandpa, 20);
+        _root.submitScore("[Arcade] Unranked Upgrades", _root.totalUnrankedPower);
+        _root.submitScore("[Stadium] Hats Unlocked", _root.stadiumHatUnlocked);
+        _root.submitScore("[Awesome Adventures] Reputation (-)", -1 * _root.save.awesomeReputation);
+        _root.submitScore("[Fishing] Rods Unlocked", _root.fishRodCount, 10);
+        _root.submitScore("[BA Raid] Dark Pyramid", _root.save.raidPyramid);
+        _root.submitScore("[BA Raid] Defend Mission", _root.save.raidDefend);
+        _root.submitScore("[BA Raid] Prehistoric Mission", _root.save.raidPrehistoric);
+        _root.submitScore("[BA Raid] The Special Arena", _root.save.raidMegaboss);
+        _root.submitScore("[BA Raid] Tower of DOOOOOOM", _root.save.raidTower);
+        _root.submitScore("[BA Raid] Secret Dungeon", _root.save.raidDungeon);
+        _root.submitScore("[BA Raid] Endless Dungeon", _root.save.raidEndless);
+        _root.submitScore("[BA Raid] THE MEGABOSS\'s Revenge", _root.save.arenaRevengeScore);
+        _root.submitScore("[BA Raid] Spooky Crypt", _root.save.arenaSpookyScore);
+        _root.submitScore("[BA Raid] Triangle Hideout", _root.save.arenaTriangleScore);
+        _root.submitScore("[BA Raid] Special Training Zone (new)", _root.save.raidSpecial);
+        _root.submitScore("[BA Raid] The Corruption", _root.save.arenaCorruptBestDifficulty);
+        _root.submitScore("[Typing] WPM", _root.save.bestWpm);
+    }
+
+    // MATCH: frame_3/DoAction.as:dispNews()
+    public void dispNews(double type, string news)
+    {
+        if (_root.save.breakNewsMode == 1)
+        {
+            var ignoreNews = true;
+            if (_root.saveGlobal.breakAll[type] || _root.saveGlobal.breakFeature[type] ||
+                _root.saveGlobal.breakTab1[type] || _root.saveGlobal.breakTab2[type] ||
+                _root.saveGlobal.breakTab3[type] || _root.saveGlobal.breakTab4[type])
+            {
+                ignoreNews = false;
+            }
+
+            if (ignoreNews == false)
+            {
+                var b = 30;
+                var imp = 0;
+                while (b >= 2)
+                {
+                    imp = 1;
+                    while (imp <= 4)
+                    {
+                        if (((FlashList<bool>)_root.saveGlobal["breakTab" + imp])[type])
+                        {
+                            _root.news["X" + imp + "breakNews" + b] = _root.news["X" + imp + "breakNews" + (b - 1)];
+                            _root.news["X" + imp + "breakStamp" + b] = _root.news["X" + imp + "breakStamp" + (b - 1)];
+                            _root.news["X" + imp + "breakColor" + b] = _root.news["X" + imp + "breakColor" + (b - 1)];
+                        }
+
+                        imp++;
+                    }
+
+                    if (_root.saveGlobal.breakAll[type])
+                    {
+                        var c = 1;
+                        while (c <= 30)
+                        {
+                            _root.news["F" + c + "breakNews" + b] = _root.news["F" + c + "breakNews" + (b - 1)];
+                            _root.news["F" + c + "breakStamp" + b] = _root.news["F" + c + "breakStamp" + (b - 1)];
+                            _root.news["F" + c + "breakColor" + b] = _root.news["F" + c + "breakColor" + (b - 1)];
+                            c++;
+                        }
+                    }
+                    else if (_root.saveGlobal.breakFeature[type])
+                    {
+                        var ft = _root.newsFeature[type];
+                        _root.news["F" + ft + "breakNews" + b] = _root.news["F" + ft + "breakNews" + (b - 1)];
+                        _root.news["F" + ft + "breakStamp" + b] = _root.news["F" + ft + "breakStamp" + (b - 1)];
+                        _root.news["F" + ft + "breakColor" + b] = _root.news["F" + ft + "breakColor" + (b - 1)];
+                    }
+
+                    b -= 1;
+                }
+
+                imp = 1;
+                while (imp <= 4)
+                {
+                    if (((FlashList<bool>)_root.saveGlobal["breakTab" + imp])[type])
+                    {
+                        _root.news["X" + imp + "breakNews1"] = news;
+                        _root.news["X" + imp + "breakStamp1"] = "[" + _root.clock_display + "]";
+                        _root.news["X" + imp + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+                                                                _root.saveGlobal.breakG[type] * 256 +
+                                                                _root.saveGlobal.breakB[type];
+                    }
+
+                    imp++;
+                }
+
+                if (_root.saveGlobal.breakAll[type])
+                {
+                    var c = 1;
+                    while (c <= 30)
+                    {
+                        _root.news["F" + c + "breakNews1"] = news;
+                        _root.news["F" + c + "breakStamp1"] = "[" + _root.clock_display + "]";
+                        _root.news["F" + c + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+                                                              _root.saveGlobal.breakG[type] * 256 +
+                                                              _root.saveGlobal.breakB[type];
+                        c++;
+                    }
+                }
+                else if (_root.saveGlobal.breakFeature[type])
+                {
+                    var ft = _root.newsFeature[type];
+                    _root.news["F" + ft + "breakNews1"] = news;
+                    _root.news["F" + ft + "breakStamp1"] = "[" + _root.clock_display + "]";
+                    _root.news["F" + ft + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+                                                           _root.saveGlobal.breakG[type] * 256 +
+                                                           _root.saveGlobal.breakB[type];
+                }
+
+                _root.updateBreakNews = 1;
+            }
+        }
+        else if (_root.save.breakNewsMode == 2)
+        {
+            // if (_root.saveGlobal.defTab == 5)
+            // {
+            //     if (_root.saveGlobal.breakAll[type] || (_root.saveGlobal.breakFeature[type] &&
+            //                                             _root.house._currentframe == _root.newsFeature[type]))
+            //     {
+            //         b = 30;
+            //         while (b >= 2)
+            //         {
+            //             if (_root.saveGlobal.breakAll[type])
+            //             {
+            //                 c = 1;
+            //                 while (c <= 30)
+            //                 {
+            //                     _root["F" + c + "breakNews" + b] = _root["F" + c + "breakNews" + (b - 1)];
+            //                     _root["F" + c + "breakStamp" + b] = _root["F" + c + "breakStamp" + (b - 1)];
+            //                     _root["F" + c + "breakColor" + b] = _root["F" + c + "breakColor" + (b - 1)];
+            //                     c++;
+            //                 }
+            //             }
+            //             else if (_root.saveGlobal.breakFeature[type])
+            //             {
+            //                 ft = _root.newsFeature[type];
+            //                 _root["F" + ft + "breakNews" + b] = _root["F" + ft + "breakNews" + (b - 1)];
+            //                 _root["F" + ft + "breakStamp" + b] = _root["F" + ft + "breakStamp" + (b - 1)];
+            //                 _root["F" + ft + "breakColor" + b] = _root["F" + ft + "breakColor" + (b - 1)];
+            //             }
+            //
+            //             b -= 1;
+            //         }
+            //
+            //         if (_root.saveGlobal.breakAll[type])
+            //         {
+            //             c = 1;
+            //             while (c <= 30)
+            //             {
+            //                 _root["F" + c + "breakNews1"] = news;
+            //                 _root["F" + c + "breakStamp1"] = "[" + _root.clock_display + "]";
+            //                 _root["F" + c + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+            //                                                  _root.saveGlobal.breakG[type] * 256 +
+            //                                                  _root.saveGlobal.breakB[type];
+            //                 c++;
+            //             }
+            //         }
+            //         else if (_root.saveGlobal.breakFeature[type])
+            //         {
+            //             ft = _root.newsFeature[type];
+            //             _root["F" + ft + "breakNews1"] = news;
+            //             _root["F" + ft + "breakStamp1"] = "[" + _root.clock_display + "]";
+            //             _root["F" + ft + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+            //                                               _root.saveGlobal.breakG[type] * 256 +
+            //                                               _root.saveGlobal.breakB[type];
+            //         }
+            //
+            //         _root.updateBreakNews = 1;
+            //     }
+            // }
+            // else if (_root.saveGlobal.defTab == 0 ||
+            //          _root.saveGlobal["breakTab" + _root.saveGlobal.defTab][type] == true)
+            // {
+            //     imp = _root.saveGlobal.defTab;
+            //     b = 30;
+            //     while (b >= 2)
+            //     {
+            //         _root["X" + imp + "breakNews" + b] = _root["X" + imp + "breakNews" + (b - 1)];
+            //         _root["X" + imp + "breakStamp" + b] = _root["X" + imp + "breakStamp" + (b - 1)];
+            //         _root["X" + imp + "breakColor" + b] = _root["X" + imp + "breakColor" + (b - 1)];
+            //         b -= 1;
+            //     }
+            //
+            //     _root["X" + imp + "breakNews1"] = news;
+            //     _root["X" + imp + "breakStamp1"] = "[" + _root.clock_display + "]";
+            //     _root["X" + imp + "breakColor1"] = _root.saveGlobal.breakR[type] * 65536 +
+            //                                        _root.saveGlobal.breakG[type] * 256 + _root.saveGlobal.breakB[type];
+            //     _root.updateBreakNews = 1;
+            // }
+        }
+    }
+
     public void gotoAndPlay(int index)
     {
         GD.Print($"WARNING: unconverted gotoAndPlay({index})");
