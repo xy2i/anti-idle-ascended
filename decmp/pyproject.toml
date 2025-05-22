@@ -1,0 +1,10 @@
+[project]
+name = "decmp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "tree-sitter>=0.24.0",
+    "tree-sitter-javascript>=0.23.1",
+]

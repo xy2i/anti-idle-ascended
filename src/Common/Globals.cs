@@ -19,6 +19,7 @@ public class Global
 
 public class Save
 {
+    public double todayMMRX;
     public double aagStat1 = 50;
     public double aagStat2 = 50;
     public double aagStat3 = 50;
@@ -1626,6 +1627,14 @@ public class PopContain
 {
     public void attachMovie(string name, string name2, double antilag, object o)
     {
-
     }
+}
+
+public class Fish
+{
+    public double fishLevel;
+    public double fishExp;
+    public string fishCate;
+    public string fishSpec;
+    public double fishAExp;
 }

@@ -30,10 +30,11 @@ public partial class Loading2OutOf8 : Control
         }
 
         _root.careerName =
-        [
-            "", "Idler", "Gardener", "Fighter", "Item Maker", "Button Basher", "Arcade Player", "Racer", "Card Player",
-            "Gem Trader", "Adventurer", "Pet Trainer", "Fisher"
-        ];
+            new([
+                "", "Idler", "Gardener", "Fighter", "Item Maker", "Button Basher", "Arcade Player", "Racer",
+                "Card Player",
+                "Gem Trader", "Adventurer", "Pet Trainer", "Fisher"
+            ]);
         _root.nameValue = 0;
         var str = _root.kongregate_username;
         if (str == undefined)
@@ -307,41 +308,43 @@ public partial class Loading2OutOf8 : Control
         // };
         // Mouse.addListener(mouseListener);
         _root.cyborgActShortName =
-        [
-            "Recharge", "Pong", "Ult. Avoidance", "Math Master", "Whack-a-greg", "Triangle Count", "MindSweeper",
-            "Balance 3", "Simple Race", "Item Fight", "Death Match", "MMR X", "FCG - Level 1", "FCG - Level 2",
-            "FCG - Level 3", "FCG - Level 4", "FCG - Level 6", "FCG - Level 7", "FCG - Level 8", "FCG - Level 10",
-            "Fishing"
-        ];
+            new([
+                "Recharge", "Pong", "Ult. Avoidance", "Math Master", "Whack-a-greg", "Triangle Count", "MindSweeper",
+                "Balance 3", "Simple Race", "Item Fight", "Death Match", "MMR X", "FCG - Level 1", "FCG - Level 2",
+                "FCG - Level 3", "FCG - Level 4", "FCG - Level 6", "FCG - Level 7", "FCG - Level 8", "FCG - Level 10",
+                "Fishing"
+            ]);
         _root.cyborgActLongName =
-        [
-            "Recharging...", "Arcade - Pong: Survival Battle", "Arcade - Ultimate Avoidance", "Arcade - Math Master",
-            "Arcade - Whack-a-greg", "Arcade - Triangle Count", "Arcade - MindSweeper", "Arcade - Balance 3",
-            "Stadium - Simple Race (Impossible)", "Stadium - Item Fight (Impossible)", "Stadium - Death Match",
-            "Arcade - MMR X", "TukkunFCG - Level 1", "TukkunFCG - Level 2", "TukkunFCG - Level 3",
-            "TukkunFCG - Level 4", "TukkunFCG - Level 6", "TukkunFCG - Level 7", "TukkunFCG - Level 8",
-            "TukkunFCG - Level 10", "Fishing"
-        ];
+            new([
+                "Recharging...", "Arcade - Pong: Survival Battle", "Arcade - Ultimate Avoidance",
+                "Arcade - Math Master",
+                "Arcade - Whack-a-greg", "Arcade - Triangle Count", "Arcade - MindSweeper", "Arcade - Balance 3",
+                "Stadium - Simple Race (Impossible)", "Stadium - Item Fight (Impossible)", "Stadium - Death Match",
+                "Arcade - MMR X", "TukkunFCG - Level 1", "TukkunFCG - Level 2", "TukkunFCG - Level 3",
+                "TukkunFCG - Level 4", "TukkunFCG - Level 6", "TukkunFCG - Level 7", "TukkunFCG - Level 8",
+                "TukkunFCG - Level 10", "Fishing"
+            ]);
         _root.cyborgActMinPerf =
-            [40, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 5, 5, 50, 5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 1];
+            new([40, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 5, 5, 50, 5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 1]);
         _root.cyborgActMaxPerf =
-        [
-            240, 4200000, 1750000, 2400000, 3300000, 13500000, 10000000, 7200000, 90, 90, 1100, 7200000, 98, 97, 96, 95,
-            90, 85, 80, 70, 95
-        ];
+            new([
+                240, 4200000, 1750000, 2400000, 3300000, 13500000, 10000000, 7200000, 90, 90, 1100, 7200000, 98, 97, 96,
+                95,
+                90, 85, 80, 70, 95
+            ]);
         _root.cyborgActPerfText =
-        [
-            "Energy", "Maximum Score", "Maximum Score", "Maximum Score", "Maximum Score", "Maximum Score",
-            "Maximum Score", "Maximum Score", "Win Rate", "Win Rate", "Maximum PWNts", "Maximum Score", "Win Rate",
-            "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Perfect Rate"
-        ];
+            new([
+                "Energy", "Maximum Score", "Maximum Score", "Maximum Score", "Maximum Score", "Maximum Score",
+                "Maximum Score", "Maximum Score", "Win Rate", "Win Rate", "Maximum PWNts", "Maximum Score", "Win Rate",
+                "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Perfect Rate"
+            ]);
         _root.cyborgActPerfSign =
-            [" sec", "", "", "", "", "", "", "", "%", "%", "", "", "%", "%", "%", "%", "%", "%", "%", "%", "%"];
+            new([" sec", "", "", "", "", "", "", "", "%", "%", "", "", "%", "%", "%", "%", "%", "%", "%", "%", "%"]);
         _root.cyborgActTime =
-            [300, 420, 175, 80, 165, 675, 500, 360, 17, 19, 600, 360, 120, 150, 170, 190, 200, 300, 350, 450, 27];
-        _root.cyborgActCost = [0, 84, 35, 16, 33, 135, 100, 72, 4, 5, 1000, 72, 30, 35, 40, 45, 60, 90, 120, 180, 11];
+            new([300, 420, 175, 80, 165, 675, 500, 360, 17, 19, 600, 360, 120, 150, 170, 190, 200, 300, 350, 450, 27]);
+        _root.cyborgActCost = new([
+            0, 84, 35, 16, 33, 135, 100, 72, 4, 5, 1000, 72, 30, 35, 40, 45, 60, 90, 120, 180, 11
+        ]);
         _root.cyborgWorking = false;
-        Trans
-        return false;
     }
 }

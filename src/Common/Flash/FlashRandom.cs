@@ -20,6 +20,11 @@ public class FlashRandom
         return r.Next(0, exclusiveUpperBound);
     }
 
+    public static double random(double exclusiveUpperBound)
+    {
+        return r.Next(0, (int)exclusiveUpperBound);
+    }
+
     /// <summary>
     ///     Equivalent to Math.random() in AS2.
     ///     See <see href="http://open-flash.github.io/mirrors/as2-language-reference/Math.html#random()">Math.random()</see>.
