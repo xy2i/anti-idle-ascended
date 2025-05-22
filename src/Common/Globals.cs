@@ -1621,3 +1621,11 @@ public class Arena
         return 0;
     }
 }
+
+public class PopContain
+{
+    public void attachMovie(string name, string name2, double antilag, object o)
+    {
+
+    }
+}

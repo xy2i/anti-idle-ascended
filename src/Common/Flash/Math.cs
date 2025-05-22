@@ -35,4 +35,12 @@ public static class Math
     {
         return System.Math.Sqrt(number);
     }
+    public static double round(double number)
+    {
+        return System.Math.Round(number);
+    }
+    public static double min(double a, double b)
+    {
+        return System.Math.Min(a, b);
+    }
 }
