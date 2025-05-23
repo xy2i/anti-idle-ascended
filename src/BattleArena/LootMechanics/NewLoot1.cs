@@ -3,7 +3,7 @@ namespace AntiIdle.BattleArena.LootMechanics;
 
 //TO DO attach to asset
 // MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as
-public partial class NewLoot1 : Control
+public partial class NewLoot1 : Node2D
 {
     private int i;
     private int yy;
@@ -11,19 +11,14 @@ public partial class NewLoot1 : Control
     private int dd;
     private double amntToGain;
     private double lootValue;
-    private double x;
-    private double y;
-    private double _X;
-    private double _Y;
+    private float x;
+    private float y;
     private double leftChance;
     private double magneticChance;
     private bool magnetic;
     private double yVel = -5;
-    private double xalpha = 250;
     private double del = 0;
     private double xVel = Math.random() * 2;
-    private double _xmouse;
-    private double _ymouse;
     private double _alpha;
 
     // MATCH: DefineSprite_155_newLoot1/frame_1/DoAction.as:getLoot()
@@ -50,18 +45,20 @@ public partial class NewLoot1 : Control
         }
         amntToGain = lootValue;
         _root.gainCoin(amntToGain);
-        _root.house.arena.showDamage("Coin +" + _root.withComma(amntToGain), 16776960, _X, _Y - 20);
+        var pos = Position;
+        _root.house.arena.showDamage("Coin +" + _root.withComma(amntToGain), 16776960, pos.X, pos.Y - 20);
     }
 
     public override void _Ready()
     {
         leftChance = 0.3;
         magneticChance = 1;
-        var _X = x;
-        var _Y = y - 50;
+        var pos = Position;
+        pos.X = x;
+        pos.Y = y - 50;
         if (Math.random() < leftChance)
         {
-            xVel = (-Math.random()) * 2;
+            xVel = -Math.random() * 2;
         }
         magnetic = false;
         if (_root.lootMagnet == true && Math.random() < magneticChance)
@@ -72,31 +69,36 @@ public partial class NewLoot1 : Control
         {
             if (magnetic == true)
             {
-                _X = 80;
+                pos.X = 80;
             }
             else if (_root.save.activityLoot == true && (_root.cursoridle < 5 || _root.arenaBot > 0 && _root.arenaBot < 2400))
             {
-                _X = 80;
+                pos.X = 80;
             }
             else if (x > 85)
             {
-                _X = x + xVel * 100;
+                pos.X = x + (float)xVel * 100;
             }
             else
             {
-                _X = x;
+                pos.X = x;
             }
-            _Y = y;
+            pos.Y = y;
         }
+        Position = pos;
     }
 
     public override void _Process(double delta)
     {
+        var pos = Position;
+        var color = Modulate;
+        var mousepos = ToLocal(GetViewport().GetMousePosition());
+        color.A = 250;
         del += 1;
         if (del >= 2)
         {
             del = 0;
-            if (_Y > 0)
+            if (pos.Y > 0)
             {
                 xVel *= 0.98;
                 if (_root.save.activityLoot == true && (_root.cursoridle < 5 || _root.arenaBot > 0 && _root.arenaBot < 2400))
@@ -104,12 +106,12 @@ public partial class NewLoot1 : Control
                     xVel -= 1;
                     if (_root.save.bouncyLoot == false)
                     {
-                        _X = 80;
+                        pos.X = 80;
                     }
                 }
             }
             yVel += 1;
-            if (_Y > 150 && yVel > 0)
+            if (pos.Y > 150 && yVel > 0)
             {
                 yVel *= -0.6;
             }
@@ -119,20 +121,20 @@ public partial class NewLoot1 : Control
                 {
                     xVel -= 1;
                 }
-                if (_Y > 0)
+                if (pos.Y > 0)
                 {
-                    _X = _X + xVel;
+                    pos.X += (float)xVel;
                 }
-                _Y = _Y + yVel;
+                pos.Y += (float)yVel;
             }
-            if (_X > 500)
+            if (pos.X > 500)
             {
-                _X = 500;
+                pos.X = 500;
             }
-            if (xalpha > 0)
+            if (color.A > 0)
             {
-                xalpha -= 100 / _root.fps;
-                if (_X < 85 || _xmouse >= -25 && _xmouse <= 25 && _ymouse >= -50 && _ymouse <= 5 && _root.cursoridle < 60)
+                color.A -= 100 / _root.fps;
+                if (pos.X < 85 || mousepos.X >= -25 && mousepos.X <= 25 && mousepos.Y >= -50 && mousepos.Y <= 5 && _root.cursoridle < 60)
                 {
                     _root.save.arenaLoot += 1;
                     getLoot();
@@ -145,8 +147,10 @@ public partial class NewLoot1 : Control
             }
             if (_root._quality == "HIGH" || _root._quality == "BEST")
             {
-                _alpha = xalpha;
+                _alpha = color.A;
             }
         }
+        Position = pos;
+        Modulate = color;
     }
 }
