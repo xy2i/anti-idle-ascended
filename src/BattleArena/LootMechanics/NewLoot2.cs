@@ -36,6 +36,7 @@ public partial class NewLoot2 : Control
                 _root.save.questCount += 1;
             }
         }
+
         i = 1;
         while (i <= _root.todayEvent)
         {

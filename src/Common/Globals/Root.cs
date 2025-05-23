@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AntiIdle.BattleArena.Crafting;
 using Godot;
@@ -12,6 +13,7 @@ namespace AntiIdle.Common.Globals;
 /// </summary>
 public class Root
 {
+    public bool apocalypse;
     public string _quality;
     public double achRedCoin;
     public double actualKpaCount;
@@ -127,7 +129,7 @@ public class Root
     public List<CraftItem> craftEnhancer;
     public List<CraftItem> craftPotion;
     public List<CraftItem> craftChip;
-    public List<CraftItem> setArray;
+    public List<SetBonus> setArray;
 
     public int getBytesLoaded()
     {
@@ -6697,6 +6699,104 @@ public class Root
         craftArmor.Add(item);
     }
 
+    // MATCH: frame_4/DoAction.as:addArenaCraftAccessory()
+    public void addArenaCraftAccessory(double recipeType, double recipeReq, double recipeLimit, double reqRank,
+        string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity,
+        double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus, string ability,
+        string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noUnique,
+        bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name,
+        string desc)
+    {
+        var item = new CraftItem();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        item.recipeLimit = recipeLimit;
+        item.name = name;
+        item.reqRank = reqRank;
+        item.subtype = subtype;
+        item.frame = frame;
+        item.attack = attack;
+        item.speed = speed;
+        item.defense = defense;
+        item.bonus = bonus;
+        item.ability = ability;
+        item.moreBonus = moreBonus;
+        item.maxLevel = maxLevel;
+        item.expTNL = expTNL;
+        item.enhance = enhance;
+        item.bonusPow = bonusPow;
+        item.sell = sell;
+        item.expiry = expiry * 86400000;
+        if (noLife == false)
+        {
+            item.expiry = Infinity;
+        }
+        item.noBonus = noBonus;
+        item.noLife = noLife;
+        item.noFuse = false;
+        item.noUnique = noUnique;
+        item.spirit = spirit;
+        item.unob = unob;
+        item.costPixel = costPixel;
+        item.costCraft = costCraft;
+        item.costSpec = costSpec;
+        item.careerExp = careerExp;
+        item.crit = crit;
+        item.dexterity = dexterity;
+        item.health = health;
+        item.desc = desc;
+        craftAccessory.Add(item);
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaCraftMedal()
+    public void addArenaCraftMedal(double recipeType, double recipeReq, double recipeLimit, double reqRank,
+        string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity,
+        double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus, string ability,
+        string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noUnique,
+        bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name,
+        string desc)
+    {
+        var item = new CraftItem();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        item.recipeLimit = recipeLimit;
+        item.name = name;
+        item.reqRank = reqRank;
+        item.subtype = subtype;
+        item.frame = frame;
+        item.attack = attack;
+        item.speed = speed;
+        item.defense = defense;
+        item.bonus = bonus;
+        item.ability = ability;
+        item.moreBonus = moreBonus;
+        item.maxLevel = maxLevel;
+        item.expTNL = expTNL;
+        item.enhance = enhance;
+        item.bonusPow = bonusPow;
+        item.sell = sell;
+        item.expiry = expiry * 86400000;
+        if (noLife == false)
+        {
+            item.expiry = Infinity;
+        }
+        item.noBonus = noBonus;
+        item.noLife = noLife;
+        item.noFuse = false;
+        item.noUnique = noUnique;
+        item.spirit = spirit;
+        item.unob = unob;
+        item.costPixel = costPixel;
+        item.costCraft = costCraft;
+        item.costSpec = costSpec;
+        item.careerExp = careerExp;
+        item.crit = crit;
+        item.dexterity = dexterity;
+        item.health = health;
+        item.desc = desc;
+        craftMedal.Add(item);
+    }
+
     // MATCH: frame_4/DoAction.as:addArenaCraftEnhancer()
     public void addArenaCraftEnhancer(double recipeType, double recipeReq, double recipeLimit,
         string subtype, double frame, double power, double curse, double success,
@@ -6728,6 +6828,554 @@ public class Root
         item.careerExp = careerExp;
         item.desc = desc;
         craftEnhancer.Add(item);
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaCraftPotion()
+    public void addArenaCraftPotion(double recipeType, double recipeReq, double recipeLimit,
+        string subtype, double frame, double attack, double defense,
+        double enhance, double bonusPow, double sell, double expiry,
+        double costPixel, double costCraft, double costSpec, double careerExp, string name, string desc)
+    {
+        var item = new CraftItem();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        item.recipeLimit = recipeLimit;
+        item.name = name;
+        item.subtype = subtype;
+        item.frame = frame;
+        item.attack = attack;
+        item.defense = defense;
+        item.enhance = enhance;
+        item.bonusPow = bonusPow;
+        item.sell = sell;
+        item.expiry = expiry * 86400000;
+        item.costPixel = costPixel;
+        item.costCraft = costCraft;
+        item.costSpec = costSpec;
+        item.careerExp = careerExp;
+        item.desc = desc;
+        craftPotion.Add(item);
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaCraftChip()
+    public void addArenaCraftChip(double recipeType, double recipeReq, double recipeLimit,
+        string subtype, double frame, double attack, double defense,
+        double enhance, double bonusPow, double sell, double expiry,
+        double costPixel, double costCraft, double costSpec, double careerExp, string name, string desc)
+    {
+        var item = new CraftItem();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        item.recipeLimit = recipeLimit;
+        item.name = name;
+        item.subtype = subtype;
+        item.frame = frame;
+        item.attack = attack;
+        item.defense = defense;
+        item.enhance = enhance;
+        item.bonusPow = bonusPow;
+        item.sell = sell;
+        item.expiry = expiry * 86400000;
+        item.costPixel = costPixel;
+        item.costCraft = costCraft;
+        item.costSpec = costSpec;
+        item.careerExp = careerExp;
+        item.desc = desc;
+        craftChip.Add(item);
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaSet()
+    public void addArenaSet(string setNameD, List<double> bonusReq, List<string> bonusStat, List<double> bonusAmnt, List<string> setItems)
+    {
+        var _loc1_ = new SetBonus();
+        _loc1_.setNameD = setNameD;
+        _loc1_.setItems = setItems;
+        _loc1_.bonusReq = bonusReq;
+        _loc1_.bonusStat = bonusStat;
+        _loc1_.bonusAmnt = bonusAmnt;
+        setArray.Add(_loc1_);
+    }
+
+    // MATCH: frame_4/DoAction.as:checkArenaSet()
+    public int checkArenaSet(string itemName)
+    {
+        var tempSetID = 0;
+        var n = 1;
+        while (n <= setArray.Count - 1)
+        {
+            var p = 0;
+            while (p <= setArray[n].setItems.Count - 1)
+            {
+                var tempName = setArray[n].setItems[p];
+                if (itemName == tempName)
+                {
+                    tempSetID = n;
+                }
+                if (tempName == "Any Weapon of DOOOOOOM")
+                {
+                    if (itemName.indexOf("DOOOOOOM") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                if (tempName == "Any Meteoric Weapon")
+                {
+                    if (itemName.indexOf("Meteoric") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                if (tempName == "Any Dragon Slayer Weapon")
+                {
+                    if (itemName.indexOf("Dragon Slayer") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                if (tempName == "Any Demon Slayer Weapon")
+                {
+                    if (itemName.indexOf("Demon Slayer") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                if (tempName == "Any Tukkonium Weapon")
+                {
+                    if (itemName.indexOf("Tukkonium") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                if (tempName == "Any Pickaxe")
+                {
+                    if (itemName.indexOf("Pickaxe") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                if (tempName.indexOf("Any Alien") != -1)
+                {
+                    if (itemName.indexOf("Alien") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                if (tempName.indexOf("Dragon Slayer") != -1)
+                {
+                    if (itemName.indexOf("Dragon Slayer") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                if (tempName.indexOf("Demon Slayer") != -1)
+                {
+                    if (itemName.indexOf("Demon Slayer") != -1)
+                    {
+                        tempSetID = n;
+                    }
+                }
+                p++;
+            }
+            n++;
+        }
+        return tempSetID;
+    }
+
+    // MATCH: frame_4/DoAction.as:displaySetItems()
+    public string displaySetItems(int setID)
+    {
+        var tempDisp = "";
+        var equipCount = 0;
+        var i = 0;
+        while (i <= setArray[setID].setItems.Count - 1)
+        {
+            var tempName = setArray[setID].setItems[i];
+            var equipped = false;
+            if (_root.save.inventoryName[_root.save.arenaWeapon] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaSubWeapon] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaHat] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaShirt] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaGloves] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaPants] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaShoes] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaSkin] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaMedal] == tempName && _root.save.inventoryDesc[_root.save.arenaMedal] != "This medal\'s name depends on your Anti-Idle title when you craft it. Don\'t ask how that works." && _root.save.inventoryDesc[_root.save.arenaMedal] != "Thank you for your donation and your continued support!")
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaPendant] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaEarring] == tempName)
+            {
+                equipped = true;
+            }
+            if (_root.save.inventoryName[_root.save.arenaTrinket] == tempName)
+            {
+                equipped = true;
+            }
+            if (tempName == "Any Weapon of DOOOOOOM")
+            {
+                if (_root.save.inventoryName[_root.save.arenaWeapon].indexOf("DOOOOOOM") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Meteoric Weapon")
+            {
+                if (_root.save.inventoryName[_root.save.arenaWeapon].indexOf("Meteoric") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Dragon Slayer Weapon")
+            {
+                if (_root.save.inventoryName[_root.save.arenaWeapon].indexOf("Dragon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Demon Slayer Weapon")
+            {
+                if (_root.save.inventoryName[_root.save.arenaWeapon].indexOf("Demon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Tukkonium Weapon")
+            {
+                if (_root.save.inventoryName[_root.save.arenaWeapon].indexOf("Tukkonium") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Dragon Slayer Hat")
+            {
+                if (_root.save.inventoryName[_root.save.arenaHat].indexOf("Dragon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Dragon Slayer Shirt")
+            {
+                if (_root.save.inventoryName[_root.save.arenaShirt].indexOf("Dragon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Dragon Slayer Gloves")
+            {
+                if (_root.save.inventoryName[_root.save.arenaGloves].indexOf("Dragon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Dragon Slayer Pants")
+            {
+                if (_root.save.inventoryName[_root.save.arenaPants].indexOf("Dragon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Dragon Slayer Shoes")
+            {
+                if (_root.save.inventoryName[_root.save.arenaShoes].indexOf("Dragon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Demon Slayer Hat")
+            {
+                if (_root.save.inventoryName[_root.save.arenaHat].indexOf("Demon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Demon Slayer Shirt")
+            {
+                if (_root.save.inventoryName[_root.save.arenaShirt].indexOf("Demon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Demon Slayer Gloves")
+            {
+                if (_root.save.inventoryName[_root.save.arenaGloves].indexOf("Demon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Demon Slayer Pants")
+            {
+                if (_root.save.inventoryName[_root.save.arenaPants].indexOf("Demon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Demon Slayer Shoes")
+            {
+                if (_root.save.inventoryName[_root.save.arenaShoes].indexOf("Demon Slayer") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Pickaxe")
+            {
+                if (_root.save.inventoryName[_root.save.arenaWeapon].indexOf("Pickaxe") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Alien Weapon")
+            {
+                if (_root.save.inventoryName[_root.save.arenaWeapon].indexOf("Alien") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Alien Hat")
+            {
+                if (_root.save.inventoryName[_root.save.arenaHat].indexOf("Alien") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Alien Shirt")
+            {
+                if (_root.save.inventoryName[_root.save.arenaShirt].indexOf("Alien") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Alien Gloves")
+            {
+                if (_root.save.inventoryName[_root.save.arenaGloves].indexOf("Alien") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Alien Pants")
+            {
+                if (_root.save.inventoryName[_root.save.arenaPants].indexOf("Alien") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Alien Shoes")
+            {
+                if (_root.save.inventoryName[_root.save.arenaShoes].indexOf("Alien") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Crystal Hat")
+            {
+                if (_root.save.inventoryName[_root.save.arenaHat].indexOf("Crystal") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Crystal Shirt")
+            {
+                if (_root.save.inventoryName[_root.save.arenaShirt].indexOf("Crystal") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Crystal Gloves")
+            {
+                if (_root.save.inventoryName[_root.save.arenaGloves].indexOf("Crystal") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Crystal Pants")
+            {
+                if (_root.save.inventoryName[_root.save.arenaPants].indexOf("Crystal") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Crystal Shoes")
+            {
+                if (_root.save.inventoryName[_root.save.arenaShoes].indexOf("Crystal") != -1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Rank 200+ Weapon")
+            {
+                if (_root.save.inventoryReqRank[_root.save.arenaWeapon] >= 200)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Rank 300+ Weapon")
+            {
+                if (_root.save.inventoryReqRank[_root.save.arenaWeapon] >= 300)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Rank 400+ Weapon")
+            {
+                if (_root.save.inventoryReqRank[_root.save.arenaWeapon] >= 400)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Finalized Weapon")
+            {
+                if (_root.save.inventoryLevel[_root.save.arenaWeapon] == 9999)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Finalized Hat")
+            {
+                if (_root.save.inventoryLevel[_root.save.arenaHat] == 9999)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Finalized Shirt")
+            {
+                if (_root.save.inventoryLevel[_root.save.arenaShirt] == 9999)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Finalized Gloves")
+            {
+                if (_root.save.inventoryLevel[_root.save.arenaGloves] == 9999)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Finalized Pants")
+            {
+                if (_root.save.inventoryLevel[_root.save.arenaPants] == 9999)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Finalized Shoes")
+            {
+                if (_root.save.inventoryLevel[_root.save.arenaShoes] == 9999)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Any Finalized Skin")
+            {
+                if (_root.save.inventoryLevel[_root.save.arenaSkin] == 9999)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Invisible X")
+            {
+                if (_root.save.arenaAlly == 1)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Apocalypse Mode")
+            {
+                if (_root.apocalypse == true)
+                {
+                    equipped = true;
+                }
+            }
+            if (tempName == "Rune of Rage")
+            {
+                if (_root.save.arenaRuneDuration[3] > 0)
+                {
+                    equipped = true;
+                }
+            }
+            if (equipped == true)
+            {
+                tempDisp += "\n<font color=\'#FFFF00\'>" + tempName + "</font>";
+                equipCount += 1;
+            }
+            else
+            {
+                tempDisp += "\n<font color=\'#CCCCCC\'>" + tempName + "</font>";
+            }
+            i++;
+        }
+        tempDisp += "\n\n<font color=\'#CC9900\'><b>Set Bonus</b></font>";
+        i = 0;
+        string plu;
+        while (i <= setArray[setID].bonusStat.Count - 1)
+        {
+            if (setArray[setID].bonusAmnt[i] == -1)
+            {
+                if (setArray[setID].bonusReq[i] == 1)
+                {
+                    plu = " item";
+                }
+                else
+                {
+                    plu = " items";
+                }
+                if (equipCount >= setArray[setID].bonusReq[i])
+                {
+                    tempDisp += "\n<font color=\'#FFFF00\'>[" + setArray[setID].bonusReq[i] + plu + "]" + "</font> <font color=\'#CCFF33\'>" + setArray[setID].bonusStat[i];
+                }
+                else
+                {
+                    tempDisp += "\n<font color=\'#CCCCCC\'>[" + setArray[setID].bonusReq[i] + plu + "]" + "</font> <font color=\'#BBBBBB\'>" + setArray[setID].bonusStat[i];
+                }
+            }
+            else
+            {
+                if (setArray[setID].bonusReq[i] == 1)
+                {
+                    plu = " item";
+                }
+                else
+                {
+                    plu = " items";
+                }
+                if (equipCount >= setArray[setID].bonusReq[i])
+                {
+                    tempDisp += "\n<font color=\'#FFFF00\'>[" + setArray[setID].bonusReq[i] + plu + "]" + "</font> <font color=\'#CCFF33\'>" + setArray[setID].bonusStat[i] + " <b>+" + setArray[setID].bonusAmnt[i] + "%</b>";
+                }
+                else
+                {
+                    tempDisp += "\n<font color=\'#CCCCCC\'>[" + setArray[setID].bonusReq[i] + plu + "]" + "</font> <font color=\'#BBBBBB\'>" + setArray[setID].bonusStat[i] + " <b>+" + setArray[setID].bonusAmnt[i] + "%</b>";
+                }
+            }
+            i++;
+        }
+        return tempDisp;
     }
 
     public void gotoAndPlay(int index)
