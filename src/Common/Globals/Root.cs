@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AntiIdle.BattleArena.Crafting;
+using AntiIdle.BattleArena.Enemy;
 using Godot;
 using Math = AntiIdle.Common.Flash.Math;
 
@@ -21,7 +22,10 @@ public class Root
     public double arcadeRewardMult;
     public double arenaBot;
     public FlashList<double> arenaSkillMaxF;
-    public FlashList<double> arenaSkillNameF;
+    public FlashList<double> arenaSkillRankF;
+    public FlashList<string> arenaSkillNameF;
+    public string stickName;
+    public double totalMonster;
     public bool autoStart;
     public double awards;
     public double bestiaryLevel;
@@ -131,6 +135,39 @@ public class Root
     public List<CraftItem> craftPotion;
     public List<CraftItem> craftChip;
     public List<SetBonus> setArray;
+    public FlashList<double> setCount;
+    public FlashList<double> komDiff;
+    public FlashList<double> komCount;
+    public FlashList<string> museumItem;
+    public FlashList<double> museumValue;
+    public double museumMaxItem;
+    public double museumMaxValue;
+    public double setHighest;
+    public double setExpBonus = 0;
+    public double setCoinBonus = 0;
+    public double setPixelBonus = 0;
+    public double setDropBonus = 0;
+    public double setSpawnBonus = 0;
+    public double setDamageBonus = 0;
+    public double setDefenseBonus = 0;
+    public double setAccuracyBonus = 0;
+    public double setEvasionBonus = 0;
+    public double setHealthBonus = 0;
+    public double setManaBonus = 0;
+    public double setSpeedBonus = 0;
+    public double setRareBonus = 0;
+    public double setEpicBonus = 0;
+
+    public double arenaSwap1;
+    public double enhancerToUse;
+    public double emptyWeaponSlot = 0;
+    public double emptyArmorSlot = 0;
+    public double emptyAccessorySlot = 0;
+    public double emptyEnhancerSlot = 0;
+    public double emptyPotionSlot = 0;
+    public double emptyOutfitSlot = 0;
+    public double emptyChipSlot = 0;
+    public List<Enemy> enemyList;
 
     public int getBytesLoaded()
     {
@@ -263,7 +300,7 @@ public class Root
     // MATCH: frame_3/DoAction.as:getKpaValue()
     public double getKpaValue(string kpaName)
     {
-        if (kpaName == undefined || kpaName == "" || kpaName.Length < 1)
+        if (kpaName == null || kpaName == "" || kpaName.Length < 1)
         {
             return 0;
         }
@@ -487,7 +524,7 @@ public class Root
     public void getRefundCode()
     {
         var refundTier = 0;
-        if (_root.kongregate_username != undefined && _root.kongregate_username != "Guest")
+        if (_root.kongregate_username != null && _root.kongregate_username != "Guest")
         {
             if (_root.save.bestLevel >= 200 && _root.save.totalPlayTime >= 2700)
             {
@@ -593,7 +630,7 @@ public class Root
     public void checkRefundCode(double code)
     {
         _root.correctTier = 0;
-        if (_root.kongregate_username != undefined && _root.kongregate_username != "Guest")
+        if (_root.kongregate_username != null && _root.kongregate_username != "Guest")
         {
             var i = 1;
             while (i <= 30)
@@ -1986,7 +2023,9 @@ public class Root
                 _root.popContain.attachMovie("scorePopMain", "scorePopMain" + _root.mainSummonCount, _root.mainAntiLag,
                     new
                     {
-                        _x = 480, _y = 60, what = "+" + _root.withComma(Math.floor(amount * multiplier)),
+                        _x = 480,
+                        _y = 60,
+                        what = "+" + _root.withComma(Math.floor(amount * multiplier)),
                         whatColor = 10092288
                     });
             }
@@ -2190,7 +2229,9 @@ public class Root
                 _root.popContain.attachMovie("scorePopMain", "scorePopMain" + _root.mainSummonCount, _root.mainAntiLag,
                     new
                     {
-                        _x = 80, _y = 20, what = "+" + _root.withComma(Math.floor(amount * multiplier)),
+                        _x = 80,
+                        _y = 20,
+                        what = "+" + _root.withComma(Math.floor(amount * multiplier)),
                         whatColor = 16776960
                     });
             }
@@ -2340,7 +2381,9 @@ public class Root
                 _root.popContain.attachMovie("scorePopMain", "scorePopMain" + _root.mainSummonCount, _root.mainAntiLag,
                     new
                     {
-                        _x = 10, _y = 60, what = "+" + _root.withComma(Math.floor(amount * multiplier)),
+                        _x = 10,
+                        _y = 60,
+                        what = "+" + _root.withComma(Math.floor(amount * multiplier)),
                         whatColor = 65280
                     });
             }
@@ -2408,7 +2451,9 @@ public class Root
                 _root.popContain.attachMovie("scorePopMain", "scorePopMain" + _root.mainSummonCount, _root.mainAntiLag,
                     new
                     {
-                        _x = 100, _y = 60, what = "+" + _root.withComma(Math.floor(amount * multiplier)),
+                        _x = 100,
+                        _y = 60,
+                        what = "+" + _root.withComma(Math.floor(amount * multiplier)),
                         whatColor = 39423
                     });
             }
@@ -6600,12 +6645,12 @@ public class Root
 
 
     // MATCH: frame_4/DoAction.as:addArenaCraftWeapon()
-    public void addArenaCraftWeapon(double recipeType, double recipeReq, double recipeLimit, double reqRank,
-        string subtype, double range, double frame, double attack, double speed, double defense, double crit,
-        double dexterity, double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus,
-        string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse,
-        bool noUnique, bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp,
-        string name, string desc)
+    public void addArenaCraftWeapon(double recipeType, double recipeReq, double recipeLimit = 0, double reqRank = 0,
+        string subtype = "", bool range = false, double frame = 0, double attack = 0, double speed = 0, double defense = 0, double crit = 0,
+        double dexterity = 0, double health = 0, double maxLevel = 0, double expTNL = 0, double enhance = 0, double bonusPow = 0, string bonus = "",
+        string ability = "", string moreBonus = "", double sell = 0, double expiry = 0, bool noBonus = false, bool noLife = false, bool noFuse = false,
+        bool noUnique = false, bool spirit = false, double unob = 0, double costPixel = 0, double costCraft = 0, double costSpec = 0, double careerExp = 0,
+        string name = "", string desc = "")
     {
         var item = new CraftItem();
         item.recipeType = recipeType;
@@ -7379,6 +7424,4663 @@ public class Root
         return tempDisp;
     }
 
+    // MATCH: frame_4/DoAction.as:checkSetBonus()
+    public void checkSetBonus()
+    {
+        var i = 1;
+        while (i <= setArray.Count - 1)
+        {
+            _root.setCount[i] = 0;
+            i++;
+        }
+        _root.setHighest = 0;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaWeapon]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaHat]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaShirt]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaGloves]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaPants]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaShoes]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaSkin]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaMedal]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaPendant]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaEarring]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaTrinket]] += 1;
+        _root.setCount[_root.save.inventorySet[_root.save.arenaSubWeapon]] += 1;
+        if (_root.save.inventoryName[_root.save.arenaTrinket] == "Gem of Constancy")
+        {
+            if (_root.save.inventoryLevel[_root.save.arenaWeapon] == 9999)
+            {
+                _root.setCount[1] += 1;
+            }
+            if (_root.save.inventoryLevel[_root.save.arenaHat] == 9999)
+            {
+                _root.setCount[1] += 1;
+            }
+            if (_root.save.inventoryLevel[_root.save.arenaShirt] == 9999)
+            {
+                _root.setCount[1] += 1;
+            }
+            if (_root.save.inventoryLevel[_root.save.arenaGloves] == 9999)
+            {
+                _root.setCount[1] += 1;
+            }
+            if (_root.save.inventoryLevel[_root.save.arenaPants] == 9999)
+            {
+                _root.setCount[1] += 1;
+            }
+            if (_root.save.inventoryLevel[_root.save.arenaShoes] == 9999)
+            {
+                _root.setCount[1] += 1;
+            }
+            if (_root.save.inventoryLevel[_root.save.arenaSkin] == 9999)
+            {
+                _root.setCount[1] += 1;
+            }
+        }
+        if (_root.save.inventoryName[_root.save.arenaTrinket] == "Empowering Gem")
+        {
+            if (_root.save.inventoryReqRank[_root.save.arenaWeapon] >= 200)
+            {
+                _root.setCount[2] += 1;
+            }
+            if (_root.save.inventoryReqRank[_root.save.arenaWeapon] >= 300)
+            {
+                _root.setCount[2] += 1;
+            }
+            if (_root.save.inventoryReqRank[_root.save.arenaWeapon] >= 400)
+            {
+                _root.setCount[2] += 1;
+            }
+        }
+        if (_root.save.inventoryName[_root.save.arenaWeapon].indexOf("Pickaxe") != -1)
+        {
+            if (_root.save.inventoryName[_root.save.arenaHat].indexOf("Crystal") != -1)
+            {
+                _root.setCount[3] += 1;
+            }
+            if (_root.save.inventoryName[_root.save.arenaShirt].indexOf("Crystal") != -1)
+            {
+                _root.setCount[3] += 1;
+            }
+            if (_root.save.inventoryName[_root.save.arenaGloves].indexOf("Crystal") != -1)
+            {
+                _root.setCount[3] += 1;
+            }
+            if (_root.save.inventoryName[_root.save.arenaPants].indexOf("Crystal") != -1)
+            {
+                _root.setCount[3] += 1;
+            }
+            if (_root.save.inventoryName[_root.save.arenaShoes].indexOf("Crystal") != -1)
+            {
+                _root.setCount[3] += 1;
+            }
+        }
+        if (_root.setCount[48] > 0 && _root.apocalypse == true)
+        {
+            _root.setCount[48] += 1;
+        }
+        if (_root.setCount[64] > 0 && _root.apocalypse == true)
+        {
+            _root.setCount[64] += 1;
+        }
+        if (_root.setCount[70] > 0 && _root.save.arenaAlly == 1)
+        {
+            _root.setCount[70] += 1;
+        }
+        if (_root.setCount[75] > 0 && _root.save.arenaRuneDuration[3] > 0)
+        {
+            _root.setCount[75] += 1;
+        }
+        _root.setExpBonus = 0;
+        _root.setCoinBonus = 0;
+        _root.setPixelBonus = 0;
+        _root.setDropBonus = 0;
+        _root.setSpawnBonus = 0;
+        _root.setDamageBonus = 0;
+        _root.setDefenseBonus = 0;
+        _root.setAccuracyBonus = 0;
+        _root.setEvasionBonus = 0;
+        _root.setHealthBonus = 0;
+        _root.setManaBonus = 0;
+        _root.setSpeedBonus = 0;
+        _root.setRareBonus = 0;
+        _root.setEpicBonus = 0;
+        i = 1;
+        while (i <= setArray.Count - 1)
+        {
+            if (_root.setCount[i] > 0)
+            {
+                var tmpItemCount = _root.setCount[i];
+                if (i == 48 && _root.setCount[48] > 0 && _root.apocalypse == true)
+                {
+                    tmpItemCount -= 1;
+                }
+                if (i == 64 && _root.setCount[64] > 0 && _root.apocalypse == true)
+                {
+                    tmpItemCount -= 1;
+                }
+                if (i == 70 && _root.setCount[70] > 0 && _root.save.arenaAlly == 1)
+                {
+                    tmpItemCount -= 1;
+                }
+                if (_root.setHighest < tmpItemCount)
+                {
+                    _root.setHighest = tmpItemCount;
+                }
+                var k = 0;
+                while (k <= setArray[i].bonusStat.Count - 1)
+                {
+                    if (_root.setCount[i] >= setArray[i].bonusReq[k])
+                    {
+                        if (setArray[i].bonusStat[k] == "EXP")
+                        {
+                            _root.setExpBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Coin")
+                        {
+                            _root.setCoinBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Pixel")
+                        {
+                            _root.setPixelBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Drop Rate")
+                        {
+                            _root.setDropBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Spawn Rate")
+                        {
+                            _root.setSpawnBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Damage")
+                        {
+                            _root.setDamageBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Defense")
+                        {
+                            _root.setDefenseBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Accuracy")
+                        {
+                            _root.setAccuracyBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Evasion")
+                        {
+                            _root.setEvasionBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "MaxHP")
+                        {
+                            _root.setHealthBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "MaxMP")
+                        {
+                            _root.setManaBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Attack Speed")
+                        {
+                            _root.setSpeedBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Rare Monster Rate")
+                        {
+                            _root.setRareBonus += setArray[i].bonusAmnt[k];
+                        }
+                        else if (setArray[i].bonusStat[k] == "Epic Monster Rate")
+                        {
+                            _root.setEpicBonus += setArray[i].bonusAmnt[k];
+                        }
+                    }
+                    k++;
+                }
+            }
+            i++;
+        }
+    }
+
+    // MATCH: frame_4/DoAction.as:previewFusedWeapon()
+    public void previewFusedWeapon(double reqRank, string subtype, double frame, bool range, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double level, double exp, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, string name, string desc, bool guard)
+    {
+        var k = 1331;
+        if (noBonus == null)
+        {
+            noBonus = false;
+        }
+        if (noLife == null)
+        {
+            noLife = true;
+        }
+        if (noFuse == null)
+        {
+            noFuse = false;
+        }
+        if (noUnique == null)
+        {
+            noUnique = false;
+        }
+        if (spirit == null)
+        {
+            spirit = false;
+        }
+        if (guard == null)
+        {
+            guard = false;
+        }
+        if (isNaN(level))
+        {
+            level = 1;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [level] not defined.", 16711680, 9002);
+        }
+        if (isNaN(exp))
+        {
+            exp = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [exp] not defined.", 16711680, 9002);
+        }
+        if (isNaN(crit))
+        {
+            crit = 10;
+            dexterity = 0;
+            health = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [crit] not defined.", 16711680, 9002);
+        }
+        if (isNaN(unob))
+        {
+            unob = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [unob] not defined.", 16711680, 9002);
+        }
+        var itemSet = (double)_root.checkArenaSet(name);
+        if (moreBonus == null)
+        {
+            moreBonus = "";
+            _root.breakNews("[Error]", "ERROR: " + name + " / [moreBonus] not defined.", 16711680, 9002);
+        }
+        if (desc == null)
+        {
+            desc = "";
+            _root.breakNews("[Error]", "ERROR: " + name + " / [desc] not defined.", 16711680, 9002);
+        }
+        _root.save.inventoryExist[k] = 1;
+        _root.save.inventoryName[k] = name;
+        _root.save.inventoryReqRank[k] = reqRank;
+        _root.save.inventoryType[k] = "Weapon";
+        _root.save.inventorySubtype[k] = subtype;
+        _root.save.inventoryFrame[k] = frame;
+        _root.save.inventoryRange[k] = range;
+        _root.save.inventoryAttack[k] = attack;
+        _root.save.inventorySpeed[k] = speed;
+        _root.save.inventoryDefense[k] = defense;
+        _root.save.inventoryBonus[k] = bonus;
+        _root.save.inventoryAbility[k] = ability;
+        _root.save.inventoryMoreBonus[k] = moreBonus;
+        _root.save.inventoryLevel[k] = level;
+        _root.save.inventoryMaxLevel[k] = maxLevel;
+        _root.save.inventoryExp[k] = exp;
+        _root.save.inventoryExpTNL[k] = expTNL;
+        _root.save.inventoryEnhance[k] = enhance;
+        _root.save.inventoryBonusPow[k] = bonusPow;
+        _root.save.inventorySell[k] = sell;
+        _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+        if (noLife == false)
+        {
+            _root.save.inventoryExpiry[k] = Infinity;
+        }
+        _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+        _root.save.inventoryDesc[k] = desc;
+        _root.save.inventoryCrit[k] = crit;
+        _root.save.inventoryDexterity[k] = dexterity;
+        _root.save.inventoryHealth[k] = health;
+        _root.save.inventoryNoBonus[k] = noBonus;
+        _root.save.inventoryNoFuse[k] = noFuse;
+        _root.save.inventoryNoUnique[k] = noUnique;
+        _root.save.inventorySpirit[k] = spirit;
+        _root.save.inventoryGuard[k] = guard;
+        _root.save.inventoryUnob[k] = unob;
+        _root.save.inventorySet[k] = itemSet;
+        if (_root.save.inventoryBonus[k] == "Random")
+        {
+            var bonusToGet = random(22) + 1;
+            if (bonusToGet == 1 || bonusToGet == 2)
+            {
+                _root.save.inventoryBonus[k] = "Reward";
+            }
+            if (bonusToGet == 3 || bonusToGet == 4)
+            {
+                _root.save.inventoryBonus[k] = "EXP";
+            }
+            if (bonusToGet == 5 || bonusToGet == 6)
+            {
+                _root.save.inventoryBonus[k] = "Coin";
+            }
+            if (bonusToGet == 7 || bonusToGet == 8)
+            {
+                _root.save.inventoryBonus[k] = "Pixel";
+            }
+            if (bonusToGet == 9 || bonusToGet == 10)
+            {
+                _root.save.inventoryBonus[k] = "Drop Rate";
+            }
+            if (bonusToGet == 11 || bonusToGet == 12)
+            {
+                _root.save.inventoryBonus[k] = "Spawn Rate";
+            }
+            if (bonusToGet == 13)
+            {
+                _root.save.inventoryBonus[k] = "Fire Element";
+            }
+            if (bonusToGet == 14)
+            {
+                _root.save.inventoryBonus[k] = "Ice Element";
+            }
+            if (bonusToGet == 15)
+            {
+                _root.save.inventoryBonus[k] = "Wind Element";
+            }
+            if (bonusToGet == 16)
+            {
+                _root.save.inventoryBonus[k] = "Earth Element";
+            }
+            if (bonusToGet == 17)
+            {
+                _root.save.inventoryBonus[k] = "Thunder Element";
+            }
+            if (bonusToGet == 18)
+            {
+                _root.save.inventoryBonus[k] = "Water Element";
+            }
+            if (bonusToGet == 19)
+            {
+                _root.save.inventoryBonus[k] = "Light Element";
+            }
+            if (bonusToGet == 20)
+            {
+                _root.save.inventoryBonus[k] = "Dark Element";
+            }
+            if (bonusToGet == 21)
+            {
+                _root.save.inventoryBonus[k] = "Rare Monster Rate";
+            }
+            if (bonusToGet == 22)
+            {
+                _root.save.inventoryBonus[k] = "Epic Monster Rate";
+            }
+            if (_root.save.arenaBonusPreference1 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference1;
+            }
+            else if (_root.save.arenaBonusPreference2 != "None" && Math.random() < 0.07)
+            {
+                _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference2;
+            }
+        }
+        if (_root.save.inventoryAbility[k] == "Random")
+        {
+            var bonusToGet = random(47) + 1;
+            if (bonusToGet == 1)
+            {
+                _root.save.inventoryAbility[k] = "Attack";
+            }
+            if (bonusToGet == 2)
+            {
+                _root.save.inventoryAbility[k] = "Attack Speed";
+            }
+            if (bonusToGet == 3)
+            {
+                _root.save.inventoryAbility[k] = "Ignore Defense";
+            }
+            if (bonusToGet == 4)
+            {
+                _root.save.inventoryAbility[k] = "Mastery";
+            }
+            if (bonusToGet == 5)
+            {
+                _root.save.inventoryAbility[k] = "Critical Chance";
+            }
+            if (bonusToGet == 6)
+            {
+                _root.save.inventoryAbility[k] = "Critical Damage";
+            }
+            if (bonusToGet == 7)
+            {
+                _root.save.inventoryAbility[k] = "Defense";
+            }
+            if (bonusToGet == 8)
+            {
+                _root.save.inventoryAbility[k] = "Damage Taken";
+            }
+            if (bonusToGet == 9)
+            {
+                _root.save.inventoryAbility[k] = "Reflect";
+            }
+            if (bonusToGet == 10)
+            {
+                _root.save.inventoryAbility[k] = "Accuracy";
+            }
+            if (bonusToGet == 11)
+            {
+                _root.save.inventoryAbility[k] = "Hit Chance";
+            }
+            if (bonusToGet == 12)
+            {
+                _root.save.inventoryAbility[k] = "Evasion";
+            }
+            if (bonusToGet == 13)
+            {
+                _root.save.inventoryAbility[k] = "Dodge Chance";
+            }
+            if (bonusToGet == 14)
+            {
+                _root.save.inventoryAbility[k] = "Poison Chance";
+            }
+            if (bonusToGet == 15)
+            {
+                _root.save.inventoryAbility[k] = "Weaken Chance";
+            }
+            if (bonusToGet == 16)
+            {
+                _root.save.inventoryAbility[k] = "Blind Chance";
+            }
+            if (bonusToGet == 17)
+            {
+                _root.save.inventoryAbility[k] = "Stun Chance";
+            }
+            if (bonusToGet == 18)
+            {
+                _root.save.inventoryAbility[k] = "HP";
+            }
+            if (bonusToGet == 19)
+            {
+                _root.save.inventoryAbility[k] = "MP";
+            }
+            if (bonusToGet == 20)
+            {
+                _root.save.inventoryAbility[k] = "HP Regen";
+            }
+            if (bonusToGet == 21)
+            {
+                _root.save.inventoryAbility[k] = "MP Regen";
+            }
+            if (bonusToGet == 22)
+            {
+                _root.save.inventoryAbility[k] = "Rage Depletion";
+            }
+            if (bonusToGet == 23)
+            {
+                _root.save.inventoryAbility[k] = "Drain";
+            }
+            if (bonusToGet == 24)
+            {
+                _root.save.inventoryAbility[k] = "Mana Eater";
+            }
+            if (bonusToGet == 25)
+            {
+                _root.save.inventoryAbility[k] = "Autosteal";
+            }
+            if (bonusToGet == 26)
+            {
+                _root.save.inventoryAbility[k] = "Double Hit Chance";
+            }
+            if (bonusToGet == 27)
+            {
+                _root.save.inventoryAbility[k] = "Rage Attack";
+            }
+            if (bonusToGet == 28)
+            {
+                _root.save.inventoryAbility[k] = "Rage Speed";
+            }
+            if (bonusToGet == 29)
+            {
+                _root.save.inventoryAbility[k] = "Poison Damage";
+            }
+            if (bonusToGet == 30)
+            {
+                _root.save.inventoryAbility[k] = "Poison Duration";
+            }
+            if (bonusToGet == 31)
+            {
+                _root.save.inventoryAbility[k] = "Weaken Effect";
+            }
+            if (bonusToGet == 32)
+            {
+                _root.save.inventoryAbility[k] = "Weaken Duration";
+            }
+            if (bonusToGet == 33)
+            {
+                _root.save.inventoryAbility[k] = "Blind Effect";
+            }
+            if (bonusToGet == 34)
+            {
+                _root.save.inventoryAbility[k] = "Blind Duration";
+            }
+            if (bonusToGet == 35)
+            {
+                _root.save.inventoryAbility[k] = "Potion Efficiency";
+            }
+            if (bonusToGet == 36)
+            {
+                _root.save.inventoryAbility[k] = "Boss Damage";
+            }
+            if (bonusToGet == 37)
+            {
+                _root.save.inventoryAbility[k] = "Magic Resist";
+            }
+            if (bonusToGet == 38)
+            {
+                _root.save.inventoryAbility[k] = "Instant Kill";
+            }
+            if (bonusToGet == 39)
+            {
+                _root.save.inventoryAbility[k] = "Negate Effect";
+            }
+            if (bonusToGet == 40)
+            {
+                _root.save.inventoryAbility[k] = "Non-Boss Damage";
+            }
+            if (bonusToGet == 41)
+            {
+                _root.save.inventoryAbility[k] = "Damage";
+            }
+            if (bonusToGet == 42)
+            {
+                _root.save.inventoryAbility[k] = "Extra Combo";
+            }
+            if (bonusToGet == 43)
+            {
+                _root.save.inventoryAbility[k] = "Magic Reflect";
+            }
+            if (bonusToGet == 44)
+            {
+                _root.save.inventoryAbility[k] = "Nullify Death Penalty";
+            }
+            if (bonusToGet == 45)
+            {
+                _root.save.inventoryAbility[k] = "Buff Effect";
+            }
+            if (bonusToGet == 46)
+            {
+                _root.save.inventoryAbility[k] = "All Elements";
+            }
+            if (bonusToGet == 47)
+            {
+                _root.save.inventoryAbility[k] = "Max Spirit";
+            }
+            if (_root.save.arenaAbilityPreference1 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference1;
+            }
+            else if (_root.save.arenaAbilityPreference2 != "None" && Math.random() < 0.1)
+            {
+                _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference2;
+            }
+            else if (_root.save.arenaAbilityPreference3 != "None" && Math.random() < 0.05)
+            {
+                _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference3;
+            }
+        }
+        if (_root.save.inventoryMoreBonus[k] == "Random")
+        {
+            var bonusToGet = random(11) + 1;
+            if (bonusToGet == 1)
+            {
+                _root.save.inventoryMoreBonus[k] = "Equipment Attack";
+            }
+            if (bonusToGet == 2)
+            {
+                _root.save.inventoryMoreBonus[k] = "Equipment Defense";
+            }
+            if (bonusToGet == 3)
+            {
+                _root.save.inventoryMoreBonus[k] = "Attack Power";
+            }
+            if (bonusToGet == 4)
+            {
+                _root.save.inventoryMoreBonus[k] = "Defense Power";
+            }
+            if (bonusToGet == 5)
+            {
+                _root.save.inventoryMoreBonus[k] = "MaxHP";
+            }
+            if (bonusToGet == 6)
+            {
+                _root.save.inventoryMoreBonus[k] = "MaxMP";
+            }
+            if (bonusToGet == 7)
+            {
+                _root.save.inventoryMoreBonus[k] = "Accuracy";
+            }
+            if (bonusToGet == 8)
+            {
+                _root.save.inventoryMoreBonus[k] = "Evasion";
+            }
+            if (bonusToGet == 9)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Boss Kill";
+            }
+            if (bonusToGet == 10)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Rare Kill";
+            }
+            if (bonusToGet == 11)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Epic Kill";
+            }
+            if (_root.save.arenaMoreBonusPreference1 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference1;
+            }
+            else if (_root.save.arenaMoreBonusPreference2 != "None" && Math.random() < 0.07)
+            {
+                _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference2;
+            }
+        }
+    }
+
+
+    // MATCH: frame_4/DoAction.as:previewFusedArmor()
+    public void previewFusedArmor(double reqRank, string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double level, double exp, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, string name, string desc, bool guard)
+    {
+        var k = 1331;
+        if (noBonus == null)
+        {
+            noBonus = false;
+        }
+        if (noLife == null)
+        {
+            noLife = true;
+        }
+        if (noFuse == null)
+        {
+            noFuse = false;
+        }
+        if (noUnique == null)
+        {
+            noUnique = false;
+        }
+        if (spirit == null)
+        {
+            spirit = false;
+        }
+        if (guard == null)
+        {
+            guard = false;
+        }
+        if (isNaN(level))
+        {
+            level = 1;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [level] not defined.", 16711680, 9002);
+        }
+        if (isNaN(exp))
+        {
+            exp = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [exp] not defined.", 16711680, 9002);
+        }
+        if (isNaN(crit))
+        {
+            crit = 10;
+            dexterity = 0;
+            health = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [crit] not defined.", 16711680, 9002);
+        }
+        if (isNaN(unob))
+        {
+            unob = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [unob] not defined.", 16711680, 9002);
+        }
+        var itemSet = _root.checkArenaSet(name);
+        if (moreBonus == null)
+        {
+            moreBonus = "";
+            _root.breakNews("[Error]", "ERROR: " + name + " / [moreBonus] not defined.", 16711680, 9002);
+        }
+        if (desc == null)
+        {
+            desc = "";
+            _root.breakNews("[Error]", "ERROR: " + name + " / [desc] not defined.", 16711680, 9002);
+        }
+        _root.save.inventoryExist[k] = 1;
+        _root.save.inventoryName[k] = name;
+        _root.save.inventoryReqRank[k] = reqRank;
+        _root.save.inventoryType[k] = "Armor";
+        _root.save.inventorySubtype[k] = subtype;
+        _root.save.inventoryFrame[k] = frame;
+        _root.save.inventoryRange[k] = false;
+        _root.save.inventoryAttack[k] = attack;
+        _root.save.inventorySpeed[k] = speed;
+        _root.save.inventoryDefense[k] = defense;
+        _root.save.inventoryBonus[k] = bonus;
+        _root.save.inventoryAbility[k] = ability;
+        _root.save.inventoryMoreBonus[k] = moreBonus;
+        _root.save.inventoryLevel[k] = level;
+        _root.save.inventoryMaxLevel[k] = maxLevel;
+        _root.save.inventoryExp[k] = exp;
+        _root.save.inventoryExpTNL[k] = expTNL;
+        _root.save.inventoryEnhance[k] = enhance;
+        _root.save.inventoryBonusPow[k] = bonusPow;
+        _root.save.inventorySell[k] = sell;
+        _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+        if (noLife == false)
+        {
+            _root.save.inventoryExpiry[k] = Infinity;
+        }
+        _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+        _root.save.inventoryDesc[k] = desc;
+        _root.save.inventoryCrit[k] = crit;
+        _root.save.inventoryDexterity[k] = dexterity;
+        _root.save.inventoryHealth[k] = health;
+        _root.save.inventoryNoBonus[k] = noBonus;
+        _root.save.inventoryNoFuse[k] = noFuse;
+        _root.save.inventoryNoUnique[k] = noUnique;
+        _root.save.inventorySpirit[k] = spirit;
+        _root.save.inventoryGuard[k] = guard;
+        _root.save.inventoryUnob[k] = unob;
+        _root.save.inventorySet[k] = itemSet;
+        if (_root.save.inventoryBonus[k] == "Random")
+        {
+            var bonusToGet = random(15) + 1;
+            if (Math.random() < 0.2)
+            {
+                bonusToGet = random(22) + 1;
+            }
+            if (bonusToGet == 1 || bonusToGet == 2)
+            {
+                _root.save.inventoryBonus[k] = "Reward";
+            }
+            if (bonusToGet == 3 || bonusToGet == 4)
+            {
+                _root.save.inventoryBonus[k] = "EXP";
+            }
+            if (bonusToGet == 5 || bonusToGet == 6)
+            {
+                _root.save.inventoryBonus[k] = "Coin";
+            }
+            if (bonusToGet == 7 || bonusToGet == 8)
+            {
+                _root.save.inventoryBonus[k] = "Pixel";
+            }
+            if (bonusToGet == 9 || bonusToGet == 10)
+            {
+                _root.save.inventoryBonus[k] = "Drop Rate";
+            }
+            if (bonusToGet == 11 || bonusToGet == 12)
+            {
+                _root.save.inventoryBonus[k] = "Spawn Rate";
+            }
+            if (bonusToGet == 13)
+            {
+                _root.save.inventoryBonus[k] = "Fire Element";
+            }
+            if (bonusToGet == 14)
+            {
+                _root.save.inventoryBonus[k] = "Ice Element";
+            }
+            if (bonusToGet == 15)
+            {
+                _root.save.inventoryBonus[k] = "Wind Element";
+            }
+            if (bonusToGet == 16)
+            {
+                _root.save.inventoryBonus[k] = "Earth Element";
+            }
+            if (bonusToGet == 17)
+            {
+                _root.save.inventoryBonus[k] = "Thunder Element";
+            }
+            if (bonusToGet == 18)
+            {
+                _root.save.inventoryBonus[k] = "Water Element";
+            }
+            if (bonusToGet == 19)
+            {
+                _root.save.inventoryBonus[k] = "Light Element";
+            }
+            if (bonusToGet == 20)
+            {
+                _root.save.inventoryBonus[k] = "Dark Element";
+            }
+            if (bonusToGet == 21)
+            {
+                _root.save.inventoryBonus[k] = "Rare Monster Rate";
+            }
+            if (bonusToGet == 22)
+            {
+                _root.save.inventoryBonus[k] = "Epic Monster Rate";
+            }
+            if (_root.save.arenaBonusPreference1 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference1;
+            }
+            else if (_root.save.arenaBonusPreference2 != "None" && Math.random() < 0.07)
+            {
+                _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference2;
+            }
+        }
+        if (_root.save.inventoryAbility[k] == "Random")
+        {
+            var bonusToGet = random(25) + 1;
+            if (bonusToGet == 1)
+            {
+                _root.save.inventoryAbility[k] = "Attack";
+            }
+            if (bonusToGet == 2)
+            {
+                _root.save.inventoryAbility[k] = "Attack Speed";
+            }
+            if (bonusToGet == 3)
+            {
+                _root.save.inventoryAbility[k] = "Ignore Defense";
+            }
+            if (bonusToGet == 4)
+            {
+                _root.save.inventoryAbility[k] = "Mastery";
+            }
+            if (bonusToGet == 5)
+            {
+                _root.save.inventoryAbility[k] = "Critical Chance";
+            }
+            if (bonusToGet == 6)
+            {
+                _root.save.inventoryAbility[k] = "Critical Damage";
+            }
+            if (bonusToGet == 7)
+            {
+                _root.save.inventoryAbility[k] = "Defense";
+            }
+            if (bonusToGet == 8)
+            {
+                _root.save.inventoryAbility[k] = "Damage Taken";
+            }
+            if (bonusToGet == 9)
+            {
+                _root.save.inventoryAbility[k] = "Reflect";
+            }
+            if (bonusToGet == 10)
+            {
+                _root.save.inventoryAbility[k] = "Accuracy";
+            }
+            if (bonusToGet == 11)
+            {
+                _root.save.inventoryAbility[k] = "Hit Chance";
+            }
+            if (bonusToGet == 12)
+            {
+                _root.save.inventoryAbility[k] = "Evasion";
+            }
+            if (bonusToGet == 13)
+            {
+                _root.save.inventoryAbility[k] = "Dodge Chance";
+            }
+            if (bonusToGet == 14)
+            {
+                _root.save.inventoryAbility[k] = "Poison Chance";
+            }
+            if (bonusToGet == 15)
+            {
+                _root.save.inventoryAbility[k] = "Weaken Chance";
+            }
+            if (bonusToGet == 16)
+            {
+                _root.save.inventoryAbility[k] = "Blind Chance";
+            }
+            if (bonusToGet == 17)
+            {
+                _root.save.inventoryAbility[k] = "Stun Chance";
+            }
+            if (bonusToGet == 18)
+            {
+                _root.save.inventoryAbility[k] = "HP";
+            }
+            if (bonusToGet == 19)
+            {
+                _root.save.inventoryAbility[k] = "MP";
+            }
+            if (bonusToGet == 20)
+            {
+                _root.save.inventoryAbility[k] = "HP Regen";
+            }
+            if (bonusToGet == 21)
+            {
+                _root.save.inventoryAbility[k] = "MP Regen";
+            }
+            if (bonusToGet == 22)
+            {
+                _root.save.inventoryAbility[k] = "Rage Depletion";
+            }
+            if (bonusToGet == 23)
+            {
+                _root.save.inventoryAbility[k] = "Drain";
+            }
+            if (bonusToGet == 24)
+            {
+                _root.save.inventoryAbility[k] = "Mana Eater";
+            }
+            if (bonusToGet == 25)
+            {
+                _root.save.inventoryAbility[k] = "Autosteal";
+            }
+            if (_root.save.arenaAbilityPreference2 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference2;
+            }
+            else if (_root.save.arenaAbilityPreference3 != "None" && Math.random() < 0.07)
+            {
+                _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference3;
+            }
+        }
+        if (_root.save.inventoryMoreBonus[k] == "Random")
+        {
+            var bonusToGet = random(11) + 1;
+            if (bonusToGet == 1)
+            {
+                _root.save.inventoryMoreBonus[k] = "Equipment Attack";
+            }
+            if (bonusToGet == 2)
+            {
+                _root.save.inventoryMoreBonus[k] = "Equipment Defense";
+            }
+            if (bonusToGet == 3)
+            {
+                _root.save.inventoryMoreBonus[k] = "Attack Power";
+            }
+            if (bonusToGet == 4)
+            {
+                _root.save.inventoryMoreBonus[k] = "Defense Power";
+            }
+            if (bonusToGet == 5)
+            {
+                _root.save.inventoryMoreBonus[k] = "MaxHP";
+            }
+            if (bonusToGet == 6)
+            {
+                _root.save.inventoryMoreBonus[k] = "MaxMP";
+            }
+            if (bonusToGet == 7)
+            {
+                _root.save.inventoryMoreBonus[k] = "Accuracy";
+            }
+            if (bonusToGet == 8)
+            {
+                _root.save.inventoryMoreBonus[k] = "Evasion";
+            }
+            if (bonusToGet == 9)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Boss Kill";
+            }
+            if (bonusToGet == 10)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Rare Kill";
+            }
+            if (bonusToGet == 11)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Epic Kill";
+            }
+            if (_root.save.arenaMoreBonusPreference1 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference1;
+            }
+            else if (_root.save.arenaMoreBonusPreference2 != "None" && Math.random() < 0.07)
+            {
+                _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference2;
+            }
+        }
+    }
+
+    // MATCH: frame_4/DoAction.as:previewFusedAccessory()
+    public void previewFusedAccessory(double reqRank, string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double level, double exp, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, string name, string desc, bool guard)
+    {
+        var k = 1331;
+        if (noBonus == null)
+        {
+            noBonus = false;
+        }
+        if (noLife == null)
+        {
+            noLife = true;
+        }
+        if (noFuse == null)
+        {
+            noFuse = false;
+        }
+        if (noUnique == null)
+        {
+            noUnique = false;
+        }
+        if (spirit == null)
+        {
+            spirit = false;
+        }
+        if (guard == null)
+        {
+            guard = false;
+        }
+        if (isNaN(level))
+        {
+            level = 1;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [level] not defined.", 16711680, 9002);
+        }
+        if (isNaN(exp))
+        {
+            exp = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [exp] not defined.", 16711680, 9002);
+        }
+        if (isNaN(crit))
+        {
+            crit = 10;
+            dexterity = 0;
+            health = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [crit] not defined.", 16711680, 9002);
+        }
+        if (isNaN(unob))
+        {
+            unob = 0;
+            _root.breakNews("[Error]", "ERROR: " + name + " / [unob] not defined.", 16711680, 9002);
+        }
+        var itemSet = _root.checkArenaSet(name);
+        if (moreBonus == null)
+        {
+            moreBonus = "";
+            _root.breakNews("[Error]", "ERROR: " + name + " / [moreBonus] not defined.", 16711680, 9002);
+        }
+        if (desc == null)
+        {
+            desc = "";
+            _root.breakNews("[Error]", "ERROR: " + name + " / [desc] not defined.", 16711680, 9002);
+        }
+        _root.save.inventoryExist[k] = 1;
+        _root.save.inventoryName[k] = name;
+        _root.save.inventoryReqRank[k] = reqRank;
+        _root.save.inventoryType[k] = "Armor";
+        _root.save.inventorySubtype[k] = subtype;
+        _root.save.inventoryFrame[k] = frame;
+        _root.save.inventoryRange[k] = false;
+        _root.save.inventoryAttack[k] = attack;
+        _root.save.inventorySpeed[k] = speed;
+        _root.save.inventoryDefense[k] = defense;
+        _root.save.inventoryBonus[k] = bonus;
+        _root.save.inventoryAbility[k] = ability;
+        _root.save.inventoryMoreBonus[k] = moreBonus;
+        _root.save.inventoryLevel[k] = level;
+        _root.save.inventoryMaxLevel[k] = maxLevel;
+        _root.save.inventoryExp[k] = exp;
+        _root.save.inventoryExpTNL[k] = expTNL;
+        _root.save.inventoryEnhance[k] = enhance;
+        _root.save.inventoryBonusPow[k] = bonusPow;
+        _root.save.inventorySell[k] = sell;
+        _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+        if (noLife == false)
+        {
+            _root.save.inventoryExpiry[k] = Infinity;
+        }
+        _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+        _root.save.inventoryDesc[k] = desc;
+        _root.save.inventoryCrit[k] = crit;
+        _root.save.inventoryDexterity[k] = dexterity;
+        _root.save.inventoryHealth[k] = health;
+        _root.save.inventoryNoBonus[k] = noBonus;
+        _root.save.inventoryNoFuse[k] = noFuse;
+        _root.save.inventoryNoUnique[k] = noUnique;
+        _root.save.inventorySpirit[k] = spirit;
+        _root.save.inventoryGuard[k] = guard;
+        _root.save.inventoryUnob[k] = unob;
+        _root.save.inventorySet[k] = itemSet;
+        if (_root.save.inventoryBonus[k] == "Random")
+        {
+            var bonusToGet = random(15) + 1;
+            if (Math.random() < 0.2)
+            {
+                bonusToGet = random(22) + 1;
+            }
+            if (bonusToGet == 1 || bonusToGet == 2)
+            {
+                _root.save.inventoryBonus[k] = "Reward";
+            }
+            if (bonusToGet == 3 || bonusToGet == 4)
+            {
+                _root.save.inventoryBonus[k] = "EXP";
+            }
+            if (bonusToGet == 5 || bonusToGet == 6)
+            {
+                _root.save.inventoryBonus[k] = "Coin";
+            }
+            if (bonusToGet == 7 || bonusToGet == 8)
+            {
+                _root.save.inventoryBonus[k] = "Pixel";
+            }
+            if (bonusToGet == 9 || bonusToGet == 10)
+            {
+                _root.save.inventoryBonus[k] = "Drop Rate";
+            }
+            if (bonusToGet == 11 || bonusToGet == 12)
+            {
+                _root.save.inventoryBonus[k] = "Spawn Rate";
+            }
+            if (bonusToGet == 13)
+            {
+                _root.save.inventoryBonus[k] = "Fire Element";
+            }
+            if (bonusToGet == 14)
+            {
+                _root.save.inventoryBonus[k] = "Ice Element";
+            }
+            if (bonusToGet == 15)
+            {
+                _root.save.inventoryBonus[k] = "Wind Element";
+            }
+            if (bonusToGet == 16)
+            {
+                _root.save.inventoryBonus[k] = "Earth Element";
+            }
+            if (bonusToGet == 17)
+            {
+                _root.save.inventoryBonus[k] = "Thunder Element";
+            }
+            if (bonusToGet == 18)
+            {
+                _root.save.inventoryBonus[k] = "Water Element";
+            }
+            if (bonusToGet == 19)
+            {
+                _root.save.inventoryBonus[k] = "Light Element";
+            }
+            if (bonusToGet == 20)
+            {
+                _root.save.inventoryBonus[k] = "Dark Element";
+            }
+            if (bonusToGet == 21)
+            {
+                _root.save.inventoryBonus[k] = "Rare Monster Rate";
+            }
+            if (bonusToGet == 22)
+            {
+                _root.save.inventoryBonus[k] = "Epic Monster Rate";
+            }
+            if (_root.save.arenaBonusPreference1 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference1;
+            }
+            else if (_root.save.arenaBonusPreference2 != "None" && Math.random() < 0.07)
+            {
+                _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference2;
+            }
+        }
+        if (_root.save.inventoryAbility[k] == "Random")
+        {
+            var bonusToGet = random(25) + 1;
+            if (bonusToGet == 1)
+            {
+                _root.save.inventoryAbility[k] = "Attack";
+            }
+            if (bonusToGet == 2)
+            {
+                _root.save.inventoryAbility[k] = "Attack Speed";
+            }
+            if (bonusToGet == 3)
+            {
+                _root.save.inventoryAbility[k] = "Ignore Defense";
+            }
+            if (bonusToGet == 4)
+            {
+                _root.save.inventoryAbility[k] = "Mastery";
+            }
+            if (bonusToGet == 5)
+            {
+                _root.save.inventoryAbility[k] = "Critical Chance";
+            }
+            if (bonusToGet == 6)
+            {
+                _root.save.inventoryAbility[k] = "Critical Damage";
+            }
+            if (bonusToGet == 7)
+            {
+                _root.save.inventoryAbility[k] = "Defense";
+            }
+            if (bonusToGet == 8)
+            {
+                _root.save.inventoryAbility[k] = "Damage Taken";
+            }
+            if (bonusToGet == 9)
+            {
+                _root.save.inventoryAbility[k] = "Reflect";
+            }
+            if (bonusToGet == 10)
+            {
+                _root.save.inventoryAbility[k] = "Accuracy";
+            }
+            if (bonusToGet == 11)
+            {
+                _root.save.inventoryAbility[k] = "Hit Chance";
+            }
+            if (bonusToGet == 12)
+            {
+                _root.save.inventoryAbility[k] = "Evasion";
+            }
+            if (bonusToGet == 13)
+            {
+                _root.save.inventoryAbility[k] = "Dodge Chance";
+            }
+            if (bonusToGet == 14)
+            {
+                _root.save.inventoryAbility[k] = "Poison Chance";
+            }
+            if (bonusToGet == 15)
+            {
+                _root.save.inventoryAbility[k] = "Weaken Chance";
+            }
+            if (bonusToGet == 16)
+            {
+                _root.save.inventoryAbility[k] = "Blind Chance";
+            }
+            if (bonusToGet == 17)
+            {
+                _root.save.inventoryAbility[k] = "Stun Chance";
+            }
+            if (bonusToGet == 18)
+            {
+                _root.save.inventoryAbility[k] = "HP";
+            }
+            if (bonusToGet == 19)
+            {
+                _root.save.inventoryAbility[k] = "MP";
+            }
+            if (bonusToGet == 20)
+            {
+                _root.save.inventoryAbility[k] = "HP Regen";
+            }
+            if (bonusToGet == 21)
+            {
+                _root.save.inventoryAbility[k] = "MP Regen";
+            }
+            if (bonusToGet == 22)
+            {
+                _root.save.inventoryAbility[k] = "Rage Depletion";
+            }
+            if (bonusToGet == 23)
+            {
+                _root.save.inventoryAbility[k] = "Drain";
+            }
+            if (bonusToGet == 24)
+            {
+                _root.save.inventoryAbility[k] = "Mana Eater";
+            }
+            if (bonusToGet == 25)
+            {
+                _root.save.inventoryAbility[k] = "Autosteal";
+            }
+            if (_root.save.arenaAbilityPreference2 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference2;
+            }
+            else if (_root.save.arenaAbilityPreference3 != "None" && Math.random() < 0.07)
+            {
+                _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference3;
+            }
+        }
+        if (_root.save.inventoryMoreBonus[k] == "Random")
+        {
+            var bonusToGet = random(11) + 1;
+            if (bonusToGet == 1)
+            {
+                _root.save.inventoryMoreBonus[k] = "Equipment Attack";
+            }
+            if (bonusToGet == 2)
+            {
+                _root.save.inventoryMoreBonus[k] = "Equipment Defense";
+            }
+            if (bonusToGet == 3)
+            {
+                _root.save.inventoryMoreBonus[k] = "Attack Power";
+            }
+            if (bonusToGet == 4)
+            {
+                _root.save.inventoryMoreBonus[k] = "Defense Power";
+            }
+            if (bonusToGet == 5)
+            {
+                _root.save.inventoryMoreBonus[k] = "MaxHP";
+            }
+            if (bonusToGet == 6)
+            {
+                _root.save.inventoryMoreBonus[k] = "MaxMP";
+            }
+            if (bonusToGet == 7)
+            {
+                _root.save.inventoryMoreBonus[k] = "Accuracy";
+            }
+            if (bonusToGet == 8)
+            {
+                _root.save.inventoryMoreBonus[k] = "Evasion";
+            }
+            if (bonusToGet == 9)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Boss Kill";
+            }
+            if (bonusToGet == 10)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Rare Kill";
+            }
+            if (bonusToGet == 11)
+            {
+                _root.save.inventoryMoreBonus[k] = "EXP / Epic Kill";
+            }
+            if (_root.save.arenaMoreBonusPreference1 != "None" && Math.random() < 0.2)
+            {
+                _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference1;
+            }
+            else if (_root.save.arenaMoreBonusPreference2 != "None" && Math.random() < 0.07)
+            {
+                _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference2;
+            }
+        }
+    }
+
+    // MATCH: frame_4/DoAction.as:getArenaWeapon()
+    public void getArenaWeapon(double reqRank, string subtype, double frame, bool range, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double level, double exp, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, string name, string desc, bool guard = false)
+    {
+        var k = 9999;
+        var i = 1;
+        while (i <= 30)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                if (k > i)
+                {
+                    k = i;
+                }
+            }
+            i++;
+        }
+        if (k == 9999)
+        {
+            k = (int)_root.save.arenaDeletedSlot;
+            _root.save.arenaDeletedSlot += 1;
+            if (_root.save.arenaDeletedSlot > 830)
+            {
+                _root.save.arenaDeletedSlot = 801;
+            }
+            _root.deleteArenaItem(k);
+        }
+        if (name != null)
+        {
+            if (noBonus == null)
+            {
+                noBonus = false;
+            }
+            if (noLife == null)
+            {
+                noLife = true;
+            }
+            if (noFuse == null)
+            {
+                noFuse = false;
+            }
+            if (noUnique == null)
+            {
+                noUnique = false;
+            }
+            if (spirit == null)
+            {
+                spirit = false;
+            }
+            if (guard == null)
+            {
+                guard = false;
+            }
+            if (isNaN(level))
+            {
+                level = 1;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [level] not defined.", 16711680, 9002);
+            }
+            if (isNaN(exp))
+            {
+                exp = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [exp] not defined.", 16711680, 9002);
+            }
+            if (isNaN(crit))
+            {
+                crit = 10;
+                dexterity = 0;
+                health = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [crit] not defined.", 16711680, 9002);
+            }
+            if (isNaN(unob))
+            {
+                unob = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [unob] not defined.", 16711680, 9002);
+            }
+            var itemSet = _root.checkArenaSet(name);
+            if (moreBonus == null)
+            {
+                moreBonus = "";
+                _root.breakNews("[Error]", "ERROR: " + name + " / [moreBonus] not defined.", 16711680, 9002);
+            }
+            if (desc == null)
+            {
+                desc = "";
+                _root.breakNews("[Error]", "ERROR: " + name + " / [desc] not defined.", 16711680, 9002);
+            }
+            _root.save.inventoryExist[k] = 1;
+            _root.save.inventoryName[k] = name;
+            _root.save.inventoryReqRank[k] = reqRank;
+            _root.save.inventoryType[k] = "Weapon";
+            _root.save.inventorySubtype[k] = subtype;
+            _root.save.inventoryFrame[k] = frame;
+            _root.save.inventoryRange[k] = range;
+            _root.save.inventoryAttack[k] = attack;
+            _root.save.inventorySpeed[k] = speed;
+            _root.save.inventoryDefense[k] = defense;
+            _root.save.inventoryBonus[k] = bonus;
+            _root.save.inventoryAbility[k] = ability;
+            _root.save.inventoryMoreBonus[k] = moreBonus;
+            _root.save.inventoryLevel[k] = level;
+            _root.save.inventoryMaxLevel[k] = maxLevel;
+            _root.save.inventoryExp[k] = exp;
+            _root.save.inventoryExpTNL[k] = expTNL;
+            _root.save.inventoryEnhance[k] = enhance;
+            _root.save.inventoryBonusPow[k] = bonusPow;
+            _root.save.inventorySell[k] = sell;
+            _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+            if (noLife == false)
+            {
+                _root.save.inventoryExpiry[k] = Infinity;
+            }
+            _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+            _root.save.inventoryDesc[k] = desc;
+            _root.save.inventoryCrit[k] = crit;
+            _root.save.inventoryDexterity[k] = dexterity;
+            _root.save.inventoryHealth[k] = health;
+            _root.save.inventoryNoBonus[k] = noBonus;
+            _root.save.inventoryNoFuse[k] = noFuse;
+            _root.save.inventoryNoUnique[k] = noUnique;
+            _root.save.inventorySpirit[k] = spirit;
+            _root.save.inventoryGuard[k] = guard;
+            _root.save.inventoryUnob[k] = unob;
+            _root.save.inventorySet[k] = itemSet;
+            if (_root.save.inventoryBonus[k] == "Random")
+            {
+                var bonusToGet = random(22) + 1;
+                if (bonusToGet == 1 || bonusToGet == 2)
+                {
+                    _root.save.inventoryBonus[k] = "Reward";
+                }
+                if (bonusToGet == 3 || bonusToGet == 4)
+                {
+                    _root.save.inventoryBonus[k] = "EXP";
+                }
+                if (bonusToGet == 5 || bonusToGet == 6)
+                {
+                    _root.save.inventoryBonus[k] = "Coin";
+                }
+                if (bonusToGet == 7 || bonusToGet == 8)
+                {
+                    _root.save.inventoryBonus[k] = "Pixel";
+                }
+                if (bonusToGet == 9 || bonusToGet == 10)
+                {
+                    _root.save.inventoryBonus[k] = "Drop Rate";
+                }
+                if (bonusToGet == 11 || bonusToGet == 12)
+                {
+                    _root.save.inventoryBonus[k] = "Spawn Rate";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryBonus[k] = "Fire Element";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryBonus[k] = "Ice Element";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryBonus[k] = "Wind Element";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryBonus[k] = "Earth Element";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryBonus[k] = "Thunder Element";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryBonus[k] = "Water Element";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryBonus[k] = "Light Element";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryBonus[k] = "Dark Element";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryBonus[k] = "Rare Monster Rate";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryBonus[k] = "Epic Monster Rate";
+                }
+                if (_root.save.arenaBonusPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference1;
+                }
+                else if (_root.save.arenaBonusPreference2 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference2;
+                }
+            }
+            if (_root.save.inventoryAbility[k] == "Random")
+            {
+                var bonusToGet = random(47) + 1;
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryAbility[k] = "Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryAbility[k] = "Attack Speed";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryAbility[k] = "Ignore Defense";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryAbility[k] = "Mastery";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Chance";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Damage";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryAbility[k] = "Defense";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryAbility[k] = "Damage Taken";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryAbility[k] = "Reflect";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryAbility[k] = "Accuracy";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryAbility[k] = "Hit Chance";
+                }
+                if (bonusToGet == 12)
+                {
+                    _root.save.inventoryAbility[k] = "Evasion";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryAbility[k] = "Dodge Chance";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Chance";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Chance";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Chance";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryAbility[k] = "Stun Chance";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryAbility[k] = "HP";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryAbility[k] = "MP";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryAbility[k] = "HP Regen";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryAbility[k] = "MP Regen";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Depletion";
+                }
+                if (bonusToGet == 23)
+                {
+                    _root.save.inventoryAbility[k] = "Drain";
+                }
+                if (bonusToGet == 24)
+                {
+                    _root.save.inventoryAbility[k] = "Mana Eater";
+                }
+                if (bonusToGet == 25)
+                {
+                    _root.save.inventoryAbility[k] = "Autosteal";
+                }
+                if (bonusToGet == 26)
+                {
+                    _root.save.inventoryAbility[k] = "Double Hit Chance";
+                }
+                if (bonusToGet == 27)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Attack";
+                }
+                if (bonusToGet == 28)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Speed";
+                }
+                if (bonusToGet == 29)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Damage";
+                }
+                if (bonusToGet == 30)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Duration";
+                }
+                if (bonusToGet == 31)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Effect";
+                }
+                if (bonusToGet == 32)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Duration";
+                }
+                if (bonusToGet == 33)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Effect";
+                }
+                if (bonusToGet == 34)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Duration";
+                }
+                if (bonusToGet == 35)
+                {
+                    _root.save.inventoryAbility[k] = "Potion Efficiency";
+                }
+                if (bonusToGet == 36)
+                {
+                    _root.save.inventoryAbility[k] = "Boss Damage";
+                }
+                if (bonusToGet == 37)
+                {
+                    _root.save.inventoryAbility[k] = "Magic Resist";
+                }
+                if (bonusToGet == 38)
+                {
+                    _root.save.inventoryAbility[k] = "Instant Kill";
+                }
+                if (bonusToGet == 39)
+                {
+                    _root.save.inventoryAbility[k] = "Negate Effect";
+                }
+                if (bonusToGet == 40)
+                {
+                    _root.save.inventoryAbility[k] = "Non-Boss Damage";
+                }
+                if (bonusToGet == 41)
+                {
+                    _root.save.inventoryAbility[k] = "Damage";
+                }
+                if (bonusToGet == 42)
+                {
+                    _root.save.inventoryAbility[k] = "Extra Combo";
+                }
+                if (bonusToGet == 43)
+                {
+                    _root.save.inventoryAbility[k] = "Magic Reflect";
+                }
+                if (bonusToGet == 44)
+                {
+                    _root.save.inventoryAbility[k] = "Nullify Death Penalty";
+                }
+                if (bonusToGet == 45)
+                {
+                    _root.save.inventoryAbility[k] = "Buff Effect";
+                }
+                if (bonusToGet == 46)
+                {
+                    _root.save.inventoryAbility[k] = "All Elements";
+                }
+                if (bonusToGet == 47)
+                {
+                    _root.save.inventoryAbility[k] = "Max Spirit";
+                }
+                if (_root.save.arenaAbilityPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference1;
+                }
+                else if (_root.save.arenaAbilityPreference2 != "None" && Math.random() < 0.1)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference2;
+                }
+                else if (_root.save.arenaAbilityPreference3 != "None" && Math.random() < 0.05)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference3;
+                }
+            }
+            if (_root.save.inventoryMoreBonus[k] == "Random")
+            {
+                var bonusToGet = random(11) + 1;
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Equipment Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Equipment Defense";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Attack Power";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Defense Power";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryMoreBonus[k] = "MaxHP";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryMoreBonus[k] = "MaxMP";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Accuracy";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Evasion";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Boss Kill";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Rare Kill";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Epic Kill";
+                }
+                if (_root.save.arenaMoreBonusPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference1;
+                }
+                else if (_root.save.arenaMoreBonusPreference2 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference2;
+                }
+            }
+            if (k <= 30)
+            {
+                _root.dispNews(49, "Weapon GET! [" + name + "]");
+            }
+            else
+            {
+                _root.dispNews(55, "Weapon inventory full! [" + name + "] moved to Recently Deleted tab.");
+            }
+        }
+        else
+        {
+            _root.dispNews(55, "Weapon inventory full! [" + name + "] deleted :(");
+        }
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:getArenaArmor()
+    public void getArenaArmor(double reqRank, string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double level, double exp, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, string name, string desc, bool guard = false)
+    {
+        var k = 9999;
+        var i = 101;
+        while (i <= 130)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                if (k > i)
+                {
+                    k = i;
+                }
+            }
+            i++;
+        }
+        if (k == 9999)
+        {
+            k = (int)_root.save.arenaDeletedSlot;
+            _root.save.arenaDeletedSlot += 1;
+            if (_root.save.arenaDeletedSlot > 830)
+            {
+                _root.save.arenaDeletedSlot = 801;
+            }
+            _root.deleteArenaItem(k);
+        }
+        if (name != null)
+        {
+            if (noBonus == null)
+            {
+                noBonus = false;
+            }
+            if (noLife == null)
+            {
+                noLife = true;
+            }
+            if (noFuse == null)
+            {
+                noFuse = false;
+            }
+            if (noUnique == null)
+            {
+                noUnique = false;
+            }
+            if (spirit == null)
+            {
+                spirit = false;
+            }
+            if (guard == null)
+            {
+                guard = false;
+            }
+            if (isNaN(level))
+            {
+                level = 1;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [level] not defined.", 16711680, 9002);
+            }
+            if (isNaN(exp))
+            {
+                exp = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [exp] not defined.", 16711680, 9002);
+            }
+            if (isNaN(crit))
+            {
+                crit = 10;
+                dexterity = 0;
+                health = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [crit] not defined.", 16711680, 9002);
+            }
+            if (isNaN(unob))
+            {
+                unob = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [unob] not defined.", 16711680, 9002);
+            }
+            var itemSet = _root.checkArenaSet(name);
+            if (moreBonus == null)
+            {
+                moreBonus = "";
+                _root.breakNews("[Error]", "ERROR: " + name + " / [moreBonus] not defined.", 16711680, 9002);
+            }
+            if (desc == null)
+            {
+                desc = "";
+                _root.breakNews("[Error]", "ERROR: " + name + " / [desc] not defined.", 16711680, 9002);
+            }
+            _root.save.inventoryExist[k] = 1;
+            _root.save.inventoryName[k] = name;
+            _root.save.inventoryReqRank[k] = reqRank;
+            _root.save.inventoryType[k] = "Armor";
+            _root.save.inventorySubtype[k] = subtype;
+            _root.save.inventoryFrame[k] = frame;
+            _root.save.inventoryRange[k] = false;
+            _root.save.inventoryAttack[k] = attack;
+            _root.save.inventorySpeed[k] = speed;
+            _root.save.inventoryDefense[k] = defense;
+            _root.save.inventoryBonus[k] = bonus;
+            _root.save.inventoryAbility[k] = ability;
+            _root.save.inventoryMoreBonus[k] = moreBonus;
+            _root.save.inventoryLevel[k] = level;
+            _root.save.inventoryMaxLevel[k] = maxLevel;
+            _root.save.inventoryExp[k] = exp;
+            _root.save.inventoryExpTNL[k] = expTNL;
+            _root.save.inventoryEnhance[k] = enhance;
+            _root.save.inventoryBonusPow[k] = bonusPow;
+            _root.save.inventorySell[k] = sell;
+            _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+            if (noLife == false)
+            {
+                _root.save.inventoryExpiry[k] = Infinity;
+            }
+            _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+            _root.save.inventoryDesc[k] = desc;
+            _root.save.inventoryCrit[k] = crit;
+            _root.save.inventoryDexterity[k] = dexterity;
+            _root.save.inventoryHealth[k] = health;
+            _root.save.inventoryNoBonus[k] = noBonus;
+            _root.save.inventoryNoFuse[k] = noFuse;
+            _root.save.inventoryNoUnique[k] = noUnique;
+            _root.save.inventorySpirit[k] = spirit;
+            _root.save.inventoryGuard[k] = guard;
+            _root.save.inventoryUnob[k] = unob;
+            _root.save.inventorySet[k] = itemSet;
+            if (_root.save.inventoryBonus[k] == "Random")
+            {
+                var bonusToGet = random(15) + 1;
+                if (Math.random() < 0.2)
+                {
+                    bonusToGet = random(22) + 1;
+                }
+                if (bonusToGet == 1 || bonusToGet == 2)
+                {
+                    _root.save.inventoryBonus[k] = "Reward";
+                }
+                if (bonusToGet == 3 || bonusToGet == 4)
+                {
+                    _root.save.inventoryBonus[k] = "EXP";
+                }
+                if (bonusToGet == 5 || bonusToGet == 6)
+                {
+                    _root.save.inventoryBonus[k] = "Coin";
+                }
+                if (bonusToGet == 7 || bonusToGet == 8)
+                {
+                    _root.save.inventoryBonus[k] = "Pixel";
+                }
+                if (bonusToGet == 9 || bonusToGet == 10)
+                {
+                    _root.save.inventoryBonus[k] = "Drop Rate";
+                }
+                if (bonusToGet == 11 || bonusToGet == 12)
+                {
+                    _root.save.inventoryBonus[k] = "Spawn Rate";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryBonus[k] = "Fire Element";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryBonus[k] = "Ice Element";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryBonus[k] = "Wind Element";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryBonus[k] = "Earth Element";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryBonus[k] = "Thunder Element";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryBonus[k] = "Water Element";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryBonus[k] = "Light Element";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryBonus[k] = "Dark Element";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryBonus[k] = "Rare Monster Rate";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryBonus[k] = "Epic Monster Rate";
+                }
+                if (_root.save.arenaBonusPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference1;
+                }
+                else if (_root.save.arenaBonusPreference2 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference2;
+                }
+            }
+            if (_root.save.inventoryAbility[k] == "Random")
+            {
+                var bonusToGet = random(25) + 1;
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryAbility[k] = "Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryAbility[k] = "Attack Speed";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryAbility[k] = "Ignore Defense";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryAbility[k] = "Mastery";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Chance";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Damage";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryAbility[k] = "Defense";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryAbility[k] = "Damage Taken";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryAbility[k] = "Reflect";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryAbility[k] = "Accuracy";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryAbility[k] = "Hit Chance";
+                }
+                if (bonusToGet == 12)
+                {
+                    _root.save.inventoryAbility[k] = "Evasion";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryAbility[k] = "Dodge Chance";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Chance";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Chance";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Chance";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryAbility[k] = "Stun Chance";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryAbility[k] = "HP";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryAbility[k] = "MP";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryAbility[k] = "HP Regen";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryAbility[k] = "MP Regen";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Depletion";
+                }
+                if (bonusToGet == 23)
+                {
+                    _root.save.inventoryAbility[k] = "Drain";
+                }
+                if (bonusToGet == 24)
+                {
+                    _root.save.inventoryAbility[k] = "Mana Eater";
+                }
+                if (bonusToGet == 25)
+                {
+                    _root.save.inventoryAbility[k] = "Autosteal";
+                }
+                if (_root.save.arenaAbilityPreference2 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference2;
+                }
+                else if (_root.save.arenaAbilityPreference3 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference3;
+                }
+            }
+            if (_root.save.inventoryMoreBonus[k] == "Random")
+            {
+                var bonusToGet = random(11) + 1;
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Equipment Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Equipment Defense";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Attack Power";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Defense Power";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryMoreBonus[k] = "MaxHP";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryMoreBonus[k] = "MaxMP";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Accuracy";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Evasion";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Boss Kill";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Rare Kill";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Epic Kill";
+                }
+                if (_root.save.arenaMoreBonusPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference1;
+                }
+                else if (_root.save.arenaMoreBonusPreference2 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference2;
+                }
+            }
+            if (k <= 130)
+            {
+                _root.dispNews(50, "Armor GET! [" + name + "]");
+            }
+            else
+            {
+                _root.dispNews(56, "Armor inventory full! [" + name + "] moved to Recently Deleted tab.");
+            }
+        }
+        else
+        {
+            _root.dispNews(56, "Armor inventory full! [" + name + "] deleted :(");
+        }
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:getArenaOutfit()
+    public void getArenaOutfit(double reqRank, string subtype, double frame, double bonusPow, double sell, string name, string desc)
+    {
+        var k = 9999;
+        var i = 601;
+        while (i <= 630)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                if (k > i)
+                {
+                    k = i;
+                }
+            }
+            i++;
+        }
+        if (k == 9999)
+        {
+            k = (int)_root.save.arenaDeletedSlot;
+            _root.save.arenaDeletedSlot += 1;
+            if (_root.save.arenaDeletedSlot > 830)
+            {
+                _root.save.arenaDeletedSlot = 801;
+            }
+            _root.deleteArenaItem(k);
+        }
+        if (name != null)
+        {
+            _root.save.inventoryExist[k] = 1;
+            _root.save.inventoryName[k] = name;
+            _root.save.inventoryReqRank[k] = reqRank;
+            _root.save.inventoryType[k] = "Outfit";
+            _root.save.inventorySubtype[k] = subtype;
+            _root.save.inventoryFrame[k] = frame;
+            _root.save.inventoryEnhance[k] = 0;
+            _root.save.inventoryBonusPow[k] = bonusPow;
+            _root.save.inventorySell[k] = sell;
+            _root.save.inventoryExpiry[k] = Infinity;
+            _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+            _root.save.inventoryDesc[k] = desc;
+            if (k <= 630)
+            {
+                _root.dispNews(54, "Outfit GET! [" + name + "]");
+            }
+            else
+            {
+                _root.dispNews(60, "Outfit inventory full! [" + name + "] moved to Recently Deleted tab.");
+            }
+        }
+        else
+        {
+            _root.dispNews(60, "Outfit inventory full! [" + name + "] deleted :(");
+        }
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:getArenaAccessory()
+    public void getArenaAccessory(double reqRank, string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double level, double exp, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, string name, string desc, bool guard = false)
+    {
+        var k = 9999;
+        var i = 501;
+        while (i <= 530)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                if (k > i)
+                {
+                    k = i;
+                }
+            }
+            i++;
+        }
+        if (k == 9999)
+        {
+            k = (int)_root.save.arenaDeletedSlot;
+            _root.save.arenaDeletedSlot += 1;
+            if (_root.save.arenaDeletedSlot > 830)
+            {
+                _root.save.arenaDeletedSlot = 801;
+            }
+            _root.deleteArenaItem(k);
+        }
+        if (name != null)
+        {
+            if (noBonus == null)
+            {
+                noBonus = false;
+            }
+            if (noLife == null)
+            {
+                noLife = true;
+            }
+            if (noFuse == null)
+            {
+                noFuse = false;
+            }
+            if (noUnique == null)
+            {
+                noUnique = false;
+            }
+            if (spirit == null)
+            {
+                spirit = false;
+            }
+            if (guard == null)
+            {
+                guard = false;
+            }
+            if (isNaN(level))
+            {
+                level = 1;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [level] not defined.", 16711680, 9002);
+            }
+            if (isNaN(exp))
+            {
+                exp = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [exp] not defined.", 16711680, 9002);
+            }
+            if (isNaN(crit))
+            {
+                crit = 10;
+                dexterity = 0;
+                health = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [crit] not defined.", 16711680, 9002);
+            }
+            if (isNaN(unob))
+            {
+                unob = 0;
+                _root.breakNews("[Error]", "ERROR: " + name + " / [unob] not defined.", 16711680, 9002);
+            }
+            var itemSet = _root.checkArenaSet(name);
+            if (desc == "This medal\'s name depends on your Anti-Idle title when you craft it. Don\'t ask how that works.")
+            {
+                itemSet = 0;
+            }
+            if (desc == "Thank you for your donation and your continued support!")
+            {
+                itemSet = 0;
+            }
+            if (moreBonus == null)
+            {
+                moreBonus = "";
+                _root.breakNews("[Error]", "ERROR: " + name + " / [moreBonus] not defined.", 16711680, 9002);
+            }
+            if (desc == null)
+            {
+                desc = "";
+                _root.breakNews("[Error]", "ERROR: " + name + " / [desc] not defined.", 16711680, 9002);
+            }
+            _root.save.inventoryExist[k] = 1;
+            _root.save.inventoryName[k] = name;
+            _root.save.inventoryReqRank[k] = reqRank;
+            _root.save.inventoryType[k] = "Accessory";
+            _root.save.inventorySubtype[k] = subtype;
+            _root.save.inventoryFrame[k] = frame;
+            _root.save.inventoryRange[k] = false;
+            _root.save.inventoryAttack[k] = attack;
+            _root.save.inventorySpeed[k] = speed;
+            _root.save.inventoryDefense[k] = defense;
+            _root.save.inventoryBonus[k] = bonus;
+            _root.save.inventoryAbility[k] = ability;
+            if (moreBonus == null)
+            {
+                moreBonus = "";
+            }
+            _root.save.inventoryMoreBonus[k] = moreBonus;
+            _root.save.inventoryLevel[k] = level;
+            _root.save.inventoryMaxLevel[k] = maxLevel;
+            _root.save.inventoryExp[k] = exp;
+            if (isNaN(level))
+            {
+                _root.save.inventoryLevel[k] = 1;
+            }
+            if (isNaN(exp))
+            {
+                _root.save.inventoryExp[k] = 0;
+            }
+            _root.save.inventoryExpTNL[k] = expTNL;
+            _root.save.inventoryEnhance[k] = enhance;
+            _root.save.inventoryBonusPow[k] = bonusPow;
+            _root.save.inventorySell[k] = sell;
+            _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+            if (noLife == false)
+            {
+                _root.save.inventoryExpiry[k] = Infinity;
+            }
+            _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+            _root.save.inventoryDesc[k] = desc;
+            _root.save.inventoryCrit[k] = crit;
+            _root.save.inventoryDexterity[k] = dexterity;
+            _root.save.inventoryHealth[k] = health;
+            _root.save.inventoryNoBonus[k] = noBonus;
+            _root.save.inventoryNoFuse[k] = false;
+            _root.save.inventoryNoUnique[k] = noUnique;
+            _root.save.inventorySpirit[k] = spirit;
+            _root.save.inventoryGuard[k] = guard;
+            _root.save.inventoryUnob[k] = unob;
+            _root.save.inventorySet[k] = itemSet;
+            if (_root.save.inventoryBonus[k] == "Random")
+            {
+                var bonusToGet = random(22) + 1;
+                if (bonusToGet == 1 || bonusToGet == 2)
+                {
+                    _root.save.inventoryBonus[k] = "Reward";
+                }
+                if (bonusToGet == 3 || bonusToGet == 4)
+                {
+                    _root.save.inventoryBonus[k] = "EXP";
+                }
+                if (bonusToGet == 5 || bonusToGet == 6)
+                {
+                    _root.save.inventoryBonus[k] = "Coin";
+                }
+                if (bonusToGet == 7 || bonusToGet == 8)
+                {
+                    _root.save.inventoryBonus[k] = "Pixel";
+                }
+                if (bonusToGet == 9 || bonusToGet == 10)
+                {
+                    _root.save.inventoryBonus[k] = "Drop Rate";
+                }
+                if (bonusToGet == 11 || bonusToGet == 12)
+                {
+                    _root.save.inventoryBonus[k] = "Spawn Rate";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryBonus[k] = "Fire Element";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryBonus[k] = "Ice Element";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryBonus[k] = "Wind Element";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryBonus[k] = "Earth Element";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryBonus[k] = "Thunder Element";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryBonus[k] = "Water Element";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryBonus[k] = "Light Element";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryBonus[k] = "Dark Element";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryBonus[k] = "Rare Monster Rate";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryBonus[k] = "Epic Monster Rate";
+                }
+                if (_root.save.arenaBonusPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference1;
+                }
+                else if (_root.save.arenaBonusPreference2 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference2;
+                }
+            }
+            if (_root.save.inventoryAbility[k] == "Random")
+            {
+                var bonusToGet = random(25) + 1;
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryAbility[k] = "Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryAbility[k] = "Attack Speed";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryAbility[k] = "Ignore Defense";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryAbility[k] = "Mastery";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Chance";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Damage";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryAbility[k] = "Defense";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryAbility[k] = "Damage Taken";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryAbility[k] = "Reflect";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryAbility[k] = "Accuracy";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryAbility[k] = "Hit Chance";
+                }
+                if (bonusToGet == 12)
+                {
+                    _root.save.inventoryAbility[k] = "Evasion";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryAbility[k] = "Dodge Chance";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Chance";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Chance";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Chance";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryAbility[k] = "Stun Chance";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryAbility[k] = "HP";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryAbility[k] = "MP";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryAbility[k] = "HP Regen";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryAbility[k] = "MP Regen";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Depletion";
+                }
+                if (bonusToGet == 23)
+                {
+                    _root.save.inventoryAbility[k] = "Drain";
+                }
+                if (bonusToGet == 24)
+                {
+                    _root.save.inventoryAbility[k] = "Mana Eater";
+                }
+                if (bonusToGet == 25)
+                {
+                    _root.save.inventoryAbility[k] = "Autosteal";
+                }
+                if (_root.save.arenaAbilityPreference2 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference2;
+                }
+                else if (_root.save.arenaAbilityPreference3 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference3;
+                }
+            }
+            if (_root.save.inventoryMoreBonus[k] == "Random")
+            {
+                var bonusToGet = random(11) + 1;
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Equipment Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Equipment Defense";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Attack Power";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Defense Power";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryMoreBonus[k] = "MaxHP";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryMoreBonus[k] = "MaxMP";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Accuracy";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Evasion";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Boss Kill";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Rare Kill";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Epic Kill";
+                }
+                if (_root.save.arenaMoreBonusPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference1;
+                }
+                else if (_root.save.arenaMoreBonusPreference2 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference2;
+                }
+            }
+            if (k <= 530)
+            {
+                _root.dispNews(51, "Accessory GET! [" + name + "]");
+            }
+            else
+            {
+                _root.dispNews(57, "Accessory inventory full! [" + name + "] moved to Recently Deleted tab.");
+            }
+        }
+        else
+        {
+            _root.dispNews(57, "Accessory inventory full! [" + name + "] deleted :(");
+        }
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:getArenaEnhancer()
+    public void getArenaEnhancer(string subtype, double frame, double power, double curse, double success, string bonus, string ability, string moreBonus, double enhance, double bonusPow, double sell, double expiry, string name, string desc, bool guard = false)
+    {
+        var k = 9999;
+        var i = 201;
+        while (i <= 230)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                if (k > i)
+                {
+                    k = i;
+                }
+            }
+            i++;
+        }
+        if (k == 9999)
+        {
+            k = (int)_root.save.arenaDeletedSlot;
+            _root.save.arenaDeletedSlot += 1;
+            if (_root.save.arenaDeletedSlot > 830)
+            {
+                _root.save.arenaDeletedSlot = 801;
+            }
+            _root.deleteArenaItem(k);
+        }
+        if (name != null)
+        {
+            if (guard == null)
+            {
+                guard = false;
+            }
+            if (moreBonus == null)
+            {
+                moreBonus = "";
+                _root.breakNews("[Error]", "ERROR: " + name + " / [moreBonus] not defined.", 16711680, 9002);
+            }
+            if (desc == null)
+            {
+                desc = "";
+                _root.breakNews("[Error]", "ERROR: " + name + " / [desc] not defined.", 16711680, 9002);
+            }
+            _root.save.inventoryExist[k] = 1;
+            _root.save.inventoryName[k] = name;
+            _root.save.inventoryReqRank[k] = 1;
+            _root.save.inventoryType[k] = "Enhancer";
+            _root.save.inventorySubtype[k] = subtype;
+            _root.save.inventoryFrame[k] = frame;
+            _root.save.inventoryRange[k] = false;
+            _root.save.inventoryAttack[k] = power;
+            _root.save.inventoryBonus[k] = bonus;
+            _root.save.inventoryAbility[k] = ability;
+            _root.save.inventoryMoreBonus[k] = moreBonus;
+            _root.save.inventoryEnhance[k] = enhance;
+            _root.save.inventoryBonusPow[k] = bonusPow;
+            _root.save.inventorySell[k] = sell;
+            _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+            _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+            _root.save.inventoryNoBonus[k] = false;
+            _root.save.inventoryNoRecycle[k] = false;
+            _root.save.inventoryNoFuse[k] = false;
+            _root.save.inventoryNoUnique[k] = false;
+            _root.save.inventorySpirit[k] = false;
+            _root.save.inventoryGuard[k] = guard;
+            _root.save.inventoryDesc[k] = desc;
+            if (_root.save.inventoryBonus[k] == "Random")
+            {
+                var bonusToGet = random(22) + 1;
+                if (bonusToGet == 1 || bonusToGet == 2)
+                {
+                    _root.save.inventoryBonus[k] = "Reward";
+                }
+                if (bonusToGet == 3 || bonusToGet == 4)
+                {
+                    _root.save.inventoryBonus[k] = "EXP";
+                }
+                if (bonusToGet == 5 || bonusToGet == 6)
+                {
+                    _root.save.inventoryBonus[k] = "Coin";
+                }
+                if (bonusToGet == 7 || bonusToGet == 8)
+                {
+                    _root.save.inventoryBonus[k] = "Pixel";
+                }
+                if (bonusToGet == 9 || bonusToGet == 10)
+                {
+                    _root.save.inventoryBonus[k] = "Drop Rate";
+                }
+                if (bonusToGet == 11 || bonusToGet == 12)
+                {
+                    _root.save.inventoryBonus[k] = "Spawn Rate";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryBonus[k] = "Fire Element";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryBonus[k] = "Ice Element";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryBonus[k] = "Wind Element";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryBonus[k] = "Earth Element";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryBonus[k] = "Thunder Element";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryBonus[k] = "Water Element";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryBonus[k] = "Light Element";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryBonus[k] = "Dark Element";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryBonus[k] = "Rare Monster Rate";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryBonus[k] = "Epic Monster Rate";
+                }
+                if (_root.save.arenaBonusPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference1;
+                }
+                else if (_root.save.arenaBonusPreference2 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryBonus[k] = _root.save.arenaBonusPreference2;
+                }
+            }
+            if (_root.save.inventoryAbility[k] == "Random")
+            {
+                var bonusToGet = random(25) + 1;
+                if (subtype == "Weapon Bonus Adder")
+                {
+                    bonusToGet = random(47) + 1;
+                }
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryAbility[k] = "Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryAbility[k] = "Attack Speed";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryAbility[k] = "Ignore Defense";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryAbility[k] = "Mastery";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Chance";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Damage";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryAbility[k] = "Defense";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryAbility[k] = "Damage Taken";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryAbility[k] = "Reflect";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryAbility[k] = "Accuracy";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryAbility[k] = "Hit Chance";
+                }
+                if (bonusToGet == 12)
+                {
+                    _root.save.inventoryAbility[k] = "Evasion";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryAbility[k] = "Dodge Chance";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Chance";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Chance";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Chance";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryAbility[k] = "Stun Chance";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryAbility[k] = "HP";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryAbility[k] = "MP";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryAbility[k] = "HP Regen";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryAbility[k] = "MP Regen";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Depletion";
+                }
+                if (bonusToGet == 23)
+                {
+                    _root.save.inventoryAbility[k] = "Drain";
+                }
+                if (bonusToGet == 24)
+                {
+                    _root.save.inventoryAbility[k] = "Mana Eater";
+                }
+                if (bonusToGet == 25)
+                {
+                    _root.save.inventoryAbility[k] = "Autosteal";
+                }
+                if (bonusToGet == 26)
+                {
+                    _root.save.inventoryAbility[k] = "Double Hit Chance";
+                }
+                if (bonusToGet == 27)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Attack";
+                }
+                if (bonusToGet == 28)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Speed";
+                }
+                if (bonusToGet == 29)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Damage";
+                }
+                if (bonusToGet == 30)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Duration";
+                }
+                if (bonusToGet == 31)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Effect";
+                }
+                if (bonusToGet == 32)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Duration";
+                }
+                if (bonusToGet == 33)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Effect";
+                }
+                if (bonusToGet == 34)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Duration";
+                }
+                if (bonusToGet == 35)
+                {
+                    _root.save.inventoryAbility[k] = "Potion Efficiency";
+                }
+                if (bonusToGet == 36)
+                {
+                    _root.save.inventoryAbility[k] = "Boss Damage";
+                }
+                if (bonusToGet == 37)
+                {
+                    _root.save.inventoryAbility[k] = "Magic Resist";
+                }
+                if (bonusToGet == 38)
+                {
+                    _root.save.inventoryAbility[k] = "Instant Kill";
+                }
+                if (bonusToGet == 39)
+                {
+                    _root.save.inventoryAbility[k] = "Negate Effect";
+                }
+                if (bonusToGet == 40)
+                {
+                    _root.save.inventoryAbility[k] = "Non-Boss Damage";
+                }
+                if (bonusToGet == 41)
+                {
+                    _root.save.inventoryAbility[k] = "Damage";
+                }
+                if (bonusToGet == 42)
+                {
+                    _root.save.inventoryAbility[k] = "Extra Combo";
+                }
+                if (bonusToGet == 43)
+                {
+                    _root.save.inventoryAbility[k] = "Magic Reflect";
+                }
+                if (bonusToGet == 44)
+                {
+                    _root.save.inventoryAbility[k] = "Nullify Death Penalty";
+                }
+                if (bonusToGet == 45)
+                {
+                    _root.save.inventoryAbility[k] = "Buff Effect";
+                }
+                if (bonusToGet == 46)
+                {
+                    _root.save.inventoryAbility[k] = "All Elements";
+                }
+                if (bonusToGet == 47)
+                {
+                    _root.save.inventoryAbility[k] = "Max Spirit";
+                }
+                if (subtype == "Weapon Bonus Adder")
+                {
+                    if (_root.save.arenaAbilityPreference1 != "None" && Math.random() < 0.2)
+                    {
+                        _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference1;
+                    }
+                    else if (_root.save.arenaAbilityPreference2 != "None" && Math.random() < 0.1)
+                    {
+                        _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference2;
+                    }
+                    else if (_root.save.arenaAbilityPreference3 != "None" && Math.random() < 0.05)
+                    {
+                        _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference3;
+                    }
+                }
+                else if (_root.save.arenaAbilityPreference2 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference2;
+                }
+                else if (_root.save.arenaAbilityPreference3 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryAbility[k] = _root.save.arenaAbilityPreference3;
+                }
+            }
+            if (_root.save.inventoryMoreBonus[k] == "Random")
+            {
+                var bonusToGet = random(11) + 1;
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Equipment Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Equipment Defense";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Attack Power";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Defense Power";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryMoreBonus[k] = "MaxHP";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryMoreBonus[k] = "MaxMP";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Accuracy";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryMoreBonus[k] = "Evasion";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Boss Kill";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Rare Kill";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryMoreBonus[k] = "EXP / Epic Kill";
+                }
+                if (_root.save.arenaMoreBonusPreference1 != "None" && Math.random() < 0.2)
+                {
+                    _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference1;
+                }
+                else if (_root.save.arenaMoreBonusPreference2 != "None" && Math.random() < 0.07)
+                {
+                    _root.save.inventoryMoreBonus[k] = _root.save.arenaMoreBonusPreference2;
+                }
+            }
+            if (k <= 230)
+            {
+                _root.dispNews(52, "Enhancer GET! [" + name + "]");
+            }
+            else
+            {
+                _root.dispNews(58, "Enhancer inventory full! [" + name + "] moved to Recently Deleted tab.");
+            }
+        }
+        else
+        {
+            _root.dispNews(58, "Enhancer inventory full! [" + name + "] deleted :(");
+        }
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:getArenaPotion()
+    public void getArenaPotion(string subtype, double frame, double attack, double defense, double enhance, double bonusPow, double sell, double expiry, string name, string desc)
+    {
+        var k = 9999;
+        var i = 401;
+        while (i <= 430)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                if (k > i)
+                {
+                    k = i;
+                }
+            }
+            i++;
+        }
+        if (k == 9999)
+        {
+            k = (int)_root.save.arenaDeletedSlot;
+            _root.save.arenaDeletedSlot += 1;
+            if (_root.save.arenaDeletedSlot > 830)
+            {
+                _root.save.arenaDeletedSlot = 801;
+            }
+            _root.deleteArenaItem(k);
+        }
+        if (name != undefined)
+        {
+            _root.save.inventoryExist[k] = 1;
+            _root.save.inventoryName[k] = name;
+            _root.save.inventoryReqRank[k] = 1;
+            _root.save.inventoryType[k] = "Potion";
+            _root.save.inventorySubtype[k] = subtype;
+            _root.save.inventoryFrame[k] = frame;
+            _root.save.inventoryAttack[k] = attack;
+            _root.save.inventoryDefense[k] = defense;
+            _root.save.inventoryEnhance[k] = enhance;
+            _root.save.inventoryBonusPow[k] = bonusPow;
+            _root.save.inventorySell[k] = sell;
+            _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+            _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+            _root.save.inventoryDesc[k] = desc;
+            if (k <= 430)
+            {
+                _root.dispNews(53, "Potion GET! [" + name + "]");
+            }
+            else
+            {
+                _root.dispNews(59, "Potion inventory full! [" + name + "] moved to Recently Deleted tab.");
+            }
+        }
+        else
+        {
+            _root.dispNews(59, "Potion inventory full! [" + name + "] deleted :(");
+        }
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:getArenaChip()
+    public void getArenaChip(string subtype, double frame, double attack, double defense, double enhance, double bonusPow, double sell, double expiry, string name, string desc)
+    {
+        var k = 9999;
+        var i = 701;
+        while (i <= 730)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                if (k > i)
+                {
+                    k = i;
+                }
+            }
+            i++;
+        }
+        if (k == 9999)
+        {
+            k = (int)_root.save.arenaDeletedSlot;
+            _root.save.arenaDeletedSlot += 1;
+            if (_root.save.arenaDeletedSlot > 830)
+            {
+                _root.save.arenaDeletedSlot = 801;
+            }
+            _root.deleteArenaItem(k);
+        }
+        if (name != undefined)
+        {
+            _root.save.inventoryExist[k] = 1;
+            _root.save.inventoryName[k] = name;
+            _root.save.inventoryReqRank[k] = 1;
+            _root.save.inventoryType[k] = "Chip";
+            _root.save.inventorySubtype[k] = subtype;
+            _root.save.inventoryFrame[k] = frame;
+            _root.save.inventoryAttack[k] = attack;
+            _root.save.inventoryDefense[k] = defense;
+            _root.save.inventoryEnhance[k] = enhance;
+            _root.save.inventoryBonusPow[k] = bonusPow;
+            _root.save.inventorySell[k] = sell;
+            _root.save.inventoryExpiry[k] = expiry + _root.systemtimenow;
+            _root.save.inventoryObtainTime[k] = _root.systemtimenow;
+            _root.save.inventoryDesc[k] = desc;
+            if (k <= 730)
+            {
+                _root.dispNews(170, "Chip GET! [" + name + "]");
+            }
+            else
+            {
+                _root.dispNews(171, "Chip inventory full! [" + name + "] moved to Recently Deleted tab.");
+            }
+        }
+        else
+        {
+            _root.dispNews(171, "Chip inventory full! [" + name + "] deleted :(");
+        }
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaWeapon()
+    public void addArenaWeapon(string name, double reqRank, string subtype, double frame, bool range, double attack, double speed, double defense, string bonus, string ability, double maxLevel, double expTNL, double enhance, double bonusPow, double sell, double expiry, bool noBonus, bool noLife, bool noRecycle, bool spirit, double crit, double dexterity, double health, string desc, bool noFuse, double level, double exp, bool noUnique, double unob, string moreBonus)
+    {
+        getArenaWeapon(reqRank, subtype, frame, range, attack, speed, defense, crit, dexterity, health, maxLevel, expTNL, level, exp, enhance, bonusPow, bonus, ability, moreBonus, sell, expiry, noBonus, noLife, noFuse, noUnique, spirit, unob, name, desc);
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaArmor()
+    public void addArenaArmor(string name, double reqRank, string subtype, double frame, double attack, double speed, double defense, string bonus, string ability, double maxLevel, double expTNL, double enhance, double bonusPow, double sell, double expiry, bool noBonus, bool noLife, bool noRecycle, bool spirit, double crit, double dexterity, double health, string desc, bool noFuse, double level, double exp, bool noUnique, double unob, string moreBonus)
+    {
+        getArenaArmor(reqRank, subtype, frame, attack, speed, defense, crit, dexterity, health, maxLevel, expTNL, level, exp, enhance, bonusPow, bonus, ability, moreBonus, sell, expiry, noBonus, noLife, noFuse, noUnique, spirit, unob, name, desc);
+    }
+
+
+    // MATCH: frame_4/DoAction.as:addArenaAccessory()
+    public void addArenaAccessory(string name, double reqRank, string subtype, double frame, double attack, double speed, double defense, string bonus, string ability, double maxLevel, double expTNL, double enhance, double bonusPow, double sell, double expiry, bool noBonus, bool noLife, bool noRecycle, bool spirit, double crit, double dexterity, double health, string desc, bool noFuse, double level, double exp, bool noUnique, double unob)
+    {
+        string moreBonus = null;
+        getArenaAccessory(
+            reqRank, subtype, frame, attack, speed, defense, crit, dexterity, health, maxLevel, expTNL, level, exp, enhance, bonusPow, bonus, ability, moreBonus, sell, expiry, noBonus, noLife, noFuse, noUnique, spirit, unob, name, desc
+        );
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaEnhancer()
+    public void addArenaEnhancer(string name, string subtype, double frame, double power, double curse, double success, string bonus, string ability, double enhance, double bonusPow, double sell, double expiry, string desc, string moreBonus)
+    {
+        getArenaEnhancer(subtype, frame, power, curse, success, bonus, ability, moreBonus, enhance, bonusPow, sell, expiry, name, desc);
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaPotion()
+    public void addArenaPotion(string name, string subtype, double frame, double attack, double defense, double enhance, double bonusPow, double sell, double expiry, string desc)
+    {
+        getArenaPotion(subtype, frame, attack, defense, enhance, bonusPow, sell, expiry, name, desc);
+    }
+
+    // MATCH: frame_4/DoAction.as:swapArenaItem()
+    public void swapArenaItem(double item1, double item2)
+    {
+        var j = item1;
+        var k = item2;
+        _root.xSwapArenaItem(900, item1);
+        _root.xSwapArenaItem(item1, item2);
+        _root.xSwapArenaItem(item2, 900);
+        _root.deleteArenaItem(900);
+        _root.arenaSwap1 = 0;
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:xSwapArenaItem()
+    public void xSwapArenaItem(double xitem1, double xitem2)
+    {
+        var j = xitem2;
+        var k = xitem1;
+        _root.save.inventoryExist[k] = _root.save.inventoryExist[j];
+        _root.save.inventoryName[k] = _root.save.inventoryName[j];
+        _root.save.inventoryReqRank[k] = _root.save.inventoryReqRank[j];
+        _root.save.inventoryType[k] = _root.save.inventoryType[j];
+        _root.save.inventorySubtype[k] = _root.save.inventorySubtype[j];
+        _root.save.inventoryFrame[k] = _root.save.inventoryFrame[j];
+        _root.save.inventoryRange[k] = _root.save.inventoryRange[j];
+        _root.save.inventoryAttack[k] = _root.save.inventoryAttack[j];
+        _root.save.inventorySpeed[k] = _root.save.inventorySpeed[j];
+        _root.save.inventoryDefense[k] = _root.save.inventoryDefense[j];
+        _root.save.inventoryBonus[k] = _root.save.inventoryBonus[j];
+        _root.save.inventoryAbility[k] = _root.save.inventoryAbility[j];
+        _root.save.inventoryMoreBonus[k] = _root.save.inventoryMoreBonus[j];
+        _root.save.inventoryLevel[k] = _root.save.inventoryLevel[j];
+        _root.save.inventoryMaxLevel[k] = _root.save.inventoryMaxLevel[j];
+        _root.save.inventoryExp[k] = _root.save.inventoryExp[j];
+        _root.save.inventoryExpTNL[k] = _root.save.inventoryExpTNL[j];
+        _root.save.inventoryEnhance[k] = _root.save.inventoryEnhance[j];
+        _root.save.inventoryBonusPow[k] = _root.save.inventoryBonusPow[j];
+        _root.save.inventorySell[k] = _root.save.inventorySell[j];
+        _root.save.inventoryExpiry[k] = _root.save.inventoryExpiry[j];
+        _root.save.inventoryObtainTime[k] = _root.save.inventoryObtainTime[j];
+        _root.save.inventoryNoBonus[k] = _root.save.inventoryNoBonus[j];
+        _root.save.inventoryNoRecycle[k] = _root.save.inventoryNoRecycle[j];
+        _root.save.inventoryNoFuse[k] = _root.save.inventoryNoFuse[j];
+        _root.save.inventoryNoUnique[k] = _root.save.inventoryNoUnique[j];
+        _root.save.inventoryUnob[k] = _root.save.inventoryUnob[j];
+        _root.save.inventorySpirit[k] = _root.save.inventorySpirit[j];
+        _root.save.inventoryCrit[k] = _root.save.inventoryCrit[j];
+        _root.save.inventoryDexterity[k] = _root.save.inventoryDexterity[j];
+        _root.save.inventoryHealth[k] = _root.save.inventoryHealth[j];
+        _root.save.inventoryDesc[k] = _root.save.inventoryDesc[j];
+        _root.save.inventorySet[k] = _root.save.inventorySet[j];
+        _root.save.inventoryGuard[k] = _root.save.inventoryGuard[j];
+        checkFullInventory();
+    }
+
+
+    // MATCH: frame_4/DoAction.as:deleteArenaItem()
+    public void deleteArenaItem(double k)
+    {
+        _root.save.inventoryExist[k] = 0;
+        _root.save.inventoryName[k] = null;
+        _root.save.inventoryReqRank[k] = 0;
+        _root.save.inventoryType[k] = null;
+        _root.save.inventorySubtype[k] = null;
+        _root.save.inventoryFrame[k] = 0;
+        _root.save.inventoryRange[k] = false;
+        _root.save.inventoryAttack[k] = 0;
+        _root.save.inventorySpeed[k] = 0;
+        _root.save.inventoryDefense[k] = 0;
+        _root.save.inventoryBonus[k] = null;
+        _root.save.inventoryAbility[k] = null;
+        _root.save.inventoryMoreBonus[k] = null;
+        _root.save.inventoryLevel[k] = 0;
+        _root.save.inventoryMaxLevel[k] = 0;
+        _root.save.inventoryExp[k] = 0;
+        _root.save.inventoryExpTNL[k] = 0;
+        _root.save.inventoryEnhance[k] = 0;
+        _root.save.inventoryBonusPow[k] = 0;
+        _root.save.inventorySell[k] = 0;
+        _root.save.inventoryExpiry[k] = 0;
+        _root.save.inventoryObtainTime[k] = 0;
+        _root.save.inventoryNoBonus[k] = false;
+        _root.save.inventoryNoRecycle[k] = false;
+        _root.save.inventoryNoFuse[k] = false;
+        _root.save.inventoryNoUnique[k] = false;
+        _root.save.inventoryUnob[k] = 0;
+        _root.save.inventorySpirit[k] = false;
+        _root.save.inventoryCrit[k] = 0;
+        _root.save.inventoryDexterity[k] = 0;
+        _root.save.inventoryHealth[k] = 0;
+        _root.save.inventoryDesc[k] = null;
+        _root.save.inventorySet[k] = 0;
+        _root.save.inventoryGuard[k] = false;
+        checkFullInventory();
+    }
+
+    // MATCH: frame_4/DoAction.as:sellArenaItem()
+    public void sellArenaItem(double k)
+    {
+        _root.deleteArenaItem(_root.save.arenaDeletedSlot);
+        if (_root.save.inventorySell[k] > 0 && !isNaN(_root.save.inventorySell[k]) && _root.save.inventorySell[k] != Infinity)
+        {
+            _root.save.arenaPixel += _root.save.inventorySell[k];
+        }
+        _root.swapArenaItem(k, _root.save.arenaDeletedSlot);
+        _root.deleteArenaItem(k);
+        _root.save.arenaDeletedSlot += 1;
+        if (_root.save.arenaDeletedSlot > 830)
+        {
+            _root.save.arenaDeletedSlot = 801;
+        }
+    }
+
+    // MATCH: frame_4/DoAction.as:enhanceArenaItem()
+    public void enhanceArenaItem(double j, double k)
+    {
+        var canEnhance = false;
+        if (_root.save.inventoryEnhance[k] < 10 || _root.save.inventorySubtype[j] == "Weapon Bonus Adder" || _root.save.inventorySubtype[j] == "Armor Bonus Adder" || _root.save.inventorySubtype[j] == "Weapon Lifespan Extender" || _root.save.inventorySubtype[j] == "Armor Lifespan Extender" || _root.save.inventorySubtype[j] == "Weapon Recycler" || _root.save.inventorySubtype[j] == "Armor Recycler" || _root.save.inventorySubtype[j] == "Weapon Spirit Rock" || _root.save.inventorySubtype[j] == "Armor Spirit Rock" || _root.save.inventorySubtype[j] == "Accessory Spirit Rock" || _root.save.inventorySubtype[j] == "Weapon Unique Enhancer" || _root.save.inventorySubtype[j] == "Armor Unique Enhancer" || _root.save.inventorySubtype[j] == "Accessory Bonus Adder" || _root.save.inventorySubtype[j] == "Accessory Lifespan Extender" || _root.save.inventorySubtype[j] == "Accessory Growth Rock" || _root.save.inventorySubtype[j] == "Accessory Unique Enhancer" || _root.save.inventorySubtype[j] == "Mystery Enhancer Identifier" || _root
+        .save.inventorySubtype[j] == "Weapon Unobtainium Enhancer" || _root.save.inventorySubtype[j] == "Armor Unobtainium Enhancer" || _root.save.inventorySubtype[j] == "Accessory Unobtainium Enhancer" || _root.save.inventorySubtype[j] == "Weapon Protector" || _root.save.inventorySubtype[j] == "Armor Protector" || _root.save.inventorySubtype[j] == "Accessory Protector" || _root.save.inventorySubtype[j] == "Enhancer Protector" || _root.save.inventorySubtype[j] == "Weapon Finalizer" || _root.save.inventorySubtype[j] == "Armor Finalizer" || _root.save.inventorySubtype[j] == "Accessory Finalizer" || _root.save.inventorySubtype[j] == "Weapon Cleansing Rock" || _root.save.inventorySubtype[j] == "Armor Cleansing Rock" || _root.save.inventorySubtype[j] == "Weapon Tukkonium Enhancer" || _root.save.inventorySubtype[j] == "Armor Tukkonium Enhancer" || _root.save.inventorySubtype[j] == "Accessory Tukkonium Enhancer")
+        {
+            canEnhance = true;
+            if (j == k)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Weapon Attack Enhancer" && _root.save.inventoryAttack[k] < 1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Weapon Unique Enhancer" && _root.save.inventoryAttack[k] < 1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Weapon Unique Enhancer" && _root.save.inventoryAttack[k] >= 3000)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Armor Unique Enhancer" && _root.save.inventoryDefense[k] >= 1800)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Accessory Unique Enhancer" && _root.save.inventoryDefense[k] >= 1800)
+            {
+                canEnhance = false;
+            }
+            if ((_root.save.inventorySubtype[j] == "Weapon Unique Enhancer" || _root.save.inventorySubtype[j] == "Armor Unique Enhancer" || _root.save.inventorySubtype[j] == "Accessory Unique Enhancer") && _root.save.inventoryEnhance[k] < 10)
+            {
+                canEnhance = false;
+            }
+            if ((_root.save.inventorySubtype[j] == "Weapon Unique Enhancer" || _root.save.inventorySubtype[j] == "Armor Unique Enhancer" || _root.save.inventorySubtype[j] == "Accessory Unique Enhancer") && _root.save.inventoryLevel[k] < _root.save.inventoryMaxLevel[k])
+            {
+                canEnhance = false;
+            }
+            if ((_root.save.inventorySubtype[j] == "Weapon Unique Enhancer" || _root.save.inventorySubtype[j] == "Armor Unique Enhancer" || _root.save.inventorySubtype[j] == "Accessory Unique Enhancer") && _root.save.inventoryNoUnique[k] == true)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Weapon Speed Enhancer" && _root.save.inventorySpeed[k] < 3)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Weapon Growth Rock" && _root.save.inventoryAttack[k] < 1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Mystery Enhancer Identifier" && _root.save.inventorySubtype[k] != "Weapon Mystery Enhancer" && _root.save.inventorySubtype[k] != "Armor Mystery Enhancer")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Weapon Lifespan Extender" || _root.save.inventorySubtype[j] == "Armor Lifespan Extender" || _root.save.inventorySubtype[j] == "Accessory Lifespan Extender")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "GIGA LIFE ROCK" && (_root.save.inventoryName[k] == "GIGA PENDANT" || _root.save.inventoryName[k] == "GIGA EARRINGS") && _root.save.inventorySubtype[k] != "Medal")
+            {
+                canEnhance = true;
+            }
+            if (_root.save.inventoryName[j] == "GIGA LIFE ROCK EX" && (_root.save.inventoryName[k] == "GIGA PENDANT" || _root.save.inventoryName[k] == "GIGA EARRINGS") && _root.save.inventorySubtype[k] != "Medal")
+            {
+                canEnhance = true;
+            }
+            if (_root.save.inventoryName[j] == "GIGA ENHANCER" && _root.save.inventoryName[k] != "GIGA PENDANT" && _root.save.inventoryName[k] != "GIGA EARRINGS")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "GIGA ENHANCER" && _root.save.inventorySubtype[k] != "Pendant" && _root.save.inventorySubtype[k] != "Earring")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "GIGA ENHANCER EX" && _root.save.inventoryName[k] != "GIGA PENDANT" && _root.save.inventoryName[k] != "GIGA EARRINGS")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "GIGA ENHANCER EX" && _root.save.inventorySubtype[k] != "Pendant" && _root.save.inventorySubtype[k] != "Earring")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "TERA LIFE ROCK" && (_root.save.inventoryName[k] == "TERA PENDANT" || _root.save.inventoryName[k] == "TERA EARRINGS") && _root.save.inventorySubtype[k] != "Medal")
+            {
+                canEnhance = true;
+            }
+            if (_root.save.inventoryName[j] == "TERA LIFE ROCK EX" && (_root.save.inventoryName[k] == "TERA PENDANT" || _root.save.inventoryName[k] == "TERA EARRINGS") && _root.save.inventorySubtype[k] != "Medal")
+            {
+                canEnhance = true;
+            }
+            if (_root.save.inventoryName[j] == "TERA ENHANCER" && _root.save.inventoryName[k] != "TERA PENDANT" && _root.save.inventoryName[k] != "TERA EARRINGS")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "TERA ENHANCER" && _root.save.inventorySubtype[k] != "Pendant" && _root.save.inventorySubtype[k] != "Earring")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "TERA ENHANCER EX" && _root.save.inventoryName[k] != "TERA PENDANT" && _root.save.inventoryName[k] != "TERA EARRINGS")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "TERA ENHANCER EX" && _root.save.inventorySubtype[k] != "Pendant" && _root.save.inventorySubtype[k] != "Earring")
+            {
+                canEnhance = false;
+            }
+            if ((_root.save.inventorySubtype[j] == "Weapon Bonus Adder" || _root.save.inventorySubtype[j] == "Armor Bonus Adder" || _root.save.inventorySubtype[j] == "Accessory Bonus Adder") && _root.save.inventoryNoBonus[k] == true && _root.save.inventoryName[j].indexOf("[S]") == -1)
+            {
+                canEnhance = false;
+            }
+            if ((_root.save.inventorySubtype[j] == "Weapon Bonus Adder" || _root.save.inventorySubtype[j] == "Armor Bonus Adder" || _root.save.inventorySubtype[j] == "Accessory Bonus Adder") && _root.save.inventoryNoBonus[k] == true && _root.save.inventorySubtype[k] == "Trinket")
+            {
+                canEnhance = false;
+            }
+            if ((_root.save.inventorySubtype[j] == "Weapon Bonus Adder" || _root.save.inventorySubtype[j] == "Armor Bonus Adder" || _root.save.inventorySubtype[j] == "Accessory Bonus Adder") && _root.save.inventoryNoBonus[k] == true && _root.save.inventorySubtype[k] == "Medal")
+            {
+                canEnhance = false;
+            }
+            if ((_root.save.inventorySubtype[j] == "Weapon Spirit Rock" || _root.save.inventorySubtype[j] == "Armor Spirit Rock" || _root.save.inventorySubtype[j] == "Accessory Spirit Rock") && _root.save.inventoryName[j].indexOf("[S]") == -1)
+            {
+                if (_root.save.inventoryEnhance[k] < 10 || _root.save.inventoryEnhance[k] > 1000)
+                {
+                    canEnhance = false;
+                }
+            }
+            if ((_root.save.inventorySubtype[j] == "Weapon Spirit Rock" || _root.save.inventorySubtype[j] == "Armor Spirit Rock" || _root.save.inventorySubtype[j] == "Accessory Spirit Rock") && _root.save.inventoryName[k] == "Dark Ruler")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Fairy Weapon Enhancer" && _root.save.inventoryName[k].indexOf("Fairy") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Fairy Armor Enhancer" && _root.save.inventoryName[k].indexOf("Fairy") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Dominator Gem Enhancer" && (_root.save.inventoryName[k] != "Dominator Gem" || _root.save.inventorySubtype[k] != "Trinket"))
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Mega Triangle Gem Enhancer" && (_root.save.inventoryName[k] != "Mega Triangle Gem" || _root.save.inventorySubtype[k] != "Trinket"))
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Crystal Unique Enhancer MAX" && _root.save.inventoryName[k].indexOf("Crystal") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Alien Core" && _root.save.inventoryName[k].indexOf("Alien") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Alien Core" && isNaN(_root.save.inventoryName[k].indexOf("Alien")))
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Weapon Cleansing Rock" && _root.save.inventoryName[k].indexOf("(Cursed)") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Weapon Cleansing Rock" && isNaN(_root.save.inventoryName[k].indexOf("(Cursed)")))
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Armor Cleansing Rock" && _root.save.inventoryName[k].indexOf("(Cursed)") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Armor Cleansing Rock" && isNaN(_root.save.inventoryName[k].indexOf("(Cursed)")))
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Anti-Nerfer" && _root.save.inventoryName[k] != "Nerf Accepted!")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Awesome Enhancer" && (_root.save.inventoryName[k] != "Awesome Earrings" || _root.save.inventorySubtype[k] != "Earring"))
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] != "Humblebee Armor Upgrade" && _root.save.inventoryEnhance[k] == 8 && _root.save.inventoryMaxLevel[k] < 184 && _root.save.inventoryName[k].indexOf("Humblebee") != -1)
+            {
+                if (!(_root.save.inventorySubtype[j] == "Armor Bonus Adder" || _root.save.inventorySubtype[j] == "Armor Spirit Rock" || _root.save.inventorySubtype[j] == "Armor Unobtainium Enhancer" || _root.save.inventorySubtype[j] == "Armor Protector" || _root.save.inventorySubtype[j] == "Armor Finalizer"))
+                {
+                    canEnhance = false;
+                }
+            }
+            if (_root.save.inventoryName[j] != "Humblebee Armor Upgrade" && _root.save.inventoryEnhance[k] == 9 && _root.save.inventoryMaxLevel[k] < 284 && _root.save.inventoryName[k].indexOf("Humblebee") != -1)
+            {
+                if (!(_root.save.inventorySubtype[j] == "Armor Bonus Adder" || _root.save.inventorySubtype[j] == "Armor Spirit Rock" || _root.save.inventorySubtype[j] == "Armor Unobtainium Enhancer" || _root.save.inventorySubtype[j] == "Armor Protector" || _root.save.inventorySubtype[j] == "Armor Finalizer"))
+                {
+                    canEnhance = false;
+                }
+            }
+            if (_root.save.inventoryName[j] == "Humblebee Armor Upgrade")
+            {
+                if (_root.save.inventoryName[k].indexOf("Humblebee") == -1)
+                {
+                    canEnhance = false;
+                }
+                if (_root.save.inventoryMaxLevel[k] >= 284)
+                {
+                    canEnhance = false;
+                }
+            }
+            if (_root.save.inventoryName[j] == "Corrupted Bonus Rock" && _root.save.inventoryName[k].indexOf("Elm") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j] == "Corrupted Bonus Rock" && isNaN(_root.save.inventoryName[k].indexOf("Elm")))
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Weapon Unobtainium Enhancer" && _root.save.inventoryUnob[k] >= _root.save.inventoryAttack[j])
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Armor Unobtainium Enhancer" && _root.save.inventoryUnob[k] >= _root.save.inventoryAttack[j])
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Accessory Unobtainium Enhancer" && _root.save.inventoryUnob[k] >= _root.save.inventoryAttack[j])
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Weapon Finalizer" && _root.save.inventoryReqRank[k] > _root.save.inventoryAttack[j])
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Armor Finalizer" && _root.save.inventoryReqRank[k] > _root.save.inventoryAttack[j])
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Accessory Finalizer" && _root.save.inventoryReqRank[k] > _root.save.inventoryAttack[j])
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[j] == "Accessory Finalizer" && _root.save.inventorySubtype[k] == "Trinket")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventorySubtype[k] == "Secondary Weapon" && _root.save.inventorySubtype[j].indexOf("Protector") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[k] == "Eric\'s Shovel")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[k] == "Eric\'s Gun-Shovel")
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryLevel[k] == 9999 && _root.save.inventorySubtype[j].indexOf("Protector") == -1 && _root.save.inventoryName[j].indexOf("[S]") == -1 && _root.save.inventoryName[j].indexOf("Tukkonium") == -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryLevel[k] != 9999 && _root.save.inventoryName[j].indexOf("Tukkonium") != -1)
+            {
+                canEnhance = false;
+            }
+            if (_root.save.inventoryName[j].indexOf("Auto Buff") != -1 && (_root.save.inventoryName[k] != "Auto Buff Gem" || _root.save.inventorySubtype[k] != "Trinket"))
+            {
+                canEnhance = false;
+            }
+        }
+        canEnhance = false;
+        if (_root.save.inventoryName[j].indexOf("Auto Buff") != -1 && _root.save.inventoryName[k] == "Auto Buff Gem" && _root.save.inventorySubtype[k] == "Trinket")
+        {
+            canEnhance = true;
+        }
+        if (canEnhance == true)
+        {
+            var pow = _root.save.inventoryAttack[j];
+            if (_root.save.inventoryBonus[j] != "")
+            {
+                _root.save.inventoryBonus[k] = _root.save.inventoryBonus[j];
+            }
+            if (_root.save.inventoryAbility[j] != "")
+            {
+                _root.save.inventoryAbility[k] = _root.save.inventoryAbility[j];
+            }
+            if (_root.save.inventoryMoreBonus[j] != "")
+            {
+                _root.save.inventoryMoreBonus[k] = _root.save.inventoryMoreBonus[j];
+            }
+            if (_root.save.inventoryBonus[j] == "Random")
+            {
+                var bonusToGet = random(20) + 1;
+                if (bonusToGet == 1 || bonusToGet == 2)
+                {
+                    _root.save.inventoryBonus[k] = "Reward";
+                }
+                if (bonusToGet == 3 || bonusToGet == 4)
+                {
+                    _root.save.inventoryBonus[k] = "EXP";
+                }
+                if (bonusToGet == 5 || bonusToGet == 6)
+                {
+                    _root.save.inventoryBonus[k] = "Coin";
+                }
+                if (bonusToGet == 7 || bonusToGet == 8)
+                {
+                    _root.save.inventoryBonus[k] = "Pixel";
+                }
+                if (bonusToGet == 9 || bonusToGet == 10)
+                {
+                    _root.save.inventoryBonus[k] = "Drop Rate";
+                }
+                if (bonusToGet == 11 || bonusToGet == 12)
+                {
+                    _root.save.inventoryBonus[k] = "Spawn Rate";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryBonus[k] = "Fire Element";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryBonus[k] = "Ice Element";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryBonus[k] = "Wind Element";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryBonus[k] = "Earth Element";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryBonus[k] = "Thunder Element";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryBonus[k] = "Water Element";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryBonus[k] = "Light Element";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryBonus[k] = "Dark Element";
+                }
+            }
+            if (_root.save.inventoryAbility[j] == "Random")
+            {
+                var bonusToGet = random(25) + 1;
+                if (bonusToGet == 1)
+                {
+                    _root.save.inventoryAbility[k] = "Attack";
+                }
+                if (bonusToGet == 2)
+                {
+                    _root.save.inventoryAbility[k] = "Attack Speed";
+                }
+                if (bonusToGet == 3)
+                {
+                    _root.save.inventoryAbility[k] = "Ignore Defense";
+                }
+                if (bonusToGet == 4)
+                {
+                    _root.save.inventoryAbility[k] = "Mastery";
+                }
+                if (bonusToGet == 5)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Chance";
+                }
+                if (bonusToGet == 6)
+                {
+                    _root.save.inventoryAbility[k] = "Critical Damage";
+                }
+                if (bonusToGet == 7)
+                {
+                    _root.save.inventoryAbility[k] = "Defense";
+                }
+                if (bonusToGet == 8)
+                {
+                    _root.save.inventoryAbility[k] = "Damage Taken";
+                }
+                if (bonusToGet == 9)
+                {
+                    _root.save.inventoryAbility[k] = "Reflect";
+                }
+                if (bonusToGet == 10)
+                {
+                    _root.save.inventoryAbility[k] = "Accuracy";
+                }
+                if (bonusToGet == 11)
+                {
+                    _root.save.inventoryAbility[k] = "Hit Chance";
+                }
+                if (bonusToGet == 12)
+                {
+                    _root.save.inventoryAbility[k] = "Evasion";
+                }
+                if (bonusToGet == 13)
+                {
+                    _root.save.inventoryAbility[k] = "Dodge Chance";
+                }
+                if (bonusToGet == 14)
+                {
+                    _root.save.inventoryAbility[k] = "Poison Chance";
+                }
+                if (bonusToGet == 15)
+                {
+                    _root.save.inventoryAbility[k] = "Weaken Chance";
+                }
+                if (bonusToGet == 16)
+                {
+                    _root.save.inventoryAbility[k] = "Blind Chance";
+                }
+                if (bonusToGet == 17)
+                {
+                    _root.save.inventoryAbility[k] = "Stun Chance";
+                }
+                if (bonusToGet == 18)
+                {
+                    _root.save.inventoryAbility[k] = "HP";
+                }
+                if (bonusToGet == 19)
+                {
+                    _root.save.inventoryAbility[k] = "MP";
+                }
+                if (bonusToGet == 20)
+                {
+                    _root.save.inventoryAbility[k] = "HP Regen";
+                }
+                if (bonusToGet == 21)
+                {
+                    _root.save.inventoryAbility[k] = "MP Regen";
+                }
+                if (bonusToGet == 22)
+                {
+                    _root.save.inventoryAbility[k] = "Rage Depletion";
+                }
+                if (bonusToGet == 23)
+                {
+                    _root.save.inventoryAbility[k] = "Drain";
+                }
+                if (bonusToGet == 24)
+                {
+                    _root.save.inventoryAbility[k] = "Mana Eater";
+                }
+                if (bonusToGet == 25)
+                {
+                    _root.save.inventoryAbility[k] = "Autosteal";
+                }
+            }
+            var tukkoniumPow = 0.0;
+            if (_root.save.inventorySubtype[j] == "Weapon Attack Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryAttack[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow;
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Unique Enhancer")
+            {
+                _root.save.inventoryAttack[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow;
+                if (_root.save.inventoryAttack[k] > 3000)
+                {
+                    _root.save.inventoryAttack[k] = 3000;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Tukkonium Enhancer")
+            {
+                if (_root.save.inventoryBonusPow[k] < 100000)
+                {
+                    tukkoniumPow = Math.ceil((5000 - _root.save.inventoryAttack[k]) / 5);
+                }
+                else
+                {
+                    tukkoniumPow = Math.ceil((5000 - _root.save.inventoryAttack[k]) / 10);
+                }
+                if (_root.save.inventoryName[k] == "Glaive of Smiting")
+                {
+                    tukkoniumPow = 1;
+                }
+                if (_root.save.inventoryName[k] == "Darkglaive of Smiting")
+                {
+                    tukkoniumPow = 1;
+                }
+                if (_root.save.inventoryName[k] == "Fiend Glaive")
+                {
+                    tukkoniumPow = 1;
+                }
+                if (_root.save.inventoryName[k] == "CHAOS AURA")
+                {
+                    tukkoniumPow = 1;
+                }
+                if (_root.save.inventoryName[k] == "Dark Ruler")
+                {
+                    tukkoniumPow = 1;
+                }
+                if (_root.save.inventoryName[k] == "Ultimate Weapon")
+                {
+                    tukkoniumPow = 1;
+                }
+                if (_root.save.inventoryName[k] == "Reincarnation Weapon")
+                {
+                    tukkoniumPow = 1;
+                }
+                if (_root.save.inventoryNoUnique[k] == true)
+                {
+                    tukkoniumPow = 1;
+                }
+                if (tukkoniumPow < 1)
+                {
+                    tukkoniumPow = 1;
+                }
+                _root.save.inventoryAttack[k] += tukkoniumPow;
+                if (_root.save.inventoryBonusPow[k] < 100000)
+                {
+                    _root.save.inventoryBonusPow[k] = 100000;
+                }
+                _root.save.inventoryBonusPow[k] += tukkoniumPow;
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Speed Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventorySpeed[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow * 20;
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Defense Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryDefense[k] += pow;
+                _root.save.inventoryBonusPow[k] += Math.round(pow * 5 / 12);
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Attack Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryAttack[k] += pow;
+                _root.save.inventoryBonusPow[k] += Math.round(pow * 5 / 2);
+            }
+            else if (_root.save.inventorySubtype[j] == "Accessory Attack Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryAttack[k] += pow;
+                _root.save.inventoryBonusPow[k] += Math.round(pow * 5 / 2);
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Speed Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventorySpeed[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow * 20;
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Defense Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryDefense[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow;
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Unique Enhancer")
+            {
+                _root.save.inventoryDefense[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow;
+                if (_root.save.inventoryDefense[k] > 1800)
+                {
+                    _root.save.inventoryDefense[k] = 1800;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Tukkonium Enhancer")
+            {
+                if (_root.save.inventorySubtype[k] == "Skin")
+                {
+                    if (_root.save.inventoryBonusPow[k] < 100000)
+                    {
+                        tukkoniumPow = Math.ceil((3000 - _root.save.inventoryDefense[k]) / 5);
+                    }
+                    else
+                    {
+                        tukkoniumPow = Math.ceil((3000 - _root.save.inventoryDefense[k]) / 10);
+                    }
+                }
+                else if (_root.save.inventoryBonusPow[k] < 100000)
+                {
+                    tukkoniumPow = Math.ceil((30000 - _root.save.inventoryDefense[k]) / 5);
+                }
+                else
+                {
+                    tukkoniumPow = Math.ceil((30000 - _root.save.inventoryDefense[k]) / 10);
+                }
+                if (_root.save.inventoryNoUnique[k] == true)
+                {
+                    tukkoniumPow = 5;
+                }
+                if (tukkoniumPow < 5)
+                {
+                    tukkoniumPow = 5;
+                }
+                if (_root.save.inventoryDefense[k] > 29990 && _root.save.inventoryDefense[k] < 30000)
+                {
+                    tukkoniumPow = 30000 - _root.save.inventoryDefense[k];
+                }
+                _root.save.inventoryDefense[k] += tukkoniumPow;
+                if (_root.save.inventoryBonusPow[k] < 100000)
+                {
+                    _root.save.inventoryBonusPow[k] = 100000;
+                }
+                _root.save.inventoryBonusPow[k] += 1;
+            }
+            else if (_root.save.inventorySubtype[j] == "Accessory Unique Enhancer")
+            {
+                _root.save.inventoryDefense[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow;
+                if (_root.save.inventoryDefense[k] > 1800)
+                {
+                    _root.save.inventoryDefense[k] = 1800;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Accessory Tukkonium Enhancer")
+            {
+                if (_root.save.inventoryBonusPow[k] < 100000)
+                {
+                    tukkoniumPow = Math.ceil((30000 - _root.save.inventoryDefense[k]) / 5);
+                }
+                else
+                {
+                    tukkoniumPow = Math.ceil((30000 - _root.save.inventoryDefense[k]) / 10);
+                }
+                if (_root.save.inventoryNoUnique[k] == true)
+                {
+                    tukkoniumPow = 1;
+                }
+                if (tukkoniumPow < 1)
+                {
+                    tukkoniumPow = 1;
+                }
+                _root.save.inventoryDefense[k] += tukkoniumPow;
+                if (_root.save.inventoryBonusPow[k] < 100000)
+                {
+                    _root.save.inventoryBonusPow[k] = 100000;
+                }
+                _root.save.inventoryBonusPow[k] += 1;
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Spirit Rock" || _root.save.inventorySubtype[j] == "Armor Spirit Rock" || _root.save.inventorySubtype[j] == "Accessory Spirit Rock")
+            {
+                if (_root.save.inventorySpirit[k] != true)
+                {
+                    _root.save.inventorySpirit[k] = true;
+                }
+                else
+                {
+                    _root.save.inventorySpirit[k] = false;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Growth Rock")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                if (_root.save.inventoryExpTNL[k] < 400)
+                {
+                    _root.save.inventoryExpTNL[k] = 400 * _root.save.inventoryReqRank[k] * _root.save.inventoryReqRank[k];
+                }
+                if (_root.save.inventoryLevel[k] == _root.save.inventoryMaxLevel[k])
+                {
+                    _root.save.inventoryExp[k] = 0;
+                }
+                _root.save.inventoryMaxLevel[k] += pow;
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Growth Rock")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                if (_root.save.inventoryExpTNL[k] < 400)
+                {
+                    _root.save.inventoryExpTNL[k] = 400 * _root.save.inventoryReqRank[k] * _root.save.inventoryReqRank[k];
+                }
+                if (_root.save.inventoryLevel[k] == _root.save.inventoryMaxLevel[k])
+                {
+                    _root.save.inventoryExp[k] = 0;
+                }
+                _root.save.inventoryMaxLevel[k] += pow;
+            }
+            else if (_root.save.inventorySubtype[j] == "Accessory Growth Rock")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                if (_root.save.inventoryExpTNL[k] < 400)
+                {
+                    _root.save.inventoryExpTNL[k] = 400 * _root.save.inventoryReqRank[k] * _root.save.inventoryReqRank[k];
+                }
+                if (_root.save.inventoryLevel[k] == _root.save.inventoryMaxLevel[k])
+                {
+                    _root.save.inventoryExp[k] = 0;
+                }
+                if (_root.save.inventoryEnhance[k] <= 10)
+                {
+                    _root.save.inventoryMaxLevel[k] += pow;
+                }
+                else
+                {
+                    _root.save.inventoryDefense[k] += 180;
+                    if (_root.save.inventoryDefense[k] > 1800)
+                    {
+                        _root.save.inventoryDefense[k] = 1800;
+                    }
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Critical Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryCrit[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow * 5;
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Dexterity Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryDexterity[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow * 5;
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Health Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryHealth[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow * 5;
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Critical Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryCrit[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow * 5;
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Dexterity Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryDexterity[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow * 5;
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Health Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryHealth[k] += pow;
+                _root.save.inventoryBonusPow[k] += pow * 5;
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Cleansing Rock")
+            {
+                _root.save.inventoryName[k] = _root.save.inventoryName[k].substr(0, _root.save.inventoryName[k].Length - 9);
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Cleansing Rock")
+            {
+                _root.save.inventoryName[k] = _root.save.inventoryName[k].substr(0, _root.save.inventoryName[k].Length - 9);
+            }
+            else if (_root.save.inventorySubtype[j] == "Accessory Lifespan Extender")
+            {
+                if (_root.save.inventoryExpiry[k] < _root.systemtimenow)
+                {
+                    _root.save.inventoryExpiry[k] = _root.systemtimenow;
+                }
+                _root.save.inventoryExpiry[k] += pow * 86400000;
+                if (pow >= 99999)
+                {
+                    _root.save.inventoryExpiry[k] = Infinity;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Mystery Enhancer Identifier")
+            {
+                if (_root.save.inventorySubtype[k] == "Weapon Mystery Enhancer")
+                {
+                    _root.save.inventoryBonusPow[k] += 500;
+                    var typeX = random(5) + 1;
+                    if (typeX == 1)
+                    {
+                        _root.save.inventorySubtype[k] = "Weapon Attack Enhancer";
+                        _root.save.inventoryAttack[k] *= 5;
+                    }
+                    if (typeX == 2)
+                    {
+                        _root.save.inventorySubtype[k] = "Weapon Defense Enhancer";
+                        _root.save.inventoryAttack[k] *= 12;
+                    }
+                    if (typeX == 3)
+                    {
+                        _root.save.inventorySubtype[k] = "Weapon Critical Enhancer";
+                    }
+                    if (typeX == 4)
+                    {
+                        _root.save.inventorySubtype[k] = "Weapon Dexterity Enhancer";
+                    }
+                    if (typeX == 5)
+                    {
+                        _root.save.inventorySubtype[k] = "Weapon Health Enhancer";
+                    }
+                }
+                if (_root.save.inventorySubtype[k] == "Armor Mystery Enhancer")
+                {
+                    _root.save.inventoryBonusPow[k] += 500;
+                    var typeX = random(5) + 1;
+                    if (typeX == 1)
+                    {
+                        _root.save.inventorySubtype[k] = "Armor Attack Enhancer";
+                        _root.save.inventoryAttack[k] *= 2;
+                    }
+                    if (typeX == 2)
+                    {
+                        _root.save.inventorySubtype[k] = "Armor Defense Enhancer";
+                        _root.save.inventoryAttack[k] *= 5;
+                    }
+                    if (typeX == 3)
+                    {
+                        _root.save.inventorySubtype[k] = "Armor Critical Enhancer";
+                    }
+                    if (typeX == 4)
+                    {
+                        _root.save.inventorySubtype[k] = "Armor Dexterity Enhancer";
+                    }
+                    if (typeX == 5)
+                    {
+                        _root.save.inventorySubtype[k] = "Armor Health Enhancer";
+                    }
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Mystery Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                var typeX = 0.0;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                if (_root.save.inventoryAttack[k] != 0)
+                {
+                    typeX = random(5) + 1;
+                }
+                else
+                {
+                    typeX = random(4) + 2;
+                }
+                if (typeX == 1)
+                {
+                    _root.save.inventoryAttack[k] += pow * 5;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+                if (typeX == 2)
+                {
+                    _root.save.inventoryDefense[k] += pow * 12;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+                if (typeX == 3)
+                {
+                    _root.save.inventoryCrit[k] += pow;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+                if (typeX == 4)
+                {
+                    _root.save.inventoryDexterity[k] += pow;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+                if (typeX == 5)
+                {
+                    _root.save.inventoryHealth[k] += pow;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Mystery Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                var typeX = random(5) + 1;
+                if (typeX == 1)
+                {
+                    _root.save.inventoryAttack[k] += pow * 2;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+                if (typeX == 2)
+                {
+                    _root.save.inventoryDefense[k] += pow * 5;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+                if (typeX == 3)
+                {
+                    _root.save.inventoryCrit[k] += pow;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+                if (typeX == 4)
+                {
+                    _root.save.inventoryDexterity[k] += pow;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+                if (typeX == 5)
+                {
+                    _root.save.inventoryHealth[k] += pow;
+                    _root.save.inventoryBonusPow[k] += pow * 5;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Unobtainium Enhancer")
+            {
+                _root.save.inventoryUnob[k] = pow;
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Unobtainium Enhancer")
+            {
+                _root.save.inventoryUnob[k] = pow;
+            }
+            else if (_root.save.inventorySubtype[j] == "Accessory Unobtainium Enhancer")
+            {
+                _root.save.inventoryUnob[k] = pow;
+            }
+            else if (_root.save.inventorySubtype[j] == "Enhancer Success Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventoryDefense[k] = Math.ceil(_root.save.inventoryDefense[k] * pow / 100);
+                _root.save.inventoryBonusPow[k] += pow - 100;
+            }
+            else if (_root.save.inventorySubtype[j] == "Enhancer Destruction Enhancer")
+            {
+                _root.save.inventoryEnhance[k] += 1;
+                if (_root.save.inventoryEnhance[k] == 10)
+                {
+                    _root.save.arenaMaxEnhance += 1;
+                }
+                _root.save.inventorySpeed[k] = Math.floor(_root.save.inventorySpeed[k] * pow / 100);
+                _root.save.inventoryBonusPow[k] += Math.floor((100 - pow) / 2);
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Protector")
+            {
+                if (_root.save.inventoryGuard[k] != true)
+                {
+                    _root.save.inventoryGuard[k] = true;
+                }
+                else
+                {
+                    _root.save.inventoryGuard[k] = false;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Protector")
+            {
+                if (_root.save.inventoryGuard[k] != true)
+                {
+                    _root.save.inventoryGuard[k] = true;
+                }
+                else
+                {
+                    _root.save.inventoryGuard[k] = false;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Accessory Protector")
+            {
+                if (_root.save.inventoryGuard[k] != true)
+                {
+                    _root.save.inventoryGuard[k] = true;
+                }
+                else
+                {
+                    _root.save.inventoryGuard[k] = false;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Enhancer Protector")
+            {
+                if (_root.save.inventoryGuard[k] != true)
+                {
+                    _root.save.inventoryGuard[k] = true;
+                }
+                else
+                {
+                    _root.save.inventoryGuard[k] = false;
+                }
+            }
+            else if (_root.save.inventorySubtype[j] == "Weapon Finalizer")
+            {
+                _root.save.inventoryAttack[k] = Math.ceil(_root.save.inventoryAttack[k] * 1.2);
+                _root.save.inventorySpeed[k] = Math.ceil(_root.save.inventorySpeed[k] * 1.2);
+                _root.save.inventoryDefense[k] = Math.ceil(_root.save.inventoryDefense[k] * 1.2);
+                _root.save.inventoryCrit[k] = Math.ceil(_root.save.inventoryCrit[k] * 1.2);
+                _root.save.inventoryDexterity[k] = Math.ceil(_root.save.inventoryDexterity[k] * 1.2);
+                _root.save.inventoryHealth[k] = Math.ceil(_root.save.inventoryHealth[k] * 1.2);
+                _root.save.inventoryLevel[k] = 9999;
+                _root.save.inventoryMaxLevel[k] = 9999;
+                _root.save.inventoryExp[k] = 0;
+                _root.save.inventoryExpTNL[k] = 0;
+                _root.save.inventoryNoBonus[k] = true;
+                _root.save.inventoryNoFuse[k] = true;
+                _root.save.inventoryNoUnique[k] = false;
+            }
+            else if (_root.save.inventorySubtype[j] == "Armor Finalizer")
+            {
+                _root.save.inventoryAttack[k] = Math.ceil(_root.save.inventoryAttack[k] * 1.2);
+                _root.save.inventorySpeed[k] = Math.ceil(_root.save.inventorySpeed[k] * 1.2);
+                _root.save.inventoryDefense[k] = Math.ceil(_root.save.inventoryDefense[k] * 1.2);
+                _root.save.inventoryCrit[k] = Math.ceil(_root.save.inventoryCrit[k] * 1.2);
+                _root.save.inventoryDexterity[k] = Math.ceil(_root.save.inventoryDexterity[k] * 1.2);
+                _root.save.inventoryHealth[k] = Math.ceil(_root.save.inventoryHealth[k] * 1.2);
+                _root.save.inventoryLevel[k] = 9999;
+                _root.save.inventoryMaxLevel[k] = 9999;
+                _root.save.inventoryExp[k] = 0;
+                _root.save.inventoryExpTNL[k] = 0;
+                _root.save.inventoryNoBonus[k] = true;
+                _root.save.inventoryNoFuse[k] = true;
+                _root.save.inventoryNoUnique[k] = false;
+            }
+            else if (_root.save.inventorySubtype[j] == "Accessory Finalizer")
+            {
+                _root.save.inventoryAttack[k] = Math.ceil(_root.save.inventoryAttack[k] * 1.2);
+                _root.save.inventorySpeed[k] = Math.ceil(_root.save.inventorySpeed[k] * 1.2);
+                _root.save.inventoryDefense[k] = Math.ceil(_root.save.inventoryDefense[k] * 1.2);
+                _root.save.inventoryCrit[k] = Math.ceil(_root.save.inventoryCrit[k] * 1.2);
+                _root.save.inventoryDexterity[k] = Math.ceil(_root.save.inventoryDexterity[k] * 1.2);
+                _root.save.inventoryHealth[k] = Math.ceil(_root.save.inventoryHealth[k] * 1.2);
+                _root.save.inventoryLevel[k] = 9999;
+                _root.save.inventoryMaxLevel[k] = 9999;
+                _root.save.inventoryExp[k] = 0;
+                _root.save.inventoryExpTNL[k] = 0;
+                _root.save.inventoryNoBonus[k] = true;
+                _root.save.inventoryNoFuse[k] = true;
+                _root.save.inventoryNoUnique[k] = false;
+            }
+            _root.dispNews(61, "[" + _root.save.inventoryName[k] + "] enhanced with [" + _root.save.inventoryName[j] + "]!");
+            if (_root.save.inventorySubtype[j].indexOf("Protector") == -1 && _root.save.inventoryName[j].indexOf("[I]") == -1)
+            {
+                if (_root.save.questType == "Enhance")
+                {
+                    if (_root.save.questSubtype == "Success")
+                    {
+                        _root.save.questCount += 1;
+                    }
+                }
+                if (_root.save.inventorySell[j] > 0)
+                {
+                    _root.gainCareerEXP(4, Math.ceil(_root.save.inventorySell[j] / 1000000), true);
+                }
+                deleteArenaItem(j);
+            }
+        }
+        else if (_root.save.inventorySubtype[k] == "Secondary Weapon")
+        {
+            _root.showPopup("Cannot Enhance", "Secondary Weapons cannot be enhanced.");
+        }
+        else
+        {
+            _root.showPopup("Cannot Enhance", "You cannot use this enhancer on this item!");
+        }
+        _root.enhancerToUse = 0;
+    }
+
+    // MATCH: frame_4/DoAction.as:checkFullInventory()
+    public void checkFullInventory()
+    {
+        _root.emptyWeaponSlot = 0;
+        _root.emptyArmorSlot = 0;
+        _root.emptyAccessorySlot = 0;
+        _root.emptyEnhancerSlot = 0;
+        _root.emptyPotionSlot = 0;
+        _root.emptyOutfitSlot = 0;
+        _root.emptyChipSlot = 0;
+        var i = 1;
+        while (i <= 30)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                _root.emptyWeaponSlot += 1;
+            }
+            i++;
+        }
+        i = 101;
+        while (i <= 130)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                _root.emptyArmorSlot += 1;
+            }
+            i++;
+        }
+        i = 201;
+        while (i <= 230)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                _root.emptyEnhancerSlot += 1;
+            }
+            i++;
+        }
+        i = 401;
+        while (i <= 430)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                _root.emptyPotionSlot += 1;
+            }
+            i++;
+        }
+        i = 501;
+        while (i <= 530)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                _root.emptyAccessorySlot += 1;
+            }
+            i++;
+        }
+        i = 601;
+        while (i <= 630)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                _root.emptyOutfitSlot += 1;
+            }
+            i++;
+        }
+        i = 701;
+        while (i <= 730)
+        {
+            if (_root.save.inventoryExist[i] != 1)
+            {
+                _root.emptyChipSlot += 1;
+            }
+            i++;
+        }
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaEnemy()
+    public void addArenaEnemy(double level, double speed, double attack, double defense, double accuracy, double evasion, double hp, double exp, double coin, double pixel, string name, string element, bool boss, double evolve, double heal, bool zombie, double rangeDamage, double explode, double explodeDamage, double rampagePct, string skill, double skillLevel, string art, string loc, string allyPassive1, double allyPassive1X, string allyPassive2, double allyPassive2X, string allyPassive3, double allyPassive3X, string allyActive1, double allyActive1X, string allyActive1Y, double allyActive1Z, string allyActive2, double allyActive2X, string allyActive2Y, double allyActive2Z, string allyActive3, double allyActive3X, string allyActive3Y, double allyActive3Z)
+    {
+        var enemy = new Enemy();
+        enemy.level = level;
+        enemy.speed = speed;
+        enemy.attack = attack;
+        enemy.defense = defense;
+        enemy.accuracy = accuracy;
+        enemy.evasion = evasion;
+        enemy.hp = hp;
+        enemy.exp = exp;
+        enemy.coin = coin;
+        enemy.pixel = pixel;
+        enemy.name = name;
+        enemy.element = element;
+        enemy.boss = boss;
+        enemy.evolve = evolve;
+        enemy.heal = heal;
+        enemy.zombie = zombie;
+        enemy.rangeDamage = rangeDamage;
+        enemy.explode = explode;
+        enemy.explodeDamage = explodeDamage;
+        enemy.rampagePct = rampagePct;
+        enemy.skill = skill;
+        enemy.skillLevel = skillLevel;
+        enemy.art = art;
+        enemy.loc = loc;
+        enemy.allyPassive1 = allyPassive1;
+        enemy.allyPassive1X = allyPassive1X;
+        enemy.allyPassive2 = allyPassive2;
+        enemy.allyPassive2X = allyPassive2X;
+        enemy.allyPassive3 = allyPassive3;
+        enemy.allyPassive3X = allyPassive3X;
+        enemy.allyActive1 = allyActive1;
+        enemy.allyActive1X = allyActive1X;
+        enemy.allyActive1Y = allyActive1Y;
+        enemy.allyActive1Z = allyActive1Z;
+        enemy.allyActive2 = allyActive2;
+        enemy.allyActive2X = allyActive2X;
+        enemy.allyActive2Y = allyActive2Y;
+        enemy.allyActive2Z = allyActive2Z;
+        enemy.allyActive3 = allyActive3;
+        enemy.allyActive3X = allyActive3X;
+        enemy.allyActive3Y = allyActive3Y;
+        enemy.allyActive3Z = allyActive3Z;
+        enemyList.Add(enemy);
+    }
+
+    // MATCH: frame_4/DoAction.as:obtainAlly()
+    public void obtainAlly(double ID)
+    {
+        if (isNaN(_root.save.arenaAllyEXP[ID]))
+        {
+            _root.save.arenaAllyEXP[ID] = 0;
+            _root.save.arenaAllyUpgrade[ID] = 0;
+            _root.dispNews(35, "Invisible Ally GET! [" + _root.enemyList[(int)ID].name + "]!");
+        }
+    }
+
+    // MATCH: frame_4/DoAction.as:addKommanderMission()
+    public void addKommanderMission(double monID, double minDiff, double monCount)
+    {
+        _root.komDiff[monID] = minDiff;
+        _root.komCount[monID] = monCount;
+    }
+
+    // MATCH: frame_4/DoAction.as:addMuseumItem()
+    public void addMuseumItem(double mSlotID, double mValue, string mName)
+    {
+        _root.museumItem[mSlotID] = mName;
+        _root.museumValue[mSlotID] = mValue;
+        _root.museumMaxItem += 1;
+        _root.museumMaxValue += mValue;
+    }
+
+    // MATCH: frame_4/DoAction.as:addMuseumArmorSet()
+    public void addMuseumArmorSet(double mSlotID, double mValue, string mName)
+    {
+        _root.museumItem[mSlotID] = mName + " Hat";
+        _root.museumValue[mSlotID] = mValue;
+        _root.museumItem[mSlotID + 1] = mName + " Shirt";
+        _root.museumValue[mSlotID + 1] = mValue;
+        _root.museumItem[mSlotID + 2] = mName + " Gloves";
+        _root.museumValue[mSlotID + 2] = mValue;
+        _root.museumItem[mSlotID + 3] = mName + " Pants";
+        _root.museumValue[mSlotID + 3] = mValue;
+        _root.museumItem[mSlotID + 4] = mName + " Shoes";
+        _root.museumValue[mSlotID + 4] = mValue;
+        _root.museumMaxItem += 5;
+        _root.museumMaxValue += mValue * 5;
+    }
+
+    // MATCH: frame_4/DoAction.as:recalcMuseumScore()
+    public void recalcMuseumScore()
+    {
+        _root.save.collectionPoint = 0;
+        _root.save.collectionPointTrophy = 0;
+        var i = 1401;
+        while (i <= 3000)
+        {
+            if (_root.save.inventoryExist[i] == 1 && !isNaN(_root.museumValue[i]))
+            {
+                _root.save.collectionPoint += _root.museumValue[i];
+                if (_root.save.inventorySubtype[i] == "Trophy")
+                {
+                    _root.save.collectionPointTrophy += 1;
+                }
+            }
+            i++;
+        }
+        if (_root.save.collectionPointMax < _root.save.collectionPoint)
+        {
+            _root.save.collectionPointMax = _root.save.collectionPoint;
+        }
+    }
+
     public void gotoAndPlay(int index)
     {
         GD.Print($"WARNING: unconverted gotoAndPlay({index})");
@@ -7393,8 +12095,5 @@ public class Root
     {
     }
 
-    public double obtainAlly(double lootValue)
-    {
-        return 0;
-    }
+    public void breakNews(string a, string b, double c, double d) { }
 }

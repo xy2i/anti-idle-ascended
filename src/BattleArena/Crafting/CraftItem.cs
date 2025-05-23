@@ -12,7 +12,7 @@ public class CraftItem
     public double power;
     public double curse;
     public double success;
-    public double range;
+    public bool range;
     public double attack;
     public double speed;
     public double defense;
