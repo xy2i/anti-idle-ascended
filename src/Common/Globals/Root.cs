@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using AntiIdle.BattleArena.Crafting;
 using Godot;
 using Math = AntiIdle.Common.Flash.Math;
 
@@ -13,35 +12,28 @@ namespace AntiIdle.Common.Globals;
 /// </summary>
 public class Root
 {
-    public FlashList<double> arenaSkillMaxF;
-    public FlashList<double> arenaSkillNameF;
-    public FlashList<Fish> fishArray;
-    public double moduleSlotLeft;
-    public double moduleSlotOccupied;
-    public double moduleInvSlotLeft;
-    public double moduleInvSlotOccupied;
-    public double chance;
-    public double cybFishCurrent;
-    public double arcadeRewardMult;
-    public double boostMax;
-    public double printPercent;
-    public double todayCode;
-    public double moostMin;
     public string _quality;
     public double achRedCoin;
     public double actualKpaCount;
     public double actualShinyKpaCount;
+    public double arcadeRewardMult;
     public double arenaBot;
+    public FlashList<double> arenaSkillMaxF;
+    public FlashList<double> arenaSkillNameF;
     public bool autoStart;
     public double awards;
     public double bestiaryLevel;
+    public double boostMax;
     public FlashList<string> careerName;
+    public double chance;
     public int clock_date;
     public double clock_display;
     public int clock_month;
     public int clock_year;
     public double correctTier;
+    public FlashList<double> curCareerLevel;
     public double cursoridle;
+    public double cybFishCurrent;
     public FlashList<double> cyborgActCost;
     public FlashList<string> cyborgActLongName;
     public FlashList<double> cyborgActMaxPerf;
@@ -51,41 +43,67 @@ public class Root
     public FlashList<string> cyborgActShortName;
     public FlashList<double> cyborgActTime;
     public bool cyborgWorking;
+    public double detectedX;
+    public double dow;
     public List<List<List<List<string>>>> eventList;
+    public double eventMaxToken;
+    public FlashList<Fish> fishArray;
     public double fishRodCount;
     public string flashVer;
     public int fps = 40;
     public GlobalSettingWrapper globalSetting;
+    public double harvestSummaryBlueCoin;
+    public double harvestSummaryCareer;
+    public double harvestSummaryCoin;
+    public double harvestSummaryCount;
+    public double harvestSummaryEXP;
+    public double harvestSummaryFruit;
+    public double harvestSummaryGreenCoin;
     public House house = new();
     public Kongregate kongregate;
     public string kongregate_username;
     public bool kpaChip;
     public bool lootMagnet;
     public double luckyNumber;
+    public double mainAntiLag;
+    public double mainSummonCount;
+    public double maxNum;
     public double maxredcoin;
+    public double moduleInvSlotLeft;
+    public double moduleInvSlotOccupied;
+    public double moduleSlotLeft;
+    public double moduleSlotOccupied;
+    public double moostMin;
     public double nameValue;
-    public Dictionary<string, object> news;
+    public Dictionary<string, object> news = new();
     public FlashList<double> newsFeature;
     public bool offlineVersion;
+    public PopContain popContain;
+    public Popup.Popup popUp; // TODO: code which calls popUp needs to init this, or put it in all frames?
     public bool preloadedFile0;
     public bool preloadedFile1;
     public bool preloadedFile2;
     public bool preloadedFile3;
+    public double printPercent;
     public double progPercent;
     public double questCount;
     public double refresh_date;
     public double refresh_max_date;
     public double refresh_month;
     public double refresh_year;
+    public double requiredExp;
     public Save save = new();
     public GlobalSetting saveGlobal = new();
     public double saveid;
     public double sawards;
     public bool scoreBanned;
+    public double scrollingDir;
     public double sessionTimeLeft;
     public double stadiumHatUnlocked;
+    public double systemtimenow;
     public double systemTimeNow;
     public double thisSession;
+    public double todayCode;
     public double todayEvent;
     public double totalachievements;
     public double totalAllyMastered;
@@ -99,28 +117,11 @@ public class Root
     public double uniqueUlt1;
     public double uniqueUlt2;
     public double uniqueUlt3;
-    public double maxNum;
     public double updateBreakNews;
     public double upnumber;
     public double upnumberHidden;
-    public double requiredExp;
-    public Popup.Popup popUp; // TODO: code which calls popUp needs to init this, or put it in all frames?
-    public double detectedX;
-    public double mainSummonCount;
-    public double mainAntiLag;
-    public PopContain popContain;
-    public double eventMaxToken;
-    public FlashList<double> curCareerLevel;
-    public double systemtimenow;
-    public double harvestSummaryCareer;
-    public double harvestSummaryCount;
-    public double harvestSummaryCoin;
-    public double harvestSummaryBlueCoin;
-    public double harvestSummaryGreenCoin;
-    public double harvestSummaryEXP;
-    public double harvestSummaryFruit;
-    public double scrollingDir;
-    public double dow;
+    public List<CraftItem> craftWeapon;
+    public List<CraftItem> craftArmor;
 
     public int getBytesLoaded()
     {
@@ -159,7 +160,10 @@ public class Root
         var i = 0;
         while (i <= tempDeckArray.Length - 1)
         {
-            if (double.Parse(tempDeckArray[i]) > 100) tempDeckArray[i] = "100";
+            if (double.Parse(tempDeckArray[i]) > 100)
+            {
+                tempDeckArray[i] = "100";
+            }
 
             var j = 1;
             while (j <= double.Parse(tempDeckArray[i]))
@@ -203,23 +207,46 @@ public class Root
     // MATCH: frame_3/DoAction.as:checkAttReward()
     public double checkAttReward(double dayCount)
     {
-        if (dayCount == _root.refresh_max_date) return 8;
+        if (dayCount == _root.refresh_max_date)
+        {
+            return 8;
+        }
 
-        if (dayCount == _root.refresh_max_date - 1) return 7;
+        if (dayCount == _root.refresh_max_date - 1)
+        {
+            return 7;
+        }
 
-        if (dayCount == 14) return 9;
+        if (dayCount == 14)
+        {
+            return 9;
+        }
 
-        if (dayCount == 24) return 6;
+        if (dayCount == 24)
+        {
+            return 6;
+        }
 
-        if (dayCount == 8 || dayCount == 16) return 5;
+        if (dayCount == 8 || dayCount == 16)
+        {
+            return 5;
+        }
 
-        if (dayCount == 1 || dayCount == 9 || dayCount == 25 || dayCount == 28) return 4;
+        if (dayCount == 1 || dayCount == 9 || dayCount == 25 || dayCount == 28)
+        {
+            return 4;
+        }
 
         if (dayCount == 2 || dayCount == 3 || dayCount == 4 || dayCount == 12 || dayCount == 17 || dayCount == 18 ||
             dayCount == 19 || dayCount == 20)
+        {
             return 3;
+        }
 
-        if (dayCount >= 21 || dayCount == 6 || dayCount == 14) return 2;
+        if (dayCount >= 21 || dayCount == 6 || dayCount == 14)
+        {
+            return 2;
+        }
 
         return 1;
     }
@@ -227,7 +254,10 @@ public class Root
     // MATCH: frame_3/DoAction.as:getKpaValue()
     public double getKpaValue(string kpaName)
     {
-        if (kpaName == undefined || kpaName == "" || kpaName.Length < 1) return 0;
+        if (kpaName == undefined || kpaName == "" || kpaName.Length < 1)
+        {
+            return 0;
+        }
 
         var kpaValue = 0;
         var k = 1;
@@ -429,9 +459,13 @@ public class Root
             }
 
             if (k == 1)
+            {
                 kpaValue += 3 * nD + 17;
+            }
             else
+            {
                 kpaValue += (k + 1) * nD + 9;
+            }
 
             kpaValue %= 10000;
             k++;
@@ -446,53 +480,104 @@ public class Root
         var refundTier = 0;
         if (_root.kongregate_username != undefined && _root.kongregate_username != "Guest")
         {
-            if (_root.save.bestLevel >= 200 && _root.save.totalPlayTime >= 2700) refundTier = 1;
+            if (_root.save.bestLevel >= 200 && _root.save.totalPlayTime >= 2700)
+            {
+                refundTier = 1;
+            }
 
-            if (_root.save.bestLevel >= 400 && _root.save.totalPlayTime >= 5400) refundTier = 2;
+            if (_root.save.bestLevel >= 400 && _root.save.totalPlayTime >= 5400)
+            {
+                refundTier = 2;
+            }
 
-            if (_root.save.bestLevel >= 700 && _root.save.totalPlayTime >= 10800) refundTier = 3;
+            if (_root.save.bestLevel >= 700 && _root.save.totalPlayTime >= 10800)
+            {
+                refundTier = 3;
+            }
 
-            if (_root.save.bestLevel >= 1000 && _root.save.totalPlayTime >= 21600) refundTier = 4;
+            if (_root.save.bestLevel >= 1000 && _root.save.totalPlayTime >= 21600)
+            {
+                refundTier = 4;
+            }
 
-            if (_root.save.bestLevel >= 1500 && _root.save.totalPlayTime >= 43200) refundTier = 5;
+            if (_root.save.bestLevel >= 1500 && _root.save.totalPlayTime >= 43200)
+            {
+                refundTier = 5;
+            }
 
-            if (_root.save.bestLevel >= 2000 && _root.save.totalPlayTime >= 86400) refundTier = 6;
+            if (_root.save.bestLevel >= 2000 && _root.save.totalPlayTime >= 86400)
+            {
+                refundTier = 6;
+            }
 
-            if (_root.save.bestLevel >= 3000 && _root.save.totalPlayTime >= 172800) refundTier = 7;
+            if (_root.save.bestLevel >= 3000 && _root.save.totalPlayTime >= 172800)
+            {
+                refundTier = 7;
+            }
 
-            if (_root.save.bestLevel >= 4000 && _root.save.totalPlayTime >= 345600) refundTier = 8;
+            if (_root.save.bestLevel >= 4000 && _root.save.totalPlayTime >= 345600)
+            {
+                refundTier = 8;
+            }
 
-            if (_root.save.bestLevel >= 5500 && _root.save.totalPlayTime >= 604800) refundTier = 9;
+            if (_root.save.bestLevel >= 5500 && _root.save.totalPlayTime >= 604800)
+            {
+                refundTier = 9;
+            }
 
-            if (_root.save.bestLevel >= 7000 && _root.save.totalPlayTime >= 864000) refundTier = 10;
+            if (_root.save.bestLevel >= 7000 && _root.save.totalPlayTime >= 864000)
+            {
+                refundTier = 10;
+            }
 
-            if (_root.save.bestLevel >= 9000 && _root.save.totalPlayTime >= 1296000) refundTier = 11;
+            if (_root.save.bestLevel >= 9000 && _root.save.totalPlayTime >= 1296000)
+            {
+                refundTier = 11;
+            }
 
             if (_root.save.bestLevel >= 9000 && _root.save.banned >= 2 && _root.save.totalPlayTime >= 1728000)
+            {
                 refundTier = 12;
+            }
 
             if (_root.save.bestLevel >= 9000 && _root.save.banned >= 5 && _root.save.totalPlayTime >= 2160000)
+            {
                 refundTier = 13;
+            }
 
             if (_root.save.bestLevel >= 9000 && _root.save.banned >= 10 && _root.save.totalPlayTime >= 2592000)
+            {
                 refundTier = 14;
+            }
 
             if (_root.save.bestLevel >= 9000 && _root.save.banned >= 20 && _root.save.totalPlayTime >= 3024000)
+            {
                 refundTier = 15;
+            }
 
             if (_root.save.bestLevel >= 9000 && _root.save.banned >= 30 && _root.save.totalPlayTime >= 3456000)
+            {
                 refundTier = 16;
+            }
 
             if (_root.save.bestLevel >= 9000 && _root.save.banned >= 50 && _root.save.totalPlayTime >= 3888000)
+            {
                 refundTier = 17;
+            }
         }
 
         var refundCode = refundTier * (1013174 + refundTier * refundTier + Math.ceil(nameValue / 7)) +
                          refundTier * (refundTier + 4) * Math.ceil(nameValue * refundTier / 1.7);
-        if (refundCode % 10 == 7) refundCode += 1;
+        if (refundCode % 10 == 7)
+        {
+            refundCode += 1;
+        }
 
         refundCode = refundCode * 10 + 7;
-        if (refundCode > 7) _root.submitScore("Refund Code", refundCode);
+        if (refundCode > 7)
+        {
+            _root.submitScore("Refund Code", refundCode);
+        }
     }
 
     // MATCH: frame_3/DoAction.as:checkRefundCode()
@@ -506,10 +591,16 @@ public class Root
             {
                 var correctCode = i * (1013174 + i * i + Math.ceil(nameValue / 7)) +
                                   i * (i + 4) * Math.ceil(nameValue * i / 1.7);
-                if (correctCode % 10 == 7) correctCode += 1;
+                if (correctCode % 10 == 7)
+                {
+                    correctCode += 1;
+                }
 
                 correctCode = correctCode * 10 + 7;
-                if (code == correctCode) _root.correctTier = i;
+                if (code == correctCode)
+                {
+                    _root.correctTier = i;
+                }
 
                 i++;
             }
@@ -544,11 +635,17 @@ public class Root
     public void submitScore(string scoreName, double amount, double hardCap = 0, bool submitZero = false)
     {
         if (_root.save.bestLevel >= 30 && scoreBanned == false && _root.saveid <= 3 && _root.save.cheatEnabled == false)
+        {
             if (((_root.save.bestLevel < 9000 && _root.save.banned < 1) || _root.save.yoEpicFail == 25465) &&
                 _root.save.safeHacking == false && _root.save.submitScore && _root.save.noobMode != true &&
                 _root.save.houseVer <= 0)
+            {
                 if ((amount > 0 || submitZero) && (amount <= hardCap || isNaN(hardCap)))
+                {
                     _root.kongregate.stats.submit(scoreName, amount);
+                }
+            }
+        }
     }
 
     // MATCH: frame_3/DoAction.as:submitKong()
@@ -585,8 +682,10 @@ public class Root
         _root.submitScore("Secret Achievements", _root.sawards, _root.totalsachievements);
         _root.submitScore("Achievement Score", _root.achRedCoin, _root.maxredcoin);
         if (_root.save.level >= 1000 || _root.save.banned > 0)
+        {
             _root.submitScore("% Anti-Idle Rewards",
                 Math.floor(_root.save.rewardClaimManual / _root.save.rewardClaim * 100), _root.maxredcoin);
+        }
 
         _root.submitScore("Rewards Claimed", _root.save.rewardClaim);
         _root.submitScore("Rewards Claimed (Anti-Idle)", _root.save.rewardClaimManual);
@@ -746,7 +845,9 @@ public class Root
             if (_root.saveGlobal.breakAll[type] || _root.saveGlobal.breakFeature[type] ||
                 _root.saveGlobal.breakTab1[type] || _root.saveGlobal.breakTab2[type] ||
                 _root.saveGlobal.breakTab3[type] || _root.saveGlobal.breakTab4[type])
+            {
                 ignoreNews = false;
+            }
 
             if (ignoreNews == false)
             {
@@ -889,7 +990,7 @@ public class Root
                 }
             }
             else if (_root.saveGlobal.defTab == 0 ||
-                     ((FlashList<bool>)_root.saveGlobal["breakTab" + _root.saveGlobal.defTab])[type] == true)
+                     ((FlashList<bool>)_root.saveGlobal["breakTab" + _root.saveGlobal.defTab])[type])
             {
                 var imp = _root.saveGlobal.defTab;
                 var b = 30;
@@ -922,49 +1023,89 @@ public class Root
     // MATCH: frame_3/DoAction.as:convertMin()
     public string convertMin(double thatNumber)
     {
-        if (thatNumber < 0) thatNumber = 0;
+        if (thatNumber < 0)
+        {
+            thatNumber = 0;
+        }
+
         var hr = Math.floor(thatNumber / 3600);
         var min = Math.floor(thatNumber / 60) - hr * 60;
         var minString = "" + min;
-        if (min < 10) minString = "0" + min;
+        if (min < 10)
+        {
+            minString = "0" + min;
+        }
+
         return hr + ":" + minString;
     }
 
     // MATCH: frame_3/DoAction.as:convertSecFull()
     public string convertSecFull(double thatNumber)
     {
-        if (thatNumber < 0) thatNumber = 0;
+        if (thatNumber < 0)
+        {
+            thatNumber = 0;
+        }
+
         var hr = Math.floor(thatNumber / 3600);
         var min = Math.floor(thatNumber / 60) - hr * 60;
         var sec = Math.floor(thatNumber) - hr * 3600 - min * 60;
         var minS = "" + min;
         var secS = "" + sec;
-        if (min < 10) minS = "0" + min;
-        if (sec < 10) secS = "0" + sec;
+        if (min < 10)
+        {
+            minS = "0" + min;
+        }
+
+        if (sec < 10)
+        {
+            secS = "0" + sec;
+        }
+
         return hr + ":" + minS + ":" + secS;
     }
 
     // MATCH: frame_3/DoAction.as:convertSec()
     public string convertSec(double thatNumber)
     {
-        if (thatNumber < 0) thatNumber = 0;
+        if (thatNumber < 0)
+        {
+            thatNumber = 0;
+        }
+
         var min = Math.floor(thatNumber / 60);
         var sec = Math.floor(thatNumber) - min * 60;
         var minS = $"{min}";
         var secS = $"{sec}";
-        if (min < 10) minS = "0" + min;
-        if (sec < 10) secS = "0" + sec;
+        if (min < 10)
+        {
+            minS = "0" + min;
+        }
+
+        if (sec < 10)
+        {
+            secS = "0" + sec;
+        }
+
         return minS + ":" + secS;
     }
 
     // MATCH: frame_3/DoAction.as:convertSecCD()
     public string convertSecCD(double thatNumber)
     {
-        if (thatNumber < 0) thatNumber = 0;
+        if (thatNumber < 0)
+        {
+            thatNumber = 0;
+        }
+
         var min = Math.floor(thatNumber / 60);
         var sec = Math.floor(thatNumber) - min * 60;
         var secS = $"{sec}";
-        if (sec < 10) secS = "0" + sec;
+        if (sec < 10)
+        {
+            secS = "0" + sec;
+        }
+
         return min + ":" + secS;
     }
 
@@ -976,7 +1117,10 @@ public class Root
         if (Math.random() < noZero)
         {
             val = Math.ceil(Math.random() * maxVal);
-            if (Math.random() < maxChance) val = maxVal;
+            if (Math.random() < maxChance)
+            {
+                val = maxVal;
+            }
         }
         else
         {
@@ -996,7 +1140,11 @@ public class Root
         }
         else
         {
-            if (thatNumber > 999999999999999) thatNumber = 999999999999999;
+            if (thatNumber > 999999999999999)
+            {
+                thatNumber = 999999999999999;
+            }
+
             var cNegative = false;
             var groupval = thatNumber;
             if (thatNumber < 0)
@@ -1012,29 +1160,100 @@ public class Root
             var group5 = Math.floor(groupval) - group1 * 1000000000000 - group2 * 1000000000 - group3 * 1000000 -
                          group4 * 1000;
             var groupCount = 1;
-            if (group4 > 0) groupCount = 2;
-            if (group3 > 0) groupCount = 3;
-            if (group2 > 0) groupCount = 4;
-            if (group1 > 0) groupCount = 5;
+            if (group4 > 0)
+            {
+                groupCount = 2;
+            }
+
+            if (group3 > 0)
+            {
+                groupCount = 3;
+            }
+
+            if (group2 > 0)
+            {
+                groupCount = 4;
+            }
+
+            if (group1 > 0)
+            {
+                groupCount = 5;
+            }
+
             var group1s = $"{group1}";
             var group2s = $"{group2}";
             var group3s = $"{group3}";
             var group4s = $"{group4}";
             var group5s = $"{group5}";
-            if (groupCount >= 2 && group5 < 10) group5s = "0" + group5;
-            if (groupCount >= 2 && group5 < 100) group5s = "0" + group5;
-            if (groupCount >= 3 && group4 < 10) group4s = "0" + group4;
-            if (groupCount >= 3 && group4 < 100) group4s = "0" + group4;
-            if (groupCount >= 4 && group3 < 10) group3s = "0" + group3;
-            if (groupCount >= 4 && group3 < 100) group3s = "0" + group3;
-            if (groupCount >= 5 && group2 < 10) group2s = "0" + group2;
-            if (groupCount >= 5 && group2 < 100) group2s = "0" + group2;
-            if (groupCount == 5) finalNumber = group1 + "," + group2 + "," + group3 + "," + group4 + "," + group5;
-            if (groupCount == 4) finalNumber = group2 + "," + group3 + "," + group4 + "," + group5;
-            if (groupCount == 3) finalNumber = group3 + "," + group4 + "," + group5;
-            if (groupCount == 2) finalNumber = group4 + "," + group5;
-            if (groupCount == 1) finalNumber = "" + group5;
-            if (cNegative == true) finalNumber = "-" + finalNumber;
+            if (groupCount >= 2 && group5 < 10)
+            {
+                group5s = "0" + group5;
+            }
+
+            if (groupCount >= 2 && group5 < 100)
+            {
+                group5s = "0" + group5;
+            }
+
+            if (groupCount >= 3 && group4 < 10)
+            {
+                group4s = "0" + group4;
+            }
+
+            if (groupCount >= 3 && group4 < 100)
+            {
+                group4s = "0" + group4;
+            }
+
+            if (groupCount >= 4 && group3 < 10)
+            {
+                group3s = "0" + group3;
+            }
+
+            if (groupCount >= 4 && group3 < 100)
+            {
+                group3s = "0" + group3;
+            }
+
+            if (groupCount >= 5 && group2 < 10)
+            {
+                group2s = "0" + group2;
+            }
+
+            if (groupCount >= 5 && group2 < 100)
+            {
+                group2s = "0" + group2;
+            }
+
+            if (groupCount == 5)
+            {
+                finalNumber = group1 + "," + group2 + "," + group3 + "," + group4 + "," + group5;
+            }
+
+            if (groupCount == 4)
+            {
+                finalNumber = group2 + "," + group3 + "," + group4 + "," + group5;
+            }
+
+            if (groupCount == 3)
+            {
+                finalNumber = group3 + "," + group4 + "," + group5;
+            }
+
+            if (groupCount == 2)
+            {
+                finalNumber = group4 + "," + group5;
+            }
+
+            if (groupCount == 1)
+            {
+                finalNumber = "" + group5;
+            }
+
+            if (cNegative)
+            {
+                finalNumber = "-" + finalNumber;
+            }
         }
 
         return finalNumber;
@@ -1050,7 +1269,11 @@ public class Root
             regB *= 10;
         }
 
-        if (regE > 990) return 990999999999999;
+        if (regE > 990)
+        {
+            return 990999999999999;
+        }
+
         return Math.floor(regE * 1000000000000 + regB);
     }
 
@@ -1058,7 +1281,11 @@ public class Root
     // MATCH: frame_3/DoAction.as:toB()
     public double toB(double reg)
     {
-        if (reg == Infinity || isNaN(reg)) return 0;
+        if (reg == Infinity || isNaN(reg))
+        {
+            return 0;
+        }
+
         var tmpB = reg;
         var tmpE = 0;
         while (tmpB > 999999999999)
@@ -1075,7 +1302,11 @@ public class Root
     // MATCH: frame_3/DoAction.as:toR()
     public double toR(double bn)
     {
-        if (isNaN(bn) || bn == Infinity) return 0;
+        if (isNaN(bn) || bn == Infinity)
+        {
+            return 0;
+        }
+
         return Math.round(_root.bGetB(bn) * Math.pow(10, _root.bGetE(bn)));
     }
 
@@ -1115,7 +1346,11 @@ public class Root
         }
 
         var tmpEDiff = _root.bGetE(bnA) - _root.bGetE(bnB);
-        if (tmpEDiff > 12) return bnA;
+        if (tmpEDiff > 12)
+        {
+            return bnA;
+        }
+
         var tmpBA = _root.bGetB(bnA);
         var tmpBB = Math.floor(_root.bGetB(bnB) / Math.pow(10, tmpEDiff));
         var tmpB = tmpBA + tmpBB;
@@ -1132,9 +1367,17 @@ public class Root
     // MATCH: frame_3/DoAction.as:bSub()
     public double bSub(double bnA, double bnB)
     {
-        if (bnB >= bnA) return 0;
+        if (bnB >= bnA)
+        {
+            return 0;
+        }
+
         var tmpEDiff = _root.bGetE(bnA) - _root.bGetE(bnB);
-        if (tmpEDiff > 12) return bnA;
+        if (tmpEDiff > 12)
+        {
+            return bnA;
+        }
+
         var tmpBA = _root.bGetB(bnA);
         var tmpBB = Math.floor(_root.bGetB(bnB) / Math.pow(10, tmpEDiff));
         var tmpB = tmpBA - tmpBB;
@@ -1190,19 +1433,31 @@ public class Root
     // MATCH: frame_3/DoAction.as:bDiv()
     public double bDiv(double bnA, double bnB)
     {
-        if (bnA < bnB) return 0;
+        if (bnA < bnB)
+        {
+            return 0;
+        }
+
         return _root.bDiv2(_root.bCreate(_root.bGetB(bnA), _root.bGetE(bnA) - _root.bGetE(bnB)), _root.bGetB(bnB));
     }
 
     // MATCH: frame_3/DoAction.as:bPct()
     public double bPct(double bnA, double bnB)
     {
-        if (bnA >= bnB) return 100;
+        if (bnA >= bnB)
+        {
+            return 100;
+        }
+
         var tmpBA = _root.bGetB(bnA);
         var tmpEA = _root.bGetE(bnA);
         var tmpBB = _root.bGetB(bnB);
         var tmpEB = _root.bGetE(bnB);
-        if (tmpEB - tmpEA > 4) return 0;
+        if (tmpEB - tmpEA > 4)
+        {
+            return 0;
+        }
+
         while (tmpEA < tmpEB)
         {
             tmpEA += 1;
@@ -1220,8 +1475,16 @@ public class Root
         var tmpPB = tmp % 100;
         var tmpPAs = $"{tmpPA}";
         var tmpPBs = $"{tmpPB}";
-        if (tmpPA < 10) tmpPAs = "0" + tmpPA;
-        if (tmpPB < 10) tmpPBs = "0" + tmpPB;
+        if (tmpPA < 10)
+        {
+            tmpPAs = "0" + tmpPA;
+        }
+
+        if (tmpPB < 10)
+        {
+            tmpPBs = "0" + tmpPB;
+        }
+
         return tmpPAs + "." + tmpPBs + "%";
     }
 
@@ -1232,7 +1495,11 @@ public class Root
         var tmpPA = Math.floor(pct / 100);
         var tmpPB = tmp % 100;
         var tmpPBs = $"{tmpPB}";
-        if (tmpPB < 10) tmpPBs = "0" + tmpPB;
+        if (tmpPB < 10)
+        {
+            tmpPBs = "0" + tmpPB;
+        }
+
         return tmpPA + "." + tmpPBs + "%";
     }
 
@@ -1287,7 +1554,11 @@ public class Root
         var tmpB = _root.bGetB(bn);
         var tmpB2 = 0;
         var tmpE = _root.bGetE(bn);
-        if (tmpE == 0) return _root.withComma(tmpB);
+        if (tmpE == 0)
+        {
+            return _root.withComma(tmpB);
+        }
+
         while (tmpB > 99999 || tmpE % 3 != 1)
         {
             tmpE += 1;
@@ -1296,7 +1567,11 @@ public class Root
 
         tmpB2 = (int)tmpB % 100;
         var tmpB2s = $"{tmpB2}";
-        if (tmpB2 < 10) tmpB2s = "0" + tmpB2;
+        if (tmpB2 < 10)
+        {
+            tmpB2s = "0" + tmpB2;
+        }
+
         tmpB = Math.floor(tmpB / 100);
         tmpE += 2;
         return tmpB + "." + tmpB2s + " x 10^" + tmpE;
@@ -1325,7 +1600,11 @@ public class Root
         var tmpB = _root.bGetB(bn);
         var tmpB2 = 0;
         var tmpE = _root.bGetE(bn);
-        if (tmpE == 0) return _root.withComma(tmpB);
+        if (tmpE == 0)
+        {
+            return _root.withComma(tmpB);
+        }
+
         while (tmpB > 99999 || tmpE % 3 != 1)
         {
             tmpE += 1;
@@ -1334,7 +1613,11 @@ public class Root
 
         tmpB2 = (int)tmpB % 100;
         var tmpB2s = $"{tmpB2}";
-        if (tmpB2 < 10) tmpB2s = "0" + tmpB2;
+        if (tmpB2 < 10)
+        {
+            tmpB2s = "0" + tmpB2;
+        }
+
         tmpB = Math.floor(tmpB / 100);
         tmpE += 2;
         return $"{tmpB}" + "." + tmpB2s + " x 10" + _root.toFW("" + tmpE);
@@ -1343,14 +1626,22 @@ public class Root
     // MATCH: frame_3/DoAction.as:withCommaB()
     public string withCommaB(double num)
     {
-        if (num < 0) return "-" + _root.bDisp(_root.toB(-num));
+        if (num < 0)
+        {
+            return "-" + _root.bDisp(_root.toB(-num));
+        }
+
         return _root.bDisp(_root.toB(num));
     }
 
     // MATCH: frame_3/DoAction.as:withCommaC()
     public string withCommaC(double num)
     {
-        if (num < 0) return "-" + _root.bDispX(_root.toB(-num));
+        if (num < 0)
+        {
+            return "-" + _root.bDispX(_root.toB(-num));
+        }
+
         return _root.bDispX(_root.toB(num));
     }
 
@@ -1362,17 +1653,39 @@ public class Root
         {
             tMult = 1.2 - _root.save.expSauceAsc[sa] / 1000000 / 20000000 -
                     _root.save.expSauceAsc[sa] / (_root.save.expSauceAsc[40] + 1) * 0.2;
-            if (sa == 0 || sa == 7) tMult += 0.1;
-            if (tMult > 1.2) tMult = 1.2;
-            if (tMult < 0.8) tMult = 0.8;
+            if (sa == 0 || sa == 7)
+            {
+                tMult += 0.1;
+            }
+
+            if (tMult > 1.2)
+            {
+                tMult = 1.2;
+            }
+
+            if (tMult < 0.8)
+            {
+                tMult = 0.8;
+            }
         }
         else if (_root.save.gDifficulty >= 2 && _root.save.level < 8999)
         {
             tMult = 1.2 - _root.save.expSauceAsc[sa] / 1000000 / 10000000 -
                     _root.save.expSauceAsc[sa] / (_root.save.expSauceAsc[40] + 1) * 0.2;
-            if (sa == 0 || sa == 7) tMult += 0.1;
-            if (tMult > 1.1) tMult = 1.1;
-            if (tMult < 0.9) tMult = 0.9;
+            if (sa == 0 || sa == 7)
+            {
+                tMult += 0.1;
+            }
+
+            if (tMult > 1.1)
+            {
+                tMult = 1.1;
+            }
+
+            if (tMult < 0.9)
+            {
+                tMult = 0.9;
+            }
         }
         else
         {
@@ -1380,7 +1693,11 @@ public class Root
         }
 
         tMult = Math.round(tMult * 100) / 100;
-        if (isNaN(tMult)) tMult = 1;
+        if (isNaN(tMult))
+        {
+            tMult = 1;
+        }
+
         return tMult;
     }
 
@@ -1391,15 +1708,34 @@ public class Root
         if (!isNaN(amount))
         {
             if (limit == 1)
+            {
                 realLimit = _root.boostMax;
+            }
             else if (limit == 2 || limit == 3)
+            {
                 realLimit = _root.boostMax * 1.5;
+            }
             else
+            {
                 realLimit = _root.boostMax * 2.5;
-            if (_root.save.bestLevel <= 5 && _root.save.featureBoostGen != true) realLimit = 100;
+            }
+
+            if (_root.save.bestLevel <= 5 && _root.save.featureBoostGen != true)
+            {
+                realLimit = 100;
+            }
+
             var actualGain = amount;
-            if (actualGain > realLimit - _root.save.boost) actualGain = realLimit - _root.save.boost;
-            if (actualGain < 0) actualGain = 0;
+            if (actualGain > realLimit - _root.save.boost)
+            {
+                actualGain = realLimit - _root.save.boost;
+            }
+
+            if (actualGain < 0)
+            {
+                actualGain = 0;
+            }
+
             _root.save.boost += actualGain;
             _root.save.boostPurchased += actualGain;
         }
@@ -1408,31 +1744,75 @@ public class Root
     // MATCH: frame_3/DoAction.as:gainEXP()
     public void gainEXP(double amount, double sauce)
     {
-        if (isNaN(sauce)) sauce = _root.house._currentframe;
+        if (isNaN(sauce))
+        {
+            sauce = _root.house._currentframe;
+        }
+
         if (!isNaN(amount) && amount > 0 && amount != Infinity)
         {
-            if (_root.save.level < 9001 && _root.save.featureBoostAuto == true)
+            if (_root.save.level < 9001 && _root.save.featureBoostAuto)
             {
                 var boostToGain = 0.05 + amount / Math.min(_root.requiredExp, 810000000) /
                     Math.pow(_root.save.boost, 1.11) * 35000;
-                if (_root.save.level < 125) boostToGain = boostToGain * _root.save.level / 125;
-                if (_root.save.boost < _root.boostMax) boostToGain *= 5;
-                if (boostToGain > 10) boostToGain = 10;
-                if (_root.save.restTime > 0) boostToGain *= 1.1 + _root.save.restEfficiency[3] * 0.01;
+                if (_root.save.level < 125)
+                {
+                    boostToGain = boostToGain * _root.save.level / 125;
+                }
+
+                if (_root.save.boost < _root.boostMax)
+                {
+                    boostToGain *= 5;
+                }
+
+                if (boostToGain > 10)
+                {
+                    boostToGain = 10;
+                }
+
+                if (_root.save.restTime > 0)
+                {
+                    boostToGain *= 1.1 + _root.save.restEfficiency[3] * 0.01;
+                }
+
                 if (_root.save.permaBanPenalty[28] == 3)
+                {
                     boostToGain *= 1.1;
+                }
                 else if (_root.save.permaBanPenalty[28] == 2)
+                {
                     boostToGain *= 1.06;
-                else if (_root.save.permaBanPenalty[28] == 1) boostToGain *= 1.04;
+                }
+                else if (_root.save.permaBanPenalty[28] == 1)
+                {
+                    boostToGain *= 1.04;
+                }
+
                 _root.gainBoost(boostToGain, 3);
             }
 
             var multiplier = 1.0;
-            if (_root.saveid == 23) multiplier = 0.75;
-            if (_root.saveid == 24) multiplier = 0.35;
-            if (_root.saveid == 4) multiplier = _root.save.dbExp / 100;
+            if (_root.saveid == 23)
+            {
+                multiplier = 0.75;
+            }
+
+            if (_root.saveid == 24)
+            {
+                multiplier = 0.35;
+            }
+
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbExp / 100;
+            }
+
             var ascentMult = _root.save.banned / 10;
-            if (ascentMult > 0.5) ascentMult = 0.5;
+            if (ascentMult > 0.5)
+            {
+                ascentMult = 0.5;
+            }
+
             multiplier += ascentMult;
             var multiplier2 = 1.0;
             var i = 1;
@@ -1441,50 +1821,148 @@ public class Root
                 var yy = _root.clock_year % 10;
                 var mm = _root.clock_month;
                 var dd = _root.clock_date;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 10% more EXP from all sources") multiplier += 0.1;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 20% more EXP from all sources") multiplier += 0.2;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 30% more EXP from all sources") multiplier += 0.3;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 50% more EXP from all sources") multiplier += 0.5;
+                if (_root.eventList[yy][mm][dd][i] == "Gain 10% more EXP from all sources")
+                {
+                    multiplier += 0.1;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 20% more EXP from all sources")
+                {
+                    multiplier += 0.2;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 30% more EXP from all sources")
+                {
+                    multiplier += 0.3;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 50% more EXP from all sources")
+                {
+                    multiplier += 0.5;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 25% more EXP from all sources except the Progress Bar, LolMarket and Awesome Adventures" &&
-                    sauce != 0 && sauce != 13 && sauce != 14) multiplier += 0.25;
+                    sauce != 0 && sauce != 13 && sauce != 14)
+                {
+                    multiplier += 0.25;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 50% more EXP from all sources except the Progress Bar, LolMarket and Awesome Adventures" &&
-                    sauce != 0 && sauce != 13 && sauce != 14) multiplier += 0.5;
+                    sauce != 0 && sauce != 13 && sauce != 14)
+                {
+                    multiplier += 0.5;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 100% more EXP from all sources except the Progress Bar, LolMarket and Awesome Adventures" &&
-                    sauce != 0 && sauce != 13 && sauce != 14) multiplier += 1;
+                    sauce != 0 && sauce != 13 && sauce != 14)
+                {
+                    multiplier += 1;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 200% more EXP from all sources except the Progress Bar, LolMarket and Awesome Adventures" &&
-                    sauce != 0 && sauce != 13 && sauce != 14) multiplier += 2;
+                    sauce != 0 && sauce != 13 && sauce != 14)
+                {
+                    multiplier += 2;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from Button Machine" && sauce == 8)
+                {
                     multiplier2 *= 1.5;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from Arcade" && sauce == 10) multiplier2 *= 1.5;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from Stadium" && sauce == 11) multiplier2 *= 1.5;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from TukkunFCG" && sauce == 12) multiplier2 *= 1.5;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from Fishing" && sauce == 22) multiplier2 *= 1.5;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from Arcade" && sauce == 10)
+                {
+                    multiplier2 *= 1.5;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from Stadium" && sauce == 11)
+                {
+                    multiplier2 *= 1.5;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from TukkunFCG" && sauce == 12)
+                {
+                    multiplier2 *= 1.5;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 1.5x EXP from Fishing" && sauce == 22)
+                {
+                    multiplier2 *= 1.5;
+                }
+
                 i++;
             }
 
             if (_root.save.hyperDay[1] == _root.todayCode || _root.save.hyperDay[2] == _root.todayCode)
+            {
                 if (sauce != 0 && sauce != 13 && sauce != 14)
+                {
                     multiplier += 3;
+                }
+            }
 
             if (sauce == 0 && _root.save.boostFreeze > 0)
+            {
                 multiplier += Math.min(Math.floor(_root.save.totalStupidity / 500), 250) * 0.01;
+            }
+
             multiplier += _root.save.ascStupidity * 0.05;
             multiplier *= multiplier2;
-            if (_root.save.restTime > 0) multiplier *= 1.1 + _root.save.restEfficiency[1] * 0.01;
-            if (_root.save.careerLevel[1] >= 200 && _root.cursoridle >= 30) multiplier *= 1.03;
-            if (_root.save.banPenalty[1] == 1) multiplier *= 1.05;
-            if (sauce == 38) multiplier = 1;
-            if (_root.save.newbieProgress != 15 && _root.save.bestLevel < 1000) multiplier = 1;
-            if (_root.save.level == 9000) multiplier *= 0.5;
-            if (_root.save.level == 9001) multiplier *= 0.05;
-            if (_root.save.level == 9002) multiplier = 0;
-            if (_root.save.doubleExpTime > 0) multiplier *= 1.5;
+            if (_root.save.restTime > 0)
+            {
+                multiplier *= 1.1 + _root.save.restEfficiency[1] * 0.01;
+            }
+
+            if (_root.save.careerLevel[1] >= 200 && _root.cursoridle >= 30)
+            {
+                multiplier *= 1.03;
+            }
+
+            if (_root.save.banPenalty[1] == 1)
+            {
+                multiplier *= 1.05;
+            }
+
+            if (sauce == 38)
+            {
+                multiplier = 1;
+            }
+
+            if (_root.save.newbieProgress != 15 && _root.save.bestLevel < 1000)
+            {
+                multiplier = 1;
+            }
+
+            if (_root.save.level == 9000)
+            {
+                multiplier *= 0.5;
+            }
+
+            if (_root.save.level == 9001)
+            {
+                multiplier *= 0.05;
+            }
+
+            if (_root.save.level == 9002)
+            {
+                multiplier = 0;
+            }
+
+            if (_root.save.doubleExpTime > 0)
+            {
+                multiplier *= 1.5;
+            }
+
             multiplier *= _root.sauceMult(sauce);
-            if (_root.detectedX == 1) multiplier = 0;
+            if (_root.detectedX == 1)
+            {
+                multiplier = 0;
+            }
+
             _root.save.expLag += Math.floor(amount * multiplier);
             _root.save.expGraph[7] += Math.floor(amount);
             _root.save.expGraph2[7] += Math.floor(amount * multiplier);
@@ -1492,7 +1970,7 @@ public class Root
             _root.save.expSauceAsc[sauce] += Math.floor(amount * multiplier);
             _root.save.expSauce[40] += Math.floor(amount * multiplier);
             _root.save.expSauceAsc[40] += Math.floor(amount * multiplier);
-            if (_root.cursoridle < 30 && _root.save.showGain == true && sauce != 0 && multiplier > 0)
+            if (_root.cursoridle < 30 && _root.save.showGain && sauce != 0 && multiplier > 0)
             {
                 _root.mainSummonCount += 1;
                 _root.mainAntiLag += 1;
@@ -1509,36 +1987,78 @@ public class Root
     // MATCH: frame_3/DoAction.as:gainCoin()
     public void gainCoin(double amount, double sauce)
     {
-        if (isNaN(sauce)) sauce = _root.house._currentframe;
+        if (isNaN(sauce))
+        {
+            sauce = _root.house._currentframe;
+        }
+
         if (!isNaN(amount) && amount > 0 && amount != Infinity && _root.save.coinOvercap < 300)
         {
-            if (_root.save.level < 9001 && _root.save.featureBoostAuto == true)
+            if (_root.save.level < 9001 && _root.save.featureBoostAuto)
             {
                 var boostToGain = 0.01 + amount / Math.min(_root.requiredExp, 810000000) /
                     Math.pow(_root.save.boost, 1.11) * 7000;
-                if (_root.save.level < 125) boostToGain = boostToGain * _root.save.level / 125;
-                if (_root.save.boost < _root.boostMax) boostToGain *= 5;
-                if (boostToGain > 2) boostToGain = 2;
-                if (_root.save.restTime > 0) boostToGain *= 1.1 + _root.save.restEfficiency[3] * 0.01;
+                if (_root.save.level < 125)
+                {
+                    boostToGain = boostToGain * _root.save.level / 125;
+                }
+
+                if (_root.save.boost < _root.boostMax)
+                {
+                    boostToGain *= 5;
+                }
+
+                if (boostToGain > 2)
+                {
+                    boostToGain = 2;
+                }
+
+                if (_root.save.restTime > 0)
+                {
+                    boostToGain *= 1.1 + _root.save.restEfficiency[3] * 0.01;
+                }
+
                 if (_root.save.permaBanPenalty[28] == 3)
+                {
                     boostToGain *= 1.1;
+                }
                 else if (_root.save.permaBanPenalty[28] == 2)
+                {
                     boostToGain *= 1.06;
-                else if (_root.save.permaBanPenalty[28] == 1) boostToGain *= 1.04;
+                }
+                else if (_root.save.permaBanPenalty[28] == 1)
+                {
+                    boostToGain *= 1.04;
+                }
+
                 _root.gainBoost(boostToGain, 3);
             }
 
             var multiplier = 1.0;
-            if (_root.saveid == 24) multiplier = 0.35;
-            if (_root.saveid == 4) multiplier = _root.save.dbCoin / 100;
+            if (_root.saveid == 24)
+            {
+                multiplier = 0.35;
+            }
+
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbCoin / 100;
+            }
+
             if (sauce != 0)
             {
                 if (sauce == 6 || sauce == 13)
+                {
                     multiplier += Math.min(Math.floor(_root.save.totalStupidity / 250), 100) * 0.01;
+                }
                 else if (_root.save.totalStupidity >= 25000)
+                {
                     multiplier += Math.min(Math.floor((_root.save.totalStupidity - 25000) / 250), 150) * 0.02 + 1;
+                }
                 else
+                {
                     multiplier += Math.min(Math.floor(_root.save.totalStupidity / 250), 100) * 0.01;
+                }
             }
 
             var i = 1;
@@ -1547,31 +2067,87 @@ public class Root
                 var yy = _root.clock_year % 10;
                 var mm = _root.clock_month;
                 var dd = _root.clock_date;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 10% more Coins from all sources") multiplier += 0.1;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 20% more Coins from all sources") multiplier += 0.2;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 30% more Coins from all sources") multiplier += 0.3;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 50% more Coins from all sources") multiplier += 0.5;
+                if (_root.eventList[yy][mm][dd][i] == "Gain 10% more Coins from all sources")
+                {
+                    multiplier += 0.1;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 20% more Coins from all sources")
+                {
+                    multiplier += 0.2;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 30% more Coins from all sources")
+                {
+                    multiplier += 0.3;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 50% more Coins from all sources")
+                {
+                    multiplier += 0.5;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 25% more Coins from all sources except the Progress Bar, Garden, LolMarket and Fishing" &&
-                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22) multiplier += 0.25;
+                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22)
+                {
+                    multiplier += 0.25;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 50% more Coins from all sources except the Progress Bar, Garden, LolMarket and Fishing" &&
-                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22) multiplier += 0.5;
+                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22)
+                {
+                    multiplier += 0.5;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 100% more Coins from all sources except the Progress Bar, Garden, LolMarket and Fishing" &&
-                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22) multiplier += 1;
+                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22)
+                {
+                    multiplier += 1;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 200% more Coins from all sources except the Progress Bar, Garden, LolMarket and Fishing" &&
-                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22) multiplier += 2;
+                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22)
+                {
+                    multiplier += 2;
+                }
+
                 i++;
             }
 
-            if (_root.save.restTime > 0) multiplier *= 1.1 + _root.save.restEfficiency[2] * 0.01;
-            if (_root.save.careerLevel[1] >= 200 && _root.cursoridle >= 30) multiplier *= 1.03;
-            if (_root.save.banPenalty[2] == 1) multiplier *= 1.1;
-            if (_root.save.doubleCoinTime > 0) multiplier *= 1.5;
-            if (sauce == 22 || sauce == 38 || sauce == 39) multiplier = 1;
-            if (_root.detectedX == 1) multiplier = 0;
+            if (_root.save.restTime > 0)
+            {
+                multiplier *= 1.1 + _root.save.restEfficiency[2] * 0.01;
+            }
+
+            if (_root.save.careerLevel[1] >= 200 && _root.cursoridle >= 30)
+            {
+                multiplier *= 1.03;
+            }
+
+            if (_root.save.banPenalty[2] == 1)
+            {
+                multiplier *= 1.1;
+            }
+
+            if (_root.save.doubleCoinTime > 0)
+            {
+                multiplier *= 1.5;
+            }
+
+            if (sauce == 22 || sauce == 38 || sauce == 39)
+            {
+                multiplier = 1;
+            }
+
+            if (_root.detectedX == 1)
+            {
+                multiplier = 0;
+            }
+
             var finalAmnt = Math.floor(amount * multiplier);
             _root.save.coinLag += finalAmnt;
             _root.save.coinSauce[sauce] += finalAmnt;
@@ -1598,7 +2174,7 @@ public class Root
                 }
             }
 
-            if (_root.cursoridle < 30 && _root.save.showGain == true && sauce != 22 && sauce != 0 && sauce != 39)
+            if (_root.cursoridle < 30 && _root.save.showGain && sauce != 22 && sauce != 0 && sauce != 39)
             {
                 _root.mainSummonCount += 1;
                 _root.mainAntiLag += 1;
@@ -1615,16 +2191,30 @@ public class Root
             _root.save.banned >= 5)
         {
             var multiplier = 1.0;
-            if (_root.saveid == 24) multiplier = 0.35;
-            if (_root.saveid == 4) multiplier = _root.save.dbCoin / 100;
+            if (_root.saveid == 24)
+            {
+                multiplier = 0.35;
+            }
+
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbCoin / 100;
+            }
+
             if (sauce != 0)
             {
                 if (sauce == 6 || sauce == 13)
+                {
                     multiplier += Math.min(Math.floor(_root.save.totalStupidity / 250), 100) * 0.01;
+                }
                 else if (_root.save.totalStupidity >= 25000)
+                {
                     multiplier += Math.min(Math.floor((_root.save.totalStupidity - 25000) / 250), 150) * 0.02 + 1;
+                }
                 else
+                {
                     multiplier += Math.min(Math.floor(_root.save.totalStupidity / 250), 100) * 0.01;
+                }
             }
 
             var i = 1;
@@ -1633,31 +2223,87 @@ public class Root
                 var yy = _root.clock_year % 10;
                 var mm = _root.clock_month;
                 var dd = _root.clock_date;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 10% more Coins from all sources") multiplier += 0.1;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 20% more Coins from all sources") multiplier += 0.2;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 30% more Coins from all sources") multiplier += 0.3;
-                if (_root.eventList[yy][mm][dd][i] == "Gain 50% more Coins from all sources") multiplier += 0.5;
+                if (_root.eventList[yy][mm][dd][i] == "Gain 10% more Coins from all sources")
+                {
+                    multiplier += 0.1;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 20% more Coins from all sources")
+                {
+                    multiplier += 0.2;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 30% more Coins from all sources")
+                {
+                    multiplier += 0.3;
+                }
+
+                if (_root.eventList[yy][mm][dd][i] == "Gain 50% more Coins from all sources")
+                {
+                    multiplier += 0.5;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 25% more Coins from all sources except the Progress Bar, Garden, LolMarket and Fishing" &&
-                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22) multiplier += 0.25;
+                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22)
+                {
+                    multiplier += 0.25;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 50% more Coins from all sources except the Progress Bar, Garden, LolMarket and Fishing" &&
-                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22) multiplier += 0.5;
+                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22)
+                {
+                    multiplier += 0.5;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 100% more Coins from all sources except the Progress Bar, Garden, LolMarket and Fishing" &&
-                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22) multiplier += 1;
+                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22)
+                {
+                    multiplier += 1;
+                }
+
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 200% more Coins from all sources except the Progress Bar, Garden, LolMarket and Fishing" &&
-                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22) multiplier += 2;
+                    sauce != 0 && sauce != 6 && sauce != 13 && sauce != 22)
+                {
+                    multiplier += 2;
+                }
+
                 i++;
             }
 
-            if (_root.save.restTime > 0) multiplier *= 1.1 + _root.save.restEfficiency[2] * 0.01;
-            if (_root.save.careerLevel[1] >= 200 && _root.cursoridle >= 30) multiplier *= 1.03;
-            if (_root.save.banPenalty[2] == 1) multiplier *= 1.1;
-            if (_root.save.doubleCoinTime > 0) multiplier *= 1.5;
-            if (sauce == 22 || sauce == 38 || sauce == 39) multiplier = 1;
-            if (_root.detectedX == 1) multiplier = 0;
+            if (_root.save.restTime > 0)
+            {
+                multiplier *= 1.1 + _root.save.restEfficiency[2] * 0.01;
+            }
+
+            if (_root.save.careerLevel[1] >= 200 && _root.cursoridle >= 30)
+            {
+                multiplier *= 1.03;
+            }
+
+            if (_root.save.banPenalty[2] == 1)
+            {
+                multiplier *= 1.1;
+            }
+
+            if (_root.save.doubleCoinTime > 0)
+            {
+                multiplier *= 1.5;
+            }
+
+            if (sauce == 22 || sauce == 38 || sauce == 39)
+            {
+                multiplier = 1;
+            }
+
+            if (_root.detectedX == 1)
+            {
+                multiplier = 0;
+            }
+
             var finalAmnt = Math.floor(amount * multiplier);
             _root.save.reforgingCoin += finalAmnt;
             _root.save.coinSauce[sauce] += finalAmnt;
@@ -1671,10 +2317,14 @@ public class Root
         if (!isNaN(amount) && amount > 0 && amount != Infinity && _root.save.greenCoinOvercap < 300)
         {
             var multiplier = 1.0;
-            if (_root.saveid == 4) multiplier = _root.save.dbGreenCoin / 100;
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbGreenCoin / 100;
+            }
+
             multiplier += Math.min(Math.floor(_root.save.totalStupidity / 5), 10) * 0.03;
             _root.save.greenCoin += Math.floor(amount * multiplier);
-            if (_root.cursoridle < 30 && _root.save.showGain == true)
+            if (_root.cursoridle < 30 && _root.save.showGain)
             {
                 _root.mainSummonCount += 1;
                 _root.mainAntiLag += 1;
@@ -1691,7 +2341,11 @@ public class Root
             _root.save.banned >= 5)
         {
             var multiplier = 1.0;
-            if (_root.saveid == 4) multiplier = _root.save.dbGreenCoin / 100;
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbGreenCoin / 100;
+            }
+
             multiplier += Math.min(Math.floor(_root.save.totalStupidity / 5), 10) * 0.03;
             _root.save.reforgingGreenCoin += Math.floor(amount * multiplier);
         }
@@ -1703,7 +2357,11 @@ public class Root
         if (!isNaN(amount) && amount > 0 && amount != Infinity && _root.save.greenCoinOvercap < 300)
         {
             var multiplier = 1.0;
-            if (_root.saveid == 4) multiplier = _root.save.dbGreenCoin / 100;
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbGreenCoin / 100;
+            }
+
             multiplier += Math.min(Math.floor(_root.save.totalStupidity / 5), 10) * 0.03;
             _root.save.greenCoin += Math.floor(amount * multiplier);
         }
@@ -1712,7 +2370,11 @@ public class Root
             _root.save.banned >= 5)
         {
             var multiplier = 1.0;
-            if (_root.saveid == 4) multiplier = _root.save.dbGreenCoin / 100;
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbGreenCoin / 100;
+            }
+
             multiplier += Math.min(Math.floor(_root.save.totalStupidity / 5), 10) * 0.03;
             _root.save.reforgingGreenCoin += Math.floor(amount * multiplier);
         }
@@ -1724,9 +2386,13 @@ public class Root
         if (!isNaN(amount) && amount > 0 && amount != Infinity && _root.save.blueCoinOvercap < 300)
         {
             var multiplier = 1.0;
-            if (_root.saveid == 4) multiplier = _root.save.dbBlueCoin / 100;
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbBlueCoin / 100;
+            }
+
             _root.save.blueCoin += Math.floor(amount * multiplier);
-            if (_root.cursoridle < 30 && _root.save.showGain == true)
+            if (_root.cursoridle < 30 && _root.save.showGain)
             {
                 _root.mainSummonCount += 1;
                 _root.mainAntiLag += 1;
@@ -1743,7 +2409,11 @@ public class Root
             _root.save.banned >= 5)
         {
             var multiplier = 1.0;
-            if (_root.saveid == 4) multiplier = _root.save.dbBlueCoin / 100;
+            if (_root.saveid == 4)
+            {
+                multiplier = _root.save.dbBlueCoin / 100;
+            }
+
             _root.save.reforgingBlueCoin += Math.floor(amount * multiplier);
         }
     }
@@ -1754,7 +2424,11 @@ public class Root
         if (!isNaN(amount) && amount > 0 && amount != Infinity)
         {
             var multiplier = 1;
-            if (Math.random() < Math.min(Math.floor(_root.save.totalStupidity / 500), 20) * 0.05) multiplier += 1;
+            if (Math.random() < Math.min(Math.floor(_root.save.totalStupidity / 500), 20) * 0.05)
+            {
+                multiplier += 1;
+            }
+
             var i = 1;
             while (i <= _root.todayEvent)
             {
@@ -1763,18 +2437,30 @@ public class Root
                 var dd = _root.clock_date;
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 100% more White Coins from all sources except level 9001 reward" &&
-                    amount < 1000) multiplier += 1;
+                    amount < 1000)
+                {
+                    multiplier += 1;
+                }
+
                 i++;
             }
 
             _root.save.whiteCoin += Math.floor(amount * multiplier);
-            if (_root.save.whiteCoin > 999999) _root.save.whiteCoin = 999999;
+            if (_root.save.whiteCoin > 999999)
+            {
+                _root.save.whiteCoin = 999999;
+            }
+
             if (Math.floor(amount * multiplier) >= 2)
+            {
                 _root.dispNews(163,
                     "Gained " + _root.withComma(amount * multiplier) + " White Coins! You now have " +
                     _root.withComma(_root.save.whiteCoin) + ".");
+            }
             else
+            {
                 _root.dispNews(163, "Gained 1 White Coin! You now have " + _root.withComma(_root.save.whiteCoin) + ".");
+            }
         }
     }
 
@@ -1792,18 +2478,30 @@ public class Root
                 var dd = _root.clock_date;
                 if (_root.eventList[yy][mm][dd][i] ==
                     "Gain 100% more White Coins from all sources except level 9001 reward" &&
-                    amount < 1000) multiplier += 1;
+                    amount < 1000)
+                {
+                    multiplier += 1;
+                }
+
                 i++;
             }
 
             _root.save.whiteCoin += Math.floor(amount * multiplier);
-            if (_root.save.whiteCoin > 999999) _root.save.whiteCoin = 999999;
+            if (_root.save.whiteCoin > 999999)
+            {
+                _root.save.whiteCoin = 999999;
+            }
+
             if (Math.floor(amount * multiplier) >= 2)
+            {
                 _root.dispNews(163,
                     "Gained " + _root.withComma(amount * multiplier) + " White Coins! You now have " +
                     _root.withComma(_root.save.whiteCoin) + ".");
+            }
             else
+            {
                 _root.dispNews(163, "Gained 1 White Coin! You now have " + _root.withComma(_root.save.whiteCoin) + ".");
+            }
         }
     }
 
@@ -1868,7 +2566,7 @@ public class Root
         {
             if (_root.save.careerActive[careerID] > 0 || _root.save.careerBoost[careerID] > 0 || mustTurnOn == false)
             {
-                if (_root.save.careerBoost[careerID] > 0 && mustTurnOn != false)
+                if (_root.save.careerBoost[careerID] > 0 && mustTurnOn)
                 {
                     if (_root.save.permaBanPenalty[13] == 3)
                     {
@@ -1957,7 +2655,7 @@ public class Root
                 }
             }
 
-            if (careerID == _root.save.curBusiness && mustTurnOn != false)
+            if (careerID == _root.save.curBusiness && mustTurnOn)
             {
                 if (_root.save.careerActive[careerID] > 0 || _root.save.careerBoost[careerID] > 0)
                 {
@@ -2083,7 +2781,7 @@ public class Root
         }
 
         var doubleMod = 1;
-        if (_root.save.featureEpicLicense == true)
+        if (_root.save.featureEpicLicense)
         {
             if (Math.random() < _root.save.epicSkill[1] * 0.01)
             {
@@ -2371,7 +3069,7 @@ public class Root
                 coinToGet = Math.floor(coinToGet * 1.1);
             }
         }
-        else if (_root.save.idleMode == true)
+        else if (_root.save.idleMode)
         {
             if (_root.save.permaBanPenalty[25] == 3)
             {
@@ -3243,7 +3941,7 @@ public class Root
                                                                      0.001);
         }
 
-        if (op >= 1 && op <= 7 || op == 11)
+        if ((op >= 1 && op <= 7) || op == 11)
         {
             tempCPerf = Math.floor(tempCPerf / 100) * 100;
         }
@@ -3308,7 +4006,7 @@ public class Root
                 _root.save.botEnergy = 359999;
             }
         }
-        else if (op >= 1 && op <= 7 || op == 11)
+        else if ((op >= 1 && op <= 7) || op == 11)
         {
             var tempCScore = Math.floor(_root.calcPerf(op) * (0.005 + Math.random() * 0.0025 + Math.random() * 0.001 +
                                                               Math.random() * Math.random() * 0.0015)) * 100;
@@ -3693,7 +4391,8 @@ public class Root
             _root.dispNews(175, "[Cyborg] You have gained " + _root.withComma(finalToken) + " Stadium Tokens!");
             if (order == 1)
             {
-                if (_root.save.questType == "Simple Race" && op == 8 || _root.save.questType == "Item Fight" && op == 9)
+                if ((_root.save.questType == "Simple Race" && op == 8) ||
+                    (_root.save.questType == "Item Fight" && op == 9))
                 {
                     if (_root.save.questSubtype == "Easy")
                     {
@@ -4225,8 +4924,9 @@ public class Root
                     cybFishCurrent = 52;
                 }
             }
-            else if (chaos1 <= 20 && _root.save.fishStreak >= 5 || _root.save.eliteFisherTime > 0 &&
-                     _root.save.fishStreak >= 2 && Math.random() < 0.02 && chaos1 > 20)
+            else if ((chaos1 <= 20 && _root.save.fishStreak >= 5) || (_root.save.eliteFisherTime > 0 &&
+                                                                      _root.save.fishStreak >= 2 &&
+                                                                      Math.random() < 0.02 && chaos1 > 20))
             {
                 if (_root.save.fishStreak >= 11 && _root.save.fishLevel >= 30 && Math.random() < 0.4)
                 {
@@ -4409,7 +5109,7 @@ public class Root
                 tempName = cybFishLev + " " + cybFishCate;
             }
 
-            if (Math.random() < _root.calcPerf(op) / 100 && (_root.save.fishStreak < 250 || Math.random() < 0.7) ||
+            if ((Math.random() < _root.calcPerf(op) / 100 && (_root.save.fishStreak < 250 || Math.random() < 0.7)) ||
                 cybFishSpec == "Manual+")
             {
                 _root.save.fishStreak += 1;
@@ -4725,7 +5425,7 @@ public class Root
             }
 
             if (_root.save.questType == "Fish" &&
-                (cybFishCurrent >= 31 && cybFishCurrent <= 50 || cybFishCurrent >= 71))
+                ((cybFishCurrent >= 31 && cybFishCurrent <= 50) || cybFishCurrent >= 71))
             {
                 if (_root.save.questSubtype == "Any")
                 {
@@ -4848,9 +5548,9 @@ public class Root
     {
         if (_root.save.bestLevel >= 1250)
         {
-            if (_root.save.botCurrentOp >= 1 && _root.save.botCurrentOp <= 7 || _root.save.botCurrentOp == 11)
+            if ((_root.save.botCurrentOp >= 1 && _root.save.botCurrentOp <= 7) || _root.save.botCurrentOp == 11)
             {
-                if (_root.save.featureArcade == true && _root.house._currentframe != 10)
+                if (_root.save.featureArcade && _root.house._currentframe != 10)
                 {
                     _root.save.botActive = true;
                 }
@@ -4861,7 +5561,7 @@ public class Root
             }
             else if (_root.save.botCurrentOp >= 8 && _root.save.botCurrentOp <= 10)
             {
-                if (_root.save.featureStadium == true && _root.house._currentframe != 11)
+                if (_root.save.featureStadium && _root.house._currentframe != 11)
                 {
                     _root.save.botActive = true;
                 }
@@ -4872,7 +5572,7 @@ public class Root
             }
             else if (_root.save.botCurrentOp >= 12 && _root.save.botCurrentOp <= 19)
             {
-                if (_root.save.featureTukkunFCG == true && _root.house._currentframe != 12)
+                if (_root.save.featureTukkunFCG && _root.house._currentframe != 12)
                 {
                     _root.save.botActive = true;
                 }
@@ -4883,7 +5583,7 @@ public class Root
             }
             else if (_root.save.botCurrentOp == 20)
             {
-                if (_root.save.featureFishing == true && _root.house._currentframe != 22 &&
+                if (_root.save.featureFishing && _root.house._currentframe != 22 &&
                     _root.save.fishExamLeft <= 0)
                 {
                     _root.save.botActive = true;
@@ -4907,12 +5607,12 @@ public class Root
                 _root.save.botCurrentOpMax = 1;
             }
 
-            if (_root.cyborgWorking == true && _root.save.botActive == false)
+            if (_root.cyborgWorking && _root.save.botActive == false)
             {
                 _root.dispNews(176, "[Cyborg] Simulation Cyborg status: PAUSED");
             }
 
-            if (_root.save.botActive == true)
+            if (_root.save.botActive)
             {
                 if (_root.cyborgWorking == false)
                 {
@@ -5096,7 +5796,7 @@ public class Root
                     j++;
                 }
 
-                if (mustSwap == true)
+                if (mustSwap)
                 {
                     j = i + 1;
                     while (j <= 9)
@@ -5134,7 +5834,7 @@ public class Root
                     j++;
                 }
 
-                if (mustSwap == true)
+                if (mustSwap)
                 {
                     j = i + 1;
                     while (j <= 110)
@@ -5435,7 +6135,7 @@ public class Root
             }
 
             if (tempModuleType == 5 || tempModuleType == 13 || tempModuleType == 22 || tempModuleType == 24 ||
-                tempModuleType == 25 || tempModuleType == 27 || tempModuleType >= 33 && tempModuleType <= 39 ||
+                tempModuleType == 25 || tempModuleType == 27 || (tempModuleType >= 33 && tempModuleType <= 39) ||
                 tempModuleType == 41)
             {
                 tempModuleType = random(42) + 1;
@@ -5451,7 +6151,7 @@ public class Root
                     tempShiny = 1;
                 }
 
-                if (Math.random() < tierUpChance && tempTier < maxTier || tempTier < minTier)
+                if ((Math.random() < tierUpChance && tempTier < maxTier) || tempTier < minTier)
                 {
                     tempTier += 1;
                 }
@@ -5874,7 +6574,7 @@ public class Root
                 tempValid = false;
             }
 
-            if (tempValid == true)
+            if (tempValid)
             {
                 _root.save.progModuleName[curPos] = tempNameA;
                 _root.save.progModuleTier[curPos] = tempTier;
@@ -5887,6 +6587,96 @@ public class Root
                 curPos += tempSize;
             }
         }
+    }
+
+
+    // MATCH: frame_4/DoAction.as:addArenaCraftWeapon()
+    public void addArenaCraftWeapon(double recipeType, double recipeReq, double recipeLimit, double reqRank, string subtype, double range, double frame, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name, string desc)
+    {
+        var item = new CraftItem();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        item.recipeLimit = recipeLimit;
+        item.name = name;
+        item.reqRank = reqRank;
+        item.subtype = subtype;
+        item.frame = frame;
+        item.range = range;
+        item.attack = attack;
+        item.speed = speed;
+        item.defense = defense;
+        item.bonus = bonus;
+        item.ability = ability;
+        item.moreBonus = moreBonus;
+        item.maxLevel = maxLevel;
+        item.expTNL = expTNL;
+        item.enhance = enhance;
+        item.bonusPow = bonusPow;
+        item.sell = sell;
+        item.expiry = expiry * 86400000;
+        if (noLife == false)
+        {
+            item.expiry = Infinity;
+        }
+        item.noBonus = noBonus;
+        item.noLife = noLife;
+        item.noFuse = noFuse;
+        item.noUnique = noUnique;
+        item.spirit = spirit;
+        item.unob = unob;
+        item.costPixel = costPixel;
+        item.costCraft = costCraft;
+        item.costSpec = costSpec;
+        item.careerExp = careerExp;
+        item.crit = crit;
+        item.dexterity = dexterity;
+        item.health = health;
+        item.desc = desc;
+        craftWeapon.Add(item);
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaCraftArmor()
+    public void addArenaCraftArmor(double recipeType, double recipeReq, double recipeLimit, double reqRank, string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name, string desc)
+    {
+        var item = new CraftItem();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        item.recipeLimit = recipeLimit;
+        item.name = name;
+        item.reqRank = reqRank;
+        item.subtype = subtype;
+        item.frame = frame;
+        item.attack = attack;
+        item.speed = speed;
+        item.defense = defense;
+        item.bonus = bonus;
+        item.ability = ability;
+        item.moreBonus = moreBonus;
+        item.maxLevel = maxLevel;
+        item.expTNL = expTNL;
+        item.enhance = enhance;
+        item.bonusPow = bonusPow;
+        item.sell = sell;
+        item.expiry = expiry * 86400000;
+        if (noLife == false)
+        {
+            item.expiry = Infinity;
+        }
+        item.noBonus = noBonus;
+        item.noLife = noLife;
+        item.noFuse = noFuse;
+        item.noUnique = noUnique;
+        item.spirit = spirit;
+        item.unob = unob;
+        item.costPixel = costPixel;
+        item.costCraft = costCraft;
+        item.costSpec = costSpec;
+        item.careerExp = careerExp;
+        item.crit = crit;
+        item.dexterity = dexterity;
+        item.health = health;
+        item.desc = desc;
+        craftArmor.Add(item);
     }
 
     public void gotoAndPlay(int index)

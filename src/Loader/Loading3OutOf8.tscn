@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://btatjby66xay1"]
+[gd_scene load_steps=3 format=3 uid="uid://bb37ornyy5ouc"]
 
-[ext_resource type="Script" uid="uid://1ktk5bl416rm" path="res://src/Loader/Loading2OutOf8.cs" id="1_73d5d"]
-[ext_resource type="FontFile" uid="uid://undd4htvlr06" path="res://common_assets/fonts/PF Tempesta Seven_893.ttf" id="2_gwrjp"]
+[ext_resource type="Script" uid="uid://1ktk5bl416rm" path="res://src/Loader/Loading2OutOf8.cs" id="1_7h8t4"]
+[ext_resource type="FontFile" uid="uid://undd4htvlr06" path="res://common_assets/fonts/PF Tempesta Seven_893.ttf" id="2_xqn2l"]
 
 [node name="Loading2OutOf8" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_73d5d")
+script = ExtResource("1_7h8t4")
 
 [node name="Bg" type="ColorRect" parent="."]
 layout_mode = 0
@@ -19,6 +19,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 22.3333
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_gwrjp")
+theme_override_fonts/font = ExtResource("2_xqn2l")
 theme_override_font_sizes/font_size = 12
 text = ">> Initializing: 2 / 8"

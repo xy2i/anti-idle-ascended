@@ -6,6 +6,7 @@ public partial class Loading2OutOf8 : Control
 {
     public override void _Ready()
     {
+        GD.Print("scene2");
         List<string> bannedUsers =
         [
             "Guest", "Tukkun", "omfg13321", "milleraus10", "Valmont06", "DarkWazza", "idan2", "luungockhang",
@@ -19,8 +20,9 @@ public partial class Loading2OutOf8 : Control
         ];
         var scoreBanned = false;
         var i = 0;
-        while (i <= bannedUsers.Count)
+        while (i < bannedUsers.Count)
         {
+            GD.Print(i);
             if (_root.kongregate_username == bannedUsers[i])
             {
                 scoreBanned = true;
@@ -30,7 +32,7 @@ public partial class Loading2OutOf8 : Control
         }
 
         _root.careerName =
-            new([
+            new FlashList<string>([
                 "", "Idler", "Gardener", "Fighter", "Item Maker", "Button Basher", "Arcade Player", "Racer",
                 "Card Player",
                 "Gem Trader", "Adventurer", "Pet Trainer", "Fisher"
@@ -308,14 +310,14 @@ public partial class Loading2OutOf8 : Control
         // };
         // Mouse.addListener(mouseListener);
         _root.cyborgActShortName =
-            new([
+            new FlashList<string>([
                 "Recharge", "Pong", "Ult. Avoidance", "Math Master", "Whack-a-greg", "Triangle Count", "MindSweeper",
                 "Balance 3", "Simple Race", "Item Fight", "Death Match", "MMR X", "FCG - Level 1", "FCG - Level 2",
                 "FCG - Level 3", "FCG - Level 4", "FCG - Level 6", "FCG - Level 7", "FCG - Level 8", "FCG - Level 10",
                 "Fishing"
             ]);
         _root.cyborgActLongName =
-            new([
+            new FlashList<string>([
                 "Recharging...", "Arcade - Pong: Survival Battle", "Arcade - Ultimate Avoidance",
                 "Arcade - Math Master",
                 "Arcade - Whack-a-greg", "Arcade - Triangle Count", "Arcade - MindSweeper", "Arcade - Balance 3",
@@ -325,24 +327,30 @@ public partial class Loading2OutOf8 : Control
                 "TukkunFCG - Level 10", "Fishing"
             ]);
         _root.cyborgActMinPerf =
-            new([40, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 5, 5, 50, 5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 1]);
+            new FlashList<double>([
+                40, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 5, 5, 50, 5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 1
+            ]);
         _root.cyborgActMaxPerf =
-            new([
+            new FlashList<double>([
                 240, 4200000, 1750000, 2400000, 3300000, 13500000, 10000000, 7200000, 90, 90, 1100, 7200000, 98, 97, 96,
                 95,
                 90, 85, 80, 70, 95
             ]);
         _root.cyborgActPerfText =
-            new([
+            new FlashList<string>([
                 "Energy", "Maximum Score", "Maximum Score", "Maximum Score", "Maximum Score", "Maximum Score",
                 "Maximum Score", "Maximum Score", "Win Rate", "Win Rate", "Maximum PWNts", "Maximum Score", "Win Rate",
                 "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Win Rate", "Perfect Rate"
             ]);
         _root.cyborgActPerfSign =
-            new([" sec", "", "", "", "", "", "", "", "%", "%", "", "", "%", "%", "%", "%", "%", "%", "%", "%", "%"]);
+            new FlashList<string>([
+                " sec", "", "", "", "", "", "", "", "%", "%", "", "", "%", "%", "%", "%", "%", "%", "%", "%", "%"
+            ]);
         _root.cyborgActTime =
-            new([300, 420, 175, 80, 165, 675, 500, 360, 17, 19, 600, 360, 120, 150, 170, 190, 200, 300, 350, 450, 27]);
-        _root.cyborgActCost = new([
+            new FlashList<double>([
+                300, 420, 175, 80, 165, 675, 500, 360, 17, 19, 600, 360, 120, 150, 170, 190, 200, 300, 350, 450, 27
+            ]);
+        _root.cyborgActCost = new FlashList<double>([
             0, 84, 35, 16, 33, 135, 100, 72, 4, 5, 1000, 72, 30, 35, 40, 45, 60, 90, 120, 180, 11
         ]);
         _root.cyborgWorking = false;
