@@ -122,6 +122,12 @@ public class Root
     public double upnumberHidden;
     public List<CraftItem> craftWeapon;
     public List<CraftItem> craftArmor;
+    public List<CraftItem> craftAccessory;
+    public List<CraftItem> craftMedal;
+    public List<CraftItem> craftEnhancer;
+    public List<CraftItem> craftPotion;
+    public List<CraftItem> craftChip;
+    public List<CraftItem> setArray;
 
     public int getBytesLoaded()
     {
@@ -6591,7 +6597,12 @@ public class Root
 
 
     // MATCH: frame_4/DoAction.as:addArenaCraftWeapon()
-    public void addArenaCraftWeapon(double recipeType, double recipeReq, double recipeLimit, double reqRank, string subtype, double range, double frame, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name, string desc)
+    public void addArenaCraftWeapon(double recipeType, double recipeReq, double recipeLimit, double reqRank,
+        string subtype, double range, double frame, double attack, double speed, double defense, double crit,
+        double dexterity, double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus,
+        string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse,
+        bool noUnique, bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp,
+        string name, string desc)
     {
         var item = new CraftItem();
         item.recipeType = recipeType;
@@ -6618,6 +6629,7 @@ public class Root
         {
             item.expiry = Infinity;
         }
+
         item.noBonus = noBonus;
         item.noLife = noLife;
         item.noFuse = noFuse;
@@ -6636,7 +6648,12 @@ public class Root
     }
 
     // MATCH: frame_4/DoAction.as:addArenaCraftArmor()
-    public void addArenaCraftArmor(double recipeType, double recipeReq, double recipeLimit, double reqRank, string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity, double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus, string ability, string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique, bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name, string desc)
+    public void addArenaCraftArmor(double recipeType, double recipeReq, double recipeLimit, double reqRank,
+        string subtype, double frame, double attack, double speed, double defense, double crit, double dexterity,
+        double health, double maxLevel, double expTNL, double enhance, double bonusPow, string bonus, string ability,
+        string moreBonus, double sell, double expiry, bool noBonus, bool noLife, bool noFuse, bool noUnique,
+        bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name,
+        string desc)
     {
         var item = new CraftItem();
         item.recipeType = recipeType;
@@ -6662,6 +6679,7 @@ public class Root
         {
             item.expiry = Infinity;
         }
+
         item.noBonus = noBonus;
         item.noLife = noLife;
         item.noFuse = noFuse;
@@ -6677,6 +6695,39 @@ public class Root
         item.health = health;
         item.desc = desc;
         craftArmor.Add(item);
+    }
+
+    // MATCH: frame_4/DoAction.as:addArenaCraftEnhancer()
+    public void addArenaCraftEnhancer(double recipeType, double recipeReq, double recipeLimit,
+        string subtype, double frame, double power, double curse, double success,
+        double enhance, double bonusPow, string bonus, string ability,
+        string moreBonus, double sell, double expiry,
+        double costPixel, double costCraft, double costSpec, double careerExp, string name,
+        string desc)
+    {
+        var item = new CraftItem();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        item.recipeLimit = recipeLimit;
+        item.name = name;
+        item.subtype = subtype;
+        item.frame = frame;
+        item.power = power;
+        item.curse = curse;
+        item.success = success;
+        item.bonus = bonus;
+        item.ability = ability;
+        item.moreBonus = moreBonus;
+        item.enhance = enhance;
+        item.bonusPow = bonusPow;
+        item.sell = sell;
+        item.expiry = expiry * 86400000;
+        item.costPixel = costPixel;
+        item.costCraft = costCraft;
+        item.costSpec = costSpec;
+        item.careerExp = careerExp;
+        item.desc = desc;
+        craftEnhancer.Add(item);
     }
 
     public void gotoAndPlay(int index)
