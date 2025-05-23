@@ -77,6 +77,7 @@ public class Root
     public double moduleSlotOccupied;
     public double moostMin;
     public double nameValue;
+    public double damageNumCount;
     public Dictionary<string, object> news = new();
     public FlashList<double> newsFeature;
     public bool offlineVersion;
