@@ -22,8 +22,9 @@ In order to keep the code uniform no matter what, please adhere to the following
 | Standard | Its correspondent in C# | Common Usage | Replacement in AS2 Code |
 | :--- | ---: | ---: | ---: |
 | `pos` | Position | `.X .Y` | `_X _Y`[^1] |
-| `mousepos` | ToLocal(GetViewport().GetMousePosition()) | `.X .Y` | `_xmouse _ymouse` |
+| `mousepos` | ToLocal(GetViewport().GetMousePosition())[^2] | `.X .Y` | `_xmouse _ymouse` |
 | `color` | Modulate | `.R .G .B .A` | `xalpha` |
 
 ## Elaboration on Usage
 [^1]: ".X" ".Y" for say the Position example mean that you would invoke pos.X or pos.Y to edit such attributes.
+[^2]: To get ToLocal to be valid (to use local instead of global coordinates on an object); your `class Name` should be tied to `Node2D`; example: `public partial class NewLoot1 : Node2D`
