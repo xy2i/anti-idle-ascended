@@ -16,3 +16,14 @@ Fonts from the original game (likely incomplete versions because of decompilatio
 
 ## src
 Currently ported code
+
+# Standardizations
+In order to keep the code uniform no matter what, please adhere to the following:
+| Standard | Its correspondent in C# | Common Usage | Replacement in AS2 Code |
+| :--- | ---: | ---: | ---: |
+| `pos` | Position | `.X .Y` | `_X _Y` |
+| `mousepos` | ToLocal(GetViewport().GetMousePosition()) | `.X .Y` | `_xmouse _ymouse` |
+| `color` | Modulate | `.R .G .B .A` | `xalpha` |
+
+## Elaboration on Usage
+".X" ".Y" for say the Position example mean that you would invoke pos.X or pos.Y to edit such attributes.
