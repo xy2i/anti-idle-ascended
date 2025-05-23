@@ -31,6 +31,7 @@ public partial class NewLoot2 : Node2D
                 _root.save.questCount += 1;
             }
         }
+
         i = 1;
         while (i <= _root.todayEvent)
         {
