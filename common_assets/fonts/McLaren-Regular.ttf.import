@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dy7fs8hl0h7wx"
-path="res://.godot/imported/150_PF Tempesta Seven Extended.ttf-f7c729b332b963088ea32d59665ce212.fontdata"
+uid="uid://dlp7fy0ywsxnl"
+path="res://.godot/imported/McLaren-Regular.ttf-47c67120d047590096c6bb9d90f60982.fontdata"
 
 [deps]
 
-source_file="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf"
-dest_files=["res://.godot/imported/150_PF Tempesta Seven Extended.ttf-f7c729b332b963088ea32d59665ce212.fontdata"]
+source_file="res://common_assets/fonts/McLaren-Regular.ttf"
+dest_files=["res://.godot/imported/McLaren-Regular.ttf-47c67120d047590096c6bb9d90f60982.fontdata"]
 
 [params]
 
@@ -22,7 +22,7 @@ msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
 hinting=1
-subpixel_positioning=1
+subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null

@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://56cva6i45crf"]
+
+[ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="1_gnun1"]
+
+[sub_resource type="FontVariation" id="FontVariation_lqe27"]
+base_font = ExtResource("1_gnun1")
+spacing_top = -2
+spacing_bottom = -2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4732"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="Theme" id="Theme_gv203"]
+Label/font_sizes/font_size = 8
+Label/fonts/font = SubResource("FontVariation_lqe27")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_g4732")
+
+[node name="RestModule" type="Control"]
+layout_mode = 3
+anchor_right = 0.157
+anchor_bottom = 0.046
+offset_right = -0.0500031
+offset_bottom = 0.0999985
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gv203")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.267
+offset_bottom = -0.0100002
+text = "NOT RESTED"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.267
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.0100002
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 10
+text = "0:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,102 @@
+[gd_scene load_steps=9 format=3 uid="uid://ryuxuc6renuk"]
+
+[ext_resource type="FontFile" uid="uid://bbyatyn4eg3yh" path="res://common_assets/fonts/131_dmgFont2_PF Tempesta Seven.ttf" id="1_f0c5r"]
+[ext_resource type="FontFile" uid="uid://b48j7xh7p70gu" path="res://common_assets/fonts/1964_Noto Sans CJK JP Bold.ttf" id="2_npimq"]
+
+[sub_resource type="FontVariation" id="FontVariation_hocrj"]
+base_font = ExtResource("1_f0c5r")
+spacing_top = -2
+spacing_bottom = -2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u0cvr"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84qtm"]
+bg_color = Color(0.0784314, 0.0784314, 0.156863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qn08x"]
+bg_color = Color(0.235294, 0.235294, 0.392157, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_qgj4q"]
+Label/colors/font_color = Color(0.4, 0.4, 0.4, 1)
+Label/font_sizes/font_size = 10
+Label/fonts/font = SubResource("FontVariation_hocrj")
+Label/styles/normal = SubResource("StyleBoxFlat_u0cvr")
+ProgressBar/fonts/font = ExtResource("2_npimq")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_84qtm")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_qn08x")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu5st"]
+bg_color = Color(0.596078, 0.682353, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 0.158
+anchor_bottom = 0.363
+offset_right = 0.299995
+offset_bottom = 0.0500031
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_qgj4q")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.408
+anchor_right = 0.602
+anchor_bottom = 0.839
+offset_left = -0.0240021
+offset_right = -0.00600433
+offset_bottom = 0.995987
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.843
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.0519867
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.541
+offset_bottom = -0.0170002
+theme_override_colors/font_color = Color(0.2, 0.2, 0.4, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_xu5st")
+text = "Idle Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "OFF"
+horizontal_alignment = 1
+vertical_alignment = 1
