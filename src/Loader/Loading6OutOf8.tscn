@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfp68noski04n"]
+
+[ext_resource type="Script" uid="uid://cxhikayvj5y3u" path="res://src/Loader/Loading6OutOf8.cs" id="1_hdw2a"]
+[ext_resource type="FontFile" uid="uid://undd4htvlr06" path="res://common_assets/fonts/PF Tempesta Seven_893.ttf" id="2_3p65e"]
+
+[node name="Loading7OutOf8" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hdw2a")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 650.0
+offset_bottom = 650.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 22.3333
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_3p65e")
+theme_override_font_sizes/font_size = 12
+text = ">> Initializing: 6 / 8"

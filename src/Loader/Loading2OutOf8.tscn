@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://btatjby66xay1"]
 
-[ext_resource type="Script" uid="uid://1ktk5bl416rm" path="res://src/Loader/Loading2OutOf8.cs" id="1_73d5d"]
+[ext_resource type="Script" uid="uid://c2kmf7jkahnbk" path="res://src/Loader/Loading2OutOf8.cs" id="1_73d5d"]
 [ext_resource type="FontFile" uid="uid://undd4htvlr06" path="res://common_assets/fonts/PF Tempesta Seven_893.ttf" id="2_gwrjp"]
 
 [node name="Loading2OutOf8" type="Control"]

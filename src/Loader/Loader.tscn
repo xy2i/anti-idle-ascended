@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://qs8fgfyxuiho" path="res://common_assets/fonts/PF Tempesta Seven Bold_131.ttf" id="2_2voco"]
 [ext_resource type="Script" uid="uid://cu4gsekhlarar" path="res://src/Loader/LoadingBox.cs" id="2_jksyv"]
 [ext_resource type="FontFile" uid="uid://undd4htvlr06" path="res://common_assets/fonts/PF Tempesta Seven_893.ttf" id="3_0yiv2"]
-[ext_resource type="Script" uid="uid://b0gvds1ywc1xr" path="res://src/BattleArena/LootMechanics/NewLoot1.cs" id="5_7r27f"]
+[ext_resource type="Script" uid="uid://ddqctysdkgjny" path="res://src/Loader/LoadingBar.cs" id="5_cd1m6"]
 
 [node name="Loader" type="Node2D"]
 script = ExtResource("1_2blfs")
@@ -75,10 +75,4 @@ offset_top = 25.0
 offset_right = 275.0
 offset_bottom = 40.0
 color = Color(0, 1, 0, 1)
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_7r27f")
+script = ExtResource("5_cd1m6")

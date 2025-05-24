@@ -32,13 +32,13 @@ public class FlashList<T> : Dictionary<int, T> where T : notnull
 
     public new T this[int key]
     {
-        get => base[key];
+        get => TryGetValue(key, out var value) ? value : default;
         set => base[key] = value;
     }
 
     public T this[double key]
     {
-        get => this[(int)key];
+        get => (T)this[(int)key];
         set => this[(int)key] = value;
     }
 }

@@ -561,7 +561,7 @@ public class Save
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ]);
-
+    public double refund_relic = 0;
     public double fcgExp = 0;
     public double fcgExpTotal = 0;
     public double fcgInitDeck = 0;
@@ -569,7 +569,17 @@ public class Save
     public double fcgLegendCount = 0;
     public double fcgLegendDeck = 0;
     public double fcgLegendLife = 0;
+    public FlashList<bool> inventoryNoLife = new();
+    public FlashList<FlashList<double>> mysteryBoxCollect = new();
+    public double totalQuests = 0;
+    public double arenaWeakenAffected = 0;
+    public double arenaSpookyPenalty = 0;
+    public bool activeDeal1 = false;
+    public bool breakignore9002 = false;
+    public double dominatorBonus = 0;
     public double fcgLevel = 1;
+    public bool anniversary3Deal2 = false;
+    public double pirateSwordPenalty = 0;
     public double fcgLevel0 = 0;
     public double fcgLevel1 = 0;
     public double fcgLevel10 = 0;
@@ -595,6 +605,13 @@ public class Save
     public double fcgMaxStreak7 = 0;
     public double fcgMaxStreak8 = 0;
     public double fcgMaxStreak9 = 0;
+    public double bankStadiumToken = 0;
+    public double fishExpTotal = 0;
+    public double banned1665 = 0;
+    public bool pam = false;
+    public bool mh = false;
+    public double minVersion = 1833;
+    public double bugExp;
 
     public FlashList<double> fcgMission = new([
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -681,6 +698,7 @@ public class Save
     public bool featureNewHouse = false;
     public bool featurePetFeedBar = false;
     public bool featurePremiumSprayer = false;
+    public double event_explosionTour = 0;
     public bool featureSecretShop = false;
     public double featureSelected = 1;
     public bool featureSeppuku = false;
@@ -1628,13 +1646,4 @@ public class PopContain
     public void attachMovie(string name, string name2, double antilag, object o)
     {
     }
-}
-
-public class Fish
-{
-    public double fishLevel;
-    public double fishExp;
-    public string fishCate;
-    public string fishSpec;
-    public double fishAExp;
 }

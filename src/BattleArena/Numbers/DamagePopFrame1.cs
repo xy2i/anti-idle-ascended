@@ -69,8 +69,8 @@ public partial class DamagePopFrame1 : Control
             {
                 if (color.A > 150)
                 {
-                    scale.X = 150;
-                    scale.Y = 150;
+                    scale.X = 1.50f;
+                    scale.Y = 1.50f;
                 }
                 else if (color.A > 100)
                 {
@@ -79,8 +79,8 @@ public partial class DamagePopFrame1 : Control
                 }
                 else
                 {
-                    scale.X = 100;
-                    scale.Y = 100;
+                    scale.X = 1.00f;
+                    scale.Y = 1.00f;
                 }
             }
             Position = pos;

@@ -34,14 +34,14 @@ public class Enemy
     public  double allyPassive3X;
     public  string allyActive1;
     public  double allyActive1X;
-    public  string allyActive1Y;
+    public double allyActive1Y;
     public  double allyActive1Z;
     public  string allyActive2;
     public  double allyActive2X;
-    public  string allyActive2Y;
+    public double allyActive2Y;
     public  double allyActive2Z;
     public  string allyActive3;
     public  double allyActive3X;
-    public  string allyActive3Y;
+    public double allyActive3Y;
     public  double allyActive3Z;
 }

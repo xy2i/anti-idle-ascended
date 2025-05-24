@@ -10,8 +10,8 @@ public static class SharedObject
         {
             case "ATG_Global":
             {
-                _root.globalSetting = new GlobalSettingWrapper();
-                break;
+                    _root.globalSetting = new GlobalSettingWrapper().data;
+                    break;
             }
         }
         return "dummy";

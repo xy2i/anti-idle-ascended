@@ -6,7 +6,6 @@ public partial class Loading2OutOf8 : Control
 {
     public override void _Ready()
     {
-        GD.Print("scene2");
         List<string> bannedUsers =
         [
             "Guest", "Tukkun", "omfg13321", "milleraus10", "Valmont06", "DarkWazza", "idan2", "luungockhang",
@@ -22,7 +21,6 @@ public partial class Loading2OutOf8 : Control
         var i = 0;
         while (i < bannedUsers.Count)
         {
-            GD.Print(i);
             if (_root.kongregate_username == bannedUsers[i])
             {
                 scoreBanned = true;
@@ -354,5 +352,10 @@ public partial class Loading2OutOf8 : Control
             0, 84, 35, 16, 33, 135, 100, 72, 4, 5, 1000, 72, 30, 35, 40, 45, 60, 90, 120, 180, 11
         ]);
         _root.cyborgWorking = false;
+    }
+
+    public override void _Process(double delta)
+    {
+        GetTree().ChangeSceneToFile("src/Loader/Loading3OutOf8.tscn");
     }
 }

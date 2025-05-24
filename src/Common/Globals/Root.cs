@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AntiIdle.BattleArena.Crafting;
 using AntiIdle.BattleArena.Enemy;
+using AntiIdle.FCG;
 using Godot;
 using Math = AntiIdle.Common.Flash.Math;
 
@@ -14,6 +15,29 @@ namespace AntiIdle.Common.Globals;
 /// </summary>
 public class Root
 {
+    public double autoBanned;
+    public DateTimeOffset systemclock;
+    public long systemtimenow;
+    public bool craftTool;
+    public double newsCount;
+    public FlashList<double> newsID;
+    public FlashList<double> newsFeature;
+    public FlashList<string> newsSauceName;
+    public List<Achievement> achList;
+    public List<Quest> mainQuestList;
+    public List<RandomQuest> questList;
+    public List<AchR> achListR;
+    public List<double> questListR;
+    public double totalMainQuest;
+    public double totalquest;
+    public string newAchName;
+    public double newAchRedCoin;
+    public List<double> newAchList;
+    public List<double> newMainQuestList;
+    public List<List<double>> questMap;
+    public List<List<double>> questHLink;
+    public List<List<double>> questVLink;
+    public double totalNewQuest;
     public bool apocalypse;
     public string _quality;
     public double achRedCoin;
@@ -37,6 +61,8 @@ public class Root
     public int clock_month;
     public int clock_year;
     public double correctTier;
+    public List<NewCard> cardList;
+    public double deckid;
     public FlashList<double> curCareerLevel;
     public double cursoridle;
     public double cybFishCurrent;
@@ -52,12 +78,24 @@ public class Root
     public double detectedX;
     public double dow;
     public List<List<List<List<string>>>> eventList;
+    public List<List<List<double>>> eventRating;
     public double eventMaxToken;
+    public double contributorRC;
+    public string rcEarnLog = "";
+    public bool canPlay = true;
+    public string banReason = "";
     public FlashList<Fish> fishArray;
     public double fishRodCount;
     public string flashVer;
     public int fps = 40;
-    public GlobalSettingWrapper globalSetting;
+    // TODO: make this load from save (aka do the SharedObject functions)
+    public GlobalSetting globalSetting = new();
+    public List<double> autoUpdateTime;
+    public List<double> challengeTime;
+    public List<double> eventStartTime;
+    public List<double> eventEndTime;
+    public List<string> eventArmorName;
+    public List<double> eventArmorFrame;
     public double harvestSummaryBlueCoin;
     public double harvestSummaryCareer;
     public double harvestSummaryCoin;
@@ -69,6 +107,8 @@ public class Root
     public Kongregate kongregate;
     public string kongregate_username;
     public bool kpaChip;
+    public double cardid;
+    public List<Deck> deckList;
     public bool lootMagnet;
     public double luckyNumber;
     public double mainAntiLag;
@@ -77,13 +117,14 @@ public class Root
     public double maxredcoin;
     public double moduleInvSlotLeft;
     public double moduleInvSlotOccupied;
+    public double verifyA;
+    public double verifyB;
     public double moduleSlotLeft;
     public double moduleSlotOccupied;
     public double moostMin;
     public double nameValue;
     public double damageNumCount;
     public Dictionary<string, object> news = new();
-    public FlashList<double> newsFeature;
     public bool offlineVersion;
     public PopContain popContain;
     public Popup.Popup popUp; // TODO: code which calls popUp needs to init this, or put it in all frames?
@@ -106,9 +147,7 @@ public class Root
     public bool scoreBanned;
     public double scrollingDir;
     public double sessionTimeLeft;
-    public double stadiumHatUnlocked;
-    public double systemtimenow;
-    public double systemTimeNow;
+    public double stadiumHatUnlocked; public double systemTimeNow;
     public double thisSession;
     public double todayCode;
     public double todayEvent;
@@ -127,13 +166,13 @@ public class Root
     public double updateBreakNews;
     public double upnumber;
     public double upnumberHidden;
-    public List<CraftItem> craftWeapon;
-    public List<CraftItem> craftArmor;
-    public List<CraftItem> craftAccessory;
-    public List<CraftItem> craftMedal;
-    public List<CraftItem> craftEnhancer;
-    public List<CraftItem> craftPotion;
-    public List<CraftItem> craftChip;
+    public List<CraftItem<Item, Header>> craftWeapon;
+    public List<CraftItem<Item, Header>> craftArmor;
+    public List<CraftItem<Item, Header>> craftAccessory;
+    public List<CraftItem<Item, Header>> craftMedal;
+    public List<CraftItem<Item, Header>> craftEnhancer;
+    public List<CraftItem<Item, Header>> craftPotion;
+    public List<CraftItem<Item, Header>> craftChip;
     public List<SetBonus> setArray;
     public FlashList<double> setCount;
     public FlashList<double> komDiff;
@@ -169,14 +208,14 @@ public class Root
     public double emptyChipSlot = 0;
     public List<Enemy> enemyList;
 
-    public int getBytesLoaded()
+    public double getBytesLoaded()
     {
-        return 0;
+        return 1;
     }
 
-    public int getBytesTotal()
+    public double getBytesTotal()
     {
-        return 0;
+        return 1;
     }
 
     // MATCH: frame_3/DoAction.as:getFullMonthName()
@@ -5013,7 +5052,7 @@ public class Root
                 {
                     if (ftc < 30)
                     {
-                        var blah = _root.save.fishLevel - _root.fishArray[ftc + 1].fishLevel;
+                        var blah = _root.save.fishLevel - (double)_root.fishArray[ftc + 1].fishLevel.GetValue();
                         if (blah > 0)
                         {
                             chance = 45 + Math.pow(blah, 0.7) * 3;
@@ -5066,11 +5105,11 @@ public class Root
                     {
                         if (ftc >= 50)
                         {
-                            blah = _root.save.fishLevel - _root.fishArray[ftc + 21].fishLevel;
+                            blah = _root.save.fishLevel - (double)_root.fishArray[ftc + 21].fishLevel.GetValue();
                         }
                         else
                         {
-                            blah = _root.save.fishLevel - _root.fishArray[ftc + 1].fishLevel;
+                            blah = _root.save.fishLevel - (double)_root.fishArray[ftc + 1].fishLevel.GetValue();
                         }
 
                         if (blah > 0)
@@ -6643,6 +6682,13 @@ public class Root
         }
     }
 
+    public void addArenaCraftWeapon(string recipeType, string recipeReq)
+    {
+        var item = new Header();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        craftWeapon.Add(new CraftItem<Item, Header>.H(item));
+    }
 
     // MATCH: frame_4/DoAction.as:addArenaCraftWeapon()
     public void addArenaCraftWeapon(double recipeType, double recipeReq, double recipeLimit = 0, double reqRank = 0,
@@ -6652,7 +6698,7 @@ public class Root
         bool noUnique = false, bool spirit = false, double unob = 0, double costPixel = 0, double costCraft = 0, double costSpec = 0, double careerExp = 0,
         string name = "", string desc = "")
     {
-        var item = new CraftItem();
+        var item = new Item();
         item.recipeType = recipeType;
         item.recipeReq = recipeReq;
         item.recipeLimit = recipeLimit;
@@ -6692,7 +6738,15 @@ public class Root
         item.dexterity = dexterity;
         item.health = health;
         item.desc = desc;
-        craftWeapon.Add(item);
+        craftWeapon.Add(new CraftItem<Item, Header>.I(item));
+    }
+
+    public void addArenaCraftArmor(string recipeType, string recipeReq)
+    {
+        var item = new Header();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        craftArmor.Add(new CraftItem<Item, Header>.H(item));
     }
 
     // MATCH: frame_4/DoAction.as:addArenaCraftArmor()
@@ -6703,7 +6757,7 @@ public class Root
         bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name,
         string desc)
     {
-        var item = new CraftItem();
+        var item = new Item();
         item.recipeType = recipeType;
         item.recipeReq = recipeReq;
         item.recipeLimit = recipeLimit;
@@ -6742,7 +6796,15 @@ public class Root
         item.dexterity = dexterity;
         item.health = health;
         item.desc = desc;
-        craftArmor.Add(item);
+        craftArmor.Add(new CraftItem<Item, Header>.I(item));
+    }
+
+    public void addArenaCraftAccessory(string recipeType, string recipeReq)
+    {
+        var item = new Header();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        craftAccessory.Add(new CraftItem<Item, Header>.H(item));
     }
 
     // MATCH: frame_4/DoAction.as:addArenaCraftAccessory()
@@ -6753,7 +6815,7 @@ public class Root
         bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name,
         string desc)
     {
-        var item = new CraftItem();
+        var item = new Item();
         item.recipeType = recipeType;
         item.recipeReq = recipeReq;
         item.recipeLimit = recipeLimit;
@@ -6791,7 +6853,15 @@ public class Root
         item.dexterity = dexterity;
         item.health = health;
         item.desc = desc;
-        craftAccessory.Add(item);
+        craftAccessory.Add(new CraftItem<Item, Header>.I(item));
+    }
+
+    public void addArenaCraftMedal(string recipeType, string recipeReq)
+    {
+        var item = new Header();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        craftMedal.Add(new CraftItem<Item, Header>.H(item));
     }
 
     // MATCH: frame_4/DoAction.as:addArenaCraftMedal()
@@ -6802,7 +6872,7 @@ public class Root
         bool spirit, double unob, double costPixel, double costCraft, double costSpec, double careerExp, string name,
         string desc)
     {
-        var item = new CraftItem();
+        var item = new Item();
         item.recipeType = recipeType;
         item.recipeReq = recipeReq;
         item.recipeLimit = recipeLimit;
@@ -6840,7 +6910,15 @@ public class Root
         item.dexterity = dexterity;
         item.health = health;
         item.desc = desc;
-        craftMedal.Add(item);
+        craftMedal.Add(new CraftItem<Item, Header>.I(item));
+    }
+
+    public void addArenaCraftEnhancer(string recipeType, string recipeReq)
+    {
+        var item = new Header();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        craftEnhancer.Add(new CraftItem<Item, Header>.H(item));
     }
 
     // MATCH: frame_4/DoAction.as:addArenaCraftEnhancer()
@@ -6851,7 +6929,7 @@ public class Root
         double costPixel, double costCraft, double costSpec, double careerExp, string name,
         string desc)
     {
-        var item = new CraftItem();
+        var item = new Item();
         item.recipeType = recipeType;
         item.recipeReq = recipeReq;
         item.recipeLimit = recipeLimit;
@@ -6873,7 +6951,15 @@ public class Root
         item.costSpec = costSpec;
         item.careerExp = careerExp;
         item.desc = desc;
-        craftEnhancer.Add(item);
+        craftEnhancer.Add(new CraftItem<Item, Header>.I(item));
+    }
+
+    public void addArenaCraftPotion(string recipeType, string recipeReq)
+    {
+        var item = new Header();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        craftPotion.Add(new CraftItem<Item, Header>.H(item));
     }
 
     // MATCH: frame_4/DoAction.as:addArenaCraftPotion()
@@ -6882,7 +6968,7 @@ public class Root
         double enhance, double bonusPow, double sell, double expiry,
         double costPixel, double costCraft, double costSpec, double careerExp, string name, string desc)
     {
-        var item = new CraftItem();
+        var item = new Item();
         item.recipeType = recipeType;
         item.recipeReq = recipeReq;
         item.recipeLimit = recipeLimit;
@@ -6900,7 +6986,15 @@ public class Root
         item.costSpec = costSpec;
         item.careerExp = careerExp;
         item.desc = desc;
-        craftPotion.Add(item);
+        craftPotion.Add(new CraftItem<Item, Header>.I(item));
+    }
+
+    public void addArenaCraftChip(string recipeType, string recipeReq)
+    {
+        var item = new Header();
+        item.recipeType = recipeType;
+        item.recipeReq = recipeReq;
+        craftChip.Add(new CraftItem<Item, Header>.H(item));
     }
 
     // MATCH: frame_4/DoAction.as:addArenaCraftChip()
@@ -6909,7 +7003,7 @@ public class Root
         double enhance, double bonusPow, double sell, double expiry,
         double costPixel, double costCraft, double costSpec, double careerExp, string name, string desc)
     {
-        var item = new CraftItem();
+        var item = new Item();
         item.recipeType = recipeType;
         item.recipeReq = recipeReq;
         item.recipeLimit = recipeLimit;
@@ -6927,7 +7021,7 @@ public class Root
         item.costSpec = costSpec;
         item.careerExp = careerExp;
         item.desc = desc;
-        craftChip.Add(item);
+        craftChip.Add(new CraftItem<Item, Header>.I(item));
     }
 
     // MATCH: frame_4/DoAction.as:addArenaSet()
@@ -11965,7 +12059,7 @@ public class Root
     }
 
     // MATCH: frame_4/DoAction.as:addArenaEnemy()
-    public void addArenaEnemy(double level, double speed, double attack, double defense, double accuracy, double evasion, double hp, double exp, double coin, double pixel, string name, string element, bool boss, double evolve, double heal, bool zombie, double rangeDamage, double explode, double explodeDamage, double rampagePct, string skill, double skillLevel, string art, string loc, string allyPassive1, double allyPassive1X, string allyPassive2, double allyPassive2X, string allyPassive3, double allyPassive3X, string allyActive1, double allyActive1X, string allyActive1Y, double allyActive1Z, string allyActive2, double allyActive2X, string allyActive2Y, double allyActive2Z, string allyActive3, double allyActive3X, string allyActive3Y, double allyActive3Z)
+    public void addArenaEnemy(double level, double speed, double attack, double defense, double accuracy, double evasion, double hp, double exp, double coin, double pixel, string name, string element, bool boss, double evolve, double heal, bool zombie, double rangeDamage, double explode, double explodeDamage, double rampagePct, string skill, double skillLevel, string art, string loc, string allyPassive1, double allyPassive1X, string allyPassive2, double allyPassive2X, string allyPassive3, double allyPassive3X, string allyActive1, double allyActive1X, double allyActive1Y, double allyActive1Z, string allyActive2, double allyActive2X, double allyActive2Y, double allyActive2Z, string allyActive3, double allyActive3X, double allyActive3Y, double allyActive3Z)
     {
         var enemy = new Enemy();
         enemy.level = level;
@@ -12081,6 +12175,66 @@ public class Root
         }
     }
 
+    // MATCH: frame_7/DoAction.as:verif()
+    public void verif(string username, double saveID, double refCode)
+    {
+        if (_root.kongregate_username == username)
+        {
+            _root.verifyA = saveID;
+            _root.verifyB = refCode;
+        }
+    }
+
+    // MATCH: frame_7/DoAction.as:addEvent()
+    public void addEvent(double rating, int year, int month, int date, string eventName)
+    {
+        _root.eventRating[year][month][date] += rating;
+        _root.eventList[year][month][date][0] = "" + int.Parse(_root.eventList[year][month][date][0]) + 1;
+        _root.eventList[year][month][date].Add(eventName);
+    }
+
+
+    // MATCH: frame_7/DoAction.as:overrideEvent()
+    public void overrideEvent(int year, int month, int date)
+    {
+        _root.eventRating[year][month][date] = 0;
+        _root.eventList[year][month][date] = new();
+        _root.eventList[year][month][date][0] = "0";
+    }
+
+    // MATCH: frame_7/DoAction.as:displayEvent()
+    public string displayEvent(int year, int month, int date)
+    {
+        var temp = "";
+        var i = 1;
+        while (i <= int.Parse(_root.eventList[year][month][date][0]))
+        {
+            temp += "* " + _root.eventList[year][month][date][i] + "\n";
+            i++;
+        }
+        return temp;
+    }
+
+    // MATCH: frame_7/DoAction.as:addRedCoin()
+    public void addRedCoin(string user, double amount, string reason)
+    {
+        if (_root.kongregate_username == user)
+        {
+            _root.contributorRC += amount;
+            _root.rcEarnLog += "\n" + amount + " Red Coins / Reason: " + reason;
+        }
+    }
+
+    // MATCH: frame_7/DoAction.as:banhammer()
+    public void banhammer(string user, string reason)
+    {
+        if (_root.kongregate_username == user || user == "[everyone]")
+        {
+            _root.canPlay = false;
+            _root.banReason += reason + "\n";
+        }
+    }
+
     public void gotoAndPlay(int index)
     {
         GD.Print($"WARNING: unconverted gotoAndPlay({index})");
@@ -12096,4 +12250,15 @@ public class Root
     }
 
     public void breakNews(string a, string b, double c, double d) { }
+
+
+    public object this[string key]
+    {
+        get => GetType().GetField(key)?.GetValue(this) ?? throw new ArgumentException($"Property `{key}` not found");
+        set
+        {
+            var prop = GetType().GetField(key) ?? throw new ArgumentException($"Property `{key}` not found");
+            prop.SetValue(this, value);
+        }
+    }
 }
