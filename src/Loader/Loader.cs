@@ -1,8 +1,6 @@
 using Godot;
-using static Godot.GD;
-using System;
 
-namespace AntiIdle.Loader;  
+namespace AntiIdle.Loader;
 
 // MATCH: frame_1/DoAction.as
 public partial class Loader : Node

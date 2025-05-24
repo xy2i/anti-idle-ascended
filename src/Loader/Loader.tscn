@@ -14,13 +14,6 @@ offset_right = 650.0
 offset_bottom = 650.0
 color = Color(0.2, 0.2, 0.2, 1)
 
-[node name="Label" type="Label" parent="."]
-offset_left = 52.0
-offset_top = 294.0
-offset_right = 148.0
-offset_bottom = 342.0
-text = "frame1"
-
 [node name="LoadingBox" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -67,6 +60,21 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_2voco")
 theme_override_font_sizes/normal_font_size = 10
 text = "Anti-Idle: The Game is loading..."
+
+[node name="LoadingBarBg" type="ColorRect" parent="LoadingBox"]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 275.0
+offset_bottom = 40.0
+color = Color(0, 0.4, 0, 1)
+
+[node name="LoadingBar" type="ColorRect" parent="LoadingBox"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 275.0
+offset_bottom = 40.0
+color = Color(0, 1, 0, 1)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

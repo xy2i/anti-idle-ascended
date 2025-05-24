@@ -196,8 +196,12 @@ sub_match = subcommands.add_parser(
     "generate_db",
     help="Generates the script database.",
 )
-sub_match.add_argument('swf_path', help='Path to anti-idle .swf file')
-sub_match.add_argument('export_path', help='Path to export the scripts to')
+sub_match.add_argument(
+    "--swf-path", help="Path to anti-idle .swf file", default="v1861.swf"
+)
+sub_match.add_argument(
+    "--export-path", help="Path to export the scripts to", default="script/"
+)
 sub_match.add_argument('--skip-jpexs', help='Skip the JPEXS processing step and use files from `export_path` directly', action=argparse.BooleanOptionalAction)
 sub_match.add_argument('--db-path', help='Where to write the database to', default="decomp_db.json")
 sub_match.set_defaults(func=generate_db)
