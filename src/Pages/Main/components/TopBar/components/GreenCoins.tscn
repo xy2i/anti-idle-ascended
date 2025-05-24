@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://5b2x4o80n70s"]
+
+[ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="1_37kkl"]
+[ext_resource type="Texture2D" uid="uid://ccuqns4iwlt31" path="res://common_assets/assets/green_coin.png" id="3_dj7pt"]
+[ext_resource type="Texture2D" uid="uid://dm4el21igmuw5" path="res://common_assets/assets/orange_triangle.svg" id="4_c2cdg"]
+
+[sub_resource type="Theme" id="Theme_ekvr2"]
+Label/colors/font_color = Color(0.4, 1, 0, 1)
+Label/font_sizes/font_size = 10
+Label/fonts/font = ExtResource("1_37kkl")
+
+[sub_resource type="FontVariation" id="FontVariation_40rju"]
+base_font = ExtResource("1_37kkl")
+spacing_top = -3
+
+[node name="GreenCoins" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -468.0
+offset_bottom = -624.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ekvr2")
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_dj7pt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(17, 17)
+layout_mode = 2
+texture = ExtResource("4_c2cdg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_40rju")
+theme_override_font_sizes/font_size = 8
+text = "5:00"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "999 B"

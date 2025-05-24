@@ -1,0 +1,155 @@
+[gd_scene load_steps=9 format=3 uid="uid://bokeb6yxjprga"]
+
+[ext_resource type="Texture2D" uid="uid://b21mnu2f4lbk8" path="res://src/MenuBg.png" id="1_76s6h"]
+[ext_resource type="Texture2D" uid="uid://dvkfnaeygcird" path="res://common_assets/11.png" id="1_ml26j"]
+[ext_resource type="Texture2D" uid="uid://c5nkw08sfeeek" path="res://common_assets/logo.png" id="2_ml26j"]
+[ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="3_76s6h"]
+[ext_resource type="PackedScene" uid="uid://sl2yxvssb88u" path="res://src/Loader/SaveFileButton.tscn" id="4_ml26j"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_76s6h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76s6h"]
+bg_color = Color(0.294118, 0.294118, 0.0980392, 1)
+
+[sub_resource type="Theme" id="Theme_6rrnm"]
+default_font = ExtResource("3_76s6h")
+default_font_size = 12
+Button/styles/normal = SubResource("StyleBoxFlat_76s6h")
+
+[node name="LoadingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_right = 650.0
+offset_bottom = 670.0
+texture = ExtResource("1_76s6h")
+stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_right = 650.0
+offset_bottom = 670.0
+texture = ExtResource("1_ml26j")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 650.0
+offset_bottom = 650.0
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_ml26j")
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_bottom = 26
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/line_separation = 1
+theme_override_fonts/normal_font = ExtResource("3_76s6h")
+theme_override_fonts/bold_font = ExtResource("3_76s6h")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 21
+bbcode_enabled = true
+text = "[b][color=\"#c8e1fa\"]Welcome to Anti-Idle: The Game![/color][/b]
+[color=\"#6496c8\"]Anti-Idle: The game is a unique idle-type game created in 2009 (and still updated after 11 years!)
+by Tukkun.
+
+Gain some EXP, level up and unlock tons of features and minigames! Anti-Idle: The Game can be
+played even when you are busy or not sitting near your computer, but there are also plenty of
+things that you can do when you are actively playing - and all of that is completely FREE!
+
+What are you still waiting for? Press the big \"Awesome!\" button below there and join the
+awesomeness right way, with millions of other players![/color]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+justification_flags = 0
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
+material = SubResource("CanvasItemMaterial_76s6h")
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = SubResource("Theme_6rrnm")
+theme_override_colors/font_color = Color(0.980392, 0.980392, 0.588235, 1)
+theme_override_fonts/font = ExtResource("3_76s6h")
+theme_override_font_sizes/font_size = 36
+text = "Awesome!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveFileButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ml26j")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveFileButton2" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ml26j")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveFileButton3" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ml26j")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveFileButton4" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ml26j")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveFileButton5" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ml26j")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_76s6h")
+theme_override_font_sizes/font_size = 10
+text = "Backup Help"
+
+[node name="EmptySpace" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_76s6h")
+theme_override_font_sizes/font_size = 10
+text = "Credits"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_fonts/font = ExtResource("3_76s6h")
+theme_override_font_sizes/font_size = 12
+text = "Your progress is automatically saved and is stored in your computer. Backup your savefile often!"
+horizontal_alignment = 1

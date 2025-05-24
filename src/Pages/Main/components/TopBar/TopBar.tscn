@@ -1,0 +1,167 @@
+[gd_scene load_steps=17 format=3 uid="uid://b5t63v425oh65"]
+
+[ext_resource type="PackedScene" uid="uid://5bi41xim0phs" path="res://src/Pages/Main/components/TopBar/components/YellowCoins.tscn" id="2_2igkp"]
+[ext_resource type="Texture2D" uid="uid://grmipihr608k" path="res://common_assets/assets/true_coin.png" id="3_m84ip"]
+[ext_resource type="PackedScene" uid="uid://5b2x4o80n70s" path="res://src/Pages/Main/components/TopBar/components/GreenCoins.tscn" id="4_d1xg1"]
+[ext_resource type="PackedScene" uid="uid://crh70hgikxsa5" path="res://src/Pages/Main/components/TopBar/components/BlueCoins.tscn" id="5_p2iwa"]
+[ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="6_b3423"]
+[ext_resource type="Texture2D" uid="uid://ckk6plvra8xvs" path="res://common_assets/assets/yellow_triangle.png" id="7_m2ka7"]
+[ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="8_b4rig"]
+[ext_resource type="FontFile" uid="uid://b48j7xh7p70gu" path="res://common_assets/fonts/1964_Noto Sans CJK JP Bold.ttf" id="9_6cn5q"]
+[ext_resource type="Texture2D" uid="uid://did7np3bv5now" path="res://common_assets/assets/red_triangle.png" id="10_h0y2n"]
+[ext_resource type="Texture2D" uid="uid://ctesp62h03r67" path="res://common_assets/assets/star/1.png" id="11_oeot4"]
+
+[sub_resource type="Theme" id="Theme_60sdv"]
+Label/fonts/font = ExtResource("6_b3423")
+
+[sub_resource type="Theme" id="Theme_c2kd0"]
+Label/colors/font_color = Color(1, 1, 0, 1)
+Label/font_sizes/font_size = 12
+Label/fonts/font = ExtResource("8_b4rig")
+
+[sub_resource type="FontVariation" id="FontVariation_n6mvp"]
+base_font = ExtResource("8_b4rig")
+spacing_top = -2
+
+[sub_resource type="FontVariation" id="FontVariation_nhk7n"]
+base_font = ExtResource("9_6cn5q")
+spacing_top = -4
+spacing_bottom = -6
+
+[sub_resource type="Theme" id="Theme_sivtw"]
+ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
+ProgressBar/fonts/font = SubResource("FontVariation_nhk7n")
+
+[sub_resource type="FontVariation" id="FontVariation_bhn3u"]
+base_font = ExtResource("6_b3423")
+variation_embolden = 1.0
+
+[node name="TopBar" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -578.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="YellowCoins" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_2igkp")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_m84ip")
+stretch_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GreenCoins" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("4_d1xg1")]
+layout_mode = 2
+
+[node name="BlueCoins" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("5_p2iwa")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = SubResource("Theme_60sdv")
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Title"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("7_m2ka7")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = SubResource("Theme_c2kd0")
+theme_override_fonts/font = SubResource("FontVariation_n6mvp")
+text = "0d + 00:00:00"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = SubResource("Theme_sivtw")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("10_h0y2n")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme = SubResource("Theme_c2kd0")
+theme_override_colors/font_color = Color(0.623529, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_n6mvp")
+text = "0d + 00:00:00"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_left = 578.0
+offset_top = -6.0
+offset_right = 650.0
+offset_bottom = 66.0
+texture = ExtResource("11_oeot4")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 16.0
+offset_right = 632.0
+offset_bottom = 43.0
+theme_override_fonts/font = SubResource("FontVariation_bhn3u")
+theme_override_font_sizes/font_size = 18
+text = "9001"
