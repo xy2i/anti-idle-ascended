@@ -1,0 +1,159 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1vhda2oxa4k7"]
+
+[ext_resource type="Texture2D" uid="uid://bmlqbakhjy61h" path="res://src/Pages/Main/13.png" id="1_wl3yd"]
+[ext_resource type="PackedScene" uid="uid://b5t63v425oh65" path="res://src/Pages/Main/components/TopBar/TopBar.tscn" id="2_17737"]
+[ext_resource type="PackedScene" uid="uid://bvbhmpf0s4yr7" path="res://src/Pages/Main/components/BottomBar.tscn" id="3_17737"]
+[ext_resource type="Texture2D" uid="uid://c5nkw08sfeeek" path="res://common_assets/logo.png" id="3_lors8"]
+[ext_resource type="PackedScene" uid="uid://ryuxuc6renuk" path="res://src/Pages/Main/components/ProgressBar.tscn" id="4_h61xd"]
+[ext_resource type="PackedScene" uid="uid://56cva6i45crf" path="res://src/Pages/Main/components/RestModule.tscn" id="5_5x7vr"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 650.0
+offset_bottom = 650.0
+texture = ExtResource("1_wl3yd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 650.0
+offset_bottom = 619.0
+theme_override_constants/separation = 0
+
+[node name="TopBar" parent="VBoxContainer" instance=ExtResource("2_17737")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 555)
+layout_mode = 2
+
+[node name="FeatureContainer" type="Control" parent="VBoxContainer/Control"]
+custom_minimum_size = Vector2(500, 350)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 11.0
+offset_top = 16.0
+offset_right = 511.0
+offset_bottom = 366.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Logo" type="TextureRect" parent="VBoxContainer/Control"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+offset_left = 509.0
+offset_top = 18.0
+offset_right = 650.0
+offset_bottom = 78.0
+texture = ExtResource("3_lors8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ProgressBar" parent="VBoxContainer/Control" instance=ExtResource("4_h61xd")]
+layout_mode = 1
+offset_left = 527.0
+offset_top = 91.0
+offset_right = 527.3
+offset_bottom = 124.535
+
+[node name="RestModule" parent="VBoxContainer/Control" instance=ExtResource("5_5x7vr")]
+layout_mode = 1
+offset_left = 528.0
+offset_top = 335.0
+offset_right = 529.95
+offset_bottom = 340.47
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 555)
+layout_mode = 2
+
+[node name="Placeholder" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Placeholder"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/Placeholder/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer/Placeholder/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 106)
+layout_mode = 2
+
+[node name="Control" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Control" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "G"
+
+[node name="Button2" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "1"
+
+[node name="Button3" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "2"
+
+[node name="Button4" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "3"
+
+[node name="Button5" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "4"
+
+[node name="Button6" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "Current
+Feature"
+
+[node name="Button7" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = ">"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control"]
+layout_mode = 2
+vertical_scroll_mode = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BottomBar" parent="VBoxContainer" instance=ExtResource("3_17737")]
+layout_mode = 2
