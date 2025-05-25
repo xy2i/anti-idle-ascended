@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://dspdq5vd1c18v"]
+
+[ext_resource type="Texture2D" uid="uid://bmlqbakhjy61h" path="res://src/Pages/Main/13.png" id="1_12iaw"]
+[ext_resource type="Texture2D" uid="uid://cr07681wc5v0x" path="res://common_assets/shapes/8076.svg" id="2_s8i5n"]
+[ext_resource type="Texture2D" uid="uid://d2hv6kkbjnod2" path="res://common_assets/sprites/DefineSprite_8069/1.png" id="3_0q7wx"]
+[ext_resource type="Texture2D" uid="uid://1gkhhiv8jb8n" path="res://common_assets/shapes/8078.svg" id="4_j4oc6"]
+[ext_resource type="Texture2D" uid="uid://r8ppu0b67fut" path="res://common_assets/buttons/DefineButton2_8057/1.png" id="5_x6gk0"]
+
+[sub_resource type="Theme" id="Theme_e7sra"]
+
+[node name="BreakingNews" type="Control"]
+layout_mode = 3
+anchor_right = 0.771
+anchor_bottom = 0.157
+offset_right = -0.150024
+offset_bottom = -0.0500031
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -10.0
+offset_top = -439.0
+offset_right = 640.0
+offset_bottom = 211.0
+texture = ExtResource("1_12iaw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 501.0
+offset_bottom = 101.0
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SettingsButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_s8i5n")
+
+[node name="Button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_0q7wx")
+
+[node name="Button2" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_0q7wx")
+
+[node name="Button3" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_0q7wx")
+
+[node name="Button4" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_0q7wx")
+
+[node name="Button5" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_0q7wx")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("4_j4oc6")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_x6gk0")
+
+[node name="VScrollBar" type="VScrollBar" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureButton2" type="TextureButton" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_x6gk0")
+flip_v = true
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_e7sra")
+editable = false
+context_menu_enabled = false
+scroll_smooth = true

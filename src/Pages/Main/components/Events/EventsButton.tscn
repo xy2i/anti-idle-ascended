@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7u2jky4a2821"]
+
+[ext_resource type="FontFile" uid="uid://dnrub80i462m7" path="res://common_assets/fonts/3185_PF Ronda Seven.ttf" id="1_n3ogh"]
+[ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="2_knp7b"]
+[ext_resource type="Texture2D" uid="uid://blm5pwwt8e873" path="res://common_assets/shapes/2472.svg" id="3_4vek1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oasdq"]
+bg_color = Color(0.184314, 0.584314, 0.686275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fchjp"]
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 1)
+
+[node name="EventsButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 140.0
+offset_bottom = 20.0
+pivot_offset = Vector2(82, 12)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 205.0
+offset_bottom = 20.0
+theme_override_constants/separation = 0
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_n3ogh")
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_oasdq")
+text = "Events"
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.00392157, 0.8, 1, 1)
+theme_override_fonts/font = ExtResource("2_knp7b")
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_fchjp")
+text = "999,999,999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 137.0
+offset_top = -3.0
+offset_right = 164.0
+offset_bottom = 24.0
+size_flags_horizontal = 4
+texture = ExtResource("3_4vek1")

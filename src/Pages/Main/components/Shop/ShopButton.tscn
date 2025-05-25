@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnlsw7m3dfr23"]
+
+[ext_resource type="FontFile" uid="uid://dnrub80i462m7" path="res://common_assets/fonts/3185_PF Ronda Seven.ttf" id="1_biext"]
+[ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="2_en2gb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v08ai"]
+bg_color = Color(0.686275, 0.486275, 0.184314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_liwuu"]
+content_margin_right = 2.0
+bg_color = Color(0, 0, 0, 1)
+
+[node name="ShopButton" type="HBoxContainer"]
+offset_right = 120.0
+offset_bottom = 20.0
+pivot_offset = Vector2(82, 12)
+theme_override_constants/separation = 0
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_biext")
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_v08ai")
+text = "Shop"
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.898039, 0.54902, 0.0235294, 1)
+theme_override_fonts/font = ExtResource("2_en2gb")
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_liwuu")
+text = "29 / 29"
+horizontal_alignment = 2
+vertical_alignment = 1
