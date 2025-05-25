@@ -62,6 +62,7 @@ theme_override_font_sizes/normal_font_size = 10
 text = "Anti-Idle: The Game is loading..."
 
 [node name="LoadingBarBg" type="ColorRect" parent="LoadingBox"]
+layout_mode = 0
 offset_left = 25.0
 offset_top = 25.0
 offset_right = 275.0

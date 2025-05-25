@@ -3,20 +3,6 @@ Original game made by Tukkun with contributions from many others.
 
 The intention is to port the game from ActionScript to a more modern language and programming engine, so more people can edit the game's code to their needs, and allow for the game to be playable outside of the antiquated Adobe Flash platform.
 
-Navigation of the repository is outlined below:
-
-## Addons
-Godot addons for testing
-
-## Decompile
-The assets of decompiled version 1861 of the original game
-
-## Fonts
-Fonts from the original game (likely incomplete versions because of decompilation)
-
-## src
-Currently ported code
-
 # How to contribute
 
 The port is written in C#, using the Godot engine.
@@ -391,13 +377,51 @@ public partial class LoadingBox : Control
 }
 ```
 
-# Standardizations
+# Differences from Flash to Godot
+
+## FlashList and List
+
+We use both of these interchangably. Here's when to use them:
+
+- If the code is in `_root.save`, or `_root.saveGlobal`, **always use FlashList**. This is required for load/save code to work.
+- Otherwise, it's up to preference. FlashList is a sparse array, which is much slower, so using List is preferred when you can. But sometimes the usage may assume a sparse list, so use FlashList if converting to List is too inconvenient.
+
+## Indexing when using a FlashList
+
+A common pattern in the Flash code is indexing an list, then checking if the element was set by comparing it to undefined:
+
+```js
+if (_root.save.arenaZoneKill[100] == undefined)
+```
+
+Replace this to:
+
+```cs
+if (_root.save.arenaZoneKill.ContainsKey(100))`
+```
+
+The FlashList helper class we use doesn't support returning null
+on an invalid access, so it returns a default value instead.
+
+## Flash scale
+
+In Godot, all scales are [0, 1]. But in Flash, scales differ based on the object:
+
+- `_alpha`: Is a percentage in Flash, from 0 (transparent) to 100 (opaque). Godot equivalent is `Modulate.A`.
+- `color` components: From 0 to 255 in Flash, compared to [0,1] in Godot.
+- `_xscale`, `_yscale`: 0 to 100 in Flash, [0,1] in Godot. Godot equivalent is `Scale`.
+
+**Be careful when porting code that uses this! You will have to convert the numbers to be between 0 and 1.**
+
+## Common usages
+
 In order to keep the code uniform no matter what, please adhere to the following:
 | Standard | Its correspondent in C# | Common Usage | Replacement in AS2 Code |
 | :--- | ---: | ---: | ---: |
 | `pos` | Position | `.X .Y` | `_X _Y`[^1] |
 | `mousepos` | ToLocal(GetViewport().GetMousePosition())[^2] | `.X .Y` | `_xmouse _ymouse` |
 | `color` | Modulate | `.R .G .B .A` | `xalpha` |
+| `scale` | Scale | `.R .G .B .A` | `_xscale`, `_yscale` |
 
 ## Elaboration on Usage
 [^1]: ".X" ".Y" for say the Position example mean that you would invoke pos.X or pos.Y to edit such attributes.
