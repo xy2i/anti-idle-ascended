@@ -1,0 +1,174 @@
+[gd_scene load_steps=12 format=3 uid="uid://cre5l5kp4b0lu"]
+
+[ext_resource type="Texture2D" uid="uid://b21mnu2f4lbk8" path="res://src/MainMenu/MenuBg.png" id="1_cttlv"]
+[ext_resource type="Texture2D" uid="uid://bxhgkp5br4qa6" path="res://common_assets/mainmenu-wireframe.jpg" id="1_ipfen"]
+[ext_resource type="Texture2D" uid="uid://dafk348bgy32y" path="res://src/MainMenu/Logo.png" id="2_ipfen"]
+[ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="4_70h2t"]
+[ext_resource type="Script" uid="uid://bgcbpyi2deq3i" path="res://src/MainMenu/AwesomeButton.cs" id="5_l2fs3"]
+
+[sub_resource type="FontVariation" id="FontVariation_70h2t"]
+base_font = ExtResource("4_70h2t")
+spacing_bottom = 1
+
+[sub_resource type="Animation" id="Animation_l2fs3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AwesomeButton:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AwesomeButton:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.2)]
+}
+
+[sub_resource type="Animation" id="Animation_vuisw"]
+resource_name = "hover"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AwesomeButton:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_tcb8k"]
+resource_name = "clicked"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AwesomeButton:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_70h2t"]
+resource_name = "idle"
+length = 1.025
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AwesomeButton:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.525, 1.025),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.2), Color(0, 0, 0, 0), Color(0, 0, 0, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l2fs3"]
+_data = {
+&"RESET": SubResource("Animation_l2fs3"),
+&"clicked": SubResource("Animation_tcb8k"),
+&"hover": SubResource("Animation_vuisw"),
+&"idle": SubResource("Animation_70h2t")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Mainmenu-wireframe" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.494118)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ipfen")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Bg" type="Sprite2D" parent="."]
+scale = Vector2(1.002, 1.002)
+texture = ExtResource("1_cttlv")
+centered = false
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(216.684, 19)
+scale = Vector2(0.476364, 0.476364)
+texture = ExtResource("2_ipfen")
+centered = false
+
+[node name="Welcome" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 149.0
+offset_right = 627.0
+offset_bottom = 380.0
+theme_override_fonts/normal_font = SubResource("FontVariation_70h2t")
+bbcode_enabled = true
+text = "[font_size=21][color=#C8E1FA]Welcome to Anti-Idle: The Game![/color][/font_size]
+[font_size=12][color=#6496C8]Anti-Idle: The Game is a unique idle-type game created in 2009 (and still updated after 11 years!) by Tukkun.
+
+Gain some EXP, level up and unlock tons of features and minigames! Anti-Idle: The Game can be played even when you are busy or not sitting near your computer, but there are also plenty of things that you can do when you are actively playing - and all of that is completely FREE!
+
+What are you still waiting for? Press the big \"Awesome!\" button below there and join the awesomeness right away, with millions of other players![/color][/font_size]"
+horizontal_alignment = 1
+
+[node name="Button" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 380.0
+offset_right = 55.0
+offset_bottom = 420.0
+
+[node name="ColorRect" type="ColorRect" parent="Button"]
+offset_right = 620.0
+offset_bottom = 60.0
+color = Color(0.588235, 0.588235, 0.196078, 1)
+
+[node name="Text" type="Label" parent="Button"]
+offset_left = 212.0
+offset_top = 1.0
+offset_right = 409.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.980392, 0.980392, 0.588235, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 40
+text = "Awesome!"
+
+[node name="AwesomeButton" type="ColorRect" parent="Button"]
+offset_right = 620.0
+offset_bottom = 60.0
+color = Color(0, 0, 0, 0.2)
+script = ExtResource("5_l2fs3")
+
+[node name="Alpha" type="AnimationPlayer" parent="Button/AwesomeButton"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_l2fs3")
+}
+autoplay = "idle"
