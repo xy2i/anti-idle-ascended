@@ -1,9 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bokeb6yxjprga"]
 
-[ext_resource type="Texture2D" uid="uid://b21mnu2f4lbk8" path="res://src/MenuBg.png" id="1_76s6h"]
+[ext_resource type="Texture2D" uid="uid://b21mnu2f4lbk8" path="res://src/MainMenu/MenuBg.png" id="1_76s6h"]
 [ext_resource type="Texture2D" uid="uid://c5nkw08sfeeek" path="res://common_assets/logo.png" id="2_ml26j"]
 [ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="3_76s6h"]
 [ext_resource type="PackedScene" uid="uid://sl2yxvssb88u" path="res://src/Loader/SaveFileButton.tscn" id="4_ml26j"]
+
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_76s6h"]
 
