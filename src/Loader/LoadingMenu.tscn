@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bokeb6yxjprga"]
+[gd_scene load_steps=8 format=3 uid="uid://bokeb6yxjprga"]
 
 [ext_resource type="Texture2D" uid="uid://b21mnu2f4lbk8" path="res://src/MenuBg.png" id="1_76s6h"]
-[ext_resource type="Texture2D" uid="uid://dvkfnaeygcird" path="res://common_assets/11.png" id="1_ml26j"]
 [ext_resource type="Texture2D" uid="uid://c5nkw08sfeeek" path="res://common_assets/logo.png" id="2_ml26j"]
 [ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="3_76s6h"]
 [ext_resource type="PackedScene" uid="uid://sl2yxvssb88u" path="res://src/Loader/SaveFileButton.tscn" id="4_ml26j"]
@@ -30,14 +29,6 @@ layout_mode = 0
 offset_right = 650.0
 offset_bottom = 670.0
 texture = ExtResource("1_76s6h")
-stretch_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="."]
-light_mask = 0
-layout_mode = 0
-offset_right = 650.0
-offset_bottom = 670.0
-texture = ExtResource("1_ml26j")
 stretch_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

@@ -1,0 +1,132 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsyoitvhm4f6b"]
+
+[ext_resource type="FontFile" uid="uid://bbyatyn4eg3yh" path="res://common_assets/fonts/131_dmgFont2_PF Tempesta Seven.ttf" id="1_e4hsj"]
+[ext_resource type="Texture2D" uid="uid://edsb60hfefu4" path="res://common_assets/sprites/DefineSprite_10159/4.png" id="1_ikni5"]
+[ext_resource type="FontFile" uid="uid://yvep1sldeuhr" path="res://common_assets/fonts/893_PF Tempesta Seven.ttf" id="2_wx84w"]
+[ext_resource type="Texture2D" uid="uid://c6k8y863hd56v" path="res://common_assets/shapes/8429.svg" id="4_jwb20"]
+[ext_resource type="Texture2D" uid="uid://d3km80yg2q3o6" path="res://common_assets/buttons/DefineButton2_8362/1.png" id="4_wx84w"]
+[ext_resource type="Texture2D" uid="uid://c5c4s66jtgm5g" path="res://common_assets/shapes/1305.svg" id="5_resna"]
+[ext_resource type="Texture2D" uid="uid://b7mcugo33gowo" path="res://common_assets/shapes/1306.svg" id="6_g4cgl"]
+
+[sub_resource type="Theme" id="Theme_jwb20"]
+Button/font_sizes/font_size = 12
+Button/fonts/font = ExtResource("2_wx84w")
+CheckBox/font_sizes/font_size = 10
+CheckBox/fonts/font = ExtResource("2_wx84w")
+Label/font_sizes/font_size = 12
+Label/fonts/font = ExtResource("1_e4hsj")
+RichTextLabel/font_sizes/normal_font_size = 10
+RichTextLabel/fonts/normal_font = ExtResource("2_wx84w")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epn1f"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4cgl"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="BoostModal" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.555
+offset_bottom = 0.25
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_jwb20")
+theme_override_styles/panel = SubResource("StyleBoxFlat_epn1f")
+
+[node name="4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(597, 239)
+texture = ExtResource("1_ikni5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Boost Generator"
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture_normal = ExtResource("4_wx84w")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+text = "Boost is ESSENTIAL! Boost makes your Progress Bar fill more quickly, AND makes you gain more
+EXP and Coins from most features !
+
+However, Ants will ear your Boost! If you ever need to refill your boost, press any of the buttons below!"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "FREE REFILL
+
+Refills Boost to
+9999%"
+icon = ExtResource("4_jwb20")
+
+[node name="Button2" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FREE REFILL
+
+Refills Boost to
+9999%"
+icon = ExtResource("5_resna")
+
+[node name="Button3" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FREE REFILL
+
+Refills Boost to
+9999%"
+icon = ExtResource("6_g4cgl")
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Automatically use 1 Regular Boost Potion every 5 minutes (if Boost is below yellow limit)"
+
+[node name="CheckBox2" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Automatically use 1 Mega Boost Potion every 5 minutes (if Boost is below purple limit)"
+
+[node name="Label2" type="RichTextLabel" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Boost Potions can be obtained from various souces. They allow you to reach even higher
+Boost than your Max Boost, and they also stop Ants from eating your Boost for 45 seconds!
+
+You can also upgrade your Max Boost. This will also decrease the speed of Boost depletion!"
+fit_content = true
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_g4cgl")
+text = "Upgrade to 99,999% for 999 B Green Coins!"

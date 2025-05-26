@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5t63v425oh65"]
+[gd_scene load_steps=19 format=3 uid="uid://b5t63v425oh65"]
 
 [ext_resource type="PackedScene" uid="uid://5bi41xim0phs" path="res://src/Pages/Main/components/TopBar/components/YellowCoins.tscn" id="2_2igkp"]
 [ext_resource type="Texture2D" uid="uid://grmipihr608k" path="res://common_assets/assets/true_coin.png" id="3_m84ip"]
@@ -10,6 +10,11 @@
 [ext_resource type="FontFile" uid="uid://b48j7xh7p70gu" path="res://common_assets/fonts/1964_Noto Sans CJK JP Bold.ttf" id="9_6cn5q"]
 [ext_resource type="Texture2D" uid="uid://did7np3bv5now" path="res://common_assets/assets/red_triangle.png" id="10_h0y2n"]
 [ext_resource type="Texture2D" uid="uid://ctesp62h03r67" path="res://common_assets/assets/star/1.png" id="11_oeot4"]
+
+[sub_resource type="Theme" id="Theme_chjx5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chjx5"]
+bg_color = Color(0, 0, 0, 0.392157)
 
 [sub_resource type="Theme" id="Theme_60sdv"]
 Label/fonts/font = ExtResource("6_b3423")
@@ -36,118 +41,128 @@ ProgressBar/fonts/font = SubResource("FontVariation_nhk7n")
 base_font = ExtResource("6_b3423")
 variation_embolden = 1.0
 
-[node name="TopBar" type="MarginContainer"]
-anchors_preset = 15
+[node name="TopBar" type="Panel"]
+custom_minimum_size = Vector2(650, 72)
+anchors_preset = -1
+anchor_top = -0.835
+anchor_right = 1.0
+anchor_bottom = 0.187
+offset_top = -0.25
+offset_bottom = -592.55
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_chjx5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_chjx5")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -578.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="YellowCoins" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_2igkp")]
+[node name="YellowCoins" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_2igkp")]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_m84ip")
 stretch_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="GreenCoins" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("4_d1xg1")]
+[node name="GreenCoins" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("4_d1xg1")]
 layout_mode = 2
 
-[node name="BlueCoins" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("5_p2iwa")]
+[node name="BlueCoins" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("5_p2iwa")]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer2"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = SubResource("Theme_60sdv")
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Name"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Title"
 horizontal_alignment = 1
 
-[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer3"]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/MarginContainer3/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("7_m2ka7")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme = SubResource("Theme_c2kd0")
 theme_override_fonts/font = SubResource("FontVariation_n6mvp")
 text = "0d + 00:00:00"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer3/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = SubResource("Theme_sivtw")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/MarginContainer3/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("10_h0y2n")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme = SubResource("Theme_c2kd0")
 theme_override_colors/font_color = Color(0.623529, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_n6mvp")
 text = "0d + 00:00:00"
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Control"]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Control"]
 layout_mode = 2
 offset_left = 578.0
 offset_top = -6.0
@@ -156,7 +171,7 @@ offset_bottom = 66.0
 texture = ExtResource("11_oeot4")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="MarginContainer/Control"]
 layout_mode = 0
 offset_left = 586.0
 offset_top = 16.0

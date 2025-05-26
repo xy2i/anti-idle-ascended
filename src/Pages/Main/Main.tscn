@@ -1,25 +1,43 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1vhda2oxa4k7"]
+[gd_scene load_steps=14 format=3 uid="uid://d1vhda2oxa4k7"]
 
 [ext_resource type="Texture2D" uid="uid://bmlqbakhjy61h" path="res://src/Pages/Main/13.png" id="1_wl3yd"]
 [ext_resource type="PackedScene" uid="uid://b5t63v425oh65" path="res://src/Pages/Main/components/TopBar/TopBar.tscn" id="2_17737"]
+[ext_resource type="Texture2D" uid="uid://cvbil213hfbtf" path="res://common_assets/background_images/2.png" id="2_een1s"]
 [ext_resource type="PackedScene" uid="uid://bvbhmpf0s4yr7" path="res://src/Pages/Main/components/BottomBar.tscn" id="3_17737"]
 [ext_resource type="Texture2D" uid="uid://c5nkw08sfeeek" path="res://common_assets/logo.png" id="3_lors8"]
 [ext_resource type="PackedScene" uid="uid://ryuxuc6renuk" path="res://src/Pages/Main/components/ProgressBar.tscn" id="4_h61xd"]
 [ext_resource type="PackedScene" uid="uid://56cva6i45crf" path="res://src/Pages/Main/components/RestModule.tscn" id="5_5x7vr"]
+[ext_resource type="PackedScene" uid="uid://dspdq5vd1c18v" path="res://src/Pages/Main/components/BreakingNews.tscn" id="6_khid0"]
+[ext_resource type="PackedScene" uid="uid://bkroys1ok7dvr" path="res://src/Pages/Main/components/Boost/BoostModule.tscn" id="7_fpxsb"]
+[ext_resource type="PackedScene" uid="uid://c3g1eg2duoduq" path="res://src/Pages/Main/components/Achievements/AchievementsButton.tscn" id="10_dr27a"]
+[ext_resource type="PackedScene" uid="uid://b7u2jky4a2821" path="res://src/Pages/Main/components/Events/EventsButton.tscn" id="11_6udhx"]
+[ext_resource type="PackedScene" uid="uid://swym632karc7" path="res://src/Pages/Main/components/Quests/QuestsButton.tscn" id="12_2ytk7"]
+[ext_resource type="PackedScene" uid="uid://bnlsw7m3dfr23" path="res://src/Pages/Main/components/Shop/ShopButton.tscn" id="13_e37wi"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -650.0
+offset_bottom = -650.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 650.0
 offset_bottom = 650.0
 texture = ExtResource("1_wl3yd")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_een1s")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -31,24 +49,48 @@ theme_override_constants/separation = 0
 layout_mode = 2
 
 [node name="Control" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 555)
+custom_minimum_size = Vector2(0, 548)
 layout_mode = 2
 
 [node name="FeatureContainer" type="Control" parent="VBoxContainer/Control"]
 custom_minimum_size = Vector2(500, 350)
 layout_mode = 2
 anchors_preset = 0
-offset_left = 11.0
-offset_top = 17.0
-offset_right = 511.0
-offset_bottom = 367.0
+anchor_left = 0.017
+anchor_top = 0.029
+anchor_right = 0.786
+anchor_bottom = 0.659
+offset_left = -1.05
+offset_top = -7.95
+offset_right = -0.899994
+offset_bottom = -4.44998
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="VBoxContainer/Control/FeatureContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Control/FeatureContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "batel arehnaa"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Logo" type="TextureRect" parent="VBoxContainer/Control"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-offset_left = 509.0
+offset_left = 510.0
 offset_top = 18.0
 offset_right = 650.0
 offset_bottom = 78.0
@@ -59,101 +101,56 @@ stretch_mode = 5
 [node name="ProgressBar" parent="VBoxContainer/Control" instance=ExtResource("4_h61xd")]
 layout_mode = 1
 offset_left = 527.0
-offset_top = 91.0
+offset_top = 84.0
 offset_right = 527.3
-offset_bottom = 124.535
+offset_bottom = 117.535
 
 [node name="RestModule" parent="VBoxContainer/Control" instance=ExtResource("5_5x7vr")]
 layout_mode = 1
 offset_left = 528.0
-offset_top = 335.0
+offset_top = 329.0
 offset_right = 529.95
-offset_bottom = 340.47
+offset_bottom = 334.47
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 555)
+[node name="BreakingNews" parent="VBoxContainer/Control" instance=ExtResource("6_khid0")]
+layout_mode = 1
+offset_left = 9.0
+offset_top = 367.0
+offset_right = 8.84998
+offset_bottom = 381.865
+
+[node name="BoostModule" parent="VBoxContainer/Control" instance=ExtResource("7_fpxsb")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 528.0
+offset_top = 366.0
+offset_right = 631.0
+offset_bottom = 469.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 516.0
+offset_right = 641.0
+offset_bottom = 536.0
+theme_override_constants/separation = 6
+
+[node name="AchievementsButton" parent="VBoxContainer/Control/HBoxContainer" instance=ExtResource("10_dr27a")]
 layout_mode = 2
 
-[node name="Placeholder" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 11
-theme_override_constants/margin_top = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Placeholder"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 0
-
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/Placeholder/HBoxContainer"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer/Placeholder/HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 30)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 106)
+[node name="QuestsButton" parent="VBoxContainer/Control/HBoxContainer" instance=ExtResource("12_2ytk7")]
 layout_mode = 2
 
-[node name="Control" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
+[node name="EventsButton" parent="VBoxContainer/Control/HBoxContainer" instance=ExtResource("11_6udhx")]
 layout_mode = 2
 
-[node name="Control" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control"]
+[node name="ShopButton" parent="VBoxContainer/Control/HBoxContainer" instance=ExtResource("13_e37wi")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
+[node name="ModalContainer" type="Control" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 5
-text = "G"
-
-[node name="Button2" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 5
-text = "1"
-
-[node name="Button3" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 5
-text = "2"
-
-[node name="Button4" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 5
-text = "3"
-
-[node name="Button5" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 5
-text = "4"
-
-[node name="Button6" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 5
-text = "Current
-Feature"
-
-[node name="Button7" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control/Control"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 5
-text = ">"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Control"]
-layout_mode = 2
-vertical_scroll_mode = 2
-
-[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 
 [node name="BottomBar" parent="VBoxContainer" instance=ExtResource("3_17737")]
 layout_mode = 2
