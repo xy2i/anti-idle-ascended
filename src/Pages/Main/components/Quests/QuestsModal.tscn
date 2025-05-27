@@ -1,0 +1,444 @@
+[gd_scene load_steps=22 format=3 uid="uid://0xqgrx5jhsge"]
+
+[ext_resource type="Texture2D" uid="uid://byct7aur0tdcw" path="res://src/Pages/Main/components/Quests/rIjxSn9.png" id="1_n5kgb"]
+[ext_resource type="FontFile" uid="uid://xspan1itif3n" path="res://common_assets/fonts/1683_PF Tempesta Seven Extended.ttf" id="2_if8nu"]
+[ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="3_sk84f"]
+[ext_resource type="FontFile" uid="uid://dnrub80i462m7" path="res://common_assets/fonts/3185_PF Ronda Seven.ttf" id="4_wp6ym"]
+[ext_resource type="FontFile" uid="uid://undd4htvlr06" path="res://common_assets/fonts/PF Tempesta Seven_893.ttf" id="5_pbq1i"]
+[ext_resource type="FontFile" uid="uid://qs8fgfyxuiho" path="res://common_assets/fonts/PF Tempesta Seven Bold_131.ttf" id="6_bdo60"]
+[ext_resource type="FontFile" uid="uid://ctv7i5w3nqvcj" path="res://common_assets/fonts/2421_I hate Comic Sans.ttf" id="7_r784w"]
+[ext_resource type="Texture2D" uid="uid://dajmfkxqw3b2t" path="res://common_assets/shapes/2470.svg" id="8_x38vs"]
+[ext_resource type="FontFile" uid="uid://yvep1sldeuhr" path="res://common_assets/fonts/893_PF Tempesta Seven.ttf" id="9_0u7jx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r784w"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u1o6"]
+bg_color = Color(0.2, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kobpr"]
+content_margin_bottom = 15.0
+
+[sub_resource type="FontVariation" id="FontVariation_wp6ym"]
+base_font = ExtResource("4_wp6ym")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp6ym"]
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0.670588, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gsg7i"]
+bg_color = Color(0.00392157, 0, 0.427451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ognj2"]
+bg_color = Color(0, 0.2, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbq1i"]
+bg_color = Color(0, 0.2, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdo60"]
+bg_color = Color(0, 0.2, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81cd3"]
+bg_color = Color(0.784314, 0.784314, 0.27451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngof3"]
+bg_color = Color(0.282353, 0.282353, 0.47451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7dqb"]
+bg_color = Color(0.282353, 0.282353, 0.47451, 1)
+
+[node name="QuestsModal" type="Panel"]
+anchors_preset = -1
+anchor_right = 0.909
+anchor_bottom = 0.749
+offset_right = 0.149963
+offset_bottom = 0.149994
+theme_override_styles/panel = SubResource("StyleBoxFlat_r784w")
+
+[node name="RIjxSn9" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+offset_left = -21.0
+offset_top = -94.0
+offset_right = 612.0
+offset_bottom = 556.0
+texture = ExtResource("1_n5kgb")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 107.0
+offset_bottom = 19.0
+theme_override_fonts/font = ExtResource("6_bdo60")
+theme_override_font_sizes/font_size = 10
+text = "Random Quest"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+offset_left = 11.0
+offset_top = 21.0
+offset_right = 416.0
+offset_bottom = 37.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_sk84f")
+theme_override_font_sizes/font_size = 10
+text = "Complete Random Quests and earn awesome rewards!"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+anchor_left = 0.041
+anchor_top = 0.074
+anchor_right = 0.961
+anchor_bottom = 0.561
+offset_left = -0.231001
+offset_top = 12.962
+offset_right = 0.0490112
+offset_bottom = -0.207031
+theme_override_styles/panel = SubResource("StyleBoxFlat_3u1o6")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.196078, 0, 1)
+theme_override_fonts/font = ExtResource("2_if8nu")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kobpr")
+text = "Random Quest"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_fonts/font = SubResource("FontVariation_wp6ym")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_wp6ym")
+text = "MEDIUM QUEST"
+horizontal_alignment = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 11
+columns = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(98, 38)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_if8nu")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_gsg7i")
+text = "Objective"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_sk84f")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ognj2")
+text = "Get 75 PERFECT catches in Fishing."
+
+[node name="Label6" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(98, 38)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_if8nu")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_gsg7i")
+text = "Progress"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pbq1i")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(129, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_sk84f")
+theme_override_font_sizes/font_size = 6
+text = "16 / 75"
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_sk84f")
+theme_override_font_sizes/font_size = 8
+text = "All progress must be made after you receive the quest."
+
+[node name="Label7" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(98, 38)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_if8nu")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_gsg7i")
+text = "Reward"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_sk84f")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_bdo60")
+text = "Quest Tokens: 1500 | Blue Coins: 6000
+120 [Regular Pet Food]"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+offset_left = 28.0
+offset_top = 280.0
+offset_right = 454.0
+offset_bottom = 356.0
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 11
+columns = 2
+
+[node name="Button" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 18)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("3_sk84f")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_81cd3")
+text = "Complete Quest"
+
+[node name="EmptySpace" type="Control" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 18)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("9_0u7jx")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ngof3")
+text = "Forfeit [Shift + Click]"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="GridContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_if8nu")
+theme_override_font_sizes/font_size = 10
+text = "Cost:"
+
+[node name="Label2" type="Label" parent="GridContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_if8nu")
+theme_override_font_sizes/font_size = 10
+text = "999999999"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="GridContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_sk84f")
+theme_override_font_sizes/font_size = 10
+text = "Green Coins"
+
+[node name="Button3" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 18)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("9_0u7jx")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_v7dqb")
+text = "Instant Finish [Shift + Click]"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="GridContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00392157, 0.6, 1, 1)
+theme_override_fonts/font = ExtResource("2_if8nu")
+theme_override_font_sizes/font_size = 10
+text = "Cost:"
+
+[node name="Label2" type="Label" parent="GridContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00392157, 0.6, 1, 1)
+theme_override_fonts/font = ExtResource("2_if8nu")
+theme_override_font_sizes/font_size = 10
+text = "999999999"
+
+[node name="Label3" type="Label" parent="GridContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00392157, 0.6, 1, 1)
+theme_override_fonts/font = ExtResource("3_sk84f")
+theme_override_font_sizes/font_size = 10
+text = "Blue Coins"
+
+[node name="GridContainer2" type="GridContainer" parent="."]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 391.0
+offset_right = 234.0
+offset_bottom = 449.0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 2
+columns = 2
+
+[node name="Label" type="Label" parent="GridContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("5_pbq1i")
+theme_override_font_sizes/font_size = 12
+text = "Completed:"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("6_bdo60")
+theme_override_font_sizes/font_size = 12
+text = "999999"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="GridContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("5_pbq1i")
+theme_override_font_sizes/font_size = 12
+text = "Today:"
+horizontal_alignment = 2
+
+[node name="Label5" type="Label" parent="GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("6_bdo60")
+theme_override_font_sizes/font_size = 12
+text = "999999"
+horizontal_alignment = 2
+
+[node name="Label4" type="Label" parent="GridContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("5_pbq1i")
+theme_override_font_sizes/font_size = 12
+text = "Maximum in 1 day:"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("6_bdo60")
+theme_override_font_sizes/font_size = 12
+text = "999999"
+horizontal_alignment = 2
+
+[node name="GridContainer3" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(290, 0)
+layout_mode = 2
+offset_left = 292.0
+offset_top = 390.0
+offset_right = 582.0
+offset_bottom = 475.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="Label" type="Label" parent="GridContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.721569, 0.901961, 1)
+theme_override_fonts/font = ExtResource("7_r784w")
+text = "Target Difficulty:"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer3"]
+layout_mode = 2
+texture = ExtResource("8_x38vs")
+stretch_mode = 4
+
+[node name="Label4" type="Label" parent="GridContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.00392157, 0.882353, 0.882353, 1)
+theme_override_fonts/font = ExtResource("9_0u7jx")
+theme_override_font_sizes/font_size = 13
+text = "200 |50"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="GridContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("7_r784w")
+text = "Super Quest Tokens:"
+horizontal_alignment = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GridContainer3"]
+layout_mode = 2
+texture = ExtResource("8_x38vs")
+stretch_mode = 2
+
+[node name="Label5" type="Label" parent="GridContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("9_0u7jx")
+theme_override_font_sizes/font_size = 13
+text = "5 (+5%)"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="GridContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("7_r784w")
+text = "Quest Tokens:"
+horizontal_alignment = 2
+
+[node name="TextureRect3" type="TextureRect" parent="GridContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("8_x38vs")
+
+[node name="Label6" type="Label" parent="GridContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("9_0u7jx")
+theme_override_font_sizes/font_size = 13
+text = "999,999,999"
+horizontal_alignment = 2

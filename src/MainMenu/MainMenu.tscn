@@ -140,6 +140,60 @@ _data = {
 &"idle": SubResource("Animation_70h2t")
 }
 
+[sub_resource type="FontVariation" id="FontVariation_l2fs3"]
+base_font = ExtResource("4_70h2t")
+spacing_top = -4
+spacing_bottom = -4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l2fs3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vuisw"]
+bg_color = Color(0.796078, 0.796078, 0.6, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcb8k"]
+bg_color = Color(0.294118, 0.294118, 0.0980392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2fs3"]
+bg_color = Color(0.588235, 0.588235, 0.196078, 1)
+
+[sub_resource type="Animation" id="Animation_22hij"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/normal:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 2.82843, 1),
+"update": 0,
+"values": [Color(0.588235, 0.588235, 0.196078, 1), Color(0.722634, 0.722985, 0.260773, 1), Color(0.588235, 0.588235, 0.196078, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_aeosc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/normal:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.588235, 0.196078, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_olvkn"]
+_data = {
+&"RESET": SubResource("Animation_aeosc"),
+&"blink": SubResource("Animation_22hij")
+}
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -162,6 +216,7 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Bg" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(1.002, 1.002)
 texture = ExtResource("1_cttlv")
 centered = false
@@ -535,6 +590,7 @@ text = "Awesome!"
 layout_mode = 0
 offset_right = 620.0
 offset_bottom = 60.0
+theme = SubResource("Theme_l2fs3")
 color = Color(0, 0, 0, 0.2)
 script = ExtResource("5_l2fs3")
 
@@ -544,3 +600,29 @@ libraries = {
 &"": SubResource("AnimationLibrary_l2fs3")
 }
 autoplay = "idle"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 445.0
+offset_right = 635.0
+offset_bottom = 505.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.992157, 0.992157, 0.796078, 1)
+theme_override_colors/font_color = Color(0.980392, 0.980392, 0.588235, 1)
+theme_override_colors/font_focus_color = Color(0.980392, 0.980392, 0.588235, 1)
+theme_override_colors/font_pressed_color = Color(0.490196, 0.490196, 0.294118, 1)
+theme_override_fonts/font = SubResource("FontVariation_l2fs3")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_l2fs3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vuisw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tcb8k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_l2fs3")
+text = "Awesome!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Button2"]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_olvkn")
+}
+autoplay = "blink"
