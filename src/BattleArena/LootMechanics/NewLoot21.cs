@@ -1,9 +1,10 @@
+using AntiIdle.Common.Nodes;
 using Godot;
 namespace AntiIdle.BattleArena.LootMechanics;
 
 //TO DO attach to asset
 // MATCH: DefineSprite_1331_newLoot21/frame_1/DoAction.as
-public partial class NewLoot21 : Node2D
+public partial class NewLoot21 : FlashNode2D
 {
     private double amntToGain;
     private double lootValue;
@@ -15,7 +16,7 @@ public partial class NewLoot21 : Node2D
     private double yVel = -5;
     private double del = 0;
     private double xVel = Math.random() * 2;
-    private double _alpha;
+    private float xalpha;
 
     // MATCH: DefineSprite_1331_newLoot21/frame_1/DoAction.as:getLoot()
     public void getLoot()
@@ -35,17 +36,15 @@ public partial class NewLoot21 : Node2D
         _root.gainCareerEXP(4, 5000 * amntToGain, true);
         _root.save.arenaTukkonium += amntToGain;
         _root.dispNews(185, "Found " + amntToGain + " [Tukkonium]!");
-        var pos = Position;
-        _root.house.arena.showDamage("Tukkonium +" + _root.withComma(amntToGain), 16777215, pos.X, pos.Y - 20);
+        _root.house.arena.showDamage("Tukkonium +" + _root.withComma(amntToGain), 16777215, _X, _Y - 20);
     }
 
     public override void _Ready()
     {
         leftChance = 0;
         magneticChance = 1;
-        var pos = Position;
-        pos.X = x;
-        pos.Y = y - 50;
+        _X = x;
+        _Y = y - 50;
         xVel = Math.random() * 2;
         if (Math.random() < leftChance)
         {
@@ -60,38 +59,34 @@ public partial class NewLoot21 : Node2D
         {
             if (magnetic == true)
             {
-                pos.X = 80;
+                _X = 80;
             }
             else if (_root.save.activityLoot == true && (_root.cursoridle < 5 || _root.arenaBot > 0 && _root.arenaBot < 2400))
             {
-                pos.X = 80;
+                _X = 80;
             }
             else if (x > 85)
             {
-                pos.X = x + (float)xVel * 100;
+                _X = x + (float)xVel * 100;
             }
             else
             {
-                pos.X = x;
+                _X = x;
             }
-            pos.Y = y;
+            _Y = y;
         }
         yVel = -5;
+        xalpha = 250;
         del = 0;
-        Position = pos;
     }
 
     public override void _Process(double delta)
     {
-        var pos = Position;
-        var color = Modulate;
-        var mousepos = ToLocal(GetViewport().GetMousePosition());
-        color.A = 250;
         del += 1;
         if (del >= 2)
         {
             del = 0;
-            if (pos.Y > 0)
+            if (_Y > 0)
             {
                 xVel *= 0.98;
                 if (_root.save.activityLoot == true && (_root.cursoridle < 5 || _root.arenaBot > 0 && _root.arenaBot < 2400))
@@ -99,12 +94,12 @@ public partial class NewLoot21 : Node2D
                     xVel -= 1;
                     if (_root.save.bouncyLoot == false)
                     {
-                        pos.X = 80;
+                        _X = 80;
                     }
                 }
             }
             yVel += 1;
-            if (pos.Y > 150 && yVel > 0)
+            if (_Y > 150 && yVel > 0)
             {
                 yVel *= -0.6;
             }
@@ -114,20 +109,20 @@ public partial class NewLoot21 : Node2D
                 {
                     xVel -= 1;
                 }
-                if (pos.Y > 0)
+                if (_Y > 0)
                 {
-                    pos.X = pos.X + (float)xVel;
+                    _X = _X + (float)xVel;
                 }
-                pos.Y = pos.Y + (float)yVel;
+                _Y = _Y + (float)yVel;
             }
-            if (pos.X > 500)
+            if (_X > 500)
             {
-                pos.X = 500;
+                _X = 500;
             }
-            if (color.A > 0)
+            if (xalpha > 0)
             {
-                color.A -= 100 / _root.fps;
-                if (pos.X < 85 || mousepos.X >= -25 && mousepos.X <= 25 && mousepos.Y >= -50 && mousepos.Y <= 5 && _root.cursoridle < 60)
+                xalpha -= 100 / _root.fps;
+                if (_X < 85 || _xmouse >= -25 && _xmouse <= 25 && _ymouse >= -50 && _ymouse <= 5 && _root.cursoridle < 60)
                 {
                     _root.save.arenaLoot += 1;
                     getLoot();
@@ -140,10 +135,8 @@ public partial class NewLoot21 : Node2D
             }
             if (_root._quality == "HIGH" || _root._quality == "BEST")
             {
-                _alpha = color.A;
+                _alpha = xalpha;
             }
         }
-        Position = pos;
-        Modulate = color;
     }
 }

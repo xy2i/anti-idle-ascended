@@ -411,18 +411,14 @@ In Godot, all scales are [0, 1]. But in Flash, scales differ based on the object
 - `color` components: From 0 to 255 in Flash, compared to [0,1] in Godot.
 - `_xscale`, `_yscale`: 0 to 100 in Flash, [0,1] in Godot. Godot equivalent is `Scale`.
 
-**Be careful when porting code that uses this! You will have to convert the numbers to be between 0 and 1.**
+To solve this, **we have special node types in Godot, use them!** These will import convenience variables `_X`, `_Y`, ... that behave the same as Flash.
+
+- For Node2D: Use `FlashNode2D`.
 
 ## Common usages
 
 In order to keep the code uniform no matter what, please adhere to the following:
 | Standard | Its correspondent in C# | Common Usage | Replacement in AS2 Code |
 | :--- | ---: | ---: | ---: |
-| `pos` | Position | `.X .Y` | `_X _Y`[^1] |
-| `mousepos` | ToLocal(GetViewport().GetMousePosition())[^2] | `.X .Y` | `_xmouse _ymouse` |
-| `color` | Modulate | `.R .G .B .A` | `xalpha` |
 | `scale` | Scale | `.R .G .B .A` | `_xscale`, `_yscale` |
 
-## Elaboration on Usage
-[^1]: ".X" ".Y" for say the Position example mean that you would invoke pos.X or pos.Y to edit such attributes.
-[^2]: To get ToLocal to be valid (to use local instead of global coordinates on an object); your `class Name` should be tied to `Node2D`; example: `public partial class NewLoot1 : Node2D`
