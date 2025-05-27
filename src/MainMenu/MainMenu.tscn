@@ -1,14 +1,59 @@
-[gd_scene load_steps=12 format=3 uid="uid://cre5l5kp4b0lu"]
+[gd_scene load_steps=18 format=3 uid="uid://cre5l5kp4b0lu"]
 
 [ext_resource type="Texture2D" uid="uid://b21mnu2f4lbk8" path="res://src/MainMenu/MenuBg.png" id="1_cttlv"]
 [ext_resource type="Texture2D" uid="uid://bxhgkp5br4qa6" path="res://common_assets/mainmenu-wireframe.jpg" id="1_ipfen"]
 [ext_resource type="Texture2D" uid="uid://dafk348bgy32y" path="res://src/MainMenu/Logo.png" id="2_ipfen"]
 [ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="4_70h2t"]
 [ext_resource type="Script" uid="uid://bgcbpyi2deq3i" path="res://src/MainMenu/AwesomeButton.cs" id="5_l2fs3"]
+[ext_resource type="Script" uid="uid://d2ey0dcmtot36" path="res://src/MainMenu/SaveFileButton.cs" id="5_vuisw"]
 
 [sub_resource type="FontVariation" id="FontVariation_70h2t"]
 base_font = ExtResource("4_70h2t")
 spacing_bottom = 1
+
+[sub_resource type="Animation" id="Animation_22hij"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:color:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_aeosc"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_olvkn"]
+resource_name = "hover"
+
+[sub_resource type="Animation" id="Animation_h61mk"]
+resource_name = "clicked"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aeosc"]
+_data = {
+&"RESET": SubResource("Animation_22hij"),
+&"clicked": SubResource("Animation_h61mk"),
+&"hover": SubResource("Animation_olvkn"),
+&"idle": SubResource("Animation_aeosc")
+}
 
 [sub_resource type="Animation" id="Animation_l2fs3"]
 length = 0.001
@@ -37,22 +82,6 @@ tracks/1/keys = {
 "values": [Color(0, 0, 0, 0.2)]
 }
 
-[sub_resource type="Animation" id="Animation_vuisw"]
-resource_name = "hover"
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AwesomeButton:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.5)]
-}
-
 [sub_resource type="Animation" id="Animation_tcb8k"]
 resource_name = "clicked"
 step = 0.025
@@ -67,6 +96,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_vuisw"]
+resource_name = "hover"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AwesomeButton:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5)]
 }
 
 [sub_resource type="Animation" id="Animation_70h2t"]
@@ -104,6 +149,11 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Mainmenu-wireframe" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.494118)
 scale = Vector2(0.5, 0.5)
@@ -138,6 +188,17 @@ Gain some EXP, level up and unlock tons of features and minigames! Anti-Idle: Th
 What are you still waiting for? Press the big \"Awesome!\" button below there and join the awesomeness right away, with millions of other players![/color][/font_size]"
 horizontal_alignment = 1
 
+[node name="BackupText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 583.0
+offset_right = 627.0
+offset_bottom = 639.0
+theme_override_fonts/normal_font = SubResource("FontVariation_70h2t")
+bbcode_enabled = true
+text = "[font_size=12][color=#999999]Your progress is automatically saved and is stored in your computer. Backup your savefile often!"
+horizontal_alignment = 1
+
 [node name="Button" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 15.0
@@ -145,12 +206,322 @@ offset_top = 380.0
 offset_right = 55.0
 offset_bottom = 420.0
 
-[node name="ColorRect" type="ColorRect" parent="Button"]
+[node name="AwesomeRect" type="ColorRect" parent="Button"]
+layout_mode = 0
 offset_right = 620.0
 offset_bottom = 60.0
 color = Color(0.588235, 0.588235, 0.196078, 1)
 
+[node name="SaveFileContainer" type="HBoxContainer" parent="Button"]
+layout_mode = 0
+offset_top = 66.0
+offset_right = 620.0
+offset_bottom = 146.0
+theme_override_constants/separation = 5
+
+[node name="SaveButton1" type="ColorRect" parent="Button/SaveFileContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+color = Color(0, 0.235294, 0.470588, 1)
+script = ExtResource("5_vuisw")
+
+[node name="FileText1" type="Label" parent="Button/SaveFileContainer/SaveButton1"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 1.0
+offset_right = 101.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 18
+text = "< File 0 >"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="SaveText1" type="Label" parent="Button/SaveFileContainer/SaveButton1"]
+layout_mode = 2
+offset_left = 2.0
+offset_top = 31.0
+offset_right = 122.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = " Time:               0 min."
+vertical_alignment = 3
+
+[node name="SaveText2" type="Label" parent="Button/SaveFileContainer/SaveButton1"]
+layout_mode = 2
+offset_left = 2.0
+offset_top = 47.0
+offset_right = 122.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = " Level:                       1"
+vertical_alignment = 3
+
+[node name="SaveText3" type="Label" parent="Button/SaveFileContainer/SaveButton1"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 62.0
+offset_right = 121.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = "Ascensions:           0"
+vertical_alignment = 3
+
+[node name="Alpha" type="AnimationPlayer" parent="Button/SaveFileContainer/SaveButton1"]
+libraries = {
+&"": SubResource("AnimationLibrary_aeosc")
+}
+
+[node name="SaveButton2" type="ColorRect" parent="Button/SaveFileContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+color = Color(0, 0.235294, 0.470588, 1)
+
+[node name="FileText2" type="Label" parent="Button/SaveFileContainer/SaveButton2"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 1.0
+offset_right = 104.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 18
+text = "< File 1 >"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="SaveText1" type="Label" parent="Button/SaveFileContainer/SaveButton2"]
+offset_left = 2.0
+offset_top = 31.0
+offset_right = 122.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = " Time:               0 min."
+vertical_alignment = 3
+
+[node name="SaveText2" type="Label" parent="Button/SaveFileContainer/SaveButton2"]
+offset_left = 2.0
+offset_top = 47.0
+offset_right = 122.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = " Level:                       1"
+vertical_alignment = 3
+
+[node name="SaveText3" type="Label" parent="Button/SaveFileContainer/SaveButton2"]
+offset_left = 4.0
+offset_top = 62.0
+offset_right = 121.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = "Ascensions:           0"
+vertical_alignment = 3
+
+[node name="SaveButton3" type="ColorRect" parent="Button/SaveFileContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+color = Color(0, 0.235294, 0.470588, 1)
+
+[node name="FileText3" type="Label" parent="Button/SaveFileContainer/SaveButton3"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 2.0
+offset_right = 103.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 18
+text = "< File 2 >"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="SaveText1" type="Label" parent="Button/SaveFileContainer/SaveButton3"]
+offset_left = 2.0
+offset_top = 31.0
+offset_right = 122.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = " Time:               0 min."
+vertical_alignment = 3
+
+[node name="SaveText2" type="Label" parent="Button/SaveFileContainer/SaveButton3"]
+offset_left = 2.0
+offset_top = 47.0
+offset_right = 122.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = " Level:                       1"
+vertical_alignment = 3
+
+[node name="SaveText3" type="Label" parent="Button/SaveFileContainer/SaveButton3"]
+offset_left = 4.0
+offset_top = 62.0
+offset_right = 121.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = "Ascensions:           0"
+vertical_alignment = 3
+
+[node name="SaveButton4" type="ColorRect" parent="Button/SaveFileContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+color = Color(0, 0.235294, 0.470588, 1)
+
+[node name="FileText4" type="Label" parent="Button/SaveFileContainer/SaveButton4"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 2.0
+offset_right = 104.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 18
+text = "< File 3 >"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="SaveText1" type="Label" parent="Button/SaveFileContainer/SaveButton4"]
+offset_left = 2.0
+offset_top = 31.0
+offset_right = 122.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = " Time:               0 min."
+vertical_alignment = 3
+
+[node name="SaveText2" type="Label" parent="Button/SaveFileContainer/SaveButton4"]
+offset_left = 2.0
+offset_top = 47.0
+offset_right = 122.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = " Level:                       1"
+vertical_alignment = 3
+
+[node name="SaveText3" type="Label" parent="Button/SaveFileContainer/SaveButton4"]
+offset_left = 4.0
+offset_top = 62.0
+offset_right = 121.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = "Ascensions:           0"
+vertical_alignment = 3
+
+[node name="SaveButton5" type="ColorRect" parent="Button/SaveFileContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+color = Color(0, 0.235294, 0.470588, 1)
+
+[node name="Control" type="Control" parent="Button/SaveFileContainer/SaveButton5"]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 2.0
+offset_right = 56.0
+offset_bottom = 42.0
+
+[node name="ChallengeText1" type="Label" parent="Button/SaveFileContainer/SaveButton5/Control"]
+layout_mode = 0
+offset_right = 91.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 18
+text = "Challenge"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="ChallengeText2" type="Label" parent="Button/SaveFileContainer/SaveButton5/Control"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 91.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 18
+text = "Mode"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="ChallengeText3" type="Label" parent="Button/SaveFileContainer/SaveButton5/Control"]
+offset_left = -16.0
+offset_top = 60.0
+offset_right = 104.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = "0 / 6 completed"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="SmallButtonContainer" type="HBoxContainer" parent="Button"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 172.0
+offset_right = 446.0
+offset_bottom = 190.0
+theme_override_constants/separation = 30
+
+[node name="SaveButton1" type="ColorRect" parent="Button/SmallButtonContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+color = Color(0.372549, 0.372549, 0.372549, 1)
+
+[node name="SaveText3" type="Label" parent="Button/SmallButtonContainer/SaveButton1"]
+layout_mode = 2
+offset_right = 120.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = "Backup Help"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="SaveButton2" type="ColorRect" parent="Button/SmallButtonContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+color = Color(0.372549, 0.372549, 0.372549, 1)
+
+[node name="SaveText3" type="Label" parent="Button/SmallButtonContainer/SaveButton2"]
+offset_right = 120.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_fonts/font = ExtResource("4_70h2t")
+theme_override_font_sizes/font_size = 12
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 3
+
 [node name="Text" type="Label" parent="Button"]
+layout_mode = 0
 offset_left = 212.0
 offset_top = 1.0
 offset_right = 409.0
@@ -161,6 +532,7 @@ theme_override_font_sizes/font_size = 40
 text = "Awesome!"
 
 [node name="AwesomeButton" type="ColorRect" parent="Button"]
+layout_mode = 0
 offset_right = 620.0
 offset_bottom = 60.0
 color = Color(0, 0, 0, 0.2)
