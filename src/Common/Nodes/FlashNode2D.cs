@@ -29,6 +29,22 @@ public partial class FlashNode2D : Node2D
             Modulate = Modulate with { A = value / 100 };
         }
     }
+    public float _xscale
+    {
+        get => Scale.X;
+        set
+        {
+            Scale = Scale with { X = value / 100 };
+        }
+    }
+    public float _yscale
+    {
+        get => Scale.Y;
+        set
+        {
+            Scale = Scale with { Y = value / 100 };
+        }
+    }
     public float _xmouse
     {
         get => ToLocal(GetViewport().GetMousePosition()).X;

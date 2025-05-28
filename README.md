@@ -414,11 +414,3 @@ In Godot, all scales are [0, 1]. But in Flash, scales differ based on the object
 To solve this, **we have special node types in Godot, use them!** These will import convenience variables `_X`, `_Y`, ... that behave the same as Flash.
 
 - For Node2D: Use `FlashNode2D`.
-
-## Common usages
-
-In order to keep the code uniform no matter what, please adhere to the following:
-| Standard | Its correspondent in C# | Common Usage | Replacement in AS2 Code |
-| :--- | ---: | ---: | ---: |
-| `scale` | Scale | `.R .G .B .A` | `_xscale`, `_yscale` |
-
