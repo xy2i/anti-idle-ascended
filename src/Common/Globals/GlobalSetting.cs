@@ -20,6 +20,7 @@ public class GlobalSetting
     public FlashList<bool> breakTab3;
     public FlashList<bool> breakTab4;
     public FlashList<double> challengeTime;
+    public bool challengeUnlocked;
     public double defTab = 2;
 
     public string graphicQuality;

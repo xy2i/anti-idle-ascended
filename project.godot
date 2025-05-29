@@ -22,6 +22,7 @@ window/size/viewport_width=650
 window/size/viewport_height=650
 window/energy_saving/keep_screen_on=false
 window/stretch/mode="canvas_items"
+display_server/driver.linuxbsd="wayland"
 window/vsync/vsync_mode=0
 
 [dotnet]

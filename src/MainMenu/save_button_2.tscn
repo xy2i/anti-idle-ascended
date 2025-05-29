@@ -1,0 +1,178 @@
+[gd_scene load_steps=11 format=3 uid="uid://cdc5ticljtaw3"]
+
+[ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="1_mof8f"]
+[ext_resource type="Script" uid="uid://bfc5o6txmvqe8" path="res://src/MainMenu/File0Select.cs" id="2_duxn6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcb8k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22hij"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
+
+[sub_resource type="Animation" id="Animation_22hij"]
+resource_name = "blink"
+length = 1.025
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SaveButton1/HoverEffect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h61mk"]
+resource_name = "clicked"
+length = 1.025
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SaveButton1/HoverEffect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.25098)]
+}
+
+[sub_resource type="Animation" id="Animation_olvkn"]
+resource_name = "hover"
+length = 1.025
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SaveButton1/HoverEffect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.12549)]
+}
+
+[sub_resource type="Animation" id="Animation_aeosc"]
+resource_name = "idle"
+length = 1.025
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SaveButton1/HoverEffect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.501961)]
+}
+
+[sub_resource type="Animation" id="Animation_uy7kt"]
+resource_name = "ssfClicked"
+length = 1.025
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SaveButton1/HoverEffect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.525, 1.025),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.25098), Color(0.252028, 0.252028, 0.252028, 0), Color(1, 0, 0, 0.247059)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aeosc"]
+_data = {
+&"RESET": SubResource("Animation_22hij"),
+&"clicked": SubResource("Animation_h61mk"),
+&"hover": SubResource("Animation_olvkn"),
+&"idle": SubResource("Animation_aeosc"),
+&"ssfClicked": SubResource("Animation_uy7kt")
+}
+
+[node name="SaveButton2" type="Button"]
+custom_minimum_size = Vector2(120, 0)
+theme_override_colors/font_color = Color(0, 0.235294, 0.470588, 1)
+theme_override_colors/font_focus_color = Color(0, 0.235294, 0.470588, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.235294, 0.470588, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tcb8k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_22hij")
+
+[node name="FileText1" type="Label" parent="."]
+layout_mode = 2
+offset_left = 22.0
+offset_top = 1.0
+offset_right = 100.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_mof8f")
+theme_override_font_sizes/font_size = 18
+text = "< File 1 >"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="SaveText1" type="Label" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 32.0
+offset_right = 121.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_mof8f")
+theme_override_font_sizes/font_size = 12
+text = " Time:               0 min."
+vertical_alignment = 3
+
+[node name="SaveText2" type="Label" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 47.0
+offset_right = 121.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_mof8f")
+theme_override_font_sizes/font_size = 12
+text = " Level:                       1"
+vertical_alignment = 3
+
+[node name="SaveText3" type="Label" parent="."]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 62.0
+offset_right = 121.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_mof8f")
+theme_override_font_sizes/font_size = 12
+text = "Ascensions:           0"
+vertical_alignment = 3
+
+[node name="HoverEffect" type="ColorRect" parent="."]
+offset_right = 120.0
+offset_bottom = 80.0
+color = Color(1, 1, 1, 0.25098)
+script = ExtResource("2_duxn6")
+metadata/_custom_type_script = "uid://b51w8aatefpfa"
+
+[node name="Alpha" type="AnimationPlayer" parent="HoverEffect"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_aeosc")
+}

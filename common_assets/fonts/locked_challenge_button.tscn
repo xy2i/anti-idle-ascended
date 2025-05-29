@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://nxgdfs1aqyy0"]
+
+[ext_resource type="Script" uid="uid://bc7lsjiqgv8lm" path="res://src/MainMenu/FileChallengeSelect.cs" id="1_d015q"]
+[ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="2_kso22"]
+[ext_resource type="Script" uid="uid://b51w8aatefpfa" path="res://src/Common/Nodes/FlashColorRect.cs" id="3_sjivi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4i8n"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yx8wd"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_528xl"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
+
+[node name="ChallengeButton" type="Button"]
+custom_minimum_size = Vector2(120, 0)
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4i8n")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_yx8wd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_528xl")
+script = ExtResource("1_d015q")
+metadata/_custom_type_script = "uid://cdoybrdveot3b"
+
+[node name="Normal" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -515.0
+offset_top = -446.0
+offset_right = -475.0
+offset_bottom = -406.0
+
+[node name="FileText1" type="Label" parent="Normal"]
+offset_left = 530.0
+offset_top = 448.0
+offset_right = 621.0
+offset_bottom = 475.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("2_kso22")
+theme_override_font_sizes/font_size = 18
+text = "Challenge"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="FileText2" type="Label" parent="Normal"]
+offset_left = 530.0
+offset_top = 468.0
+offset_right = 621.0
+offset_bottom = 495.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("2_kso22")
+theme_override_font_sizes/font_size = 18
+text = "Mode"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="FileText3" type="Label" parent="Normal"]
+offset_left = 528.0
+offset_top = 508.0
+offset_right = 623.0
+offset_bottom = 535.0
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("2_kso22")
+theme_override_font_sizes/font_size = 12
+text = "0 / 6 completed"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="HoverEffect" type="ColorRect" parent="."]
+z_index = 100
+offset_right = 120.0
+offset_bottom = 80.0
+color = Color(1, 0, 0, 0.25098)
+script = ExtResource("3_sjivi")
+metadata/_custom_type_script = "uid://b51w8aatefpfa"

@@ -150,14 +150,14 @@ with JPEXS earlier. Click on "Script Layer: Frame 1" and you should find the cod
 
 ![actions](doc/cs6_frame1action.png)
 
-Alternative, you can also look for the code manually, in the exported scripts/
+Alternatively, you can also look for the code manually, in the exported scripts/
 directory in decmp.
 
 Looking around in CS6, you can see that the frame 1 is made up of various
 elements. In Flash language, these are known as "MovieClips". Think of a frame
 as just a tree of movieclips.
 
-## Porting the initial Frame 1 code to Godot and C #
+## Porting the initial Frame 1 code to Godot and C#
 
 When porting to Godot, we want to reproduce that same tree, in the Godot scene
 tree. In Godot's case, the equivalent to a frame is just a scene.
@@ -173,11 +173,11 @@ the Loader. In Godot, you can associate code to any code in the scene tree,
 and it will run with the same lifecycle as Flash. This is how we can port the
 flash MovieClips.
 
-You might need to set up [associated editor](https://docs.godotengine.org/en/stable/tutorials/editor/external_editor.html)
-for Godot to open the files in VSCode or your editor. After this, the `Loader.cs`
+You might need to set up an [associated editor](https://docs.godotengine.org/en/stable/tutorials/editor/external_editor.html)
+for Godot to open the files in a text editor of your choice like VSCode. After this, the `Loader.cs`
 file should show up.
 
-### Porting the code to C #
+### Porting the code to C#
 
 You can find the original frame_1 code.
 
@@ -411,6 +411,6 @@ In Godot, all scales are [0, 1]. But in Flash, scales differ based on the object
 - `color` components: From 0 to 255 in Flash, compared to [0,1] in Godot.
 - `_xscale`, `_yscale`: 0 to 100 in Flash, [0,1] in Godot. Godot equivalent is `Scale`.
 
-To solve this, **we have special node types in Godot, use them!** These will import convenience variables `_X`, `_Y`, ... that behave the same as Flash.
+To solve this, **we use special node types in Godot!** These will import convenience variables `_X`, `_Y`, and others that behave the same way in Flash.
 
 - For Node2D: Use `FlashNode2D`.

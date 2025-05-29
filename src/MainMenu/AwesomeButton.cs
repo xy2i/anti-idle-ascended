@@ -1,8 +1,8 @@
 using Godot;
-using System;
+namespace AntiIdle.Common.Nodes;
 
 // MATCH: DefineSprite_2380/frame_1/DoAction.as
-public partial class AwesomeButton : ColorRect
+public partial class AwesomeButton : FlashButton
 {
 	AnimationPlayer anim;
 	double position;
@@ -23,14 +23,18 @@ public partial class AwesomeButton : ColorRect
 
 	private void OnMouseExited()
 	{
-		anim.AssignedAnimation = "idle";
+		anim.AssignedAnimation = "blink";
 		anim.Seek(position);
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (Input.IsMouseButtonPressed(MouseButton.Left)) {
-			anim.AssignedAnimation = "clicked";
+		if (_xmouse >= 0 && _xmouse < 620 && _ymouse >= 0 && _ymouse < 60)
+		{
+			if (Input.IsMouseButtonPressed(MouseButton.Left))
+			{
+				anim.AssignedAnimation = "clicked";
+			}
 		}
 	}
 

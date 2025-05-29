@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://1imyqiq7yx0m"]
+
+[ext_resource type="Script" uid="uid://bc7lsjiqgv8lm" path="res://src/MainMenu/FileChallengeSelect.cs" id="1_d015q"]
+[ext_resource type="FontFile" uid="uid://bc8ccf2c7o73w" path="res://common_assets/fonts/1931_Maiandra GD.ttf" id="2_8f8xm"]
+[ext_resource type="Script" uid="uid://b51w8aatefpfa" path="res://src/Common/Nodes/FlashColorRect.cs" id="3_sjivi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4i8n"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yx8wd"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_528xl"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
+
+[node name="ChallengeButton" type="Button"]
+custom_minimum_size = Vector2(120, 0)
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4i8n")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_yx8wd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_528xl")
+script = ExtResource("1_d015q")
+metadata/_custom_type_script = "uid://cdoybrdveot3b"
+
+[node name="Locked" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FileText1" type="Label" parent="Locked"]
+offset_left = 16.0
+offset_top = 5.0
+offset_right = 107.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+theme_override_fonts/font = ExtResource("2_8f8xm")
+theme_override_font_sizes/font_size = 21
+text = "LOCKED"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="FileText2" type="Label" parent="Locked"]
+offset_left = 7.0
+offset_top = 41.0
+offset_right = 115.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.470588, 0.470588, 0.470588, 1)
+theme_override_fonts/font = ExtResource("2_8f8xm")
+theme_override_font_sizes/font_size = 14
+text = "Reach level 1,000"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="FileText3" type="Label" parent="Locked"]
+offset_left = 16.0
+offset_top = 59.0
+offset_right = 107.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(0.470588, 0.470588, 0.470588, 1)
+theme_override_fonts/font = ExtResource("2_8f8xm")
+theme_override_font_sizes/font_size = 14
+text = "to unlock"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="FlashColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 80.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("3_sjivi")
+metadata/_custom_type_script = "uid://b51w8aatefpfa"

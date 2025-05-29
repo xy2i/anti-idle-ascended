@@ -12261,4 +12261,9 @@ public class Root
             prop.SetValue(this, value);
         }
     }
+
+    public void selectSavefile(double index)
+    {
+        
+    }
 }
