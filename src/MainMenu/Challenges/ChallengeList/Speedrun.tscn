@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3wlpyyvfopsj"]
+
+[ext_resource type="FontFile" uid="uid://c702oelamesfo" path="res://decmp/script/fonts/1546_I hate Comic Sans.ttf" id="1_262kd"]
+[ext_resource type="FontFile" uid="uid://bkce6w7pnorvp" path="res://common_assets/fonts/1546_I hate Comic Sans.ttf" id="2_mqd6h"]
+
+[sub_resource type="FontVariation" id="FontVariation_kmgqn"]
+base_font = ExtResource("1_262kd")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_1ls6v"]
+base_font = ExtResource("2_mqd6h")
+spacing_glyph = 1
+
+[node name="MarginContainer" type="MarginContainer"]
+theme_override_constants/margin_top = 10
+
+[node name="TextContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TextContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.576471, 0.996078, 0.572549, 1)
+theme_override_colors/font_outline_color = Color(0.318541, 0.627166, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_kmgqn")
+theme_override_font_sizes/font_size = 30
+text = "Speedrun!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -9
+
+[node name="Label2" type="Label" parent="TextContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0745098, 0.992157, 0.0745098, 1)
+theme_override_colors/font_outline_color = Color(0, 0.8, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_1ls6v")
+theme_override_font_sizes/font_size = 20
+text = "How fast can you reach Lv. 9001?"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -9
+
+[node name="Label3" type="Label" parent="TextContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_1ls6v")
+theme_override_font_sizes/font_size = 15
+text = "(inspired by Aurian's suggestion)"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Label4" type="Label" parent="TextContainer/MarginContainer3"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 1, 0.6, 1)
+theme_override_constants/paragraph_spacing = -2
+theme_override_fonts/font = SubResource("FontVariation_1ls6v")
+theme_override_font_sizes/font_size = 15
+text = "Play Anti-Idle once again and reach level 9001 as fast as possible, with nothing but your knowledge.
+
+Speedrun Mode has been revamped! It is now merged with the Challenge Mode system, and you can play Speedrun Mode while playing another savefile at the same time!
+
+Receive a Medal in the Battle Arena for reaching Lv. 9001!
+Your fastest time will also be saved so you can brag to your friends!"
+horizontal_alignment = 1
+autowrap_mode = 3

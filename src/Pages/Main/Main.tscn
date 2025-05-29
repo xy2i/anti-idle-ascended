@@ -120,6 +120,7 @@ offset_right = 8.84998
 offset_bottom = 381.865
 
 [node name="BoostModule" parent="VBoxContainer/Control" instance=ExtResource("7_fpxsb")]
+visible = false
 layout_mode = 2
 anchors_preset = 0
 anchor_right = 0.0

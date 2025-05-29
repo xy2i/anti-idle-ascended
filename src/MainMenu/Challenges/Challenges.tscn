@@ -1,0 +1,150 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtb71bw3opbn0"]
+
+[ext_resource type="Texture2D" uid="uid://db0nposf61ipl" path="res://src/MainMenu/Challenges/image.png" id="1_fkm65"]
+[ext_resource type="FontFile" uid="uid://bkce6w7pnorvp" path="res://common_assets/fonts/1546_I hate Comic Sans.ttf" id="2_gs7kl"]
+[ext_resource type="PackedScene" uid="uid://d3wlpyyvfopsj" path="res://src/MainMenu/Challenges/ChallengeList/Speedrun.tscn" id="2_u4puh"]
+[ext_resource type="Texture2D" uid="uid://0w3721fsxqje" path="res://src/MainMenu/Challenges/LeftArrow.png" id="4_6hiuy"]
+[ext_resource type="Texture2D" uid="uid://brydwak1idsvo" path="res://src/MainMenu/Challenges/RightArrow.png" id="5_h5ksr"]
+[ext_resource type="Texture2D" uid="uid://d3km80yg2q3o6" path="res://common_assets/buttons/DefineButton2_8362/1.png" id="6_6hiuy"]
+
+[sub_resource type="FontVariation" id="FontVariation_gs7kl"]
+base_font = ExtResource("2_gs7kl")
+spacing_glyph = 1
+
+[node name="Challenges" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="Sprite2D" parent="."]
+position = Vector2(325, 176)
+texture = ExtResource("1_fkm65")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.834
+offset_bottom = 3.99997
+theme_override_constants/separation = 0
+
+[node name="Top" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Top"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/Top/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = SubResource("FontVariation_gs7kl")
+theme_override_font_sizes/font_size = 30
+text = "Challenge Mode!"
+horizontal_alignment = 1
+
+[node name="Bottom" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Bottom"]
+layout_mode = 2
+
+[node name="MarginContainer" parent="VBoxContainer/Bottom/VBoxContainer" instance=ExtResource("2_u4puh")]
+custom_minimum_size = Vector2(0, 347.945)
+layout_mode = 2
+theme_override_constants/margin_top = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Bottom/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 1
+
+[node name="LeftArrow" type="TextureRect" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_6hiuy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+text = "CHALLENGE ACCEPTED!!!1!"
+
+[node name="RightArrow" type="TextureRect" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_h5ksr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_right = 75
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "File A"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "File B"
+
+[node name="Button3" type="Button" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "File C"
+
+[node name="Button4" type="Button" parent="VBoxContainer/Bottom/VBoxContainer/VBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "File D"
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 2
+offset_top = 417.0
+offset_right = 650.0
+offset_bottom = 417.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 606.0
+offset_top = 6.0
+offset_right = 645.0
+offset_bottom = 44.0
+size_flags_horizontal = 10
+texture_normal = ExtResource("6_6hiuy")
+ignore_texture_size = true
+stretch_mode = 0

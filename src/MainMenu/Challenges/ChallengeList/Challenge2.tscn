@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://dafjthm2ksagh"]
+
+[ext_resource type="FontFile" uid="uid://c702oelamesfo" path="res://decmp/script/fonts/1546_I hate Comic Sans.ttf" id="1_viomi"]
+[ext_resource type="FontFile" uid="uid://bkce6w7pnorvp" path="res://common_assets/fonts/1546_I hate Comic Sans.ttf" id="2_o5pqi"]
+
+[sub_resource type="FontVariation" id="FontVariation_kmgqn"]
+base_font = ExtResource("1_viomi")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_1ls6v"]
+base_font = ExtResource("2_o5pqi")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_uv438"]
+base_font = ExtResource("2_o5pqi")
+spacing_glyph = 1
+
+[node name="MarginContainer" type="MarginContainer"]
+theme_override_constants/margin_top = 10
+
+[node name="TextContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TextContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.721569, 0.807843, 1)
+theme_override_fonts/font = SubResource("FontVariation_kmgqn")
+theme_override_font_sizes/font_size = 30
+text = "Challenge #2"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -9
+
+[node name="Label2" type="Label" parent="TextContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.509804, 0.615686, 0.72549, 1)
+theme_override_colors/font_outline_color = Color(0, 0.8, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_1ls6v")
+theme_override_font_sizes/font_size = 20
+text = "- The Damage is True -"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -9
+
+[node name="Label3" type="Label" parent="TextContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_1ls6v")
+theme_override_font_sizes/font_size = 15
+text = "(idea by wecl0me12)"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Label4" type="RichTextLabel" parent="TextContainer/MarginContainer3"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_uv438")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "[color=d7b6a8]Who needs defense anyway? Show that you can do just as well with everything dealing true damage against you!
+Tank all the damage in the world with nothing but your health bar!
+
+[/color][color=e4cdc5]Defeat Corrupted Giant Treeman[/color][color=e4cdc5] to win.[/color]"
+fit_content = true
+horizontal_alignment = 1

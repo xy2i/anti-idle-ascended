@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://4b3m3on6fmkd"]
+
+[ext_resource type="Texture2D" uid="uid://db0nposf61ipl" path="res://src/MainMenu/Challenges/image.png" id="1_6n51w"]
+[ext_resource type="PackedScene" uid="uid://dtb71bw3opbn0" path="res://src/MainMenu/Challenges/Challenges.tscn" id="2_6n51w"]
+
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("1_6n51w")
+centered = false
+
+[node name="Challenges" parent="." instance=ExtResource("2_6n51w")]
+layout_mode = 1
+offset_top = 150.0
+offset_bottom = 0.0

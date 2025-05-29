@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8la67f0dw4it"]
+
+[ext_resource type="FontFile" uid="uid://c702oelamesfo" path="res://decmp/script/fonts/1546_I hate Comic Sans.ttf" id="1_tirf0"]
+[ext_resource type="FontFile" uid="uid://bkce6w7pnorvp" path="res://common_assets/fonts/1546_I hate Comic Sans.ttf" id="2_wiv1h"]
+
+[sub_resource type="FontVariation" id="FontVariation_kmgqn"]
+base_font = ExtResource("1_tirf0")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_1ls6v"]
+base_font = ExtResource("2_wiv1h")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_uv438"]
+base_font = ExtResource("2_wiv1h")
+spacing_glyph = 1
+
+[node name="MarginContainer" type="MarginContainer"]
+theme_override_constants/margin_top = 10
+
+[node name="TextContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TextContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.823529, 0.807843, 0.956863, 1)
+theme_override_fonts/font = SubResource("FontVariation_kmgqn")
+theme_override_font_sizes/font_size = 30
+text = "Challenge #6"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -9
+
+[node name="Label2" type="Label" parent="TextContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72549, 0.701961, 0.933333, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_1ls6v")
+theme_override_font_sizes/font_size = 20
+text = "- Zombie Apocalypse -"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = -9
+
+[node name="Label3" type="Label" parent="TextContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_1ls6v")
+theme_override_font_sizes/font_size = 15
+text = "(by Tukkun)"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Label4" type="RichTextLabel" parent="TextContainer/MarginContainer3"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_uv438")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "[color=9BF4B3]It's the ZOMBIE APOCALYPSE in the Battle Arena! RUN FOR YOUR LIVES!!!1!
+
+... or maybe not. Can you still wreak havoc in the Battle Arena even when you can't leave Apocalypse mode, monsters spawn super fast and every single monster is undead? Tame 200 Invisible Allies to prove it!
+
+Many reward stats are improved to help you progress more quickly."
+fit_content = true
+horizontal_alignment = 1
