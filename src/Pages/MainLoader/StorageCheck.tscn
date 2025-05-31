@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3cit17ohijiq"]
+
+[ext_resource type="Script" uid="uid://di154d4spndko" path="res://src/Pages/MainLoader/StorageCheck.cs" id="1_jqs0l"]
+
+[node name="StorageCheck" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jqs0l")
+
+[node name="Bg" type="ColorRect" parent="."]
+offset_right = 650.0
+offset_bottom = 650.0
+color = Color(0.2, 0.2, 0.2, 1)

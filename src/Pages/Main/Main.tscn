@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://d1vhda2oxa4k7"]
+[gd_scene load_steps=15 format=3 uid="uid://d1vhda2oxa4k7"]
 
+[ext_resource type="Script" uid="uid://cjp2pjpu1jl4x" path="res://src/Pages/Main/Main.cs" id="1_c6bj8"]
 [ext_resource type="Texture2D" uid="uid://bmlqbakhjy61h" path="res://src/Pages/Main/13.png" id="1_wl3yd"]
 [ext_resource type="PackedScene" uid="uid://b5t63v425oh65" path="res://src/Pages/Main/components/TopBar/TopBar.tscn" id="2_17737"]
 [ext_resource type="Texture2D" uid="uid://cvbil213hfbtf" path="res://common_assets/background_images/2.png" id="2_een1s"]
@@ -14,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://swym632karc7" path="res://src/Pages/Main/components/Quests/QuestsButton.tscn" id="12_2ytk7"]
 [ext_resource type="PackedScene" uid="uid://bnlsw7m3dfr23" path="res://src/Pages/Main/components/Shop/ShopButton.tscn" id="13_e37wi"]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" node_paths=PackedStringArray("_topBar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +26,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_c6bj8")
+_topBar = NodePath("VBoxContainer/TopBar")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false

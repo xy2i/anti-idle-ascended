@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1f5dg1pljhcw"]
+
+[ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="1_83ibd"]
+[ext_resource type="Script" uid="uid://ce0ywob8n11rf" path="res://src/Pages/MainLoader/MainLoader.cs" id="1_imgcj"]
+
+[node name="MainLoader" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_imgcj")
+
+[node name="Bg" type="ColorRect" parent="."]
+offset_right = 650.0
+offset_bottom = 650.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 650.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("1_83ibd")
+theme_override_font_sizes/font_size = 10
+text = "Loading...
+(This should take less than 2 seconds)"
+horizontal_alignment = 1

@@ -19,6 +19,8 @@ public class Global
 
 public class Save
 {
+    public double compatible = 4;
+    public bool newbieSet3 = false;
     public double todayMMRX;
     public double aagStat1 = 50;
     public double aagStat2 = 50;

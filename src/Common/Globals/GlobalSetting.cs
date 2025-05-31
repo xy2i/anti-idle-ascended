@@ -72,6 +72,11 @@ public class GlobalSetting
     public bool pl7 = true;
     public bool pl8 = true;
 
+    public bool flush(int amount)
+    {
+        return true;
+    }
+
     public object this[string key]
     {
         get => GetType().GetField(key)?.GetValue(this) ?? throw new ArgumentException($"Property `{key}` not found");

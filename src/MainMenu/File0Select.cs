@@ -48,6 +48,7 @@ public partial class File0Select : FlashButton
             else
             {
                 _root.selectSavefile(_root.saveGlobal.selectedSave);
+                GetTree().ChangeSceneToFile("src/Pages/MainLoader/StorageCheck.tscn");
             }
         }
     }

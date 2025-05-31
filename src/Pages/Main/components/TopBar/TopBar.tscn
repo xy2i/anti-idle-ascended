@@ -1,14 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5t63v425oh65"]
+[gd_scene load_steps=18 format=3 uid="uid://b5t63v425oh65"]
 
+[ext_resource type="Script" uid="uid://dl2h42yr75kxu" path="res://src/Pages/Main/components/TopBar/TopBar.cs" id="1_1kyak"]
 [ext_resource type="PackedScene" uid="uid://5bi41xim0phs" path="res://src/Pages/Main/components/TopBar/components/YellowCoins.tscn" id="2_2igkp"]
-[ext_resource type="Texture2D" uid="uid://grmipihr608k" path="res://common_assets/assets/true_coin.png" id="3_m84ip"]
 [ext_resource type="PackedScene" uid="uid://5b2x4o80n70s" path="res://src/Pages/Main/components/TopBar/components/GreenCoins.tscn" id="4_d1xg1"]
 [ext_resource type="PackedScene" uid="uid://crh70hgikxsa5" path="res://src/Pages/Main/components/TopBar/components/BlueCoins.tscn" id="5_p2iwa"]
 [ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="6_b3423"]
 [ext_resource type="Texture2D" uid="uid://ckk6plvra8xvs" path="res://common_assets/assets/yellow_triangle.png" id="7_m2ka7"]
 [ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="8_b4rig"]
 [ext_resource type="FontFile" uid="uid://b48j7xh7p70gu" path="res://common_assets/fonts/1964_Noto Sans CJK JP Bold.ttf" id="9_6cn5q"]
-[ext_resource type="Texture2D" uid="uid://did7np3bv5now" path="res://common_assets/assets/red_triangle.png" id="10_h0y2n"]
 [ext_resource type="Texture2D" uid="uid://ctesp62h03r67" path="res://common_assets/assets/star/1.png" id="11_oeot4"]
 
 [sub_resource type="Theme" id="Theme_chjx5"]
@@ -41,7 +40,7 @@ ProgressBar/fonts/font = SubResource("FontVariation_nhk7n")
 base_font = ExtResource("6_b3423")
 variation_embolden = 1.0
 
-[node name="TopBar" type="Panel"]
+[node name="TopBar" type="Panel" node_paths=PackedStringArray("ascentText")]
 custom_minimum_size = Vector2(650, 72)
 anchors_preset = -1
 anchor_top = -0.835
@@ -53,6 +52,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("Theme_chjx5")
 theme_override_styles/panel = SubResource("StyleBoxFlat_chjx5")
+script = ExtResource("1_1kyak")
+ascentText = NodePath("MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2/Label")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -75,11 +76,6 @@ layout_mode = 2
 
 [node name="YellowCoins" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_2igkp")]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_m84ip")
-stretch_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -143,21 +139,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = SubResource("Theme_sivtw")
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-texture = ExtResource("10_h0y2n")
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme = SubResource("Theme_c2kd0")
-theme_override_colors/font_color = Color(0.623529, 0, 0, 1)
-theme_override_fonts/font = SubResource("FontVariation_n6mvp")
-text = "0d + 00:00:00"
 
 [node name="Control" type="Control" parent="MarginContainer"]
 layout_mode = 2
