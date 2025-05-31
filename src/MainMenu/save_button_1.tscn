@@ -1,9 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://kiih7g7hy663"]
+[gd_scene load_steps=13 format=3 uid="uid://kiih7g7hy663"]
 
 [ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="1_e77iq"]
 [ext_resource type="Script" uid="uid://b51w8aatefpfa" path="res://src/Common/Nodes/FlashColorRect.cs" id="2_e77iq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcb8k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e77iq"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bkcy8"]
+bg_color = Color(0, 0.235294, 0.470588, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22hij"]
 bg_color = Color(0, 0.235294, 0.470588, 1)
@@ -115,6 +121,8 @@ theme_override_colors/font_color = Color(0, 0.235294, 0.470588, 1)
 theme_override_colors/font_focus_color = Color(0, 0.235294, 0.470588, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.235294, 0.470588, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tcb8k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e77iq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bkcy8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_22hij")
 
 [node name="FileText1" type="Label" parent="."]
@@ -172,10 +180,11 @@ libraries = {
 }
 
 [node name="HoverEffect" type="ColorRect" parent="."]
-z_index = 100
+z_index = 1
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 80.0
+mouse_filter = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("2_e77iq")
 metadata/_custom_type_script = "uid://b51w8aatefpfa"

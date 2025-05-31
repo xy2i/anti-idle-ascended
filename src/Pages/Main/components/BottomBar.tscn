@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvbhmpf0s4yr7"]
+[gd_scene load_steps=5 format=3 uid="uid://bvbhmpf0s4yr7"]
 
 [ext_resource type="FontFile" uid="uid://yvep1sldeuhr" path="res://common_assets/fonts/893_PF Tempesta Seven.ttf" id="1_gbr8a"]
 [ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="2_1jhmi"]
+[ext_resource type="Script" uid="uid://bf8rnhs7mw8h6" path="res://src/Pages/Main/components/BottomBar/BackButton.cs" id="2_k3nk4"]
 
 [sub_resource type="FontVariation" id="FontVariation_5x7vr"]
 base_font = ExtResource("2_1jhmi")
@@ -106,6 +107,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 8
 text = "< Back"
+script = ExtResource("2_k3nk4")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(23, 0)

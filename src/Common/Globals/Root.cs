@@ -220,6 +220,7 @@ public class Root
     public double achViewType = 2;
     public double achViewPage = 1;
     public string achMode = "All";
+    public string actiondescription = "";
 
     public double getBytesLoaded()
     {

@@ -7,6 +7,7 @@ public partial class FileChallengeSelect : FlashButton
     // MATCH: frame_11/PlaceObject2_2379_64/CLIPACTIONRECORD onClipEvent(load).as:checkFrame()
     public void checkFrame()
     {
+        // challenge unlock check is not implemented at the moment
         if (_root.saveGlobal.selectedSave == 5)
         {
             anim.AssignedAnimation = "clicked";

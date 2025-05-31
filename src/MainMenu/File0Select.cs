@@ -31,7 +31,6 @@ public partial class File0Select : FlashButton
     public override void _Ready()
     {
         anim = GetNode<AnimationPlayer>("Alpha");
-        GD.Print(anim);
         FocusMode = FocusModeEnum.All; // focusable by tab
         checkFrame();
     }

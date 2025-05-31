@@ -34,6 +34,12 @@ public partial class AwesomeButton : FlashButton
 			if (Input.IsMouseButtonPressed(MouseButton.Left))
 			{
 				anim.AssignedAnimation = "clicked";
+				_root.selectSavefile(_root.saveGlobal.selectedSave);
+				GetTree().ChangeSceneToFile("src/Pages/MainLoader/StorageCheck.tscn");
+			}
+			else
+			{
+				anim.AssignedAnimation = "blink";
 			}
 		}
 	}
