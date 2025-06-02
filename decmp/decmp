@@ -28,6 +28,7 @@ class C:
     CYAN = '\033[36m'
     WHITE = '\033[37m'
     UNDERLINE = '\033[4m'
+    BOLD = '\033[1m'
     RESET = '\033[0m'
 
 
@@ -176,12 +177,12 @@ def match(args):
     matches = sorted(matches, key=lambda x: x["name"])
     total_line_count = db["total_line_count"]
     for match in matches:
-        print(f'    function {match["name"]} {C.GREEN}matches{C.RESET} {match["source"]}: {match["line_count"]} loc')
+        print(f'{match["name"]} {C.GREEN}=>{C.RESET} {match["source"]}, {match["line_count"]} loc')
 
     print()
-    print(f"Total accuracy of port: {C.GREEN}{(matching_line_count/total_line_count)*100:.2g}%{C.RESET} across {len(db['functions'])} functions")
-    print(f"Matched {len(matches)} out of {len(db['functions'])} functions")
-    print(f"Matched {matching_line_count} loc out of {total_line_count} loc")
+    print(f"Total accuracy of port: {C.GREEN}{C.BOLD}{(matching_line_count/total_line_count)*100:.4g}%{C.RESET}")
+    print(f"Matched {len(matches):,} / {len(db['functions']):,} functions")
+    print(f"        {matching_line_count:,} / {total_line_count:,} lines of code")
 
 
 def main(args):
