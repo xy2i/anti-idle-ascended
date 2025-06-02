@@ -1,3 +1,4 @@
+#!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
@@ -197,10 +198,10 @@ sub_match = subcommands.add_parser(
     help="Generates the script database.",
 )
 sub_match.add_argument(
-    "--swf-path", help="Path to anti-idle .swf file", default="v1861.swf"
+    "--swf-path", help="Path to anti-idle .swf file", default="decmp/v1861.swf"
 )
 sub_match.add_argument(
-    "--export-path", help="Path to export the scripts to", default="script/"
+    "--export-path", help="Path to export the scripts to", default="decmp/script/"
 )
 sub_match.add_argument('--skip-jpexs', help='Skip the JPEXS processing step and use files from `export_path` directly', action=argparse.BooleanOptionalAction)
 sub_match.add_argument('--db-path', help='Where to write the database to', default="decomp_db.json")
@@ -211,7 +212,7 @@ sub_match = subcommands.add_parser(
     help="Matches Godot and ActionScript functions, reporting on the total match between original and ported code.",
 )
 sub_match.add_argument('--db-path', help='Where to read the decompilation databse `decomp_db.json` from', default="decomp_db.json")
-sub_match.add_argument('--source-path', help='Path to the Godot source code', default="../src/")
+sub_match.add_argument('--source-path', help='Path to the Godot source code', default="src")
 sub_match.set_defaults(func=match)
 
 args = parser.parse_args()

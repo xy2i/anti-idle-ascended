@@ -52,12 +52,11 @@ working.
 ### Setting up the `decmp` tool
 
 In the `decmp/` directory, you'll find our tool used to help decompilation.
-We recommend installing [`uv`](https://docs.astral.sh/uv/) first.
-Afterwards, you can run the script with:
+We recommend installing [`uv`](https://docs.astral.sh/uv/) first, and adding the `decmp` folder
+to your PATH. Then you can run:
 
 ```sh
-cd decmp
-uv run --script main.py
+decmp --help
 ```
 
 The `decmp` tool runs [JPEXS](https://github.com/jindrapetrik/jpexs-decompiler),
@@ -67,13 +66,13 @@ You'll also need to get a copy of the base game `v1861.swf` and place it in
 the `decmp` folder. Then run:
 
 ```sh
-uv run --script main.py generate_db
+decmp generate_db
 ```
 
 This will generate a `decomp_db.json` file in the folder. With this, now run:
 
 ```sh
-uv run --script main.py match
+decmp match
 ```
 
 and this will output the currently ported code.
