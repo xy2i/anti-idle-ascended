@@ -15,5 +15,6 @@ public partial class TopBar : Panel
     public Label greenCoinText;
     [Export]
     public Label blueCoinText;
+    [Export]
     public LevelStar levelStar;
 }

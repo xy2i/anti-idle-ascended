@@ -1,3 +1,4 @@
+using AntiIdle.Pages.Main;
 using Godot;
 using System;
 using Math = AntiIdle.Common.Flash.Math;
@@ -9,7 +10,16 @@ public partial class Main : Control
 {
     [Export]
     private TopBar _topBar;
-
+    [Export]
+    private Mini1 mini1;
+    [Export]
+    private Mini2 mini2;
+    [Export]
+    private Mini3 mini3;
+    [Export]
+    private Mini4 mini4;
+    [Export]
+    private Mini5 mini5;
     bool dispAlt;
     double recentReputation;
     double delay1sec;
@@ -19,6 +29,11 @@ public partial class Main : Control
     public override void _EnterTree()
     {
         _root.topBar = _topBar;
+        _root.mini1 = mini1;
+        _root.mini2 = mini2;
+        _root.mini3 = mini3;
+        _root.mini4 = mini4;
+        _root.mini5 = mini5;
         var i = 0;
         if (_root.suc1 == true && _root.suc2 == true && _root.saveid < 10)
         {

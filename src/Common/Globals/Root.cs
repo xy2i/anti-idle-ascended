@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using AntiIdle.BattleArena.Crafting;
 using AntiIdle.BattleArena.Enemy;
 using AntiIdle.FCG;
@@ -349,6 +350,22 @@ public class Root
     public double zoneKill89;
     public double zoneKill90;
     public double zoneKill91;
+    public double careerLevel1;
+    public double careerLevel2;
+    public double careerLevel3;
+    public double careerLevel4;
+    public double careerLevel5;
+    public double careerLevel6;
+    public double careerLevel7;
+    public double careerLevel8;
+    public double careerLevel9;
+    public double careerLevel10;
+    public double careerLevel11;
+    public double careerLevel12;
+    public double careerLevel13;
+    public double careerLevel14;
+    public double careerLevel15;
+    public double careerLevel16;
     public double emptyWeaponSlot = 0;
     public double emptyArmorSlot = 0;
     public double emptyAccessorySlot = 0;
@@ -1378,134 +1395,7 @@ public class Root
     }
 
     // MATCH: frame_3/DoAction.as:withComma()
-    public string withComma(double thatNumber)
-    {
-        var finalNumber = "";
-        if (thatNumber == Infinity || isNaN(thatNumber))
-        {
-            finalNumber = "-----";
-        }
-        else
-        {
-            if (thatNumber > 999999999999999)
-            {
-                thatNumber = 999999999999999;
-            }
-
-            var cNegative = false;
-            var groupval = thatNumber;
-            if (thatNumber < 0)
-            {
-                groupval = Math.abs(thatNumber);
-                cNegative = true;
-            }
-
-            var group1 = Math.floor(groupval / 1000000000000);
-            var group2 = Math.floor(groupval / 1000000000) - group1 * 1000;
-            var group3 = Math.floor(groupval / 1000000) - group1 * 1000000 - group2 * 1000;
-            var group4 = Math.floor(groupval / 1000) - group1 * 1000000000 - group2 * 1000000 - group3 * 1000;
-            var group5 = Math.floor(groupval) - group1 * 1000000000000 - group2 * 1000000000 - group3 * 1000000 -
-                         group4 * 1000;
-            var groupCount = 1;
-            if (group4 > 0)
-            {
-                groupCount = 2;
-            }
-
-            if (group3 > 0)
-            {
-                groupCount = 3;
-            }
-
-            if (group2 > 0)
-            {
-                groupCount = 4;
-            }
-
-            if (group1 > 0)
-            {
-                groupCount = 5;
-            }
-
-            var group1s = $"{group1}";
-            var group2s = $"{group2}";
-            var group3s = $"{group3}";
-            var group4s = $"{group4}";
-            var group5s = $"{group5}";
-            if (groupCount >= 2 && group5 < 10)
-            {
-                group5s = "0" + group5;
-            }
-
-            if (groupCount >= 2 && group5 < 100)
-            {
-                group5s = "0" + group5;
-            }
-
-            if (groupCount >= 3 && group4 < 10)
-            {
-                group4s = "0" + group4;
-            }
-
-            if (groupCount >= 3 && group4 < 100)
-            {
-                group4s = "0" + group4;
-            }
-
-            if (groupCount >= 4 && group3 < 10)
-            {
-                group3s = "0" + group3;
-            }
-
-            if (groupCount >= 4 && group3 < 100)
-            {
-                group3s = "0" + group3;
-            }
-
-            if (groupCount >= 5 && group2 < 10)
-            {
-                group2s = "0" + group2;
-            }
-
-            if (groupCount >= 5 && group2 < 100)
-            {
-                group2s = "0" + group2;
-            }
-
-            if (groupCount == 5)
-            {
-                finalNumber = group1 + "," + group2 + "," + group3 + "," + group4 + "," + group5;
-            }
-
-            if (groupCount == 4)
-            {
-                finalNumber = group2 + "," + group3 + "," + group4 + "," + group5;
-            }
-
-            if (groupCount == 3)
-            {
-                finalNumber = group3 + "," + group4 + "," + group5;
-            }
-
-            if (groupCount == 2)
-            {
-                finalNumber = group4 + "," + group5;
-            }
-
-            if (groupCount == 1)
-            {
-                finalNumber = "" + group5;
-            }
-
-            if (cNegative)
-            {
-                finalNumber = "-" + finalNumber;
-            }
-        }
-
-        return finalNumber;
-    }
-
+    public string withComma(double thatNumber) => thatNumber.ToString("N0", CultureInfo.InvariantCulture);
 
     // MATCH: frame_3/DoAction.as:bCreate()
     public double bCreate(double regB, double regE)
@@ -14474,6 +14364,7 @@ public class Root
             _root.topBar.titleText.Text = _root.save.userTitle;
         }
         var titleColor = c((uint)(_root.save.titlered * 65536 + _root.save.titlegreen * 256 + _root.save.titleblue));
+        GD.Print(_root.topBar.titleText);
         if (_root.topBar.titleText.LabelSettings.FontColor != titleColor)
         {
             _root.topBar.nameText.LabelSettings.FontColor = titleColor;

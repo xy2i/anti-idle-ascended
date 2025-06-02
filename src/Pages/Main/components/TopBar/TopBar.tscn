@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b5t63v425oh65"]
+[gd_scene load_steps=19 format=3 uid="uid://b5t63v425oh65"]
 
 [ext_resource type="Script" uid="uid://dl2h42yr75kxu" path="res://src/Pages/Main/components/TopBar/TopBar.cs" id="1_1kyak"]
 [ext_resource type="PackedScene" uid="uid://5bi41xim0phs" path="res://src/Pages/Main/components/TopBar/components/YellowCoins.tscn" id="2_2igkp"]
@@ -7,8 +7,8 @@
 [ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="6_b3423"]
 [ext_resource type="Texture2D" uid="uid://ckk6plvra8xvs" path="res://common_assets/assets/yellow_triangle.png" id="7_m2ka7"]
 [ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="8_b4rig"]
+[ext_resource type="PackedScene" uid="uid://dj2niogo0du7j" path="res://src/Pages/Main/components/TopBar/components/LevelStar.tscn" id="9_1kyak"]
 [ext_resource type="FontFile" uid="uid://b48j7xh7p70gu" path="res://common_assets/fonts/1964_Noto Sans CJK JP Bold.ttf" id="9_6cn5q"]
-[ext_resource type="Texture2D" uid="uid://ctesp62h03r67" path="res://common_assets/assets/star/1.png" id="11_oeot4"]
 
 [sub_resource type="Theme" id="Theme_chjx5"]
 
@@ -17,6 +17,11 @@ bg_color = Color(0, 0, 0, 0.392157)
 
 [sub_resource type="Theme" id="Theme_60sdv"]
 Label/fonts/font = ExtResource("6_b3423")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1kyak"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_chjx5"]
+font_size = 12
 
 [sub_resource type="Theme" id="Theme_c2kd0"]
 Label/colors/font_color = Color(1, 1, 0, 1)
@@ -36,11 +41,7 @@ spacing_bottom = -6
 ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
 ProgressBar/fonts/font = SubResource("FontVariation_nhk7n")
 
-[sub_resource type="FontVariation" id="FontVariation_bhn3u"]
-base_font = ExtResource("6_b3423")
-variation_embolden = 1.0
-
-[node name="TopBar" type="Panel" node_paths=PackedStringArray("ascentText")]
+[node name="TopBar" type="Panel" node_paths=PackedStringArray("ascentText", "titleText", "nameText", "coinText", "greenCoinText", "blueCoinText", "levelStar")]
 custom_minimum_size = Vector2(650, 72)
 anchors_preset = -1
 anchor_top = -0.835
@@ -54,6 +55,12 @@ theme = SubResource("Theme_chjx5")
 theme_override_styles/panel = SubResource("StyleBoxFlat_chjx5")
 script = ExtResource("1_1kyak")
 ascentText = NodePath("MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2/Label")
+titleText = NodePath("MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer/Title")
+nameText = NodePath("MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer/Name")
+coinText = NodePath("MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/YellowCoins/Label")
+greenCoinText = NodePath("MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/GreenCoins/Label")
+blueCoinText = NodePath("MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/BlueCoins/Label")
+levelStar = NodePath("MarginContainer/Control")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -99,15 +106,17 @@ layout_mode = 2
 theme = SubResource("Theme_60sdv")
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Name"
+label_settings = SubResource("LabelSettings_1kyak")
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Title"
+label_settings = SubResource("LabelSettings_chjx5")
 horizontal_alignment = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
@@ -140,24 +149,9 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = SubResource("Theme_sivtw")
 
-[node name="Control" type="Control" parent="MarginContainer"]
+[node name="Control" parent="MarginContainer" instance=ExtResource("9_1kyak")]
 layout_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Control"]
-layout_mode = 2
-offset_left = 578.0
-offset_top = -6.0
-offset_right = 650.0
-offset_bottom = 66.0
-texture = ExtResource("11_oeot4")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="MarginContainer/Control"]
-layout_mode = 0
-offset_left = 586.0
-offset_top = 16.0
-offset_right = 632.0
-offset_bottom = 43.0
-theme_override_fonts/font = SubResource("FontVariation_bhn3u")
-theme_override_font_sizes/font_size = 18
-text = "9001"
+[editable path="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/YellowCoins"]
+[editable path="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/GreenCoins"]
+[editable path="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/BlueCoins"]

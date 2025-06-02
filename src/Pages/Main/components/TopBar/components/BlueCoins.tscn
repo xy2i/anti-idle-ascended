@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://crh70hgikxsa5"]
+[gd_scene load_steps=7 format=3 uid="uid://crh70hgikxsa5"]
 
 [ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="1_hkatn"]
 [ext_resource type="Texture2D" uid="uid://i7lb2altf6ck" path="res://common_assets/assets/blue_coin.png" id="3_hkatn"]
@@ -12,6 +12,10 @@ Label/fonts/font = ExtResource("1_hkatn")
 [sub_resource type="FontVariation" id="FontVariation_hx0tg"]
 base_font = ExtResource("1_hkatn")
 spacing_top = -3
+
+[sub_resource type="LabelSettings" id="LabelSettings_cydg6"]
+font_size = 10
+font_color = Color(0, 0.6, 1, 1)
 
 [node name="BlueCoins" type="HBoxContainer"]
 anchors_preset = 15
@@ -49,3 +53,4 @@ text = "5:00"
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 text = "999,999 M"
+label_settings = SubResource("LabelSettings_cydg6")

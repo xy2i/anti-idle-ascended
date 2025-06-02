@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://1evc6jq4nand"]
+
+[ext_resource type="Script" uid="uid://ca0loya78pr80" path="res://src/Pages/Main/components/Minis/Mini4.cs" id="1_a7mxu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2022b"]
+
+[node name="Mini4" type="ColorRect"]
+offset_left = 21.0
+offset_top = 547.0
+offset_right = 61.0
+offset_bottom = 587.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_a7mxu")
+metadata/_custom_type_script = "uid://b51w8aatefpfa"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 22.3333
+text = "text"
+label_settings = SubResource("LabelSettings_2022b")

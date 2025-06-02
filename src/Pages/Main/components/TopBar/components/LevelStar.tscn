@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj2niogo0du7j"]
+
+[ext_resource type="Script" uid="uid://dhin7aaalc4xv" path="res://src/Pages/Main/components/TopBar/LevelStar.cs" id="1_ibkun"]
+[ext_resource type="Texture2D" uid="uid://ctesp62h03r67" path="res://common_assets/assets/star/1.png" id="1_psmxn"]
+[ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="2_hs7lu"]
+[ext_resource type="Script" uid="uid://b51w8aatefpfa" path="res://src/Common/Nodes/FlashColorRect.cs" id="4_i7g7n"]
+
+[sub_resource type="FontVariation" id="FontVariation_bhn3u"]
+base_font = ExtResource("2_hs7lu")
+variation_embolden = 1.0
+
+[node name="Control" type="Control" node_paths=PackedStringArray("levelAnim")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ibkun")
+levelAnim = NodePath("FlashColorRect")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 578.0
+offset_top = -6.0
+offset_right = 650.0
+offset_bottom = 66.0
+texture = ExtResource("1_psmxn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 16.0
+offset_right = 632.0
+offset_bottom = 43.0
+theme_override_fonts/font = SubResource("FontVariation_bhn3u")
+theme_override_font_sizes/font_size = 18
+text = "9001"
+
+[node name="FlashColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_i7g7n")
+metadata/_custom_type_script = "uid://b51w8aatefpfa"

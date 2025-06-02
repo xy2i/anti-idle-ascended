@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1vhda2oxa4k7"]
+[gd_scene load_steps=21 format=3 uid="uid://d1vhda2oxa4k7"]
 
 [ext_resource type="Script" uid="uid://cjp2pjpu1jl4x" path="res://src/Pages/Main/Main.cs" id="1_c6bj8"]
 [ext_resource type="Texture2D" uid="uid://bmlqbakhjy61h" path="res://src/Pages/Main/13.png" id="1_wl3yd"]
@@ -14,8 +14,15 @@
 [ext_resource type="PackedScene" uid="uid://b7u2jky4a2821" path="res://src/Pages/Main/components/Events/EventsButton.tscn" id="11_6udhx"]
 [ext_resource type="PackedScene" uid="uid://swym632karc7" path="res://src/Pages/Main/components/Quests/QuestsButton.tscn" id="12_2ytk7"]
 [ext_resource type="PackedScene" uid="uid://bnlsw7m3dfr23" path="res://src/Pages/Main/components/Shop/ShopButton.tscn" id="13_e37wi"]
+[ext_resource type="PackedScene" uid="uid://bm8ko7wx8gdv4" path="res://src/Pages/Main/components/Minis/mini_1.tscn" id="15_k38fl"]
+[ext_resource type="PackedScene" uid="uid://1nfm8tuyobw0" path="res://src/Pages/Main/components/Minis/mini_2.tscn" id="16_ao74c"]
+[ext_resource type="PackedScene" uid="uid://cs6cawwwsofwj" path="res://src/Pages/Main/components/Minis/mini_3.tscn" id="17_u31dg"]
+[ext_resource type="PackedScene" uid="uid://1evc6jq4nand" path="res://src/Pages/Main/components/Minis/mini_4.tscn" id="18_ao74c"]
+[ext_resource type="PackedScene" uid="uid://bjasl780omou0" path="res://src/Pages/Main/components/Minis/mini_5.tscn" id="19_gkvr8"]
 
-[node name="Main" type="Control" node_paths=PackedStringArray("_topBar")]
+[sub_resource type="LabelSettings" id="LabelSettings_ygkns"]
+
+[node name="Main" type="Control" node_paths=PackedStringArray("_topBar", "mini1", "mini2", "mini3", "mini4", "mini5")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +35,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_c6bj8")
 _topBar = NodePath("VBoxContainer/TopBar")
+mini1 = NodePath("Mini1")
+mini2 = NodePath("Mini2")
+mini3 = NodePath("Mini3")
+mini4 = NodePath("Mini4")
+mini5 = NodePath("Mini5")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -47,6 +59,7 @@ layout_mode = 0
 offset_right = 650.0
 offset_bottom = 619.0
 theme_override_constants/separation = 0
+metadata/_edit_lock_ = true
 
 [node name="TopBar" parent="VBoxContainer" instance=ExtResource("2_17737")]
 layout_mode = 2
@@ -54,6 +67,7 @@ layout_mode = 2
 [node name="Control" type="Control" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 548)
 layout_mode = 2
+metadata/_edit_lock_ = true
 
 [node name="FeatureContainer" type="Control" parent="VBoxContainer/Control"]
 custom_minimum_size = Vector2(500, 350)
@@ -158,3 +172,44 @@ layout_mode = 2
 
 [node name="BottomBar" parent="VBoxContainer" instance=ExtResource("3_17737")]
 layout_mode = 2
+
+[node name="Mini1" parent="." node_paths=PackedStringArray("miniGardenText") instance=ExtResource("15_k38fl")]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 544.0
+offset_right = 64.0
+offset_bottom = 581.0
+miniGardenText = NodePath("Label")
+
+[node name="Label" parent="Mini1" index="0"]
+label_settings = SubResource("LabelSettings_ygkns")
+
+[node name="Mini2" parent="." instance=ExtResource("16_ao74c")]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 546.0
+offset_right = 111.0
+offset_bottom = 586.0
+
+[node name="Mini3" parent="." instance=ExtResource("17_u31dg")]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 549.0
+offset_right = 155.0
+offset_bottom = 589.0
+
+[node name="Mini4" parent="." instance=ExtResource("18_ao74c")]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 548.0
+offset_right = 218.0
+offset_bottom = 588.0
+
+[node name="Mini5" parent="." instance=ExtResource("19_gkvr8")]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 543.0
+offset_right = 279.0
+offset_bottom = 583.0
+
+[editable path="Mini1"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5bi41xim0phs"]
+[gd_scene load_steps=7 format=3 uid="uid://5bi41xim0phs"]
 
 [ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="1_ojxb4"]
 [ext_resource type="Texture2D" uid="uid://vdq6hoya1w6v" path="res://common_assets/assets/yellow_coin.png" id="3_ca6nb"]
@@ -12,6 +12,10 @@ Label/fonts/font = ExtResource("1_ojxb4")
 [sub_resource type="FontVariation" id="FontVariation_hx0tg"]
 base_font = ExtResource("1_ojxb4")
 spacing_top = -3
+
+[sub_resource type="LabelSettings" id="LabelSettings_ojihg"]
+font_size = 10
+font_color = Color(1, 1, 0, 1)
 
 [node name="YellowCoins" type="HBoxContainer"]
 anchors_preset = 15
@@ -49,3 +53,4 @@ text = "5:00"
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 text = "1,000,000,000,000"
+label_settings = SubResource("LabelSettings_ojihg")

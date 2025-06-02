@@ -2,7 +2,8 @@
 using AntiIdle.Common.Nodes;
 using Godot;
 
-public class LevelStar
+public partial class LevelStar : Control
 {
+    [Export]
     public FlashColorRect levelAnim;
 }

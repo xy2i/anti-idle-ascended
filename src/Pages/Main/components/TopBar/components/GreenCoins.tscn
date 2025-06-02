@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5b2x4o80n70s"]
+[gd_scene load_steps=7 format=3 uid="uid://5b2x4o80n70s"]
 
 [ext_resource type="FontFile" uid="uid://dy7fs8hl0h7wx" path="res://common_assets/fonts/150_PF Tempesta Seven Extended.ttf" id="1_37kkl"]
 [ext_resource type="Texture2D" uid="uid://ccuqns4iwlt31" path="res://common_assets/assets/green_coin.png" id="3_dj7pt"]
@@ -12,6 +12,10 @@ Label/fonts/font = ExtResource("1_37kkl")
 [sub_resource type="FontVariation" id="FontVariation_40rju"]
 base_font = ExtResource("1_37kkl")
 spacing_top = -3
+
+[sub_resource type="LabelSettings" id="LabelSettings_75x78"]
+font_size = 10
+font_color = Color(0.4, 1, 0, 1)
 
 [node name="GreenCoins" type="HBoxContainer"]
 anchors_preset = 15
@@ -49,3 +53,4 @@ text = "5:00"
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 text = "999 B"
+label_settings = SubResource("LabelSettings_75x78")
