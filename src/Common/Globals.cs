@@ -19,6 +19,7 @@ public class Global
 
 public class Save
 {
+    public bool tlttpSkin;
     public double compatible = 4;
     public bool newbieSet3 = false;
     public double todayMMRX;

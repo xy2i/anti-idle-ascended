@@ -125,55 +125,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_e77iq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bkcy8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_22hij")
 
-[node name="FileText1" type="Label" parent="."]
-layout_mode = 2
-offset_left = 22.0
-offset_top = 1.0
-offset_right = 100.0
-offset_bottom = 28.0
-theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
-theme_override_fonts/font = ExtResource("1_e77iq")
-theme_override_font_sizes/font_size = 18
-text = "< File 0 >"
-horizontal_alignment = 1
-vertical_alignment = 3
-
-[node name="SaveText1" type="Label" parent="."]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 32.0
-offset_right = 121.0
-offset_bottom = 50.0
-theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
-theme_override_fonts/font = ExtResource("1_e77iq")
-theme_override_font_sizes/font_size = 12
-text = " Time:               0 min."
-vertical_alignment = 3
-
-[node name="SaveText2" type="Label" parent="."]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 47.0
-offset_right = 121.0
-offset_bottom = 65.0
-theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
-theme_override_fonts/font = ExtResource("1_e77iq")
-theme_override_font_sizes/font_size = 12
-text = " Level:                       1"
-vertical_alignment = 3
-
-[node name="SaveText3" type="Label" parent="."]
-layout_mode = 2
-offset_left = 4.0
-offset_top = 62.0
-offset_right = 121.0
-offset_bottom = 80.0
-theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
-theme_override_fonts/font = ExtResource("1_e77iq")
-theme_override_font_sizes/font_size = 12
-text = "Ascensions:           0"
-vertical_alignment = 3
-
 [node name="Alpha" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_aeosc")
@@ -188,3 +139,79 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("2_e77iq")
 metadata/_custom_type_script = "uid://b51w8aatefpfa"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="FileText" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_e77iq")
+theme_override_font_sizes/font_size = 18
+text = "< File 0 >"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = -2
+columns = 2
+
+[node name="Time" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_e77iq")
+theme_override_font_sizes/font_size = 12
+text = "Time:"
+
+[node name="TimeValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_e77iq")
+theme_override_font_sizes/font_size = 12
+text = "0 min."
+horizontal_alignment = 2
+
+[node name="Level" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_e77iq")
+theme_override_font_sizes/font_size = 12
+text = "Level:"
+
+[node name="LevelValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_e77iq")
+theme_override_font_sizes/font_size = 12
+text = "9001"
+horizontal_alignment = 2
+
+[node name="Ascensions" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_e77iq")
+theme_override_font_sizes/font_size = 12
+text = "Ascensions:"
+
+[node name="AscensionsValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.490196, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1_e77iq")
+theme_override_font_sizes/font_size = 12
+text = "9001"
+horizontal_alignment = 2

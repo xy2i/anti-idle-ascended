@@ -42,6 +42,7 @@ public class Root
     public double petTotalFeed;
     public double autoBanned;
     public double finalExp;
+    public bool viewCredits;
     public bool suc1 = false;
     public bool suc2 = false;
     public double toBuyInsta;
@@ -14375,6 +14376,7 @@ public class Root
             _root.dispAsc();
         }
     }
+
 
     // MATCH: frame_13/DoAction_2.as:dispAsc()
     public void dispAsc()

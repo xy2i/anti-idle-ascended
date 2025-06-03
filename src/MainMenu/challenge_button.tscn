@@ -154,7 +154,7 @@ text = "Mode"
 horizontal_alignment = 1
 vertical_alignment = 3
 
-[node name="FileText3" type="Label" parent="Normal"]
+[node name="ChallengeValue" type="Label" parent="Normal"]
 layout_mode = 0
 offset_left = 528.0
 offset_top = 508.0

@@ -77,7 +77,7 @@ public partial class MainLoader : Control
         }
     }
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
         _root.autoBanned = 0;
         _root.systemclock = DateTimeOffset.Now;
