@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://cre5l5kp4b0lu"]
+[gd_scene load_steps=30 format=3 uid="uid://cre5l5kp4b0lu"]
 
 [ext_resource type="Texture2D" uid="uid://dkclrfo3ark4s" path="res://src/MainMenu/Screenshot_20250529_143824.png" id="1_ah704"]
 [ext_resource type="Texture2D" uid="uid://b21mnu2f4lbk8" path="res://src/MainMenu/MenuBg.png" id="1_cttlv"]
 [ext_resource type="Script" uid="uid://2k0roc3i7bmg" path="res://src/MainMenu/MainMenu.cs" id="1_e1bcd"]
+[ext_resource type="Texture2D" uid="uid://desp1jwp37qpj" path="res://common_assets/backup.jpg" id="2_e1bcd"]
 [ext_resource type="Texture2D" uid="uid://dafk348bgy32y" path="res://src/MainMenu/Logo.png" id="2_ipfen"]
 [ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="4_70h2t"]
 [ext_resource type="Script" uid="uid://bfc5o6txmvqe8" path="res://src/MainMenu/File0Select.cs" id="5_22hij"]
@@ -19,6 +20,8 @@
 [sub_resource type="FontVariation" id="FontVariation_70h2t"]
 base_font = ExtResource("4_70h2t")
 spacing_bottom = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e1bcd"]
 
 [sub_resource type="FontVariation" id="FontVariation_aeosc"]
 base_font = ExtResource("7_22hij")
@@ -141,23 +144,32 @@ file3Level = NodePath("Button/SaveFileContainer/SaveButton4/MarginContainer/VBox
 file3Ascs = NodePath("Button/SaveFileContainer/SaveButton4/MarginContainer/VBoxContainer/GridContainer/AscensionsValue")
 challengesDone = NodePath("Button/SaveFileContainer/ChallengeButton/Normal/ChallengeValue")
 
-[node name="Screenshot20250529143824" type="Sprite2D" parent="."]
+[node name="Backup" type="Sprite2D" parent="."]
 visible = false
+position = Vector2(3, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_e1bcd")
+centered = false
+
+[node name="Screenshot20250529143824" type="Sprite2D" parent="."]
 position = Vector2(325, 313)
 texture = ExtResource("1_ah704")
 
 [node name="Bg" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(1.002, 1.002)
 texture = ExtResource("1_cttlv")
 centered = false
 
 [node name="Logo" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(216.684, 19)
 scale = Vector2(0.476364, 0.476364)
 texture = ExtResource("2_ipfen")
 centered = false
 
 [node name="Welcome" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 26.0
 offset_top = 149.0
@@ -174,6 +186,7 @@ What are you still waiting for? Press the big \"Awesome!\" button below there an
 horizontal_alignment = 1
 
 [node name="BackupText" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 26.0
 offset_top = 583.0
@@ -236,29 +249,23 @@ layout_mode = 2
 [node name="SmallButtonContainer" type="HBoxContainer" parent="Button"]
 layout_mode = 0
 offset_left = 176.0
-offset_top = 172.0
+offset_top = 173.0
 offset_right = 446.0
-offset_bottom = 190.0
+offset_bottom = 191.0
 theme_override_constants/separation = 30
 
-[node name="SaveButton1" type="ColorRect" parent="Button/SmallButtonContainer"]
-clip_contents = true
+[node name="Button" type="Button" parent="Button/SmallButtonContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-color = Color(0.372549, 0.372549, 0.372549, 1)
-
-[node name="SaveText3" type="Label" parent="Button/SmallButtonContainer/SaveButton1"]
-layout_mode = 2
-offset_right = 120.0
-offset_bottom = 18.0
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("4_70h2t")
 theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxTexture_e1bcd")
 text = "Backup Help"
-horizontal_alignment = 1
-vertical_alignment = 3
+clip_text = true
 
 [node name="SaveButton2" type="ColorRect" parent="Button/SmallButtonContainer"]
+visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 color = Color(0.372549, 0.372549, 0.372549, 1)
@@ -286,6 +293,7 @@ theme_override_font_sizes/font_size = 40
 text = "Awesome!"
 
 [node name="BottomStats" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -431,6 +439,7 @@ text = "1,500"
 horizontal_alignment = 2
 
 [node name="AwesomeButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 15.0
 offset_top = 382.0

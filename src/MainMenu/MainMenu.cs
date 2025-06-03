@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-// MATCH: frame_11:DoAction.as
+// MATCH: frame_11/DoAction.as
 public partial class MainMenu : Control
 {
     [Export]
