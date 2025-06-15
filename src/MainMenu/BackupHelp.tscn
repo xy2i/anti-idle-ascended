@@ -1,0 +1,179 @@
+[gd_scene load_steps=5 format=3 uid="uid://drp2bbdfbpisl"]
+
+[ext_resource type="Script" uid="uid://ew6jb13bjx84" path="res://src/MainMenu/BackupHelp.cs" id="1_kd7jv"]
+[ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="6_i3ad3"]
+[ext_resource type="PackedScene" uid="uid://ck2ne06bfn6sn" path="res://src/MainMenu/FlatButton2.tscn" id="13_xo1nb"]
+
+[sub_resource type="FontVariation" id="FontVariation_kd7jv"]
+base_font = ExtResource("6_i3ad3")
+spacing_top = 1
+
+[node name="BackupHelp" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+script = ExtResource("1_kd7jv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 649.0
+offset_bottom = 620.0
+color = Color(0, 0, 0, 0.8)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 11
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.784314, 0.882353, 0.980392, 1)
+theme_override_fonts/normal_font = ExtResource("6_i3ad3")
+theme_override_font_sizes/normal_font_size = 28
+text = "Backup Help"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = -4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.588235, 0.784314, 0.980392, 1)
+theme_override_fonts/normal_font = ExtResource("6_i3ad3")
+theme_override_font_sizes/normal_font_size = 21
+text = "Why should I backup my savefile? "
+fit_content = true
+autowrap_mode = 0
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_right = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.392157, 0.588235, 0.784314, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_kd7jv")
+theme_override_font_sizes/normal_font_size = 12
+text = "Anti-Idle is a game created using Flash. Due to the nature of Flash, it is relatively easy to lose your savefile accidentally, especially when you clear your browser cookies or run a third party program that cleans up junk files (especially CCleaner). There is also a small possibility that your savefile may disappear or become corrupted due to technical problems such as power outage or browser crash. And because your savefile is stored entirely on your computer, if it is gone, there is no way to get it back! And trust me, you don't want that to happen. Neither do I!"
+fit_content = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 12
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer4"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.588235, 0.784314, 0.980392, 1)
+theme_override_fonts/normal_font = ExtResource("6_i3ad3")
+theme_override_font_sizes/normal_font_size = 21
+text = "How do I backup my savefile?"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_right = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer5"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.392157, 0.588235, 0.784314, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_kd7jv")
+theme_override_font_sizes/normal_font_size = 12
+text = "Step 1: Find your savefile. If you play using file 0, the file is called antiIdle_file0.sol (in case you play using files 1, 2 or 3, change the \"file0\" to \"file1\", \"file2\" or \"file3\" respectively). Usually, running a search in your computer will allow you to find this file. You may need to enable the option to search for hidden files. If you are unsure whether that is the correct file or need additional help, you can press the button below to generate an extra file in the folder containing the savefile."
+fit_content = true
+
+[node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer6"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.392157, 0.588235, 0.784314, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_kd7jv")
+theme_override_font_sizes/normal_font_size = 12
+text = "Step 2: Copy the savefile and backup the savefile. You can try one of the following methods:
+- Email it to yourself (recommended)
+- Paste it to a location that won't disappear even if your computer breaks, such as your USB stick
+- Upload it to the cloud or use any file uploading service
+
+Remember, you have to backup your savefile frequently! Don't do this just once. If you lose your savefile, you will be able to restore from your previous backup."
+fit_content = true
+
+[node name="MarginContainer7" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 9
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer7"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.588235, 0.784314, 0.980392, 1)
+theme_override_fonts/normal_font = ExtResource("6_i3ad3")
+theme_override_font_sizes/normal_font_size = 21
+text = "How do I restore from a backup savefile?"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MarginContainer8" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_right = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer8"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.392157, 0.588235, 0.784314, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_kd7jv")
+theme_override_font_sizes/normal_font_size = 12
+text = "Step 1: Close Anti-Idle: The Game first. This is important!
+Step 2: Copy the backup savefile and paste it to the original location (chat.kongregate.com folder)
+Step 3: Open Anti-Idle: The Game. Your progress should be back!"
+fit_content = true
+
+[node name="Container" parent="." instance=ExtResource("13_xo1nb")]
+layout_mode = 1
+offset_left = 27.0
+offset_top = 342.0
+offset_right = -61.3
+offset_bottom = 322.05
+
+[node name="Button" parent="Container" index="0"]
+modulate = Color(0.5, 1.297, 1.5, 1)
+
+[node name="Label" parent="Container" index="1"]
+theme_override_colors/font_color = Color(0.8, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_i3ad3")
+theme_override_font_sizes/font_size = 12
+text = "Click here"
+
+[editable path="Container"]

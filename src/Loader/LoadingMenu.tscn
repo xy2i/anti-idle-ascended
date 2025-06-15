@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bokeb6yxjprga"]
+[gd_scene load_steps=9 format=3 uid="uid://bokeb6yxjprga"]
 
 [ext_resource type="Texture2D" uid="uid://b21mnu2f4lbk8" path="res://src/MainMenu/MenuBg.png" id="1_76s6h"]
 [ext_resource type="Texture2D" uid="uid://c5nkw08sfeeek" path="res://common_assets/logo.png" id="2_ml26j"]
 [ext_resource type="FontFile" uid="uid://dlp7fy0ywsxnl" path="res://common_assets/fonts/McLaren-Regular.ttf" id="3_76s6h"]
 [ext_resource type="PackedScene" uid="uid://sl2yxvssb88u" path="res://src/Loader/SaveFileButton.tscn" id="4_ml26j"]
+[ext_resource type="PackedScene" uid="uid://bto1ogoaaut31" path="res://src/MainMenu/FlatButton.tscn" id="5_76s6h"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_76s6h"]
 
@@ -117,13 +118,9 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(120, 0)
+[node name="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("5_76s6h")]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("3_76s6h")
-theme_override_font_sizes/font_size = 10
-text = "Backup Help"
+text = "Button 2"
 
 [node name="EmptySpace" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(40, 0)

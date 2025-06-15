@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck2ne06bfn6sn"]
+
+[ext_resource type="Texture2D" uid="uid://bpg0nblah2xki" path="res://src/MainMenu/1600.png" id="1_leeg0"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h7epk"]
+diffuse_texture = ExtResource("1_leeg0")
+texture_filter = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_leeg0"]
+load_path = "res://.godot/imported/1601.png-4a4d559720badfb73e7ded96e68b8bda.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_we20k"]
+diffuse_texture = SubResource("CompressedTexture2D_leeg0")
+texture_filter = 1
+
+[node name="Container" type="Control"]
+layout_mode = 3
+anchor_right = 0.262
+anchor_bottom = 0.063
+offset_right = -0.300018
+offset_bottom = 0.0499992
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("CanvasTexture_h7epk")
+texture_pressed = SubResource("CanvasTexture_h7epk")
+texture_hover = SubResource("CanvasTexture_we20k")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = -9.66667
+grow_horizontal = 2
+grow_vertical = 2
+text = "button text :)"
+horizontal_alignment = 1

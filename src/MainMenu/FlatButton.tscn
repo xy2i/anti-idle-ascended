@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bto1ogoaaut31"]
+
+[ext_resource type="Texture2D" uid="uid://bpg0nblah2xki" path="res://src/MainMenu/1600.png" id="1_11ris"]
+[ext_resource type="Texture2D" uid="uid://1ifkijpp5y1q" path="res://src/MainMenu/1601.png" id="1_s7qit"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x6mrc"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_x6mrc"]
+diffuse_texture = ExtResource("1_11ris")
+texture_filter = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s7qit"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = SubResource("CanvasTexture_x6mrc")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_s7qit"]
+diffuse_texture = ExtResource("1_s7qit")
+texture_filter = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v3dlj"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = SubResource("CanvasTexture_s7qit")
+
+[node name="Button" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -600.0
+offset_bottom = -630.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x6mrc")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_s7qit")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_s7qit")
+theme_override_styles/hover = SubResource("StyleBoxTexture_v3dlj")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_s7qit")
+theme_override_styles/normal = SubResource("StyleBoxTexture_s7qit")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.33333
+grow_horizontal = 2
+grow_vertical = 2
